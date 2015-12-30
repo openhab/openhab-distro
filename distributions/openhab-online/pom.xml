@@ -8,11 +8,11 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>openhab-offline</artifactId>
+    <artifactId>openhab-online</artifactId>
     <packaging>karaf-assembly</packaging>
 
-    <name>openHAB Offline Distribution</name>
-    <description>This is an offline distribution of openHAB</description>
+    <name>openHAB Online Distribution</name>
+    <description>This is the online distribution of openHAB</description>
 
     <dependencies>
         <dependency>
@@ -27,22 +27,56 @@
             <version>${karaf.features.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.openhab.distro</groupId>
-            <artifactId>openhab-aggregate-kar</artifactId>
-            <version>${project.version}</version>
-            <type>kar</type>
-            <scope>provided</scope>
+            <groupId>de.maggu2810.playground.shk</groupId>
+            <artifactId>shk-feature-base</artifactId>
+            <version>1.0.3</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.openhab.distro</groupId>
-            <artifactId>openhab-aggregate-xml</artifactId>
+            <groupId>org.openhab.core</groupId>
+            <artifactId>openhab-core</artifactId>
+            <version>${ohc.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openhab.addons</groupId>
+            <artifactId>openhab2-addons</artifactId>
+            <version>${oh2.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openhab.addons</groupId>
+            <artifactId>openhab-addons</artifactId>
+            <version>${oh1.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>openhab-esh-addons</artifactId>
             <version>${project.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>openhab-demo</artifactId>
+            <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>          
     </dependencies>
 
     <build>
