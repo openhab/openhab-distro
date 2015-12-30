@@ -105,6 +105,14 @@
             <url>https://jcenter.bintray.com/</url>
         </repository>
         <repository>
+            <id>jfrog</id>
+            <name>JFrog OSS Repository</name>
+            <url>http://oss.jfrog.org/libs-snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>eclipse</id>
             <name>Eclipse Snapshot Repository</name>
             <layout>default</layout>
