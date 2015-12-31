@@ -26,7 +26,7 @@
             <outputDirectory>runtime</outputDirectory>
             <includes>
                 <include>etc/**</include>
-                <include>sounds/**</include>
+                <include>sounds</include>
             </includes>
         </fileSet>
 

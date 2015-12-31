@@ -104,7 +104,7 @@
             <name>JCenter Repository</name>
             <url>https://jcenter.bintray.com/</url>
         </repository>
-        <repository>
+         <repository>
             <id>jfrog</id>
             <name>JFrog OSS Repository</name>
             <url>http://oss.jfrog.org/libs-snapshot/</url>
@@ -135,6 +135,65 @@
               <enabled>true</enabled>
             </snapshots>
         </repository>
+        <!-- Apache ServiceMix repository (for region) -->
+        <repository>
+            <id>apache.servicemix.m2</id>
+            <name>Apache ServiceMix M2 repository</name>
+            <url>http://svn.apache.org/repos/asf/servicemix/m2-repo</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- Gemini Blueprint repository -->
+        <repository>
+            <id>zodiac-repository</id>
+            <name>Zodiac Release Repository</name>
+            <url>http://repository.springsource.com/maven/bundles/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- Spring EBR repository -->
+        <repository>
+            <id>spring-ebr-repository</id>
+            <name>Spring EBR Repository</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- OPS4J SNAPSHOT repository -->
+        <repository>
+            <id>ops4j.sonatype.snapshots.deploy</id>
+            <name>OPS4J snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/ops4j-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <!-- Apache SNAPSHOT -->
+        <repository>
+            <id>apache.snapshots.deploy</id>
+            <name>Apache snapshot repository</name>
+            <url>https://repository.apache.org/content/groups/snapshots-group</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
-
 </project>
