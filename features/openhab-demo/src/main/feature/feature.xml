@@ -3,9 +3,11 @@
 
     <!-- <feature name="${project.artifactId}" description="${project.name}" version="${project.version}"> -->
 
-    <feature name="openhab-demo" description="${project.name}" version="${project.version}">
-        <details>${project.description}</details>
+    <feature name="openhab-package-demo" description="openHAB Demo Package" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>openhab-misc-restdocs</feature>
         <feature>openhab-ui-basic</feature>
+        <feature>openhab-ui-classic</feature>
         <feature>openhab-ui-paper</feature>
         <feature>openhab-binding-yahooweather</feature>
         <feature>openhab-binding-wemo</feature>

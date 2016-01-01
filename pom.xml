@@ -32,6 +32,17 @@
         <system>Github</system>
     </issueManagement>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/openhab/mvn/openhab-distro/;publish=1</url>
+        </repository>
+        <snapshotRepository>
+            <id>jfrog</id>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <esh.version>0.8.0-SNAPSHOT</esh.version>
         <ohc.version>2.0.0-SNAPSHOT</ohc.version>
