@@ -115,7 +115,7 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-        </plugins>        
+        </plugins>
     </build>
 
     <repositories>
@@ -124,7 +124,7 @@
             <name>JCenter Repository</name>
             <url>https://jcenter.bintray.com/</url>
         </repository>
-         <repository>
+        <repository>
             <id>jfrog</id>
             <name>JFrog OSS Repository</name>
             <url>http://oss.jfrog.org/libs-snapshot/</url>
@@ -142,17 +142,17 @@
             </snapshots>
         </repository>
         <repository>
-           <id>tmp-jaxrs-swagger</id>
-           <url>https://github.com/maggu2810/openhab2-mvn-repo/raw/jaxrs-swagger</url>
-           <snapshots>
-              <enabled>true</enabled>
+            <id>tmp-jaxrs-swagger</id>
+            <url>https://github.com/maggu2810/openhab2-mvn-repo/raw/jaxrs-swagger</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
         <repository>
-           <id>tmp-shk</id>
-           <url>https://github.com/maggu2810/openhab2-mvn-repo/raw/shk</url>
-           <snapshots>
-              <enabled>true</enabled>
+            <id>tmp-shk</id>
+            <url>https://github.com/maggu2810/openhab2-mvn-repo/raw/shk</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
         <!-- Apache ServiceMix repository (for region) -->

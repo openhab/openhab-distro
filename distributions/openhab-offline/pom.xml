@@ -47,7 +47,7 @@
 
     <build>
         <resources>
-        	<!-- add shared distribution resources -->
+            <!-- add shared distribution resources -->
             <resource>
                 <directory>../distribution-resources/src/main/resources</directory>
                 <filtering>false</filtering>
@@ -62,7 +62,7 @@
                     <include>**/*</include>
                 </includes>
             </resource>
-        	<!-- add distribution specific resources -->
+            <!-- add distribution specific resources -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
@@ -76,7 +76,7 @@
                 <includes>
                     <include>**/*</include>
                 </includes>
-            </resource>            
+            </resource>
         </resources>
         <plugins>
             <plugin>
