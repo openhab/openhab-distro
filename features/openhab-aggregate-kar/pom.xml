@@ -54,20 +54,4 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <repositories>
-        <repository>
-            <id>jfrog</id>
-            <name>JFrog OSS Repository</name>
-            <url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jcenter</id>
-            <name>JCenter Repository</name>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-    </repositories>
-
 </project>
