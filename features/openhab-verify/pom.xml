@@ -30,7 +30,6 @@
             <classifier>features</classifier>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -61,6 +60,7 @@
                             </features>
                             <verifyTransitive>false</verifyTransitive>
                             <ignoreMissingConditions>true</ignoreMissingConditions>
+                            <fail>first</fail>
                         </configuration>
                     </execution>
                 </executions>
