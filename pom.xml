@@ -131,6 +131,11 @@
             <url>https://dl.bintray.com/maggu2810/maven</url>
         </repository>
         <repository>
+            <id>openhab-bintray</id>
+            <name>Bintray Repository for openHAB pax-web-jetty Patch</name>
+            <url>https://dl.bintray.com/openhab/mvn</url>
+        </repository>
+        <repository>
             <id>jfrog</id>
             <name>JFrog OSS Repository</name>
             <url>http://oss.jfrog.org/libs-snapshot/</url>
