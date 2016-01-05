@@ -81,4 +81,9 @@ export JAVA_OPTS="${JAVA_OPTS}
 #
 # set jvm options
 #
-export EXTRA_JAVA_OPTS="-XX:+UseG1GC -Xms64m -Xmx256m"
+ARCH=`arch` 
+case "$ARCH" in
+  *arm*) export EXTRA_JAVA_OPTS="-Xmx256m" ;;
+      *) export EXTRA_JAVA_OPTS="-XX:+UseG1GC -Xmx256m" ;;
+esac
+
