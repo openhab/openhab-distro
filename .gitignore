@@ -20,3 +20,5 @@ distribution/openhabhome/userdata/mapdb/storage.mapdb.t
 
 /*features*/*/src/main/history/
 maven-metadata-local.xml
+launch/home/logs
+launch/home/userdata
