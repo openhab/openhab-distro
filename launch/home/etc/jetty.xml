@@ -15,8 +15,8 @@
 	<!-- Server Thread Pool -->
 	<!-- =========================================================== -->
 	<Get name="ThreadPool">
-		<Set name="minThreads">5</Set>
-		<Set name="maxThreads">100</Set>
+		<Set name="minThreads">7</Set>
+		<Set name="maxThreads">15</Set>
 	</Get>
 
 
@@ -90,6 +90,23 @@
 		<Set name="headerCacheSize">512</Set>
 	</New>
 
+	<!-- =========================================================== -->
+	<!-- Create a TLS specific HttpConfiguration based on the -->
+	<!-- common HttpConfiguration defined in jetty.xml -->
+	<!-- Add a SecureRequestCustomizer to extract certificate and -->
+	<!-- session information -->
+	<!-- =========================================================== -->
+	<New id="sslHttpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+		<Arg>
+			<Ref refid="httpConfig" />
+		</Arg>
+		<Call name="addCustomizer">
+			<Arg>
+				<New class="org.eclipse.jetty.server.SecureRequestCustomizer" />
+			</Arg>
+		</Call>
+	</New>
+
 
 	<!-- =========================================================== -->
 	<!-- extra options -->
@@ -99,40 +116,100 @@
 	<Set name="dumpAfterStart">false</Set>
 	<Set name="dumpBeforeStop">false</Set>
 
+	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
+		<Set name="KeyStorePath"><SystemProperty name="jetty.keystore.path" default="/etc/myKeystore" /></Set>
+		<Set name="KeyStorePassword"><SystemProperty name="jetty.ssl.password" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
+		<Set name="KeyManagerPassword"><SystemProperty name="jetty.ssl.keypassword" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
+		<Set name="TrustStorePath"><SystemProperty name="jetty.truststore.path" default="/etc/myKeystore" /></Set>
+		<Set name="TrustStorePassword"><SystemProperty name="jetty.ssl.password" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
+		<Set name="EndpointIdentificationAlgorithm"></Set>
+		<Set name="NeedClientAuth"><SystemProperty name="jetty.ssl.needClientAuth" default="false" /></Set>
+		<Set name="WantClientAuth"><SystemProperty name="jetty.ssl.wantClientAuth" default="false" /></Set>
+		<Set name="ExcludeCipherSuites">
+			<Array type="String">
+				<Item>SSL_RSA_WITH_DES_CBC_SHA</Item>
+				<Item>SSL_DHE_RSA_WITH_DES_CBC_SHA</Item>
+				<Item>SSL_DHE_DSS_WITH_DES_CBC_SHA</Item>
+				<Item>SSL_RSA_EXPORT_WITH_RC4_40_MD5</Item>
+				<Item>SSL_RSA_EXPORT_WITH_DES40_CBC_SHA</Item>
+				<Item>SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA</Item>
+				<!-- Disable cipher suites with Diffie-Hellman key exchange to prevent Logjam attack and avoid the ssl_error_weak_server_ephemeral_dh_key error in recent browsers -->
+				<Item>SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA</Item>
+				<Item>SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA</Item>
+				<Item>TLS_DHE_RSA_WITH_AES_256_CBC_SHA256</Item>
+				<Item>TLS_DHE_DSS_WITH_AES_256_CBC_SHA256</Item>
+				<Item>TLS_DHE_RSA_WITH_AES_256_CBC_SHA</Item>
+				<Item>TLS_DHE_DSS_WITH_AES_256_CBC_SHA</Item>
+				<Item>TLS_DHE_RSA_WITH_AES_128_CBC_SHA256</Item>
+				<Item>TLS_DHE_DSS_WITH_AES_128_CBC_SHA256</Item>
+				<Item>TLS_DHE_RSA_WITH_AES_128_CBC_SHA</Item>
+				<Item>TLS_DHE_DSS_WITH_AES_128_CBC_SHA</Item>
+			</Array>
+		</Set>
+		<!-- setting required for preventing Poodle attack, see http://stackoverflow.com/questions/26382540/how-to-disable-the-sslv3-protocol-in-jetty-to-prevent-poodle-attack/26388531#26388531 -->
+		<Set name="ExcludeProtocols">
+			<Array type="java.lang.String">
+				<Item>SSLv3</Item>
+			</Array>
+		</Set>
+
+
+	</New>
+
 
 	<!-- =========================================================== -->
-	<!-- jetty-jndi by default -->
+	<!-- Add a HTTPS Connector. -->
+	<!-- Configure an o.e.j.server.ServerConnector with connection -->
+	<!-- factories for TLS (aka SSL) and HTTP to provide HTTPS. -->
+	<!-- All accepted TLS connections are wired to a HTTP connection. -->
+	<!-- -->
+	<!-- Consult the javadoc of o.e.j.server.ServerConnector, -->
+	<!-- o.e.j.server.SslConnectionFactory and -->
+	<!-- o.e.j.server.HttpConnectionFactory for all configuration -->
+	<!-- that may be set here. -->
 	<!-- =========================================================== -->
-	<Call class="org.eclipse.jetty.webapp.Configuration$ClassList"
-		name="setServerDefault">
-		<Arg>
-			<Ref refid="Server" />
-		</Arg>
-		<Call name="addAfter">
-			<Arg name="afterClass">org.eclipse.jetty.webapp.FragmentConfiguration</Arg>
-			<Arg>
-				<Array type="String">
-					<Item>org.eclipse.jetty.plus.webapp.EnvConfiguration</Item>
-					<Item>org.eclipse.jetty.plus.webapp.PlusConfiguration</Item>
-					<Item>org.eclipse.jetty.annotations.AnnotationConfiguration</Item>
-				</Array>
-			</Arg>
-		</Call>
-	</Call>
 
-	<Call class="java.lang.System" name="setProperty">
-		<Arg>java.naming.factory.initial</Arg>
+	<Call id="sslConnector" name="addConnector">
 		<Arg>
-			<Property name="java.naming.factory.initial"
-				default="org.eclipse.jetty.jndi.InitialContextFactory" />
+			<New class="org.eclipse.jetty.server.ServerConnector" id="sslConnectorId">
+				<Arg name="server">
+					<Ref refid="Server" />
+				</Arg>
+				<Arg name="factories">
+					<Array type="org.eclipse.jetty.server.ConnectionFactory">
+						<Item>
+							<New class="org.eclipse.jetty.server.SslConnectionFactory">
+								<Arg name="next">http/1.1</Arg>
+								<Arg name="sslContextFactory">
+									<Ref refid="sslContextFactory" />
+								</Arg>
+							</New>
+						</Item>
+						<Item>
+							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
+								<Arg name="config">
+									<Ref refid="sslHttpConfig" />
+								</Arg>
+							</New>
+						</Item>
+					</Array>
+				</Arg>
+				<Set name="name">
+					<SystemProperty name="jetty.host" default="0.0.0.0" />:<SystemProperty name="org.osgi.service.http.port.secure" default="8443" />
+				</Set>
+				<Set name="host">
+					<SystemProperty name="jetty.host" />
+				</Set>
+				<Set name="port">
+					<SystemProperty name="org.osgi.service.http.port.secure" default="8443" />
+				</Set>
+				<Set name="idleTimeout">
+					<SystemProperty name="https.timeout" default="30000" />
+				</Set>
+				<Set name="soLingerTime">
+					<SystemProperty name="https.soLingerTime" default="-1" />
+				</Set>
+			</New>
 		</Arg>
 	</Call>
-	
-	<Call class="java.lang.System" name="setProperty">
-		<Arg>java.naming.factory.url.pkgs</Arg>
-		<Arg>
-			<Property name="java.naming.factory.url.pkgs" default="org.eclipse.jetty.jndi" />
-		</Arg>
-	</Call>
-
 </Configure>
