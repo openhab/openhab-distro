@@ -7,6 +7,10 @@
         <feature>esh-binding-hue</feature>
     </feature>
 
+    <feature name="openhab-binding-fsinternetradio" description="Frontier Silicon Internet Radio Binding" version="${esh.version}">
+        <feature>esh-binding-fsinternetradio</feature>
+    </feature>
+
     <feature name="openhab-binding-lifx" description="LIFX Binding" version="${esh.version}">
         <feature>esh-binding-lifx</feature>
     </feature>
