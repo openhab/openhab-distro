@@ -6,29 +6,29 @@ All optional add-ons for openHAB 2 are [available in a separate download](https:
 
 | Binding | Description |
 |-------|----------------------|
-| [Astro Binding](../../addons/binding/org.openhab.binding.astro/README.md) | Astronomical calculations for sun and moon positions |
-| [Autelis Binding](../../addons/binding/org.openhab.binding.autelis/README.md) | Pool controller |
-| [AVM Fritz!Box Binding](../../addons/binding/org.openhab.binding.avmfritz/README.md) | currently only supports FRITZ AHA devices |
-| [DSCAlarm Binding](../../addons/binding/org.openhab.binding.dscalarm/README.md) | DSC PowerSeries alarm systems |
-| [Freebox Binding](../../addons/binding/org.openhab.binding.freebox/README.md) | the french [Freebox Revolution](http://www.free.fr/adsl/freebox-revolution.html) server |
-| [HDanywhere Binding](../../addons/binding/org.openhab.binding.hdanywhere/) | HDMI matrix |
-| [IPP Binding](../../addons/binding/org.openhab.binding.ipp/README.md) | Internet Printing Protocol (replaces 1.x CUPS Binding) |
-| [KEBA Binding](../../addons/binding/org.openhab.binding.keba/README.md) | Electric vehicle charging station |
+| [Astro Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.astro/README.md) | Astronomical calculations for sun and moon positions |
+| [Autelis Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.autelis/README.md) | Pool controller |
+| [AVM Fritz!Box Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.avmfritz/README.md) | currently only supports FRITZ AHA devices |
+| [DSCAlarm Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.dscalarm/README.md) | DSC PowerSeries alarm systems |
+| [Freebox Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.freebox/README.md) | the french [Freebox Revolution](http://www.free.fr/adsl/freebox-revolution.html) server |
+| [HDanywhere Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.hdanywhere/) | HDMI matrix |
+| [IPP Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.ipp/README.md) | Internet Printing Protocol (replaces 1.x CUPS Binding) |
+| [KEBA Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.keba/README.md) | Electric vehicle charging station |
 | [LIFX Binding](https://github.com/eclipse/smarthome/blob/20150525/addons/binding/org.eclipse.smarthome.binding.lifx/README.md) | Wifi-enabled LED bulbs |
-| [Lutron Binding](../../addons/binding/org.openhab.binding.lutron/README.md) | Dimmers And Lighting Controls |
-| [MAX! Binding](../../addons/binding/org.openhab.binding.max/README.md) | Heater control solution by eQ-3 |
-| [Network Binding](../../addons/binding/org.openhab.binding.network/) | Scans local network (replaces 1.x networkhealth Binding) |
+| [Lutron Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.lutron/README.md) | Dimmers And Lighting Controls |
+| [MAX! Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.max/README.md) | Heater control solution by eQ-3 |
+| [Network Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.network/) | Scans local network (replaces 1.x networkhealth Binding) |
 | [NTP Binding](https://github.com/eclipse/smarthome/blob/master/extensions/binding/org.eclipse.smarthome.binding.ntp/README.md) | NTP time servers |
-| [PioneerAVR Binding](../../addons/binding/org.openhab.binding.pioneeravr/README.md) | AV receivers by Pioneer |
+| [PioneerAVR Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.pioneeravr/README.md) | AV receivers by Pioneer |
 | [Philips Hue Binding](https://github.com/eclipse/smarthome/blob/20150525/addons/binding/org.eclipse.smarthome.binding.hue/README.md) | LED lighting system |
-| [Pulseaudio Binding](../../addons/binding/org.openhab.binding.pulseaudio/README.md) | software-based audio distribution |
-| [Rfxcom Binding](../../addons/binding/org.openhab.binding.rfxcom/README.md) | 433MHz radio transceiver and devices |
-| [SamsungTV Binding](../../addons/binding/org.openhab.binding.samsungtv/README.md) | Samsung Smart TVs |
-| [SMAEnergyMeter Binding](../../addons/binding/org.openhab.binding.smaenergymeter/README.md) | SMA Energy Meter for photovoltaic systems |
-| [Sonos Binding](../../addons/binding/org.openhab.binding.sonos/README.md) | Multi-room audio system |
-| [Squeezebox Binding](../../addons/binding/org.openhab.binding.squeezebox/README.md) | Logitech's connected speakers |
-| [Tesla Binding](../../addons/binding/org.openhab.binding.tesla/README.md) | Teslas Model S Electric Vehicle |
-| [Vitotronic Binding](../../addons/binding/org.openhab.binding.vitotronic/README.md) | Heating systems by Viessmann |
+| [Pulseaudio Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.pulseaudio/README.md) | software-based audio distribution |
+| [Rfxcom Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.rfxcom/README.md) | 433MHz radio transceiver and devices |
+| [SamsungTV Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.samsungtv/README.md) | Samsung Smart TVs |
+| [SMAEnergyMeter Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.smaenergymeter/README.md) | SMA Energy Meter for photovoltaic systems |
+| [Sonos Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.sonos/README.md) | Multi-room audio system |
+| [Squeezebox Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.squeezebox/README.md) | Logitech's connected speakers |
+| [Tesla Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.tesla/README.md) | Teslas Model S Electric Vehicle |
+| [Vitotronic Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.vitotronic/README.md) | Heating systems by Viessmann |
 | [WeMo Binding](https://github.com/eclipse/smarthome/blob/20150525/addons/binding/org.eclipse.smarthome.binding.wemo/README.md) | Switchable sockets by Belkin |
 | [YahooWeather Binding](https://github.com/eclipse/smarthome/blob/20150525/addons/binding/org.eclipse.smarthome.binding.yahooweather/README.md) | Weather information from Yahoo |
 
