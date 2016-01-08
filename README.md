@@ -27,6 +27,19 @@ The distribution is available in two flavors:
 
 For the latest snapshot builds, please see to our [cloudbees job](https://openhab.ci.cloudbees.com/job/openHAB-Distribution/).
 
+## Getting Started
+
+If you have downloaded the openHAB distribution zip file, simply unzip it to a local folder and call 'start.sh' (resp. 'start.bat') from the command line.
+The distribution is preconfigured to install demo files, so that you directly have a working instance that you can start playing with.
+
+Once the runtime is started, you can access it in your browser at 'http://localhost:8080/' (note that it might take a bit for the HTTP server to be started, even if the console already welcomes you):
+
+![dashboard](docs/sources/images/dashboard.png)
+
+From here, you can directly access all web-based user interfaces like the new [Paper UI](docs/sources/features/paperui.md) for administration, as well as the [interactive REST API documentation](https://www.eclipse.org/smarthome/rest/index.html). 
+
+For more details on how to get up to speed, please continue reading the [Getting Started page](docs/sources/getting-started.md).
+
 ## Community: How to Get Involved
 
 As any good open source project, openHAB welcomes community participation in the project. Read more in the [how to contribute](CONTRIBUTING.md) guide.
@@ -37,7 +50,8 @@ You can also learn [how openHAB 2 bindings are developed](docs/sources/developme
 
 In case of problems or questions, please join our vibrant [openHAB community](https://community.openhab.org/).
 
-
 ## Trademark Disclaimer
 
 Product names, logos, brands and other trademarks referred to within the openHAB website are the property of their respective trademark holders. These trademark holders are not affiliated with openHAB or our website. They do not sponsor or endorse our materials.
+
+[![Cloudbees](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png)](https://openhab.ci.cloudbees.com/job/openHAB-Distribution/)
