@@ -105,6 +105,7 @@
                 <configuration>
                     <installedFeatures>
                         <feature>wrapper</feature>
+                        <feature>management</feature>
                     </installedFeatures>
                     <startupFeatures>
                         <feature>eventadmin</feature>
@@ -113,7 +114,6 @@
                         <feature>jaas</feature>
                         <feature>shell</feature>
                         <feature>ssh</feature>
-                        <feature>management</feature>
                         <feature>bundle</feature>
                         <feature>config</feature>
                         <feature>deployer</feature>

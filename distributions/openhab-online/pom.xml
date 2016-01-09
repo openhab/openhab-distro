@@ -155,7 +155,6 @@
                         <feature>jaas</feature>
                         <feature>shell</feature>
                         <feature>ssh</feature>
-                        <feature>management</feature>
                         <feature>bundle</feature>
                         <feature>config</feature>
                         <feature>deployer</feature>
