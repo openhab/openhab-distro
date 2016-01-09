@@ -44,9 +44,9 @@
     </distributionManagement>
 
     <properties>
-        <esh.version>0.8.0-SNAPSHOT</esh.version>
+        <esh.version>0.8.0.b2</esh.version>
         <shk.version>1.2</shk.version>
-        <ohc.version>2.0.0-SNAPSHOT</ohc.version>
+        <ohc.version>2.0.0.a4</ohc.version>
         <oh2.version>2.0.0-SNAPSHOT</oh2.version>
         <oh1.version>1.8.0-SNAPSHOT</oh1.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -144,13 +144,19 @@
             </snapshots>
         </repository>
         <repository>
-            <id>eclipse</id>
+            <id>eclipse-snapshots</id>
             <name>Eclipse Snapshot Repository</name>
             <layout>default</layout>
             <url>https://repo.eclipse.org/content/repositories/snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>eclipse-releases</id>
+            <name>Eclipse Release Repository</name>
+            <layout>default</layout>
+            <url>https://repo.eclipse.org/content/repositories/releases/</url>
         </repository>
         <!-- Apache ServiceMix repository (for region) -->
         <repository>
