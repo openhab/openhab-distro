@@ -19,6 +19,7 @@
         <feature>openhab-binding-avmfritz</feature>
         <feature>openhab-binding-ntp</feature>
         <feature>openhab-persistence-rrd4j</feature>
+        <feature>openhab-transformation-map</feature>
         <configfile finalname="${openhab.conf}/items/demo.items" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/items</configfile>
         <configfile finalname="${openhab.conf}/sitemaps/demo.sitemap" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/sitemaps</configfile>
         <configfile finalname="${openhab.conf}/things/demo.things" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/things</configfile>
