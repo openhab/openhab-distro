@@ -87,3 +87,90 @@ case "$ARCH" in
       *) export EXTRA_JAVA_OPTS="-XX:+UseG1GC -Xmx256m" ;;
 esac
 
+
+# The 3 functions below are copied from the karaf script to set JAVA_HOME to a default value.
+# This avoids Karaf printing a warning message at startup.
+
+detectOS() {
+    # OS specific support (must be 'true' or 'false').
+    cygwin=false;
+    darwin=false;
+    aix=false;
+    os400=false;
+    case "`uname`" in
+        CYGWIN*)
+            cygwin=true
+            ;;
+        Darwin*)
+            darwin=true
+            ;;
+        AIX*)
+            aix=true
+            ;;
+        OS400*)
+            os400=true
+            ;;
+    esac
+    # For AIX, set an environment variable
+    if $aix; then
+         export LDR_CNTRL=MAXDATA=0xB0000000@DSA
+         echo $LDR_CNTRL
+    fi
+}
+
+pathCanonical() {
+    local dst="${1}"
+    while [ -h "${dst}" ] ; do
+        ls=`ls -ld "${dst}"`
+        link=`expr "$ls" : '.*-> \(.*\)$'`
+        if expr "$link" : '/.*' > /dev/null; then
+            dst="$link"
+        else
+            dst="`dirname "${dst}"`/$link"
+        fi
+    done
+    local bas=`basename "${dst}"`
+    local dir=`dirname "${dst}"`
+    if [ "$bas" != "$dir" ]; then
+      dst="`pathCanonical "$dir"`/$bas"
+    fi
+    echo "${dst}" | sed -e 's#//#/#g' -e 's#/./#/#g' -e 's#/[^/]*/../#/#g'
+}
+
+locateJava() {
+    # Setup the Java Virtual Machine
+    if $cygwin ; then
+        [ -n "$JAVA" ] && JAVA=`cygpath --unix "$JAVA"`
+        [ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+    fi
+
+    if [ "x$JAVA_HOME" = "x" ] && [ "$darwin" = "true" ]; then
+        JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+    fi
+    if [ "x$JAVA" = "x" ] && [ -r /etc/gentoo-release ] ; then
+        JAVA_HOME=`java-config --jre-home`
+    fi
+    if [ "x$JAVA" = "x" ]; then
+        if [ "x$JAVA_HOME" != "x" ]; then
+            if [ ! -d "$JAVA_HOME" ]; then
+                die "JAVA_HOME is not valid: $JAVA_HOME"
+            fi
+            JAVA="$JAVA_HOME/bin/java"
+        else
+            JAVA=`type java`
+            echo $JAVA
+            JAVA=`expr "$JAVA" : '.* \(/.*\)$'`
+            echo $JAVA
+            if [ "x$JAVA" = "x" ]; then
+                die "java command not found"
+            fi
+        fi
+    fi
+    if [ "x$JAVA_HOME" = "x" ]; then
+        JAVA_HOME="$(dirname $(dirname $(pathCanonical "$JAVA")))"
+        export JAVA_HOME
+    fi
+
+}
+detectOS
+locateJava
