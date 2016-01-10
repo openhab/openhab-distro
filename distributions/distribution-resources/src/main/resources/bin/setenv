@@ -114,7 +114,6 @@ detectOS() {
     # For AIX, set an environment variable
     if $aix; then
          export LDR_CNTRL=MAXDATA=0xB0000000@DSA
-         echo $LDR_CNTRL
     fi
 }
 
@@ -158,9 +157,7 @@ locateJava() {
             JAVA="$JAVA_HOME/bin/java"
         else
             JAVA=`type java`
-            echo $JAVA
             JAVA=`expr "$JAVA" : '.* \(/.*\)$'`
-            echo $JAVA
             if [ "x$JAVA" = "x" ]; then
                 die "java command not found"
             fi
