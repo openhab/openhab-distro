@@ -1,19 +1,18 @@
 # Contributing to openHAB
 
-Note that this project is only about building the openHAB distribution (i.e. the ready-to-run binary) - it does NOT contain the source code of all the features of openHAB.
+Before reporting an issue, please check the [openHAB forum] (https://community.openhab.org) for solutions and help. More people will see your issue when it is posted in the forum and community members may be able to help you find known solutions/workarounds for your issue.
 
-These are actually spread over different projects like
-https://github.com/eclipse/smarthome
-https://github.com/openhab/openhab
-https://github.com/openhab/openhab2
-https://github.com/maggu2810/shk
-https://github.com/kaikreuzer/openhab-core
+When no solution was found, use the table below to determine where your issue should be logged:
 
-So please check 
-## Reporting Issues
+Issue | Where to report
+------|----------------
+Problems and feature requests for openHAB 1 addons | [openHAB] (https://github.com/openhab/openhab/issues)
+Problems and feature requests for openHAB 2 addons | [openHAB2] (https://github.com/openhab/openhab2/issues)
+Issues related to the runtime environment, IDE and packaging | [openHAB-distro] (https://github.com/openhab/openhab-distro/issues)
+Issues related to the core openHAB bundles that are not from Eclipse SmartHome | [openHAB-core] (https://github.com/kaikreuzer/openhab-core/issues)
+Issues related to Eclipse SmartHome addons and core runtime | [Eclipse SmartHome] (https://github.com/eclipse/smarthome/issues)
 
-Please report only [openHAB distribution specific issues here](https://github.com/openhab/openhab-distro/issues), while issues that are related to functionality should be reported to the according project.
-Do not worry, if you are not clear, which category your issue belongs to - we will redirect you, if necessary.
+But do not worry - if you are not clear, which category your issue belongs to - we will redirect you, if necessary.
 
 ## Contribution guidelines
 
