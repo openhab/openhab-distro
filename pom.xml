@@ -46,9 +46,9 @@
     <properties>
         <esh.version>0.8.0.b2</esh.version>
         <shk.version>1.2</shk.version>
-        <ohc.version>2.0.0.a4</ohc.version>
-        <oh2.version>2.0.0-SNAPSHOT</oh2.version>
-        <oh1.version>1.8.0-SNAPSHOT</oh1.version>
+        <ohc.version>2.0.0.b1</ohc.version>
+        <oh2.version>2.0.0.b1</oh2.version>
+        <oh1.version>1.8.0</oh1.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -76,6 +76,7 @@
     <modules>
         <module>features</module>
         <module>distributions</module>
+        <module>launch</module>
     </modules>
 
     <build>

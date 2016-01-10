@@ -102,7 +102,7 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 
 | Add-on | Type | Reason
 |--------|------|------|
-
+| SagerCaster | Binding | Not following the architecture guidelines, see [issue 3754](https://github.com/openhab/openhab/issues/3754) |
 
 ## Compatible Applications
 
