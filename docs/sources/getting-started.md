@@ -63,6 +63,16 @@ in the `acme.cfg` file.
 
 If an add-on provides configuration options, the according cfg file will be automatically created in `conf/services`, when installing the add-on (as long as the `conf` folder is writable for openHAB).
 
+## Configuring which HTTP(s) ports to use
+
+The Jetty webserver in openHAB has been preconfigured to use ports 8080 (http) and 8443 (https). You can change these default ports by specifying the environment variables OPENHAB_HTTP_PORT and OPENHAB_HTTPS_PORT.
+
+For example:
+```
+export OPENHAB_HTTP_PORT=8011
+export OPENHAB_HTTPS_PORT=8444
+```
+
 ## Starting the Runtime
 
 Once you have configured your runtime, you can simply start openHAB by calling `start.sh` resp. `start.bat` on Windows. Point your browser to ```http://<hostname>:8080``` (allow the runtime some time to start before the HTTP server is available, especially on the very first start) and you will be welcomed by the openHAB Dashboard.
