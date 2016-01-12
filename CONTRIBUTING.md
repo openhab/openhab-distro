@@ -14,6 +14,10 @@ Issues related to Eclipse SmartHome addons and core runtime | [Eclipse SmartHome
 
 But do not worry - if you are not clear, which category your issue belongs to - we will redirect you, if necessary.
 
+
+
+
+
 ## Contribution guidelines
 
 ### Pull requests are always welcome
