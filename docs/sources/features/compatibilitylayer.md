@@ -15,13 +15,14 @@ Now start up the runtime and touch wood.
  
 ## How to solve problems with a certain add-on?
  
-All developers are encouraged to help on this in order to quickly make as many add-ons compatible with the openHAB 2 runtime as possible.
+All developers are encouraged to help on this in order to quickly make as many 1.x add-ons compatible with the openHAB 2 runtime as possible.
 Here is what you need to do:
  - Setup a the [openHAB 2 IDE](../development/ide.md).
  - Import your 1.x add-on from your local openHAB 1 git clone into your workspace.
  - If it compiles, the first major step is already done. If not, try to figure out why there are compilation problems and if you cannot solve them, ask on the mailing list for help. 
  - After adding some configuration, start up the runtime through the launch configuration (make sure your bundle is activated and started by default) from within the IDE.
- - Go and test and report your findings by creating issues or pull requests for the add-on in openHAB 1.
+ - Go and test and report your findings by creating issues or pull requests for the [add-on in openHAB 1](https://github.com/openhab/openhab/issues).
+ - If all is well and the binding works, add it to the official distribution by creating a PR similar to [this one](https://github.com/openhab/openhab/pull/3720/files). With will automatically make the add-on a part of the distro with the next build.
 
 ## Future Plans
 
