@@ -93,7 +93,11 @@ openHAB uses Apache Karaf and thus comes with a very powerful shell for managing
  
 ## Registering openHAB as a System Service in the OS
 
-Karaf provides the possibility to be automatically started on system startup as a service. As different mechanisms are required for the different operating systems, Karaf detects your OS and generates the required files. To do so, simply call
+Karaf provides the possibility to be automatically started on system startup as a service. As different mechanisms are required for the different operating systems, Karaf detects your OS and generates the required files. 
+
+This capability is currently not available for ARM based devices (e.g. Raspberry Pi 1 and 2). On Linux systems, you can use the command ```arch``` to show which CPU architecture is being used.
+
+To install openHAB as a service, call
 ```
 openhab:install-service 
 ```
