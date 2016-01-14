@@ -122,8 +122,8 @@
 <repository location="http://www.jmdns.org/update-site/3.4.2/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.openhab.feature.p2.feature.group" version="2.0.0.a3"/>
-<repository location="https://dl.bintray.com/kaikreuzer/openhab-core/"/>
+<unit id="org.openhab.feature.p2.feature.group" version="0.0.0"/>
+<repository location="https://dl.bintray.com/kaikreuzer/openhab-core/p2/2.0.0.b1"/>
 </location>
 </locations>
 </target>
