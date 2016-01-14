@@ -95,7 +95,7 @@ openHAB uses Apache Karaf and thus comes with a very powerful shell for managing
 
 Karaf provides the possibility to be automatically started on system startup as a service. As different mechanisms are required for the different operating systems, Karaf detects your OS and generates the required files. 
 
-This capability is currently not available for ARM based devices (e.g. Raspberry Pi 1 and 2). On Linux systems, you can use the command ```arch``` to show which CPU architecture is being used.
+This capability is currently not available for ARM based devices (e.g. Raspberry Pi 1 and 2) but further below shows the manual steps needed. On Linux systems, you can use the command ```arch``` to show which CPU architecture is being used.
 
 To install openHAB as a service, call
 ```
@@ -103,3 +103,63 @@ openhab:install-service
 ```
 in the shell and make sure that the folder `<openhab root folder>/runtime/karaf` is writable (only required at this time, you can make it read-only again afterwards).
 The files are then generated for you and a short guide is displayed on what further actions you need to take to register it as a system service.
+
+### Raspberry Pi
+
+If you're running Raspbian Jessie and have systemd installed the following steps will allow you to register openHAB as a service so that it runs at startup and automatically restarts if openHAB crashes.
+
+ 1. Make sure openHAB is installed somewhere, for the purpose of this guide it's installed in /opt/openhab2.
+ 2. Create the following file called "openhab.service" in /lib/systemd/system/ replacing the username with whichever user runs openHAB on your setup.
+ ```
+ [Unit]
+Description=Starts and stops the openHAB Home Automation Bus
+Documentation=http://www.openhab.org
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+GuessMainPID=yes
+User=**enter your openhab username here**
+ExecStart=/opt/openhab2/start.sh
+ExecStop=kill -SIGINT $MAINPID
+Restart=on-failure
+WorkingDirectory=/opt/openhab2
+
+[Install]
+WantedBy=multi-user.target
+ ```
+ 3. Run the following commands to enable the service, start the service and check the status of the service respectively.
+ 
+ ```
+ sudo systemctl enable openhab
+ ```
+
+ ```
+ sudo systemctl start openhab
+ ```
+
+ ```
+ sudo systemctl status openhab
+ ```
+
+ 4. Assuming all looks good when you checked the status of the service, i.e. you see something like the below on your command line, then it should now be setup to run as a service.
+
+ ```
+ openhab.service - Starts and stops the openHAB Home Automation Bus
+   Loaded: loaded (/etc/systemd/system/openhab.service; enabled)
+   Active: active (running) since Thu 2016-01-14 01:16:00 GMT; 18h ago
+     Docs: http://www.openhab.org
+
+ ```
+ 5. If you need to stop openHAB use the following command.
+  
+ ```
+ sudo systemctl stop openhab
+ ```
+ 6. If you need to disable the service so that it doesn't run at startup use the following command.
+ 
+ ```
+ sudo systemctl disable openhab
+ ```
+ 
