@@ -81,11 +81,14 @@ export JAVA_OPTS="${JAVA_OPTS}
 #
 # set jvm options
 #
-ARCH=`arch` 
+ARCH=`arch`
+EXTRA_JAVA_OPTS_COMMON="-Xmx256m"
+EXTRA_JAVA_OPTS_ARCH=""
 case "$ARCH" in
-  *arm*) export EXTRA_JAVA_OPTS="-Xmx256m" ;;
-      *) export EXTRA_JAVA_OPTS="-XX:+UseG1GC -Xmx256m" ;;
+  *arm*) ;;
+      *) EXTRA_JAVA_OPTS_ARCH="-XX:+UseG1GC" ;;
 esac
+export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTRA_JAVA_OPTS}"
 
 
 # The 3 functions below are copied from the karaf script to set JAVA_HOME to a default value.
