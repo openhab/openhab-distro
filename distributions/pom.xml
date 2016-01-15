@@ -16,6 +16,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>apt-repo</module>
     <module>openhab-offline</module>
     <module>openhab-online</module>
   </modules>
