@@ -30,7 +30,8 @@
             <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
                 <artifactId>karaf-maven-plugin</artifactId>
-                <version>${dep.karaf.version}</version>
+                <!-- TODO: temporary solution as long as main karaf dep <= 4.0.4 -->
+                <version>4.0.4</version>
                 <extensions>true</extensions>
                 <configuration>
                     <startLevel>80</startLevel>
@@ -44,14 +45,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <!-- TODO: temporary solution as long as karaf-maven-plugin <= 4.0.3 -->
-            <id>apache-snapshots</id>
-            <name>Apache Snapshot Repository</name>
-            <url>https://repository.apache.org/content/groups/snapshots</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
