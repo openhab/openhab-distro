@@ -9,9 +9,11 @@ Currently, the compatibility layer focuses on the official APIs, i.e. an add-ons
 ## How to use openHAB 1.x Add-ons that are not part of the distribution
  
 While the openHAB distribution already contains many add-ons of openHAB 1, there are still quite some of them missing - please help testing them - if they are confirmed to be working, they can be included in the distribution.
-Test a not included add-on is very straight forward: As with openHAB 1.x, simply take the jar file of your add-on and place it in the `${openhab.home}/addons` folder.
-Furthermore, copy your personal `openhab.cfg` file to `${openhab.home}/conf/services/openhab.cfg`.
-Now start up the runtime and touch wood.
+Test a not included add-on is very straight forward: 
+ - Start your runtime
+ - Install the 1.x compatibility layer by running `feature:install openhab-runtime-compat1x` in the openHAB console 
+ - As with openHAB 1.x, simply take the jar file of your add-on and place it in the `${openhab.home}/addons` folder.
+ - Copy your personal `openhab.cfg` file to `${openhab.home}/conf/services/openhab.cfg`.
  
 ## How to solve problems with a certain add-on?
  
