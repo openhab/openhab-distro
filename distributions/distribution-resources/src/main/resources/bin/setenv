@@ -79,9 +79,9 @@ export JAVA_OPTS="${JAVA_OPTS}
   -Dorg.osgi.service.http.port.secure=${HTTPS_PORT}"
 
 #
-# set jvm options
+# set JVM options
 #
-ARCH=`arch`
+ARCH=`uname -m`
 EXTRA_JAVA_OPTS_COMMON="-Xmx256m"
 EXTRA_JAVA_OPTS_ARCH=""
 case "$ARCH" in
