@@ -76,7 +76,6 @@
     <modules>
         <module>features</module>
         <module>distributions</module>
-        <module>launch</module>
     </modules>
 
     <build>
@@ -121,44 +120,91 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>jcenter</id>
-            <name>JCenter Repository</name>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-        <repository>
-            <id>shk-bintray</id>
-            <name>Bintray Repository for shk</name>
-            <url>https://dl.bintray.com/maggu2810/maven</url>
-        </repository>
-        <repository>
-            <id>openhab-bintray</id>
-            <name>Bintray Repository for openHAB pax-web-jetty Patch</name>
-            <url>https://dl.bintray.com/openhab/mvn</url>
-        </repository>
-        <repository>
-            <id>jfrog</id>
-            <name>JFrog OSS Repository</name>
-            <url>http://oss.jfrog.org/libs-snapshot/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>eclipse-snapshots</id>
-            <name>Eclipse Snapshot Repository</name>
-            <layout>default</layout>
-            <url>https://repo.eclipse.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
+       <!-- ESH releases -->
         <repository>
             <id>eclipse-releases</id>
             <name>Eclipse Release Repository</name>
             <layout>default</layout>
             <url>https://repo.eclipse.org/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
+
+        <!-- ESH Snapshots -->
+        <repository>
+            <id>eclipse-snapshots</id>
+            <name>Eclipse Snapshot Repository</name>
+            <layout>default</layout>
+            <url>https://repo.eclipse.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+
+        <!-- openHAB releases -->
+        <repository>
+            <id>jcenter</id>
+            <name>JCenter Repository</name>
+            <url>https://jcenter.bintray.com/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>openhab-bintray</id>
+            <name>Bintray Repository for openHAB</name>
+            <url>https://dl.bintray.com/openhab/mvn/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <!-- openHAB snapshots -->
+        <repository>
+            <id>jfrog</id>
+            <name>JFrog OSS Repository</name>
+            <url>http://oss.jfrog.org/libs-snapshot/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+
+        <!-- SHK releases -->
+        <repository>
+            <id>shk-bintray</id>
+            <name>Bintray Repository for shk</name>
+            <url>https://dl.bintray.com/maggu2810/maven</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
         <!-- Apache ServiceMix repository (for region) -->
         <repository>
             <id>apache.servicemix.m2</id>
@@ -166,11 +212,13 @@
             <url>http://svn.apache.org/repos/asf/servicemix/m2-repo</url>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
         <!-- Gemini Blueprint repository -->
         <repository>
             <id>zodiac-repository</id>
@@ -178,11 +226,13 @@
             <url>http://repository.springsource.com/maven/bundles/release</url>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>                
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
         <!-- Spring EBR repository -->
         <repository>
             <id>spring-ebr-repository</id>
@@ -190,11 +240,13 @@
             <url>http://repository.springsource.com/maven/bundles/external</url>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>                
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
         <!-- OPS4J SNAPSHOT repository -->
         <repository>
             <id>ops4j.sonatype.snapshots.deploy</id>
@@ -205,8 +257,10 @@
             </releases>
             <snapshots>
                 <enabled>true</enabled>
+               <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
+
         <!-- Apache SNAPSHOT -->
         <repository>
             <id>apache.snapshots.deploy</id>
@@ -217,6 +271,7 @@
             </releases>
             <snapshots>
                 <enabled>true</enabled>
+               <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
     </repositories>
