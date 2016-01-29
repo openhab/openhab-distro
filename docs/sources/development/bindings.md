@@ -15,8 +15,6 @@ As a first step, you need to decide in which namespace you want to develop your 
 
 ## Creating a skeleton
 
-_Note:_ Here you can find a [screencast of the binding skeleton creation](http://youtu.be/30nhm0yIcvA).
-
 For the openHAB namespace: Choose the option "openHAB 2 Add-ons" in [your IDE setup](ide.md), and go ahead and create a skeleton for your binding. For this, go into your git repository under `git/openhab2-addons/addons/binding` and call the script `create_openhab_binding_skeleton.sh` with a single parameter, which is your binding name in camel case (e.g. 'ACMEProduct' or 'SomeSystem'). When prompted, enter your name as author and hit "Y" to start the skeleton generation.
 
 For the Eclipse SmartHome namespace: Choose the option "Eclipse SmartHome Extensions" in [your IDE setup](ide.md), and go ahead and create a skeleton for your binding. For this, go to `git/smarthome/extensions/binding` and call the script `create_esh_binding_skeleton.sh` with a single parameter, which is your binding name in camel case (e.g. 'ACMEProduct' or 'SomeSystem'). When prompted, enter your name as author and hit "Y" to start the skeleton generation.
@@ -24,6 +22,8 @@ For the Eclipse SmartHome namespace: Choose the option "Eclipse SmartHome Extens
 Now switch in Eclipse and choose `File->Import->General->Existing Projects into Workspace`, enter the folder of the newly created skeleton as the root directory and press "Finish".
 
 This should give you an easy starting point for your developments. To learn about the internal structure and the concepts of a binding, please see the [Eclipse tutorial on binding development](https://www.eclipse.org/smarthome/documentation/development/bindings/how-to.html).
+
+_Note:_ Here you can find a [screencast of the binding skeleton creation](http://youtu.be/30nhm0yIcvA).
 
 ## Setup and Run the Binding
 
