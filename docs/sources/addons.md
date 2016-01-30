@@ -50,19 +50,21 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | Enphaseenergy | Binding |
 | Epsonprojector | Binding |
 | Exec | Binding |
+| Freebox | Binding |
 | Freeswitch | Binding |
 | FS20 | Binding |
 | Heatmiser | Binding |
 | Homematic | Binding |
 | HTTP | Binding |
 | IHC | Binding |
-| InsteonPLM | Binding |
 | KNX | Binding |
 | LCN | Binding |
 | Milight | Binding |
+| MiOS | Binding |
 | Modbus | Binding |
 | MQTT | Binding |
 | Nest | Binding |
+| Netatmo | Binding |
 | Networkhealth | Binding |
 | Nibeheatpump | Binding |
 | NTP | Binding |
@@ -102,7 +104,9 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 
 | Add-on | Type | Reason
 |--------|------|------|
+| InsteonPLM | Binding | see [issue 3922](https://github.com/openhab/openhab/issues/3922) |
 | SagerCaster | Binding | Not following the architecture guidelines, see [issue 3754](https://github.com/openhab/openhab/issues/3754) |
+| MiOS | Action | |
 
 ## Compatible Applications
 
