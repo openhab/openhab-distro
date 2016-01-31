@@ -73,6 +73,16 @@ export OPENHAB_HTTP_PORT=8011
 export OPENHAB_HTTPS_PORT=8444
 ```
 
+## Configuring additional JVM options
+
+In a standard setup, you don't need to configure JVM arguments. There may however be cases where bindings require additional JVM settings, for example to use non standard serial ports.
+When additional JVM arguments are needed, these can be set using the ```EXTRA_JAVA_OPTS``` environment variable.
+
+For example:
+```
+export EXTRA_JAVA_OPTS=-Dgnu.io.rxtx.SerialPorts=/dev/ttyAMA0
+``` 
+
 ## Starting the Runtime
 
 Once you have configured your runtime, you can simply start openHAB by calling `start.sh` resp. `start.bat` on Windows. Point your browser to ```http://<hostname>:8080``` (allow the runtime some time to start before the HTTP server is available, especially on the very first start) and you will be welcomed by the openHAB Dashboard.
