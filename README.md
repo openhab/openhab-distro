@@ -44,6 +44,8 @@ For more details on how to get up to speed, please continue reading the [Getting
 
 As any good open source project, openHAB welcomes community participation in the project. Read more in the [how to contribute](CONTRIBUTING.md) guide.
 
+We are trying to maintain a list of [compatible 1.x bindings](docs/sources/addons.md#compatible-1x-add-ons) and [currently incompatible 1.x bindings](docs/sources/addons.md#currently-incompatible-1x-add-ons) in openHAB2. As a user, you can help testing compatibility of 1.x binding in openHAB 2 and then report your results in our [openHAB community](https://community.openhab.org/).
+
 If you are a developer and want to jump right into the sources and execute openHAB from within Eclipse, please have a look at the [IDE setup](docs/sources/development/ide.md) procedures.
 
 You can also learn [how openHAB 2 bindings are developed](docs/sources/development/bindings.md).
