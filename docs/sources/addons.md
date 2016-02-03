@@ -72,7 +72,6 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | OpenEnergyMonitor | Binding |
 | OneWire | Binding |
 | RWE SmartHome | Binding |
-| RFXCOM | Binding |
 | Samsung AC | Binding |
 | Sapp | Binding |
 | Satel | Binding |
@@ -89,10 +88,9 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | rrd4j | Persistence |
 | MySQL | Persistence |
 | MongoDB | Persistence |
-| Logging | Persistence |
 | JPA | Persistence |
-| Ecobee | Action |
 | Mail | Action |
+| MiOS | Action |
 | Pushover | Action |
 | Telegram | Action |
 | XBMC | Action |
@@ -105,8 +103,10 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | Add-on | Type | Reason
 |--------|------|------|
 | InsteonPLM | Binding | see [issue 3922](https://github.com/openhab/openhab/issues/3922) |
+| RFXCOM | Binding | see [issue 3952](https://github.com/openhab/openhab/issues/3952) |
 | SagerCaster | Binding | Not following the architecture guidelines, see [issue 3754](https://github.com/openhab/openhab/issues/3754) |
-| MiOS | Action | |
+| Logging | Persistence | openHAB 2 does not use logback anymore |
+| Ecobee | Action | see [issue 3963](https://github.com/openhab/openhab/issues/3963) |
 
 ## Compatible Applications
 
