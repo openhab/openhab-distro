@@ -56,6 +56,7 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | Heatmiser | Binding |
 | Homematic | Binding |
 | HTTP | Binding |
+| Intertechno | Binding |
 | IHC | Binding |
 | KNX | Binding |
 | LCN | Binding |
