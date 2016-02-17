@@ -20,3 +20,9 @@ In order to continue using rules from openHAB 1, a few minor changes might be ne
 
 1. Import statements at the top are not required anymore for any org.openhab package, so these can be removed
 1. The state "Uninitialized" has been renamed to "NULL" and thus needs to be replaced in the rules
+
+## Transforms
+
+The **SCALE** transformation has evolved. 
+ - Old syntax that was : `[minbound,maxbound]` has to be changed to `[minbound..maxbound]`. 
+ - Note that you now have the ability to exclude bounds from the ranges (eg `]minbound..maxbound]`) and also define open ranges : `[minbound..]`
