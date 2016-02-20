@@ -39,10 +39,10 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 |--------|------|
 | Anel | Binding |
 | Astro | Binding |
-| CalDAV | Binding |
 | Comfo Air | Binding |
 | Denon | Binding |
 | DMX (OLA) | Binding |
+| Ecobee | Action |
 | Ecobee | Binding |
 | EDS OWServer | Binding |
 | Energenie | Binding |
@@ -103,11 +103,11 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 
 | Add-on | Type | Reason
 |--------|------|------|
+| CalDAV | Binding | see [issue 4074](https://github.com/openhab/openhab/issues/4074) |
 | InsteonPLM | Binding | see [issue 3922](https://github.com/openhab/openhab/issues/3922) |
 | RFXCOM | Binding | see [issue 3952](https://github.com/openhab/openhab/issues/3952) |
 | SagerCaster | Binding | Not following the architecture guidelines, see [issue 3754](https://github.com/openhab/openhab/issues/3754) |
 | Logging | Persistence | openHAB 2 does not use logback anymore |
-| Ecobee | Action | see [issue 3963](https://github.com/openhab/openhab/issues/3963) |
 
 ## Compatible Applications
 
