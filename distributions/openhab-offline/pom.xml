@@ -14,6 +14,12 @@
     <name>openHAB Offline Distribution</name>
     <description>This is an offline distribution of openHAB</description>
 
+    <properties>
+        <deb.name>openhab2-offline</deb.name>
+        <deb.srcarchive>openhab-offline-${project.version}.tar.gz</deb.srcarchive>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.karaf.features</groupId>
@@ -45,11 +51,11 @@
         </dependency>
         <!-- Temporary patch for https://github.com/openhab/openhab-distro/issues/10 -->
         <dependency>
-          	<groupId>org.openhab.distro.deps</groupId>
-  			<artifactId>pax-web-jetty</artifactId>
-  			<version>4.2.3.sp1</version>
-			<scope>provided</scope>
-  		</dependency>
+              <groupId>org.openhab.distro.deps</groupId>
+              <artifactId>pax-web-jetty</artifactId>
+              <version>4.2.3.sp1</version>
+            <scope>provided</scope>
+          </dependency>
     </dependencies>
 
     <build>
@@ -151,7 +157,10 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+            </plugin>
         </plugins>
-    </build>
-
+      </build>
 </project>
