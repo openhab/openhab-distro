@@ -56,14 +56,16 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | Heatmiser | Binding |
 | Homematic | Binding |
 | HTTP | Binding |
-| Intertechno | Binding |
 | IHC | Binding |
+| Intertechno | Binding |
+| IRtrans | Binding |
 | KNX | Binding |
 | LCN | Binding |
 | Milight | Binding |
 | MiOS | Binding |
 | Modbus | Binding |
 | MQTT | Binding |
+| NeoHub | Binding |
 | Nest | Binding |
 | Netatmo | Binding |
 | Networkhealth | Binding |
@@ -72,15 +74,18 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | Onkyo | Binding |
 | OpenEnergyMonitor | Binding |
 | OneWire | Binding |
+| RFXCOM | Binding |
 | RWE SmartHome | Binding |
 | Samsung AC | Binding |
 | Sapp | Binding |
 | Satel | Binding |
+| Serial | Binding |
 | SNMP | Binding |
 | SwegonVentilation | Binding |
 | SystemInfo | Binding |
-| Tinkerforge | Binding |
+| TCP | Binding |
 | Tellstick | Binding |
+| Tinkerforge | Binding |
 | Weather | Binding |
 | WOL | Binding |
 | XBMC | Binding |
@@ -105,7 +110,6 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 |--------|------|------|
 | CalDAV | Binding | see [issue 4074](https://github.com/openhab/openhab/issues/4074) |
 | InsteonPLM | Binding | see [issue 3922](https://github.com/openhab/openhab/issues/3922) |
-| RFXCOM | Binding | see [issue 3952](https://github.com/openhab/openhab/issues/3952) |
 | SagerCaster | Binding | Not following the architecture guidelines, see [issue 3754](https://github.com/openhab/openhab/issues/3754) |
 | Logging | Persistence | openHAB 2 does not use logback anymore |
 
