@@ -1,3 +1,5 @@
+import org.joda.time.*
+
 var Timer timer = null
 
 /**
@@ -19,6 +21,29 @@ rule "Dimmed Light"
     		if(percent>100) percent = 100
     		postUpdate(DimmedLight, percent);
     	}
+end
+
+rule "Timer Demo"
+when
+    Item Light_GF_Corridor_Ceiling received command
+then
+    if(receivedCommand==ON) {
+        if(timer==null) {
+            // first ON command, so create a timer to turn the light off again
+            timer = createTimer(now.plusSeconds(10)) [|
+                sendCommand(Light_GF_Corridor_Ceiling, OFF)
+            ]
+        } else {
+            // subsequent ON command, so reschedule the existing timer
+            timer.reschedule(now.plusSeconds(10))
+        }
+    } else if(receivedCommand==OFF) {
+        // remove any previously scheduled timer
+        if(timer!=null) {
+            timer.cancel
+            timer = null
+        }   
+    }
 end
 
 /**
