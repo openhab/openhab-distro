@@ -14,12 +14,14 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | [HDanywhere Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.hdanywhere/) | HDMI matrix |
 | [IPP Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.ipp/README.md) | Internet Printing Protocol (replaces 1.x CUPS Binding) |
 | [KEBA Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.keba/README.md) | Electric vehicle charging station |
+| [Kostal Inverter Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.kostalinverter/README.md) | Photovoltaic converter |
 | [FS Internet Radio Binding](https://github.com/eclipse/smarthome/blob/ref-0.8.0.b2/extensions/binding/org.eclipse.smarthome.binding.fsinternetradio/README.md) | Internet radios with chip from Frontier Silicon |
 | [LIFX Binding](https://github.com/eclipse/smarthome/blob/ref-0.8.0.b2/extensions/binding/org.eclipse.smarthome.binding.lifx/README.md) | Wifi-enabled LED bulbs |
 | [Lutron Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.lutron/README.md) | Dimmers And Lighting Controls |
 | [MAX! Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.max/README.md) | Heater control solution by eQ-3 |
 | [Network Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.network/) | Scans local network (replaces 1.x networkhealth Binding) |
 | [NTP Binding](https://github.com/eclipse/smarthome/blob/ref-0.8.0.b2/extensions/binding/org.eclipse.smarthome.binding.ntp/README.md) | NTP time servers |
+| [OpenSprinkler Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.opensprinkler/README.md) | Open sprinkler system |
 | [PioneerAVR Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.pioneeravr/README.md) | AV receivers by Pioneer |
 | [Philips Hue Binding](https://github.com/eclipse/smarthome/blob/ref-0.8.0.b2/extensions/binding/org.eclipse.smarthome.binding.hue/README.md) | LED lighting system |
 | [Pulseaudio Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.pulseaudio/README.md) | software-based audio distribution |
@@ -32,6 +34,7 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | [Vitotronic Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.vitotronic/README.md) | Heating systems by Viessmann |
 | [WeMo Binding](https://github.com/eclipse/smarthome/blob/ref-0.8.0.b2/extensions/binding/org.eclipse.smarthome.binding.wemo/README.md) | Switchable sockets by Belkin |
 | [YahooWeather Binding](https://github.com/eclipse/smarthome/blob/ref-0.8.0.b2/extensions/binding/org.eclipse.smarthome.binding.yahooweather/README.md) | Weather information from Yahoo |
+| [Z-Wave Binding](https://github.com/openhab/openhab2/blob/master/addons/binding/org.openhab.binding.zwave/README.md) | Z-Wave radio controlled devices |
 
 ## Compatible 1.x Add-ons
 
