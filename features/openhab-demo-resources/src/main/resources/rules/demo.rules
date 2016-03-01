@@ -111,3 +111,11 @@ when
 then
   postUpdate(Weather_LastUpdate, new DateTimeType())
 end
+
+rule "Set random wifi variations"
+    when 
+        System started or
+        Time cron "/20 * * * * ?"
+    then
+        postUpdate(Wifi_Level, (Math::random * 4.0).intValue)
+end
