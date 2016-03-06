@@ -2495,15 +2495,15 @@
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${git.clone.esh.location/bundles/core}"/>
+          rootFolder="${git.clone.esh2.location/bundles/core}"/>
       <sourceLocator
-          rootFolder="${git.clone.esh.location/bundles/config}"/>
+          rootFolder="${git.clone.esh2.location/bundles/config}"/>
       <sourceLocator
-          rootFolder="${git.clone.esh.location/bundles/storage}"/>
+          rootFolder="${git.clone.esh2.location/bundles/storage}"/>
       <sourceLocator
-          rootFolder="${git.clone.esh.location/bundles/ui}"/>
+          rootFolder="${git.clone.esh2.location/bundles/ui}"/>
       <sourceLocator
-          rootFolder="${git.clone.esh.location/bundles/io}">
+          rootFolder="${git.clone.esh2.location/bundles/io}">
         <excludedPath>org.eclipse.smarthome.io.console.karaf</excludedPath>
       </sourceLocator>
       <sourceLocator
