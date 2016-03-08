@@ -12,7 +12,9 @@ Note: This page is work in progress and serves as a place to collect whatever yo
  - Instead of the global `configuration/openhab.cfg` file, there is now an individual file per add-on in `conf/services`
  - The OSGi console commands are now available as "smarthome", not as "openhab" anymore.
  - The webapps folder has been discontinued, but static resources can be placed in `conf/html`.
- - It is possible to provide your own custom icons in the `conf/icons/classic` folder - no need to overwrite the icons that come with the runtime
+ - It is possible to provide your own custom icons in the `conf/icons/classic` folder - no need to overwrite the icons that come with the runtime.
+ - For custom dynamic icons depending on an item state, you need in openHAB 2 to define in the `conf/icons/classic` folder a default icon (without the state part) in addition to the icons for the different states. This default icon was not required in openHAB 1. For example, for a Wifi level that can take a value from 1 to 4, in addition to the files wifi-1.png, wifi-2.png, wifi-3.png and wifi-4.png, you need to provide a file named wifi.png.
+ - Note that Basic UI requires icons with SVG format by default; a Basic UI setting is available to choose beween SVG and PNG formats.
 
 ## Rules
 
