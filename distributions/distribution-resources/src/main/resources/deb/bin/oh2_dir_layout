@@ -7,6 +7,7 @@ export OPENHAB_HOME=`cd "$DIRNAME/../../.."; pwd`
 export OPENHAB_CONF="/etc/openhab2"
 export OPENHAB_RUNTIME="${OPENHAB_HOME}/runtime"
 export OPENHAB_USERDATA="/var/lib/openhab2"
+export OPENHAB_LOGDIR="/var/log/openhab2"
 
 export KARAF_HOME="${OPENHAB_RUNTIME}/karaf"
 export KARAF_DATA="${OPENHAB_USERDATA}"

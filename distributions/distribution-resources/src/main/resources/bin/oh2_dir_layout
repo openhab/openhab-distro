@@ -7,6 +7,7 @@ export OPENHAB_HOME=`cd "$DIRNAME/../../.."; pwd`
 export OPENHAB_CONF="${OPENHAB_HOME}/conf"
 export OPENHAB_RUNTIME="${OPENHAB_HOME}/runtime"
 export OPENHAB_USERDATA="${OPENHAB_HOME}/userdata"
+export OPENHAB_LOGDIR="${OPENHAB_USERDATA}/logs"
 
 export KARAF_HOME="${OPENHAB_RUNTIME}/karaf"
 export KARAF_DATA="${OPENHAB_USERDATA}"
