@@ -1,6 +1,10 @@
 #!/bin/sh
 
 set -e
+if [ x"${OH_DOCKER_INSTALLATION}" != x ]; then
+    echo "docker installation \"${OH_DOCKER_INSTALLATION}\""
+    exit 0
+fi
 
 [ -f /etc/default/openhab2 ] && . /etc/default/openhab2
 
