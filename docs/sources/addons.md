@@ -68,6 +68,7 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | MiOS | Binding |
 | Modbus | Binding |
 | MQTT | Binding |
+| MyQ | Binding |
 | NeoHub | Binding |
 | Nest | Binding |
 | Netatmo | Binding |
