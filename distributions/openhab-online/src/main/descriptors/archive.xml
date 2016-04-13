@@ -49,7 +49,7 @@
                 <include>system/**</include>
             </includes>
             <excludes>
-            	<exclude>pax-web-jetty*.jar</exclude>
+                <exclude>pax-web-jetty*.jar</exclude>
             </excludes>
         </fileSet>
 
