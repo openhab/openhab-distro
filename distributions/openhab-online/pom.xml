@@ -79,16 +79,16 @@
         </dependency>
         <!-- Temporary patch for https://github.com/openhab/openhab-distro/issues/10 -->
         <dependency>
-          	<groupId>org.openhab.distro.deps</groupId>
-  			<artifactId>pax-web-jetty</artifactId>
-  			<version>4.2.3.sp1</version>
-			<scope>provided</scope>
-  		</dependency>         
+            <groupId>org.openhab.distro.deps</groupId>
+            <artifactId>pax-web-jetty</artifactId>
+            <version>4.2.4</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <resources>
-        	<!-- add shared distribution resources -->
+            <!-- add shared distribution resources -->
             <resource>
                 <directory>../distribution-resources/src/main/resources</directory>
                 <filtering>false</filtering>
@@ -103,7 +103,7 @@
                     <include>**/*</include>
                 </includes>
             </resource>
-        	<!-- add distribution specific resources -->
+            <!-- add distribution specific resources -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
@@ -117,7 +117,7 @@
                 <includes>
                     <include>**/*</include>
                 </includes>
-            </resource>            
+            </resource>
         </resources>
         <plugins>
             <plugin>
