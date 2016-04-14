@@ -97,9 +97,9 @@
         </file>
         <!-- add patch for https://github.com/openhab/openhab-distro/issues/10 -->
         <file>
-            <source>target/assembly/system/org/openhab/distro/deps/pax-web-jetty/4.2.3.sp1/pax-web-jetty-4.2.3.sp1.jar</source>
-            <outputDirectory>runtime/karaf/system/org/ops4j/pax/web/pax-web-jetty/4.2.3/</outputDirectory>
-            <destName>pax-web-jetty-4.2.3.jar</destName>
+            <source>target/assembly/system/org/openhab/distro/deps/pax-web-jetty/4.2.4/pax-web-jetty-4.2.4.jar</source>
+            <outputDirectory>runtime/karaf/system/org/ops4j/pax/web/pax-web-jetty/4.2.4/</outputDirectory>
+            <destName>pax-web-jetty-4.2.4.jar</destName>
         </file>     
     </files>
 
