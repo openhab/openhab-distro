@@ -30,8 +30,6 @@
             <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
                 <artifactId>karaf-maven-plugin</artifactId>
-                <!-- TODO: temporary solution as long as main karaf dep <= 4.0.4 -->
-                <version>4.0.4</version>
                 <extensions>true</extensions>
                 <configuration>
                     <startLevel>80</startLevel>
