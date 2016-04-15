@@ -24,13 +24,6 @@
             <type>xml</type>
         </dependency>
         <dependency>
-            <groupId>de.maggu2810.shk</groupId>
-            <artifactId>shk-feature-base</artifactId>
-            <version>${shk.version}</version>
-            <classifier>features</classifier>
-            <type>xml</type>
-        </dependency>
-        <dependency>
             <groupId>org.openhab.core</groupId>
             <artifactId>openhab-core</artifactId>
             <version>${ohc.version}</version>
@@ -71,6 +64,55 @@
             <version>${project.version}</version>
             <type>pom</type>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>apache-commons</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>apache-httpcomponents</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>gson</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>jmdns</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>jupnp</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>paho</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>de.maggu2810.kat.features</groupId>
+            <artifactId>xtext</artifactId>
+            <version>${kat.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
         </dependency>
     </dependencies>
 
