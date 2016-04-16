@@ -45,10 +45,10 @@
 
     <properties>
         <esh.version>0.8.0-SNAPSHOT</esh.version>
-        <shk.version>1.2</shk.version>
         <ohc.version>2.0.0-SNAPSHOT</ohc.version>
         <oh2.version>2.0.0-SNAPSHOT</oh2.version>
         <oh1.version>1.9.0-SNAPSHOT</oh1.version>
+        <kat.version>1.4.1</kat.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -56,9 +56,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 
-        <dep.karaf.version>4.0.3</dep.karaf.version>
-        <karaf.maven.plugin.version>4.0.3</karaf.maven.plugin.version>
-        <karaf.features.version>4.0.3</karaf.features.version>
+        <karaf.version>4.0.4</karaf.version>
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <build.helper.maven.plugin.version>1.9.1</build.helper.maven.plugin.version>
 
@@ -84,7 +82,7 @@
                 <plugin>
                     <groupId>org.apache.karaf.tooling</groupId>
                     <artifactId>karaf-maven-plugin</artifactId>
-                    <version>${karaf.maven.plugin.version}</version>
+                    <version>${karaf.version}</version>
                     <extensions>true</extensions>
                 </plugin>
                 <plugin>

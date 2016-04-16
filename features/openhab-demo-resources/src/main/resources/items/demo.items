@@ -14,7 +14,7 @@ Group GF_Corridor   "Corridor"      <corridor>  (gGF)
 
 Group FF_Bath       "Bathroom"      <bath>      (gFF)
 Group FF_Office     "Office"        <office>    (gFF)
-Group FF_Child      "Child's Room"  <boy1>      (gFF)
+Group FF_Child      "Child's Room"  <boy_1>      (gFF)
 Group FF_Bed        "Bedroom"       <bedroom>   (gFF)
 Group FF_Corridor   "Corridor"      <corridor>  (gFF)
 
@@ -114,3 +114,4 @@ Number Radio_Station            "Radio"                 <network>
 Dimmer Volume                   "Volume [%.1f %%]"
 Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>
 Location DemoLocation           "Brandenburg Gate Berlin"
+Number Wifi_Level               "Wifi Level [%d/4]"     <signal>        (FF_Office)

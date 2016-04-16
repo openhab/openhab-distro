@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.apache.karaf.features</groupId>
             <artifactId>framework</artifactId>
-            <version>${dep.karaf.version}</version>
+            <version>${karaf.version}</version>
             <type>kar</type>
             <scope>provided</scope>
         </dependency>
@@ -46,8 +46,8 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>mvn:org.apache.karaf.features/framework/${dep.karaf.version}/xml/features</descriptor>
-                                <descriptor>mvn:org.apache.karaf.features/standard/${dep.karaf.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/framework/${karaf.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:${project.groupId}/openhab-aggregate-xml/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <distribution>org.apache.karaf.features:framework</distribution>
