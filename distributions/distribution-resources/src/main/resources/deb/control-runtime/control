@@ -7,4 +7,5 @@ Maintainer: [[deb.maintainer]]
 Description: [[deb.description]]
 Distribution: [[deb.distribution]]
 Depends: adduser
+Conflicts: [[deb.conflicts]]
 Homepage: http://www.openhab.org

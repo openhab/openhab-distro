@@ -8,7 +8,7 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>openhab-offline</artifactId>
+    <artifactId>openhab2-offline</artifactId>
     <packaging>karaf-assembly</packaging>
 
     <name>openHAB Offline Distribution</name>
@@ -17,6 +17,7 @@
     <properties>
         <deb.name>openhab2-offline</deb.name>
         <deb.srcarchive>openhab-offline-${project.version}.tar.gz</deb.srcarchive>
+        <deb.conflicts>openhab-online</deb.conflicts>
     </properties>
 
 

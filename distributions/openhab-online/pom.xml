@@ -17,6 +17,7 @@
     <properties>
         <deb.name>openhab2-online</deb.name>
         <deb.srcarchive>openhab-online-${project.version}.tar.gz</deb.srcarchive>
+        <deb.conflicts>openhab2-offline</deb.conflicts>
     </properties>
 
 

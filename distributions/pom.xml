@@ -48,8 +48,6 @@
                                         <type>template</type>
                                         <paths>
                                             <path>etc/openhab2</path>
-                                            <path>usr/share/openhab2</path>
-                                            <path>usr/share/openhab2/bin</path>
                                             <path>var/lib/openhab2</path>
                                             <path>var/lib/openhab2/persistence/db4o</path>
                                             <path>var/lib/openhab2/persistence/rrd4j</path>
@@ -60,6 +58,18 @@
                                             <type>perm</type>
                                             <user>openhab2</user>
                                             <group>openhab2</group>
+                                        </mapper>
+                                    </data>
+                                    <data>
+                                        <type>template</type>
+                                        <paths>
+                                            <path>usr/share/openhab2</path>
+                                            <path>usr/share/openhab2/bin</path>
+                                        </paths>
+                                        <mapper>
+                                            <type>perm</type>
+                                            <user>root</user>
+                                            <group>root</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -113,8 +123,8 @@
                                         <mapper>
                                             <type>perm</type>
                                             <prefix>/usr/share/openhab2</prefix>
-                                            <user>openhab2</user>
-                                            <group>openhab2</group>
+                                            <user>root</user>
+                                            <group>root</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -151,8 +161,8 @@
                                             <type>perm</type>
                                             <prefix>/usr/share/openhab2/runtime/karaf/bin</prefix>
                                             <filemode>755</filemode>
-                                            <user>openhab2</user>
-                                            <group>openhab2</group>
+                                            <user>root</user>
+                                            <group>root</group>
                                         </mapper>
                                     </data>
                                     <data>

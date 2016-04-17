@@ -23,11 +23,8 @@ startOpenHAB() {
 
 case "$1" in
 	configure)
-	# if $2 is set, this is an upgrade
-		if [ -n $2 ] ; then
-			startOpenHAB
-	# this is a fresh installation
-		else
+		if [ -z $2 ] ; then
+			# this is a fresh installation
 			if [ -x /bin/systemctl ] ; then
 				echo "### NOT starting on installation, please execute the following statements to configure openHAB to start automatically using systemd"
 				echo " sudo /bin/systemctl daemon-reload"
@@ -40,6 +37,9 @@ case "$1" in
 				echo "### In order to start openhab2, execute"
 				echo " sudo /etc/init.d/openhab2 start"
 			fi
+		else
+			# this is an upgrade
+			startOpenHAB
 		fi
 		;;
 esac
