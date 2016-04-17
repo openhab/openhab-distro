@@ -8,7 +8,7 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>openhab2-offline</artifactId>
+    <artifactId>openhab-offline</artifactId>
     <packaging>karaf-assembly</packaging>
 
     <name>openHAB Offline Distribution</name>
@@ -17,7 +17,7 @@
     <properties>
         <deb.name>openhab2-offline</deb.name>
         <deb.srcarchive>openhab-offline-${project.version}.tar.gz</deb.srcarchive>
-        <deb.conflicts>openhab-online</deb.conflicts>
+        <deb.conflicts>openhab2-online</deb.conflicts>
     </properties>
 
 
@@ -161,6 +161,19 @@
             <plugin>
                 <artifactId>jdeb</artifactId>
                 <groupId>org.vafer</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>apt-repo</artifactId>
+                <groupId>org.m1theo</groupId>
+                <version>0.2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>apt-repo</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
       </build>
