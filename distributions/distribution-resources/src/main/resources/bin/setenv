@@ -67,9 +67,14 @@ else
 fi
 
 #
+# set karaf options
+#
+export KARAF_OPTS="${KARAF_OPTS}
+  -Dkaraf.instances=${KARAF_INSTANCES}"
+
+#
 # set java options
 #
-
 export JAVA_OPTS="${JAVA_OPTS}
   -Dopenhab.home=${OPENHAB_HOME}
   -Dopenhab.conf=${OPENHAB_CONF}

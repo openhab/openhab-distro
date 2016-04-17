@@ -87,6 +87,10 @@ goto :https_port_done
 
 :https_port_done
 
+:: set karaf options
+set KARAF_OPTS=%KARAF_OPTS% ^
+  -Dkaraf.instances=%KARAF_INSTANCES% ^
+
 :: set java options
 set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.home=%OPENHAB_HOME% ^
