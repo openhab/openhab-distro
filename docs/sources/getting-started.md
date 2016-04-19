@@ -14,9 +14,9 @@ You will find the following folders:
  
 ## Choosing a Base Package and Add-ons to be Installed 
 
-If you do not do any changes to the distribution, it will by default install a demo package, which consists out of demo configuration file (for items, sitemaps, etc.) and a selection of add-ons and UIs.
+If you do not do any changes to the distribution, it will by default install a standard package, which comes with the most common UIs.
 
-If you do not want the demo package, you should directly edit the file 'conf/services/addons.cfg'.
+If you are starting and want the demo package, which consists out of demo configuration files (for items, sitemaps, etc.) and a selection of add-ons and UIs, you should directly edit the file 'conf/services/addons.cfg'.
 It allows you to choose a base package and any add-on that you might want to install. Note that all required dependencies (e.g. io.transport bundles) will automatically be installed, so you do not need to worry about this anymore. You also do not have to get hold of the jar file yourself as the openHAB distribution either includes it already locally (offline distro) or knows from where to download it (online distro).
 
 ```
