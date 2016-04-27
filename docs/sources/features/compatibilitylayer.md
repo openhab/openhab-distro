@@ -1,6 +1,6 @@
 # Compatibility Layer for openHAB 1.x Add-ons
 
-openHAB 2 used [Eclipse SmartHome](https://www.eclipse.org/smarthome/) as its core framework. Although many classes are similar, all of them have at least a different namespace (`org.eclipse.smarthome` instead of `org.openhab`) - as a result, none the existing 1.x add-ons would work on openHAB 2.
+openHAB 2 uses [Eclipse SmartHome](https://www.eclipse.org/smarthome/) as its core framework. Although many classes are similar, all of them have at least a different namespace (`org.eclipse.smarthome` instead of `org.openhab`) - as a result, none the existing 1.x add-ons would work on openHAB 2.
 
 To still make it possible to use 1.x add-ons, there is a special bundle in openHAB 2, which serves as a compatibility layer. It effectively exposes and consumes all relevant classes and services from the `org.openhab` namespace and internally delegates or proxies them to the according `org.eclipse.smarthome` classes and services.
 
