@@ -2328,7 +2328,9 @@
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.openhab2-addons.location/addons}"
-          locateNestedProjects="true"/>
+          locateNestedProjects="true">
+        <excludedPath>ui/org.openhab.ui.cometvisu.php</excludedPath>
+      </sourceLocator>
     </setupTask>
     <stream
         name="master"/>
@@ -2362,35 +2364,17 @@
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.openhab.location/bundles/binding}">
-        <excludedPath>org.openhab.binding.dscalarm</excludedPath>
         <excludedPath>org.openhab.binding.fritzaha</excludedPath>
         <excludedPath>org.openhab.binding.hue</excludedPath>
         <excludedPath>org.openhab.binding.sagercaster</excludedPath>
-        <excludedPath>org.openhab.binding.sonos</excludedPath>
-        <excludedPath>org.openhab.binding.wemo</excludedPath>
       </sourceLocator>
       <sourceLocator
-          rootFolder="${git.clone.openhab.location/bundles/action}">
-        <excludedPath>org.openhab.action.astro</excludedPath>
-        <excludedPath>org.openhab.action.dscalarm</excludedPath>
-      </sourceLocator>
+          rootFolder="${git.clone.openhab.location/bundles/action}"/>
       <sourceLocator
-          rootFolder="${git.clone.openhab.location/bundles/persistence}">
-        <excludedPath>org.openhab.persistence.jdbc</excludedPath>
-        <excludedPath>org.openhab.persistence.jpa</excludedPath>
-      </sourceLocator>
+          rootFolder="${git.clone.openhab.location/bundles/persistence}"/>
       <sourceLocator
           rootFolder="${git.clone.openhab.location/bundles/io}">
-        <excludedPath>org.openhab.io.multimedia</excludedPath>
-        <excludedPath>org.openhab.io.console</excludedPath>
-        <excludedPath>org.openhab.io.monitor</excludedPath>
         <excludedPath>org.openhab.io.cv</excludedPath>
-        <excludedPath>org.openhab.io.net</excludedPath>
-        <excludedPath>org.openhab.io.net.test</excludedPath>
-        <excludedPath>org.openhab.io.myopenhab</excludedPath>
-        <excludedPath>org.openhab.io.rest</excludedPath>
-        <excludedPath>org.openhab.io.rest.lib</excludedPath>
-        <excludedPath>org.openhab.io.rest.test</excludedPath>
       </sourceLocator>
     </setupTask>
     <stream
