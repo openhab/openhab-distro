@@ -20,7 +20,7 @@ If you are starting and want the demo package, which consists out of demo config
 It allows you to choose a base package and any add-on that you might want to install. Note that all required dependencies (e.g. io.transport bundles) will automatically be installed, so you do not need to worry about this anymore. You also do not have to get hold of the jar file yourself as the openHAB distribution either includes it already locally (offline distro) or knows from where to download it (online distro).
 
 ```
-# The base installation package of this openHAB instance
+# The base installation package of this openHAB instance (default is "standard")
 # Valid options:
 #   - minimal  : Installation only with dashboard, but no UIs or other addons
 #   - standard : Typical installation with all standards UIs
@@ -42,8 +42,8 @@ action =
 # A comma-separated list of transformation services to install (e.g. "map,jsonpath")
 transformation = map
 
-# A comma-separated list of text-to-speech engines to install (e.g. "marytts,freetts")
-tts =
+# A comma-separated list of voice services to install (e.g. "marytts,freetts")
+voice =
 
 # A comma-separated list of miscellaneous services to install (e.g. "myopenhab")
 misc = myopenhab

@@ -6,6 +6,7 @@
     <feature name="openhab-package-demo" description="openHAB Demo Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>openhab-runtime-certificate</feature>
+        <feature>openhab-transport-mdns</feature>
         <feature>openhab-misc-restdocs</feature>
         <feature>openhab-ui-basic</feature>
         <feature>openhab-ui-classic</feature>

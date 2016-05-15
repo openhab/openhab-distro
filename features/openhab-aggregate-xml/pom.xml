@@ -59,13 +59,6 @@
             <type>xml</type>
         </dependency>
         <dependency>
-            <groupId>org.openhab.addons</groupId>
-            <artifactId>openhab-addons-legacy</artifactId>
-            <version>${oh1.version}</version>
-            <classifier>features</classifier>
-            <type>xml</type>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>openhab-demo</artifactId>
             <version>${project.version}</version>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2014-2016 by the respective copyright holders.
+
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+-->
+<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0">
+
+    <!-- binding -->
+
+    <feature name="openhab-misc-ruleengine" description="Rule Engine (Experimental)" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-automation-api</feature>
+        <feature>esh-automation-commands</feature>
+        <feature>esh-automation-core</feature>
+        <feature>esh-automation-module-core</feature>
+        <feature>esh-automation-module-script</feature>
+        <feature>esh-automation-module-script-defaultscope</feature>
+        <feature>esh-automation-module-timer</feature>
+        <feature>esh-automation-parser-gson</feature>
+        <feature>esh-automation-providers</feature>
+        <feature>esh-automation-rest</feature>
+    </feature>
+	
+</features>
