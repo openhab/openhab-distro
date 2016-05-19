@@ -4,8 +4,8 @@ set -e
 
 case "$1" in
 	install)
-		OH_USER=openhab2
-		OH_GROUP=openhab2
+		OH_USER=openhab
+		OH_GROUP=openhab
 		if [ x"${USER_AND_GROUP}" != x ]; then
 			OH_USER=`echo ${USER_AND_GROUP} | cut -d ":" -f 1`
 			OH_GROUP=`echo ${USER_AND_GROUP} | cut -d ":" -f 2`

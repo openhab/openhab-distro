@@ -37,7 +37,7 @@ OPENHAB_HOME_DIR="/var/lib/openhab2"
 OPENHAB_USER_DATA_DIR="${OPENHAB_HOME_DIR}"
 
 if [ -z "$USER_AND_GROUP" ]; then
-        USER_AND_GROUP="openhab2:openhab2"
+        USER_AND_GROUP="openhab:openhab"
 fi
 
 if [ x"${OPENHAB_JAVA}" != x ]; then

@@ -6,8 +6,8 @@ After=network-online.target
 
 [Service]
 EnvironmentFile=/etc/default/openhab2
-User=openhab2
-Group=openhab2
+User=openhab
+Group=openhab
 WorkingDirectory=/usr/share/openhab2
 #PermissionsStartOnly=true
 #ExecStartPre=/usr/share/openhab/bin/setpermissions.sh

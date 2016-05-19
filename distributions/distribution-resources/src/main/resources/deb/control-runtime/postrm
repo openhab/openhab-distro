@@ -2,8 +2,8 @@
 
 set -e
 
-OH_USER=openhab2
-OH_GROUP=openhab2
+OH_USER=openhab
+OH_GROUP=openhab
 
 removeOpenHABInit() {
 	if [ -x /bin/systemctl ] ; then

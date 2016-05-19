@@ -17,6 +17,8 @@
         <deb.maintainer>openHAB &lt;admin@openhab.org&gt;</deb.maintainer>
         <deb.section>misc</deb.section>
         <deb.distribution>development</deb.distribution>
+        <deb.user>openhab</deb.user>
+        <deb.group>openhab</deb.group>
     </properties>
 
   <packaging>pom</packaging>
@@ -56,8 +58,8 @@
                                         </paths>
                                         <mapper>
                                             <type>perm</type>
-                                            <user>openhab2</user>
-                                            <group>openhab2</group>
+                                            <user>${deb.user}</user>
+                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -68,8 +70,8 @@
                                         </paths>
                                         <mapper>
                                             <type>perm</type>
-                                            <user>root</user>
-                                            <group>root</group>
+                                            <user>${deb.user}</user>
+                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -123,8 +125,8 @@
                                         <mapper>
                                             <type>perm</type>
                                             <prefix>/usr/share/openhab2</prefix>
-                                            <user>root</user>
-                                            <group>root</group>
+                                            <user>${deb.user}</user>
+                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -137,8 +139,8 @@
                                             <type>perm</type>
                                             <strip>1</strip>
                                             <prefix>/etc/openhab2</prefix>
-                                            <user>openhab2</user>
-                                            <group>openhab2</group>
+                                            <user>${deb.user}</user>
+                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -150,8 +152,8 @@
                                             <type>perm</type>
                                             <strip>1</strip>
                                             <prefix>/var/lib/openhab2</prefix>
-                                            <user>openhab2</user>
-                                            <group>openhab2</group>
+                                            <user>${deb.user}</user>
+                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                     <data>
@@ -173,8 +175,8 @@
                                             <type>perm</type>
                                             <prefix>/etc/openhab2/services</prefix>
                                             <filemode>644</filemode>
-                                            <user>openhab2</user>
-                                            <group>openhab2</group>
+                                            <user>${deb.user}</user>
+                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                 </dataSet>
