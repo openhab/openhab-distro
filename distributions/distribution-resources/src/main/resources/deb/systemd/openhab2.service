@@ -1,0 +1,21 @@
+[Unit]
+Description=Starts and stops the openHAB Home Automation Bus
+Documentation=http://www.openhab.org
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=/etc/default/openhab2
+User=openhab
+Group=openhab
+WorkingDirectory=/usr/share/openhab2
+#PermissionsStartOnly=true
+#ExecStartPre=/usr/share/openhab/bin/setpermissions.sh
+ExecStart=/usr/share/openhab2/start.sh server
+ExecStop=/usr/share/openhab2/runtime/karaf/bin/stop
+# Shutdown delay in seconds, before process is tried to be killed with KILL (if configured)
+TimeoutStopSec=120
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -4,13 +4,15 @@
 (unset CDPATH) >/dev/null 2>&1 && unset CDPATH
 
 export OPENHAB_HOME=`cd "$DIRNAME/../../.."; pwd`
-export OPENHAB_CONF="${OPENHAB_HOME}/conf"
+export OPENHAB_CONF="/etc/openhab2"
 export OPENHAB_RUNTIME="${OPENHAB_HOME}/runtime"
-export OPENHAB_USERDATA="${OPENHAB_HOME}/userdata"
-export OPENHAB_LOGDIR="${OPENHAB_USERDATA}/logs"
+export OPENHAB_USERDATA="/var/lib/openhab2"
+export OPENHAB_LOGDIR="/var/log/openhab2"
 
 export KARAF_HOME="${OPENHAB_RUNTIME}/karaf"
 export KARAF_DATA="${OPENHAB_USERDATA}"
 export KARAF_BASE="${OPENHAB_USERDATA}"
 export KARAF_ETC="${OPENHAB_RUNTIME}/karaf/etc"
+
+
 
