@@ -14,6 +14,13 @@
     <name>openHAB Offline Distribution</name>
     <description>This is an offline distribution of openHAB</description>
 
+    <properties>
+        <deb.name>openhab2-offline</deb.name>
+        <deb.srcarchive>openhab-offline-${project.version}.tar.gz</deb.srcarchive>
+        <deb.conflicts>openhab2-online</deb.conflicts>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.karaf.features</groupId>
@@ -151,7 +158,23 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>apt-repo</artifactId>
+                <groupId>org.m1theo</groupId>
+                <version>0.2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>apt-repo</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-    </build>
-
+      </build>
 </project>

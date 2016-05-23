@@ -14,6 +14,13 @@
     <name>openHAB Online Distribution</name>
     <description>This is the online distribution of openHAB</description>
 
+    <properties>
+        <deb.name>openhab2-online</deb.name>
+        <deb.srcarchive>openhab-online-${project.version}.tar.gz</deb.srcarchive>
+        <deb.conflicts>openhab2-offline</deb.conflicts>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.karaf.features</groupId>
@@ -141,6 +148,23 @@
                             <appendAssemblyId>false</appendAssemblyId>
                             <tarLongFileMode>gnu</tarLongFileMode>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>apt-repo</artifactId>
+                <groupId>org.m1theo</groupId>
+                <version>0.2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>apt-repo</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

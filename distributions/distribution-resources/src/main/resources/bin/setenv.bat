@@ -93,6 +93,7 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.conf=%OPENHAB_CONF% ^
   -Dopenhab.runtime=%OPENHAB_RUNTIME% ^
   -Dopenhab.userdata=%OPENHAB_USERDATA% ^
+  -Dopenhab.logdir=%OPENHAB_LOGDIR% ^
   -Dorg.osgi.service.http.port=%HTTP_PORT% ^
   -Dorg.osgi.service.http.port.secure=%HTTPS_PORT%
 
