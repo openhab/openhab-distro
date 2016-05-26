@@ -114,6 +114,12 @@ openhab:install-service
 in the shell and make sure that the folder `<openhab root folder>/runtime/karaf` is writable (only required at this time, you can make it read-only again afterwards).
 The files are then generated for you and a short guide is displayed on what further actions you need to take to register it as a system service.
 
+After starting openhab as a service, you can still access the openHAB shell using ssh, by calling
+```
+ssh -p 8101 karaf@localhost
+```
+with the default password 'karaf'.
+
 ### Raspberry Pi
 
 If you're running Raspbian Jessie and have systemd installed the following steps will allow you to register openHAB as a service so that it runs at startup and automatically restarts if openHAB crashes.
