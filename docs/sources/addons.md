@@ -78,6 +78,7 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | Onkyo | Binding |
 | OpenEnergyMonitor | Binding |
 | OneWire | Binding |
+| Prowl | Action |
 | RFXCOM | Binding |
 | RWE SmartHome | Binding |
 | Samsung AC | Binding |
@@ -98,11 +99,13 @@ All optional add-ons for openHAB 2 are part of the distribution. This includes a
 | rrd4j | Persistence |
 | MySQL | Persistence |
 | MongoDB | Persistence |
+| MapDB | Persistence |
 | JPA | Persistence |
 | Mail | Action |
 | MiOS | Action |
 | Pushover | Action |
 | Telegram | Action |
+| Twitter  | Action |
 | XBMC | Action |
 | XMPP | Action |
 | GoogleTTS | TTS engine |
