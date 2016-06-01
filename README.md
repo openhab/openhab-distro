@@ -1,3 +1,5 @@
+_NOTE:_ The official documentation has moved from this repo to [http://docs.openhab.org/](http://docs.openhab.org/)!
+
 ## Introduction
 
 The open Home Automation Bus (openHAB) project aims at providing a universal integration platform for all things around home automation. It is a pure Java solution, fully based on OSGi.
@@ -10,7 +12,7 @@ For further Information please refer to our homepage [www.openhab.org](http://ww
 
 openHAB 2 is the successor of [openHAB 1](https://github.com/openhab/openhab/wiki). It is an open-source solution based on the [Eclipse SmartHome](https://www.eclipse.org/smarthome/) framework. It is fully written in Java and uses [Apache Karaf](http://karaf.apache.org/) together with [Eclipse Equinox](https://www.eclipse.org/equinox/) as an OSGi runtime and bundles this with [Jetty](https://www.eclipse.org/jetty/) as an HTTP server.
 
-openHAB is a highly modular software, which means that the base installation (the "runtime") can be extended through "add-ons". The openHAB distribution includes add-ons from different sources and makes them all available.
+openHAB is highly modular software, which means that the base installation (the "runtime") can be extended through "add-ons". The openHAB distribution includes add-ons from different sources and makes them all available.
 
 ![distribution overview](docs/sources/images/distro.png)
 
