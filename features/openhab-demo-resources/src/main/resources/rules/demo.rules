@@ -1,5 +1,3 @@
-import org.joda.time.*
-
 var Timer timer = null
 
 /**
@@ -94,14 +92,14 @@ rule "Set random room temperatures"
 		)
 end
 
-rule "Update max and min temperatures"
+rule "ut"
 when
 	Item Weather_Temperature changed or
 	Time cron "0 0 0 * * ?" or
 	System started
 then	
-	postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.toDateMidnight).state)
-	postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.toDateMidnight).state)
+	postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.withTimeAtStartOfDay).state)
+	postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.withTimeAtStartOfDay).state)
 end
 
 // Creates an item that stores the last update time of this item
