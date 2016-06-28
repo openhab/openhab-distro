@@ -2246,7 +2246,7 @@
     <requirement
         name="org.eclipse.wst.web_ui.feature.feature.group"/>
     <repository
-        url="http://dist.springsource.org/snapshot/GRECLIPSE/e4.5/"/>
+        url="http://dist.springsource.org/snapshot/GRECLIPSE/e4.6/"/>
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
