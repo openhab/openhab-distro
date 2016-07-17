@@ -22,13 +22,13 @@ sitemap demo label="Main Menu"
 		}
 	}
 	Frame label="Astronomical Data" {
-				Text item=Sun_Elevation
-				Text item=Sun_Azimuth
-				Text item=Sunrise_Time
-				Text item=Sunset_Time
-				Text item=Moon_Elevation
-				Text item=Moon_Azimuth
-				Text item=Moon_Phase
+		Text item=Sun_Elevation
+		Text item=Sun_Azimuth
+		Text item=Sunrise_Time
+		Text item=Sunset_Time
+		Text item=Moon_Elevation
+		Text item=Moon_Azimuth
+		Text item=Moon_Phase
 		}
 	Frame label="Demo" {
 		Text item=CurrentDate
