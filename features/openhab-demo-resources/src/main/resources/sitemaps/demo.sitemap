@@ -7,7 +7,6 @@ sitemap demo label="Main Menu"
 		Group item=Garden icon="garden" 
 	}
 	Frame label="Weather" {
-		Text item=Sun_Elevation
 		Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="NULL"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
 			Frame {
 				Text item=Weather_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
@@ -21,8 +20,17 @@ sitemap demo label="Main Menu"
 				Chart item=Weather_Chart period=W refresh=3600 visibility=[Weather_Chart_Period==2]
 			}
 		}
+        Text label="Astronomical Data" icon="sun" {
+            Text item=Sun_Elevation
+            Text item=Sun_Azimuth
+            Text item=Sunrise_Time
+            Text item=Sunset_Time
+            Text item=Moon_Elevation
+            Text item=Moon_Azimuth
+            Text item=Moon_Phase
+        }
 	}
-	Frame label="Demo" {
+    Frame label="Demo" {
 		Text item=CurrentDate
 		Text label="Group Demo" icon="firstfloor" {
 			Switch item=Lights mappings=[OFF="All Off"]
