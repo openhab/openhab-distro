@@ -44,6 +44,8 @@
     </distributionManagement>
 
     <properties>
+        <build.number>- local build -</build.number>
+
         <esh.version>0.9.0-SNAPSHOT</esh.version>
         <ohc.version>2.0.0-SNAPSHOT</ohc.version>
         <oh2.version>2.0.0-SNAPSHOT</oh2.version>
