@@ -43,6 +43,7 @@
                                 <goal>jdeb</goal>
                             </goals>
                             <configuration>
+                                <snapshotExpand>true</snapshotExpand>
                                 <controlDir>${basedir}/../distribution-resources/src/main/resources/deb/control-runtime</controlDir>
                                 <deb>${basedir}/target/${deb.name}-${project.version}.deb</deb>
                                 <dataSet>
