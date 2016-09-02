@@ -4,7 +4,7 @@ Group gC            "Cellar"        <cellar>
 Group Garden        "Garden"        <garden>
 Group Weather       "Weather"       <sun>
 
-Group Status 
+Group Status
 Group Shutters
 
 Group GF_Living     "Living Room"   <video>     (gGF)
@@ -121,3 +121,5 @@ Dimmer Volume                   "Volume [%.1f %%]"
 Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>
 Location DemoLocation           "Brandenburg Gate Berlin"
 Number Wifi_Level               "Wifi Level [%d/4]"     <signal>        (FF_Office)
+
+// vim: syntax=Xtend syntax=openhab

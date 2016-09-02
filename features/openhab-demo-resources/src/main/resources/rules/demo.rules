@@ -1,8 +1,8 @@
 var Timer timer = null
 
 /**
- * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands 
- * and posting an updated state on the bus 
+ * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands
+ * and posting an updated state on the bus
  */
 rule "Dimmed Light"
 	when
@@ -10,7 +10,7 @@ rule "Dimmed Light"
 	then
         if ((receivedCommand==INCREASE) || (receivedCommand==DECREASE)) {
     		var Number percent = 0
-    		if(DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType 
+    		if(DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType
     			
     		if(receivedCommand==INCREASE) percent = percent + 5
     		if(receivedCommand==DECREASE) percent = percent - 5
@@ -40,7 +40,7 @@ then
         if(timer!=null) {
             timer.cancel
             timer = null
-        }   
+        }
     }
 end
 
@@ -57,7 +57,7 @@ rule "Initialize light states"
 end
 
 rule "Initialize heating states"
-	when 
+	when
 		System started
 	then
 		Heating?.members.forEach(heating|
@@ -67,7 +67,7 @@ rule "Initialize heating states"
 end
 
 rule "Initialize contact states"
-	when 
+	when
 		System started
 	then
 		Windows?.members.forEach(window|
@@ -76,14 +76,14 @@ rule "Initialize contact states"
 end
 
 rule "Initialize Location"
-	when 
+	when
 		System started
 	then
 		DemoLocation.postUpdate(new PointType("52.5200066,13.4049540"))
 end
 
 rule "Set random room temperatures"
-	when 
+	when
 		System started or
 		Time cron "0 0/5 * * * ?"
 	then
@@ -97,7 +97,7 @@ when
 	Item Weather_Temperature changed or
 	Time cron "0 0 0 * * ?" or
 	System started
-then	
+then
 	postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.withTimeAtStartOfDay).state)
 	postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.withTimeAtStartOfDay).state)
 end
@@ -111,9 +111,11 @@ then
 end
 
 rule "Set random wifi variations"
-    when 
+    when
         System started or
         Time cron "/20 * * * * ?"
     then
         postUpdate(Wifi_Level, (Math::random * 4.0).intValue)
 end
+
+// vim: syntax=Xtend syntax=openhab
