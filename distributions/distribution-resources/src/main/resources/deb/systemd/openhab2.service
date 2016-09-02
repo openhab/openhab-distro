@@ -1,6 +1,7 @@
 [Unit]
-Description=Starts and stops the openHAB Home Automation Bus
-Documentation=http://www.openhab.org
+Description=openHAB 2 Home Automation Bus Solution
+Documentation=http://docs.openhab.org
+Documentation=http://community.openhab.org
 Wants=network-online.target
 After=network-online.target
 
