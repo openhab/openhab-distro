@@ -4,7 +4,7 @@ Strategies {
 	default = everyChange
 }
 
-/* 
+/*
  * Each line in this section defines for which item(s) which strategy(ies) should be applied.
  * You can list single items, use "*" for all items or "groupitem*" for all members of a group
  * item (excl. the group item itself).
@@ -13,3 +13,5 @@ Items {
 	// log all temperatures on every change
 	Temperature* -> "temperatures" : strategy=everyChange
 }
+
+// vim: syntax=Xtend syntax=openhab
