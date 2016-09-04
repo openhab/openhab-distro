@@ -86,8 +86,9 @@ ARCH=`uname -m`
 EXTRA_JAVA_OPTS_COMMON="-Xmx256m -Djava.awt.headless=true"
 EXTRA_JAVA_OPTS_ARCH=""
 case "$ARCH" in
-  *arm*) ;;
-      *) EXTRA_JAVA_OPTS_ARCH="-XX:+UseG1GC" ;;
+    *arm*) ;;
+  *aarch*) ;;
+        *) EXTRA_JAVA_OPTS_ARCH="-XX:+UseG1GC" ;;
 esac
 export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTRA_JAVA_OPTS}"
 
