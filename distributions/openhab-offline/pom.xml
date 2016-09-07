@@ -165,15 +165,6 @@
             <plugin>
                 <artifactId>apt-repo</artifactId>
                 <groupId>org.m1theo</groupId>
-                <version>0.2.3</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>apt-repo</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
       </build>
