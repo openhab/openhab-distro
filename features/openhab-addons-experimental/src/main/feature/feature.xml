@@ -11,8 +11,6 @@
 -->
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0">
 
-    <!-- binding -->
-
     <feature name="openhab-misc-ruleengine" description="Rule Engine (Experimental)" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>esh-automation-api</feature>
@@ -27,4 +25,10 @@
         <feature>esh-automation-rest</feature>
     </feature>
 	
+    <feature name="openhab-ui-habpanel" description="HABPanel" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>openhab-dashboard</feature>
+        <bundle start-level="80">mvn:org.openhab.ui/org.openhab.ui.habpanel/${project.version}</bundle>
+    </feature>
+
 </features>
