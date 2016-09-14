@@ -44,7 +44,7 @@ for debfile in ../../../../../openhab-offline/target/*.deb ../../../../../openha
 	ls ${debfile}
 	debfilename=`basename ${debfile}`
 	if [ $DRY_RUN = "false" ]; then
-		msg=`curl -H "X-GPG-PASSPHRASE: ${gpgpasswd}" -T ${debfile} -u${username}:${apikey} "${BASE_URL}/${BINTRAY_REPO}/${BINTRAY_PACKAGE}/${BINTRAY_VERSION}/pool/main/${version}/${debfilename};deb_distribution=${distribution};deb_distribution=${version};deb_component=main;deb_architecture=all;publish=1" 2>/dev/null`
+		msg=`curl -H "X-GPG-PASSPHRASE: ${gpgpasswd}" -T ${debfile} -u${username}:${apikey} "${BASE_URL}/${BINTRAY_REPO}/${BINTRAY_PACKAGE}/${BINTRAY_VERSION}/pool/main/${version}/${debfilename};deb_distribution=${distribution};deb_distribution=${version};deb_component=main;deb_architecture=all,armhf,armel,mips,arm64;publish=1" 2>/dev/null`
 		echo $msg | awk -F ":" '{ if ( $2 == "\"success\"}" )  exit 0 ; else { print $0 ; exit 1 }} '
 		if [ $? -eq 0 ]; then
 			echo "ok"
