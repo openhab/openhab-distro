@@ -2,8 +2,17 @@
 
 set -e
 
+UD_CACHE=/var/lib/openhab2/cache
+UD_TMP=/var/lib/openhab2/tmp
+
+removeCache(){
+    [ -d ${UD_CACHE} ] && rm -rf ${UD_CACHE}
+    [ -d ${UD_TMP} ] && rm -rf ${UD_TMP}
+}
+
 case "$1" in
 	install)
+        removeCache
 		OH_USER=openhab
 		OH_GROUP=openhab
 		if [ x"${USER_AND_GROUP}" != x ]; then
