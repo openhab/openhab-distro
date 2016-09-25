@@ -44,16 +44,27 @@
             <type>xml</type>
             <scope>runtime</scope>
         </dependency>
-        <!-- Temporary patch for https://github.com/openhab/openhab-distro/issues/10 -->
-        <dependency>
-            <groupId>org.openhab.distro.deps</groupId>
-            <artifactId>pax-web-jetty</artifactId>
-            <version>4.2.4</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.5.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.openhab.util</groupId>
+                            <artifactId>pax-web-patch</artifactId>
+                            <version>1.0.0</version>
+                        </dependency>  
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <resources>
             <!-- add shared distribution resources -->
             <resource>
@@ -129,6 +140,25 @@
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.openhab.patch.ClassPathUtilPatcher</mainClass>
+                    <arguments>
+                        <argument>${project.basedir}/target/assembly/system/org/ops4j/pax/web/pax-web-api</argument>
+                    </arguments>
+                    <includePluginDependencies>True</includePluginDependencies>
                 </configuration>
             </plugin>
             <plugin>
