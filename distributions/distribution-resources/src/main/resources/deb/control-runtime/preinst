@@ -8,6 +8,7 @@ UD_TMP=/var/lib/openhab2/tmp
 removeCache(){
     [ -d ${UD_CACHE} ] && rm -rf ${UD_CACHE}
     [ -d ${UD_TMP} ] && rm -rf ${UD_TMP}
+	true
 }
 
 case "$1" in
