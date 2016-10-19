@@ -99,8 +99,6 @@ set JAVA_OPTS=%JAVA_OPTS% ^
 
 :: set jvm options
 set EXTRA_JAVA_OPTS=-XX:+UseG1GC ^
-  -Xms64m ^
-  -Xmx256m ^
   -Djava.awt.headless=true
 
 :: set JAVA_HOME if not set yet

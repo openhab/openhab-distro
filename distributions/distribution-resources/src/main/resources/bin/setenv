@@ -83,7 +83,7 @@ export JAVA_OPTS="${JAVA_OPTS}
 # set JVM options
 #
 ARCH=`uname -m`
-EXTRA_JAVA_OPTS_COMMON="-Xmx256m -Djava.awt.headless=true"
+EXTRA_JAVA_OPTS_COMMON="-Djava.awt.headless=true"
 EXTRA_JAVA_OPTS_ARCH=""
 case "$ARCH" in
     *arm*) ;;
