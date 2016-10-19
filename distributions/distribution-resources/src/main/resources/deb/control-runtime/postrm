@@ -16,6 +16,7 @@ removeOpenHABInit() {
 removeCache(){
     rm -rf /var/lib/openhab2/cache
     rm -rf /var/lib/openhab2/tmp
+	true
 }
 
 case "$1" in
