@@ -1,14 +1,15 @@
 rem DIRNAME is the directory of karaf, setenv, etc.
-CALL :removeSpacesFromPath "%DIRNAME%..\..\.."
+CALL :removeSpacesFromPath "%DIRNAME%..\.."
 
 set OPENHAB_HOME=%RETVAL%
 set OPENHAB_CONF=%OPENHAB_HOME%\conf
 set OPENHAB_RUNTIME=%OPENHAB_HOME%\runtime
 set OPENHAB_USERDATA=%OPENHAB_HOME%\userdata
 set OPENHAB_LOGDIR=%OPENHAB_USERDATA%\logs
+set KARAF_HOME=%OPENHAB_RUNTIME%
 set KARAF_DATA=%OPENHAB_USERDATA%
 set KARAF_BASE=%OPENHAB_USERDATA%
-set KARAF_ETC=%OPENHAB_RUNTIME%\karaf\etc
+set KARAF_ETC=%OPENHAB_USERDATA%\etc
 
 EXIT /B
 
