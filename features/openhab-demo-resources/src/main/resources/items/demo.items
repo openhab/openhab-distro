@@ -121,5 +121,6 @@ Dimmer Volume                   "Volume [%.1f %%]"
 Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>
 Location DemoLocation           "Brandenburg Gate Berlin"
 Number Wifi_Level               "Wifi Level [%d/4]"     <signal>        (FF_Office)
+String ImageURL                 "Image URL [%s]"
 
 // vim: syntax=Xtend syntax=openhab
