@@ -2441,7 +2441,7 @@
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.ohc"
-        remoteURI="https://github.com/kaikreuzer/openhab-core.git"
+        remoteURI="https://github.com/openhab/openhab-core.git"
         pushURI="https://github.com/${github.user.id}/openhab-core.git">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
