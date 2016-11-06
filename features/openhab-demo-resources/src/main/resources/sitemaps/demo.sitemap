@@ -74,7 +74,7 @@ sitemap demo label="Main Menu"
 		Text label="Dynamic Images" icon="video" {
 		    Frame label="Changing Image Source" {
 		        Text item=ImageURL
-		        Image url="http://www.placecage.com/g/640/480" item=ImageURL
+		        Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
 		    }
 		}
 	}
