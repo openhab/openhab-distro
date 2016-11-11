@@ -76,7 +76,7 @@ case "$1" in
         log_daemon_msg "Starting $DESC" "$NAME"
         #${OPENHAB_INST_DIR}/bin/setpermissions.sh > /dev/null
         if start-stop-daemon --start --quiet --pidfile $PIDFILE -c "${USER_AND_GROUP}" --umask 002 --background --make-pidfile --chdir ${OPENHAB_DIR} \
-                --oknodo --exec /usr/share/openhab2/runtime/karaf/bin/start
+                --oknodo --exec /usr/share/openhab2/runtime/bin/start
         then
             log_end_msg 0
         else
@@ -85,7 +85,7 @@ case "$1" in
         ;;
   stop)
         log_daemon_msg "Stopping $DESC" "$NAME"
-        if /usr/share/openhab2/runtime/karaf/bin/stop
+        if /usr/share/openhab2/runtime/bin/stop
         then
             rm -f $PIDFILE
             log_end_msg 0
@@ -94,13 +94,13 @@ case "$1" in
         fi
         ;;
   status)
-        /usr/share/openhab2/runtime/karaf/bin/status
+        /usr/share/openhab2/runtime/bin/status
         ;;
   restart|force-reload)
         log_daemon_msg "Restarting $DESC" "$NAME"
-        if /usr/share/openhab2/runtime/karaf/bin/stop
+        if /usr/share/openhab2/runtime/bin/stop
         then
-            if /usr/share/openhab2/runtime/karaf/bin/start
+            if /usr/share/openhab2/runtime/bin/start
             then
                 log_end_msg 0
             else

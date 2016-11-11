@@ -13,7 +13,7 @@ WorkingDirectory=/usr/share/openhab2
 #PermissionsStartOnly=true
 #ExecStartPre=/usr/share/openhab/bin/setpermissions.sh
 ExecStart=/usr/share/openhab2/start.sh server
-ExecStop=/usr/share/openhab2/runtime/karaf/bin/stop
+ExecStop=/usr/share/openhab2/runtime/bin/stop
 # Shutdown delay in seconds, before process is tried to be killed with KILL (if configured)
 TimeoutStopSec=120
 Restart=on-failure
