@@ -122,7 +122,7 @@
                                     <data>
                                         <src>${basedir}/target/${deb.srcarchive}</src>
                                         <type>archive</type>
-                                        <excludes>conf/**,userdata/**,runtime/karaf/bin/oh2_dir_layout,start.bat,start_debug.bat</excludes>
+                                        <excludes>conf/**,userdata/**,runtime/bin/oh2_dir_layout,start.bat,start_debug.bat</excludes>
                                         <mapper>
                                             <type>perm</type>
                                             <prefix>/usr/share/openhab2</prefix>
@@ -162,7 +162,7 @@
                                         <type>file</type>
                                         <mapper>
                                             <type>perm</type>
-                                            <prefix>/usr/share/openhab2/runtime/karaf/bin</prefix>
+                                            <prefix>/usr/share/openhab2/runtime/bin</prefix>
                                             <filemode>755</filemode>
                                             <user>root</user>
                                             <group>root</group>
