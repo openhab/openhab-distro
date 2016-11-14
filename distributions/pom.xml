@@ -134,7 +134,6 @@
                                         <src>${basedir}/target/${deb.srcarchive}</src>
                                         <type>archive</type>
                                         <includes>conf/**</includes>
-                                        <excludes>conf/services/addons.cfg</excludes>
                                         <conffile>true</conffile>
                                         <mapper>
                                             <type>perm</type>
@@ -166,18 +165,6 @@
                                             <filemode>755</filemode>
                                             <user>root</user>
                                             <group>root</group>
-                                        </mapper>
-                                    </data>
-                                    <data>
-                                        <src>${basedir}/../distribution-resources/src/main/resources/deb/conf/services/addons.cfg</src>
-                                        <type>file</type>
-                                        <conffile>true</conffile>
-                                        <mapper>
-                                            <type>perm</type>
-                                            <prefix>/etc/openhab2/services</prefix>
-                                            <filemode>644</filemode>
-                                            <user>${deb.user}</user>
-                                            <group>${deb.group}</group>
                                         </mapper>
                                     </data>
                                 </dataSet>
