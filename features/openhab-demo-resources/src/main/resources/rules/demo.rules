@@ -1,4 +1,10 @@
+import java.util.Random
+
 var Timer timer = null
+val resList = newArrayList("640/480", "320/240", "480/360")
+val urlList = newArrayList("http://www.fillmurray.com", "http://www.fillmurray.com/g",
+                 "http://www.placecage.com", "http://www.placecage.com/c", "http://www.placecage.com/g")
+val Random random = new Random()
 
 /**
  * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands
@@ -116,6 +122,16 @@ rule "Set random wifi variations"
         Time cron "/20 * * * * ?"
     then
         postUpdate(Wifi_Level, (Math::random * 4.0).intValue)
+end
+
+rule "Set random image URLs"
+    when
+        Time cron "/10 * * * * ?"
+    then
+        val url = urlList.get(random.nextInt(urlList.length))
+        val res = resList.get(random.nextInt(resList.length))
+
+        postUpdate(ImageURL, url + "/" + res)
 end
 
 // vim: syntax=Xtend syntax=openhab

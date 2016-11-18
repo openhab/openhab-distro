@@ -71,6 +71,12 @@ sitemap demo label="Main Menu"
 				Webview url="http://heise-online.mobi/" height=8
 			}
 		}
+		Text label="Dynamic Images" icon="video" {
+		    Frame label="Changing Image Source" {
+		        Text item=ImageURL
+		        Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
+		    }
+		}
 	}
 }
 
