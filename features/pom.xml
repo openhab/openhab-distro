@@ -19,7 +19,6 @@
         <module>openhab-aggregate-xml</module>
         <module>openhab-demo-resources</module>
         <module>openhab-demo</module>
-        <module>openhab-addons-experimental</module>
         <module>openhab-verify</module>
     </modules>
 

@@ -41,7 +41,7 @@
                                 <artifact><file>src/main/resources/services/logging.cfg</file><type>cfg</type><classifier>services-logging</classifier></artifact>
                                 <artifact><file>src/main/resources/services/basicui.cfg</file><type>cfg</type><classifier>services-basicui</classifier></artifact>
                                 <artifact><file>src/main/resources/services/classicui.cfg</file><type>cfg</type><classifier>services-classicui</classifier></artifact>
-                                <artifact><file>src/main/resources/services/runtime.cfg</file><type>cfg</type><classifier>services-runtime</classifier></artifact>
+                                <artifact><file>src/main/resources/etc/org.openhab.addons.cfg</file><type>cfg</type><classifier>addons</classifier></artifact>
                             </artifacts>
                         </configuration>
                     </execution>
