@@ -5,22 +5,6 @@
 
     <feature name="openhab-package-demo" description="openHAB Demo Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
-        <feature>openhab-runtime-certificate</feature>
-        <feature>openhab-transport-mdns</feature>
-        <feature>openhab-misc-restdocs</feature>
-        <feature>openhab-ui-basic</feature>
-        <feature>openhab-ui-classic</feature>
-        <feature>openhab-ui-paper</feature>
-        <feature>openhab-binding-yahooweather</feature>
-        <feature>openhab-binding-wemo</feature>
-        <feature>openhab-binding-hue</feature>
-        <feature>openhab-binding-sonos</feature>
-        <feature>openhab-binding-ipp</feature>
-        <feature>openhab-binding-astro</feature>
-        <feature>openhab-binding-avmfritz</feature>
-        <feature>openhab-binding-ntp</feature>
-        <feature>openhab-persistence-rrd4j</feature>
-        <feature>openhab-transformation-map</feature>
         <configfile finalname="${openhab.conf}/items/demo.items" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/items</configfile>
         <configfile finalname="${openhab.conf}/sitemaps/demo.sitemap" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/sitemaps</configfile>
         <configfile finalname="${openhab.conf}/things/demo.things" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/things</configfile>
@@ -34,7 +18,7 @@
         <configfile finalname="${openhab.conf}/services/basicui.cfg" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/services-basicui</configfile>
         <configfile finalname="${openhab.conf}/services/classicui.cfg" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/services-classicui</configfile>
         <configfile finalname="${openhab.conf}/services/logging.cfg" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/services-logging</configfile>
-        <configfile finalname="${openhab.conf}/services/runtime.cfg" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/services-runtime</configfile>
+        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="true">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/addons</configfile>
     </feature>
 
 </features>
