@@ -76,6 +76,7 @@ export JAVA_OPTS="${JAVA_OPTS}
   -Dopenhab.runtime=${OPENHAB_RUNTIME}
   -Dopenhab.userdata=${OPENHAB_USERDATA}
   -Dopenhab.logdir=${OPENHAB_LOGDIR}
+  -Dfelix.cm.dir=${OPENHAB_USERDATA}/config
   -Dorg.osgi.service.http.port=${HTTP_PORT}
   -Dorg.osgi.service.http.port.secure=${HTTPS_PORT}"
 
