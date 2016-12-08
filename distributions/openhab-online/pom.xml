@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>org.openhab.distro</groupId>
-            <artifactId>openhab-aggregate-xml</artifactId>
+            <artifactId>openhab-features</artifactId>
             <version>${project.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
@@ -70,13 +70,6 @@
             <resource>
                 <directory>../distribution-resources/src/main/resources</directory>
                 <filtering>false</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>../distribution-resources/src/main/filtered-resources</directory>
-                <filtering>true</filtering>
                 <includes>
                     <include>**/*</include>
                 </includes>
@@ -136,6 +129,7 @@
                         <feature>service</feature>
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
+                        <feature>openhab-runtime-updates</feature>
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
