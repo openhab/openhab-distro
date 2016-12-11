@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>openhab-features</artifactId>
+            <artifactId>openhab-aggregate-xml</artifactId>
             <version>${project.version}</version>
             <classifier>features</classifier>
             <type>xml</type>

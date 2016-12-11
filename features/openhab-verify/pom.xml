@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>openhab-features</artifactId>
+            <artifactId>openhab-aggregate-xml</artifactId>
             <version>${project.version}</version>
             <type>xml</type>
             <classifier>features</classifier>
@@ -48,7 +48,7 @@
                             <descriptors>
                                 <descriptor>mvn:org.apache.karaf.features/framework/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
-                                <descriptor>mvn:${project.groupId}/openhab-features/${project.version}/xml/features</descriptor>
+                                <descriptor>mvn:${project.groupId}/openhab-aggregate-xml/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <distribution>org.apache.karaf.features:framework</distribution>
                             <javase>1.8</javase>
