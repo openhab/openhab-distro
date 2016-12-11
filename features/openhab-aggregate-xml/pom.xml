@@ -9,10 +9,10 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>openhab-features</artifactId>
+    <artifactId>openhab-aggregate-xml</artifactId>
     <packaging>feature</packaging>
 
-    <name>openHAB Features</name>
+    <name>openHAB Feature Aggregate XML</name>
     <description>openHAB Feature Aggregate XML</description>
 
     <dependencies>
