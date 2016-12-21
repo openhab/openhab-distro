@@ -58,7 +58,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 
-        <karaf.version>4.0.4</karaf.version>
+        <karaf.version>4.0.8</karaf.version>
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <build.helper.maven.plugin.version>1.9.1</build.helper.maven.plugin.version>
 
