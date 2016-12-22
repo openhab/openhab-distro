@@ -53,6 +53,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact><file>target/etc/branding.properties</file><type>cfg</type><classifier>branding</classifier></artifact>
+                                <artifact><file>target/etc/branding-ssh.properties</file><type>cfg</type><classifier>branding-ssh</classifier></artifact>
                             </artifacts>
                         </configuration>
                     </execution>
