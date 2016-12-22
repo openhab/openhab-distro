@@ -5,6 +5,7 @@
 
     <feature name="openhab-runtime-updates" description="openHAB Runtime Updates" version="${project.version}" hidden="true">
         <configfile finalname="${openhab.userdata}/etc/branding.properties" override="true">mvn:${project.groupId}/openhab-distro-resources/${project.version}/cfg/branding</configfile>
+        <configfile finalname="${openhab.userdata}/etc/branding-ssh.properties" override="true">mvn:${project.groupId}/openhab-distro-resources/${project.version}/cfg/branding-ssh</configfile>
     </feature>
 
 </features>
