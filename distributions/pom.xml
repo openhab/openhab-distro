@@ -149,20 +149,19 @@
                                         <type>archive</type>
                                         <includes>userdata/**</includes>
                                         <excludes>
-                                                  userdata/etc/startup.properties,
-                                                  userdata/etc/config.properties,
-                                                  userdata/etc/distribution.info,
-                                                  userdata/etc/org.apache.karaf.management.cfg,
-                                                  userdata/etc/jre.properties,
-                                                  userdata/etc/org.apache.karaf.*,
-                                                  userdata/etc/profile.cfg,
-                                                  userdata/etc/branding.properties
+                                            userdata/etc/startup.properties,
+                                            userdata/etc/config.properties,
+                                            userdata/etc/distribution.info,
+                                            userdata/etc/org.apache.karaf*,
+                                            userdata/etc/jre.properties,
+                                            userdata/etc/profile.cfg,
+                                            userdata/etc/branding.properties
                                         </excludes>
                                         <conffile>true</conffile>
                                         <mapper>
                                             <type>perm</type>
                                             <strip>1</strip>
-                                            <prefix>/var/lib/openhab2/</prefix>
+                                            <prefix>/var/lib/openhab2</prefix>
                                             <user>${deb.user}</user>
                                             <group>${deb.group}</group>
                                         </mapper>
@@ -171,14 +170,13 @@
                                         <src>${basedir}/target/${deb.srcarchive}</src>
                                         <type>archive</type>
                                         <includes>
-                                                  userdata/etc/startup.properties,
-                                                  userdata/etc/config.properties,
-                                                  userdata/etc/distribution.info,
-                                                  userdata/etc/org.apache.karaf.management.cfg,
-                                                  userdata/etc/jre.properties,
-                                                  userdata/etc/org.apache.karaf.features*,
-                                                  userdata/etc/profile.cfg,
-                                                  userdata/etc/branding.properties
+                                            userdata/etc/startup.properties,
+                                            userdata/etc/config.properties,
+                                            userdata/etc/distribution.info,
+                                            userdata/etc/org.apache.karaf*,
+                                            userdata/etc/jre.properties,
+                                            userdata/etc/profile.cfg,
+                                            userdata/etc/branding.properties
                                         </includes>
                                         <conffile>false</conffile>
                                         <mapper>
@@ -221,5 +219,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
