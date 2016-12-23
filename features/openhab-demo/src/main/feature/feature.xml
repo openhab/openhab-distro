@@ -10,7 +10,6 @@
         <configfile finalname="${openhab.conf}/things/demo.things" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/things</configfile>
         <configfile finalname="${openhab.conf}/rules/demo.rules" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/rules</configfile>
         <configfile finalname="${openhab.conf}/scripts/demo.script" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/scripts</configfile>
-        <configfile finalname="${openhab.conf}/sounds/doorbell.mp3" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/sounds</configfile>
         <configfile finalname="${openhab.conf}/persistence/logging.persist" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/persistence-logging</configfile>
         <configfile finalname="${openhab.conf}/persistence/rrd4j.persist" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/persistence-rrd4j</configfile>
         <configfile finalname="${openhab.conf}/transform/en.map" override="false">mvn:${project.groupId}/openhab-demo-resources/${project.version}/cfg/transform-en</configfile>
