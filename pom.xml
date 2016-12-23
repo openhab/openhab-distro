@@ -8,7 +8,7 @@
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0.b5</version>
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -46,10 +46,10 @@
     <properties>
         <build.number>- local build -</build.number>
 
-        <esh.version>0.9.0-SNAPSHOT</esh.version>
-        <ohc.version>2.0.0-SNAPSHOT</ohc.version>
-        <oh2.version>2.0.0-SNAPSHOT</oh2.version>
-        <oh1.version>1.9.0-SNAPSHOT</oh1.version>
+        <esh.version>0.9.0.b2</esh.version>
+        <ohc.version>2.0.0.b5</ohc.version>
+        <oh2.version>2.0.0.b5</oh2.version>
+        <oh1.version>1.9.0.b5</oh1.version>
         <kat.version>1.4.1</kat.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
