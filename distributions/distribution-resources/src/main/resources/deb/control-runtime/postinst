@@ -1,5 +1,7 @@
 #!/bin/sh
 
+UD_TMP=/var/lib/openhab2/tmp
+
 set -e
 if [ x"${OH_DOCKER_INSTALLATION}" != x ]; then
     echo "docker installation \"${OH_DOCKER_INSTALLATION}\""
@@ -39,6 +41,14 @@ case "$1" in
 			fi
 		else
 			# this is an upgrade
+			OH_USER=openhab
+			OH_GROUP=openhab
+			if [ x"${USER_AND_GROUP}" != x ]; then
+				OH_USER=`echo ${USER_AND_GROUP} | cut -d ":" -f 1`
+				OH_GROUP=`echo ${USER_AND_GROUP} | cut -d ":" -f 2`
+			fi
+			mkdir -p $UD_TMP
+			chown -R "$OH_USER:$OH_GROUP" $UD_TMP
 			startOpenHAB
 		fi
 		;;
