@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+    <!-- binding -->
+
+    <feature name="openhab-binding-digitalstrom" description="digitalSTROM Binding" version="${project.version}">
+        <feature>esh-binding-digitalstrom</feature>
+    </feature>
+
+    <feature name="openhab-binding-hue" description="Hue Binding" version="${project.version}">
+        <feature>esh-binding-hue</feature>
+    </feature>
+
+    <feature name="openhab-binding-fsinternetradio" description="Frontier Silicon Internet Radio Binding" version="${project.version}">
+        <feature>esh-binding-fsinternetradio</feature>
+    </feature>
+
+    <feature name="openhab-binding-lifx" description="LIFX Binding" version="${project.version}">
+        <feature>esh-binding-lifx</feature>
+    </feature>
+
+    <feature name="openhab-binding-ntp" description="NTP Binding" version="${project.version}">
+        <feature>esh-binding-ntp</feature>
+    </feature>
+
+    <feature name="openhab-binding-sonos" description="Sonos Binding" version="${project.version}">
+        <feature>esh-binding-sonos</feature>
+        <config name="binding.sonos">
+            opmlUrl = http://opml.radiotime.com/Describe.ashx?c=nowplaying&amp;partnerId=IAeIhU42&amp;id=%id&amp;serial=%serial
+        </config>
+    </feature>
+
+    <feature name="openhab-binding-wemo" description="Wemo Binding" version="${project.version}">
+        <feature>esh-binding-wemo</feature>
+    </feature>
+
+    <feature name="openhab-binding-yahooweather" description="Yahoo Weather Binding" version="${project.version}">
+        <feature>esh-binding-yahooweather</feature>
+    </feature>
+
+    <!-- transformation -->   
+
+    <feature name="openhab-transformation-exec" description="Exec Transformation" version="${project.version}">
+        <feature>esh-transform-exec</feature>
+    </feature>
+
+    <feature name="openhab-transformation-javascript" description="Javascript Transformation" version="${project.version}">
+        <feature>esh-transform-javascript</feature>
+    </feature>
+
+    <feature name="openhab-transformation-map" description="Map Transformation" version="${project.version}">
+        <feature>esh-transform-map</feature>
+    </feature>
+
+    <feature name="openhab-transformation-scale" description="Scale Transformation" version="${project.version}">
+        <feature>esh-transform-scale</feature>
+    </feature>
+
+    <feature name="openhab-transformation-regex" description="RegEx Transformation" version="${project.version}">
+        <feature>esh-transform-regex</feature>
+    </feature>
+
+    <feature name="openhab-transformation-xpath" description="XPath Transformation" version="${project.version}">
+        <feature>esh-transform-xpath</feature>
+    </feature>
+
+    <feature name="openhab-transformation-jsonpath" description="JSONPath Transformation" version="${project.version}">
+        <feature>esh-transform-jsonpath</feature>
+    </feature>
+
+    <feature name="openhab-transformation-xslt" description="XSLT Transformation" version="${project.version}">
+        <feature>esh-transform-xslt</feature>
+    </feature>
+
+    <!-- voice -->   
+
+    <feature name="openhab-voice-mactts" description="MacOS Text-to-Speech" version="${project.version}">
+        <feature>esh-voice-mactts</feature>
+    </feature>
+
+    <!-- ui -->
+
+    <feature name="openhab-ui-basic" description="Basic UI" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-ui-basic</feature>
+        <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.basicui/${project.version}</bundle>
+        <config name="org.eclipse.smarthome.basicui">
+            defaultSitemap = _default
+            iconType = svg
+        </config>
+    </feature>
+
+    <feature name="openhab-ui-classic" description="Classic UI" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-ui-classic</feature>
+        <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.classicui/${project.version}</bundle>
+        <config name="org.eclipse.smarthome.classicui">
+            defaultSitemap = _default
+        </config>
+    </feature>
+
+    <feature name="openhab-ui-paper" description="Paper UI" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-ui-paper</feature>
+        <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.paperui/${project.version}</bundle>
+    </feature>
+
+	<!-- misc -->
+	
+    <feature name="openhab-misc-restdocs" description="REST Documentation" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <requirement>esh.tp;filter:="(feature=jax-rs-provider-swagger)"</requirement>
+        <bundle>mvn:org.openhab.core/org.openhab.io.rest.docs/${project.version}</bundle>
+    </feature>
+
+</features>

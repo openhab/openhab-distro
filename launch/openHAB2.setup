@@ -2283,9 +2283,6 @@
         rootFolder="${git.clone.openhab-distro.location/features}"
         locateNestedProjects="true"/>
     <sourceLocator
-        rootFolder="${git.clone.openhab-distro.location/docs}"
-        locateNestedProjects="true"/>
-    <sourceLocator
         rootFolder="${git.clone.openhab-distro.location/launch}"
         locateNestedProjects="true"/>
   </setupTask>
