@@ -11,8 +11,8 @@
 	<artifactId>online-repo</artifactId>
 	<packaging>pom</packaging>
 
-	<name>openHAB Distribution</name>
-	<description>This is the distribution of openHAB</description>
+	<name>openHAB Online Repository</name>
+	<description>This is the online repository of openHAB</description>
 
 	<dependencies>
 		<dependency>

@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>distro</artifactId>
+            <artifactId>distro-kar</artifactId>
             <version>${project.version}</version>
             <type>kar</type>
             <scope>provided</scope>
@@ -61,9 +61,8 @@
                             <descriptors>
                                 <descriptor>mvn:org.apache.karaf.features/framework/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
-                                <descriptor>mvn:${project.groupId}/openhab-addons/${project.version}/xml/features</descriptor>
-                                <descriptor>mvn:${project.groupId}/openhab-addons-legacy/${project.version}/xml/features</descriptor>
-                                <descriptor>mvn:${project.groupId}/openhab-distro/${project.version}/xml/features</descriptor>
+                                <descriptor>mvn:${project.groupId}/addons/${project.version}/xml/features</descriptor>
+                                <descriptor>mvn:${project.groupId}/distro/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <distribution>org.apache.karaf.features:framework</distribution>
                             <javase>1.8</javase>
