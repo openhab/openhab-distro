@@ -40,12 +40,12 @@
                     <logDependencyChanges>true</logDependencyChanges>
                     <overwriteChangedDependencies>true</overwriteChangedDependencies>
                     <ignoreDependencyFlag>true</ignoreDependencyFlag>
-          			<archive>
-			            <index>true</index>
-    					<manifestEntries>
-				        	<Karaf-Feature-Start>false</Karaf-Feature-Start>
-            			</manifestEntries>
-      				</archive>
+                    <archive>
+                        <index>true</index>
+                        <manifestEntries>
+                            <Karaf-Feature-Start>false</Karaf-Feature-Start>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
