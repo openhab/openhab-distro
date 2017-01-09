@@ -15,13 +15,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>openhab-aggregate-kar</module>
-        <module>openhab-aggregate-xml</module>
-        <module>openhab-demo-resources</module>
-        <module>openhab-demo</module>
-        <module>openhab-distro-resources</module>
-        <module>openhab-distro</module>
-        <module>openhab-verify</module>
+        <module>addons-esh</module>
+        <module>distro</module>
+        <module>distro-kar</module>
+        <module>distro-resources</module>
+        <module>addons</module>
     </modules>
 
 </project>

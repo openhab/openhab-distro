@@ -1,6 +1,0 @@
-# This file is only relevant, if you decide to track your configuration in a git repository.
-# If you are going to upload your configuration to GitHub or another public place, be sure to
-# hide your sensitive data, examples may be:
-
-#services/pushover.cfg  # may contain your login credentials
-#things/astro.things    # may contain your physical location

@@ -45,6 +45,7 @@
 
     <properties>
         <build.number>- local build -</build.number>
+        <online.repo.version>2.0.0.nightly</online.repo.version>
 
         <esh.version>0.9.0-SNAPSHOT</esh.version>
         <ohc.version>2.0.0-SNAPSHOT</ohc.version>

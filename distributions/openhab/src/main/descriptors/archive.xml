@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <id>archive</id>
+    <formats>
+        <format>zip</format>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+
+        <!-- Add addons, conf & userdata -->
+        <fileSet>
+            <directory>target/assembly</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>addons/**</include>
+                <include>conf/**</include>
+                <include>runtime/**</include>
+                <include>userdata/**</include>
+                <include>LICENSE.TXT</include>
+            </includes>
+        </fileSet>
+
+        <!-- KARAF_HOME -->
+        <fileSet>
+            <directory>target/assembly</directory>
+            <outputDirectory>runtime</outputDirectory>
+            <includes>
+                <include>bin/**</include>
+                <include>lib/**</include>
+                <include>system/**</include>
+            </includes>
+        </fileSet>
+
+        <!-- KARAF_DATA -->
+        <fileSet>
+            <directory>target/assembly/data</directory>
+            <outputDirectory>userdata</outputDirectory>
+        </fileSet>
+
+        <!-- KARAF_ETC -->
+        <fileSet>
+            <directory>target/assembly/etc</directory>
+            <outputDirectory>userdata/etc</outputDirectory>
+        </fileSet>
+
+    </fileSets>
+
+    <!-- Add start scripts to openHAB home folder -->
+    <files>
+        <file>
+            <source>src/main/resources/home/start.sh</source>
+            <outputDirectory></outputDirectory>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/resources/home/start_debug.sh</source>
+            <outputDirectory></outputDirectory>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </file>
+        <file>
+            <source>src/main/resources/home/start.bat</source>
+            <outputDirectory></outputDirectory>
+            <fileMode>0644</fileMode>
+            <lineEnding>windows</lineEnding>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/resources/home/start_debug.bat</source>
+            <outputDirectory></outputDirectory>
+            <fileMode>0644</fileMode>
+            <lineEnding>windows</lineEnding>
+        </file>
+    </files>
+
+</assembly>
