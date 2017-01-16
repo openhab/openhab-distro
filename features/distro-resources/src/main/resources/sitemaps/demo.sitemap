@@ -14,7 +14,7 @@ sitemap demo label="Main Menu"
 				Text item=Weather_LastUpdate visibility=[Weather_LastUpdate>30] valuecolor=[Weather_LastUpdate>120="orange", Weather_LastUpdate>300="red"]
 			}
 			Frame {
-				Switch item=Weather_Chart_Period label="Chart Period" mappings=[0="Hour", 1="Day", 2="Week"]
+				Switch item=Weather_Chart_Period label="Chart Period" icon="chart" mappings=[0="Hour", 1="Day", 2="Week"]
 				Chart item=Weather_Chart period=h refresh=600 visibility=[Weather_Chart_Period==0, Weather_Chart_Period=="NULL"]
 				Chart item=Weather_Chart period=D refresh=3600 visibility=[Weather_Chart_Period==1]
 				Chart item=Weather_Chart period=W refresh=3600 visibility=[Weather_Chart_Period==2]
@@ -61,13 +61,13 @@ sitemap demo label="Main Menu"
 		Text label="Multimedia" icon="video" {
 			Frame label="Radio Control" {
 				Selection item=Radio_Station mappings=[0=off, 1=HR3, 2=SWR3, 3=FFH]
-				Slider item=Volume
+				Slider item=Volume icon="soundvolume"
 			}
 			Frame label="Multimedia Widgets" {
 				Image url="https://raw.github.com/wiki/openhab/openhab/images/features.png" label="openHAB" {
 					Text label="http://www.openHAB.org" icon="icon"
 				}
-				Video url="http://demo.openhab.org/Hue.m4v"
+				Video url="http://www.openhab.org/assets/smarthome.mp4"
 				Webview url="http://heise-online.mobi/" height=8
                 Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
 			}
@@ -75,4 +75,4 @@ sitemap demo label="Main Menu"
 	}
 }
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend

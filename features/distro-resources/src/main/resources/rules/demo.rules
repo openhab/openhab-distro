@@ -98,14 +98,18 @@ rule "Set random room temperatures"
 		)
 end
 
-rule "ut"
+rule "Set daily max and min temperature"
 when
 	Item Weather_Temperature changed or
 	Time cron "0 0 0 * * ?" or
 	System started
 then
-	postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.withTimeAtStartOfDay).state)
-	postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.withTimeAtStartOfDay).state)
+	val max = Weather_Temperature.maximumSince(now.withTimeAtStartOfDay)
+	val min = Weather_Temperature.minimumSince(now.withTimeAtStartOfDay)
+	if( max != null && min != null) {
+		postUpdate(Weather_Temp_Max, max.state)
+		postUpdate(Weather_Temp_Min, min.state)
+	}
 end
 
 // Creates an item that stores the last update time of this item
@@ -134,4 +138,29 @@ rule "Set random image URLs"
         postUpdate(ImageURL, url + "/" + res)
 end
 
-// vim: syntax=Xtend syntax=openhab
+rule "Volume"
+	when
+		Item Volume received command
+	then
+		if(receivedCommand instanceof PercentType) {
+			setMasterVolume(receivedCommand as PercentType)
+		} else {
+			if(receivedCommand==INCREASE) increaseMasterVolume(20)
+			if(receivedCommand==DECREASE) decreaseMasterVolume(20)	
+		}
+end
+
+rule "Select Radio Station"
+	when
+		Item Radio_Station received command
+	then
+		switch(receivedCommand) {
+			case 0 : playStream(null)
+			case 1 : playStream("http://metafiles.gl-systemhaus.de/hr/hr3_2.m3u")
+			case 2 : playStream("http://mp3-live.swr3.de/swr3_m.m3u")
+			case 3 : playStream("http://edge.live.mp3.mdn.newmedia.nacamar.net/radioffh/livestream.mp3.m3u")
+			case 4 : playStream("http://stream.laut.fm/club93")
+		}
+end
+
+// vim: syntax=Xtend

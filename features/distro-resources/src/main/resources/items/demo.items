@@ -25,7 +25,7 @@ Group:Number:AVG                Temperature "Avg. Room Temperature [%.1f °C]"  
 Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
 
 /* Lights */
-Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)
+Dimmer Light_GF_Living_Table        "Table"     (GF_Living, Lights)     ["Lighting"]
 Switch Light_GF_Corridor_Ceiling    "Ceiling"       (GF_Corridor, Lights)
 Switch Light_GF_Kitchen_Ceiling     "Ceiling"       (GF_Kitchen, Lights)
 Switch Light_GF_Kitchen_Table       "Table"         (GF_Kitchen, Lights)
@@ -43,16 +43,16 @@ Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)
 Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)
 Switch Light_C_Staircase            "Staircase"     (gC, Lights)
 Switch Light_C_Washing_Ceiling      "Washing"       (gC, Lights)
-Switch Light_C_Workshop             "Workshop"      (gC, Lights)
+Switch Light_C_Workshop             "Workshop"      (gC, Lights)        ["Lighting"]
 
-Switch Light_Garden_Garage          "Garage"        (Garden, Lights)
+Switch Light_Garden_Garage          "Garage"        (Garden, Lights)      ["Lighting"]
 Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)
 
 /* Heating */
 Switch Heating_GF_Corridor  "Corridor"      <heating>   (GF_Corridor, Heating)
 Switch Heating_GF_Toilet    "Toilet"        <heating>   (GF_Toilet, Heating)
 Switch Heating_GF_Living    "Livingroom"    <heating>   (GF_Living, Heating)
-Switch Heating_GF_Kitchen   "Kitchen"       <heating>   (GF_Kitchen, Heating)
+Switch Heating_GF_Kitchen   "Kitchen"       <heating>   (GF_Kitchen, Heating, Thermostat) ["CurrentTemperature"]
 
 Switch Heating_FF_Bath      "Bath"          <heating>   (FF_Bath, Heating)
 Switch Heating_FF_Office    "Office"        <heating>   (FF_Office, Heating)
@@ -118,9 +118,12 @@ Dimmer DemoBlinds               "Blinds [%d %%]"        <rollershutter>
 Number Scene_General            "Scene"                 <sofa>
 Number Radio_Station            "Radio"                 <network>
 Dimmer Volume                   "Volume [%.1f %%]"
-Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>
 Location DemoLocation           "Brandenburg Gate Berlin"
 Number Wifi_Level               "Wifi Level [%d/4]"     <signal>        (FF_Office)
 String ImageURL                 "Image URL [%s]"
 
-// vim: syntax=Xtend syntax=openhab
+Group Thermostat          "Thermostat"        <temperature>            ["Thermostat"]
+Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature"]
+String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:HeatingCoolingMode"]
+
+// vim: syntax=Xtend
