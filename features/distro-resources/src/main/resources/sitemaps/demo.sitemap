@@ -75,4 +75,4 @@ sitemap demo label="Main Menu"
 	}
 }
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend

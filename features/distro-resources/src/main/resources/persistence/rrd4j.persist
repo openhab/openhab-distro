@@ -11,4 +11,4 @@ Items {
 	Temperature*,Weather_Chart* : strategy = everyMinute, restoreOnStartup
 }
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend

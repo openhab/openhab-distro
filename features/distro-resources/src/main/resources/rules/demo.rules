@@ -163,4 +163,4 @@ rule "Select Radio Station"
 		}
 end
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend

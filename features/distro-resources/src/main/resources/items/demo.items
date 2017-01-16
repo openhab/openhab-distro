@@ -126,4 +126,4 @@ Group Thermostat          "Thermostat"        <temperature>            ["Thermos
 Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature"]
 String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:HeatingCoolingMode"]
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend
