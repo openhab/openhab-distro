@@ -62,7 +62,6 @@
 								<artifact><file>src/main/resources/things/demo.things</file><type>cfg</type><classifier>things</classifier></artifact>
 								<artifact><file>src/main/resources/rules/demo.rules</file><type>cfg</type><classifier>rules</classifier></artifact>
 								<artifact><file>src/main/resources/scripts/demo.script</file><type>cfg</type><classifier>scripts</classifier></artifact>
-								<artifact><file>src/main/resources/persistence/logging.persist</file><type>cfg</type><classifier>persistence-logging</classifier></artifact>
 								<artifact><file>src/main/resources/persistence/rrd4j.persist</file><type>cfg</type><classifier>persistence-rrd4j</classifier></artifact>
 								<artifact><file>src/main/resources/transform/en.map</file><type>cfg</type><classifier>transform-en</classifier></artifact>
 								<artifact><file>src/main/resources/transform/de.map</file><type>cfg</type><classifier>transform-de</classifier></artifact>
