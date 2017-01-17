@@ -52,7 +52,7 @@ Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)
 Switch Heating_GF_Corridor  "Corridor"      <heating>   (GF_Corridor, Heating)
 Switch Heating_GF_Toilet    "Toilet"        <heating>   (GF_Toilet, Heating)
 Switch Heating_GF_Living    "Livingroom"    <heating>   (GF_Living, Heating)
-Switch Heating_GF_Kitchen   "Kitchen"       <heating>   (GF_Kitchen, Heating, Thermostat) ["CurrentTemperature"]
+Switch Heating_GF_Kitchen   "Kitchen"       <heating>   (GF_Kitchen, Heating)
 
 Switch Heating_FF_Bath      "Bath"          <heating>   (FF_Bath, Heating)
 Switch Heating_FF_Office    "Office"        <heating>   (FF_Office, Heating)
@@ -75,7 +75,7 @@ Switch Shutter_all
 Number Temperature_GF_Corridor  "Temperature [%.1f °C]" <temperature>   (Temperature, GF_Corridor)
 Number Temperature_GF_Toilet    "Temperature [%.1f °C]" <temperature>   (Temperature, GF_Toilet)
 Number Temperature_GF_Living    "Temperature [%.1f °C]" <temperature>   (Temperature, GF_Living)
-Number Temperature_GF_Kitchen   "Temperature [%.1f °C]" <temperature>   (Temperature, GF_Kitchen)
+Number Temperature_GF_Kitchen   "Temperature [%.1f °C]" <temperature>   (Temperature, GF_Kitchen, Thermostat) ["CurrentTemperature"]
 Number Temperature_FF_Bath      "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Bath)
 Number Temperature_FF_Office    "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Office)
 Number Temperature_FF_Child     "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Child)
@@ -122,7 +122,7 @@ Location DemoLocation           "Brandenburg Gate Berlin"
 Number Wifi_Level               "Wifi Level [%d/4]"     <signal>        (FF_Office)
 String ImageURL                 "Image URL [%s]"
 
-Group Thermostat          "Thermostat"        <temperature>            ["Thermostat"]
+Group Thermostat                "Thermostat"            <temperature>                    ["Thermostat"]
 Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature"]
 String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:HeatingCoolingMode"]
 
