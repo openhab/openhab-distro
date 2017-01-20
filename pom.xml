@@ -45,12 +45,12 @@
 
     <properties>
         <build.number>- local build -</build.number>
-        <online.repo.version>2.0.0.nightly</online.repo.version>
+        <online.repo.version>2.0</online.repo.version>
 
-        <esh.version>0.9.0-SNAPSHOT</esh.version>
-        <ohc.version>2.0.0-SNAPSHOT</ohc.version>
-        <oh2.version>2.0.0-SNAPSHOT</oh2.version>
-        <oh1.version>1.9.0-SNAPSHOT</oh1.version>
+        <esh.version>0.9.0.b4</esh.version>
+        <ohc.version>2.0.0</ohc.version>
+        <oh2.version>2.0.0</oh2.version>
+        <oh1.version>1.9.0</oh1.version>
         <kat.version>1.4.1</kat.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
