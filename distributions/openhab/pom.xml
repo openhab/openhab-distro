@@ -110,6 +110,7 @@
                 <configuration>
                     <installedFeatures>
                         <feature>wrapper</feature>
+                        <feature>wrap</feature>
                     </installedFeatures>
                     <startupFeatures>
                         <feature>eventadmin</feature>
