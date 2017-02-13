@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="160">
+<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="161">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.smarthome.feature.runtime.core.feature.group" version="0.0.0"/>
@@ -20,7 +20,7 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.deps.runtime.feature.group" version="0.0.0"/>
 <unit id="org.openhab.deps.test.feature.group" version="0.0.0"/>
-<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.10"/>
+<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.11"/>
 </location>
 </locations>
 </target>
