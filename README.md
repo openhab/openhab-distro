@@ -37,4 +37,8 @@ In case of problems or questions, please join our vibrant [openHAB community](ht
 <tr><td width=30%><img src="http://www.openhab.org/assets/images/bintray.png"/></td>
 <td><a href="https://www.jfrog.com">JFrog</a> is providing an <a href="https://openhab.jfrog.io">Artifactory instance for our snapshots</a> as well as distributing our <a href="https://bintray.com/openhab">releases through Bintray</a>.</td>
 </tr>
+<tr><td width=30%><img src="http://www.ej-technologies.com/images/product_banners/jprofiler_large.png"/></td>
+<td><a href="http://www.ej-technologies.com/">EJ Technologies</a> is providing us open source licenses for <a href="http://www.ej-technologies.com/products/jprofiler/overview.html">JProfiler</a> to make openHAB even more awesome.</td>
+</tr>
+
 </table>
