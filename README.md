@@ -28,7 +28,7 @@ You can also learn [how openHAB 2 bindings are developed](http://docs.openhab.or
 
 In case of problems or questions, please join our vibrant [openHAB community](https://community.openhab.org/).
 
-## Acknowledgments
+## Acknowledgements
 
 <table>
 <tr><td width=30%><img src="http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png" alt="Powered By CloudBees"></td>
