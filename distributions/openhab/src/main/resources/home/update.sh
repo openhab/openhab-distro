@@ -8,9 +8,13 @@ function error_exit
 }
 
 TIMESTAMP='date +%Y%m%d_%H%M%S';
+
 # base installation path of openHAB2
 BASEPATH='/opt/openhab2';
+
+# path to where backups a stored
 BACKUPPATH='/opt/backup/backup-oh2-';
+
 # please set variable RELEASE to the current release
 RELEASE='2.1.0';
 
