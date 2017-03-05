@@ -38,7 +38,7 @@
         <feature>esh-binding-yahooweather</feature>
     </feature>
 
-    <!-- transformation -->   
+    <!-- transformation -->
 
     <feature name="openhab-transformation-exec" description="Exec Transformation" version="${project.version}">
         <feature>esh-transform-exec</feature>
@@ -72,7 +72,7 @@
         <feature>esh-transform-xslt</feature>
     </feature>
 
-    <!-- voice -->   
+    <!-- voice -->
 
     <feature name="openhab-voice-mactts" description="MacOS Text-to-Speech" version="${project.version}">
         <feature>esh-voice-mactts</feature>
@@ -106,11 +106,15 @@
     </feature>
 
 	<!-- misc -->
-	
+
     <feature name="openhab-misc-restdocs" description="REST Documentation" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <requirement>esh.tp;filter:="(feature=jax-rs-provider-swagger)"</requirement>
         <bundle>mvn:org.openhab.core/org.openhab.io.rest.docs/${project.version}</bundle>
     </feature>
 
+    <feature name="openhab-misc-marketplace" description="IoT Marketplace" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-extensionservice-marketplace</feature>
+    </feature>
 </features>
