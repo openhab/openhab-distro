@@ -6,7 +6,7 @@ When no solution was found, use the table below to determine where your issue sh
 
 Issue | Where to report
 ------|----------------
-Problems and feature requests for openHAB 1 addons | [openHAB] (https://github.com/openhab/openhab/issues)
+Problems and feature requests for openHAB 1 addons | [openHAB1-addons] (https://github.com/openhab/openhab1-addons/issues)
 Problems and feature requests for openHAB 2 addons | [openHAB2-addons] (https://github.com/openhab/openhab2-addons/issues)
 Issues related to the runtime environment, IDE and packaging | [openHAB-distro] (https://github.com/openhab/openhab-distro/issues)
 Issues related to the core openHAB bundles that are not from Eclipse SmartHome | [openHAB-core] (https://github.com/kaikreuzer/openhab-core/issues)
