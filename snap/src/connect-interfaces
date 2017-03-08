@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "This is helper script and it shoud be called by user directly!"
+echo "Connecting interfaces for openhab"
+
+snap connect openhab:home
+snap connect openhab:process-control
+gadget_snap=$(for i in $(snap list | awk '{print $1}'); do [[ ! -z $(snap info $i | grep gadget) ]] && echo "$i"; done 2> /dev/null)
+snap connect openhab:serial-port $gadget_snap
