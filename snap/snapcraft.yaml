@@ -68,7 +68,7 @@ parts:
 
     # helper scripts
     openhab-control:
-        source: snap/src
+        source: snap
         plugin: dump
         organize:
             openhab-control: bin/openhab-control
@@ -76,3 +76,7 @@ parts:
             config: bin/config
             openhab-help: bin/openhab-help
             configure: meta/hooks/configure
+        stage:
+            - -plugins
+        prime:
+            - -plugins
