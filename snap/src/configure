@@ -5,11 +5,14 @@ set -x
 exec >> $SNAP_COMMON/configure-hook.log 2>&1
 echo "$(date '+%Y-%m-%d %H:%M:%S') configure-hook: Entering hook"
 
-# configure hook can be also run as part of install/update, migrate data if needed here, use
-# version key to track state
-VERSION=$(snapctl get version)
-# handle bug when snap uninstall will not clear value of 'version' key
-if [ "x$VERSION" == "x$SNAP_VERSION" ] && [ -d $SNAP_DATA/userdata ]; then
+# configure hook can be called as result of: snap set / install / update / rollback. Handle each independently
+# version key to track reason for configure hook call
+LAST_REVISION=$(snapctl get revision)
+# this is revision before last installed one, used to track rollback
+REVERT_REVISION=$(snapctl get rev-revision)
+
+# handle bug when snap uninstall will not clear value of 'revision' key
+if [ "x$LAST_REVISION" == "x$SNAP_REVISION" ] &&  [ -d $SNAP_DATA/userdata ]; then
     echo "Handle config change"
     # read openhab config
     . $SNAP/bin/config
@@ -35,27 +38,25 @@ if [ "x$VERSION" == "x$SNAP_VERSION" ] && [ -d $SNAP_DATA/userdata ]; then
     chmod 755 $SETTINGS_FILE
     # we can't use snapctl to restart service, may be one day ....
     echo "Setting has been updated, restart service. $ sudo openhab.stop"
-else
-    # we have three potential screnarios, fresh install/update/rollback
-    if [ -d $SNAP_DATA/userdata ]; then
-        echo "detected rollback : doing nothing"
-        # this is potentially rollback, we better do nothing
-    else
-        if [ "x$VERSION" != "x" ] || [ ! -d $(dirname $SNAP_DATA)/$VERSION/userdata ]; then
-            # this is fresh install or previus version has no userdata
-            echo "detected fresh install or missing previous user data, populate with fresh one"
-            cp -rf $SNAP/userdata $SNAP_DATA/
-            cp -rf $SNAP/conf $SNAP_DATA/
-        else
-            # this is update: migrate data from previous version, minus cache, tmp
-            echo "detected udpate: migrate data"
-            shopt -s dotglob; rm -rf $(dirname $SNAP_DATA)/$VERSION/userdata/cache/*
-            shopt -s dotglob; rm -rf $(dirname $SNAP_DATA)/$VERSION/userdata/tmp/*
-            cp -rT $(dirname $SNAP_DATA)/$VERSION $SNAP_DATA
-            cp -r -n $SNAP/userdata/etc $SNAP_DATA/userdata/
-            cp -r -n $SNAP/conf/services $SNAP_DATA/conf
-            # add here more custom migration steps
-        fi
-    fi
-    snapctl set version=$SNAP_VERSION
+elif [ "x$LAST_REVISION" == "x" ] || [ ! -d $SNAP_COMMON/conf ]; then
+    # this is fresh install or previus version has no userdata
+    echo "detected fresh install or missing previous user data, populate with fresh one"
+    cp -rf $SNAP/userdata $SNAP_DATA/
+    cp -rf $SNAP/conf $SNAP_DATA/
+elif [ "x$LAST_REVISION" != "x$SNAP_REVISION" ] && [ "x$REVERT_REVISION" == "x$SNAP_REVISION" ]; then
+    # this is rollback: update logging properties
+    echo "detected rollback"
+    # this is potentially rollback, we better do nothing
+    # empty previous revision key
+    snapctl set rev-revision=""
+elif [ "x$LAST_REVISION" != "x$SNAP_REVISION" ]; then
+    # this is update:  update logging properties
+    echo "detected udpate"
+    # wipe cache and tmp for new version
+    shopt -s dotglob; rm -rf $(dirname $SNAP_DATA)/$VERSION/userdata/cache/*
+    shopt -s dotglob; rm -rf $(dirname $SNAP_DATA)/$VERSION/userdata/tmp/*
+    # add here more custom migration steps
+    # update revert revision key
+    snapctl set rev-revision=$LAST_REVISION
 fi
+snapctl set revision=$SNAP_REVISION
