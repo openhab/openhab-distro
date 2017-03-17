@@ -65,7 +65,7 @@
 								<descriptor>src/main/descriptors/archive.xml</descriptor>
 							</descriptors>
 							<appendAssemblyId>false</appendAssemblyId>
-							<tarLongFileMode>gnu</tarLongFileMode>
+							<tarLongFileMode>posix</tarLongFileMode>
 						</configuration>
 					</execution>
 				</executions>
