@@ -189,7 +189,7 @@
         <repository>
             <id>jfrog</id>
             <name>JFrog OSS Repository</name>
-            <url>http://oss.jfrog.org/libs-snapshot/</url>
+            <url>https://openhab.jfrog.io/openhab/libs-snapshot/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -255,33 +255,6 @@
             </snapshots>
         </repository>
 
-        <!-- OPS4J SNAPSHOT repository -->
-        <repository>
-            <id>ops4j.sonatype.snapshots.deploy</id>
-            <name>OPS4J snapshot repository</name>
-            <url>https://oss.sonatype.org/content/repositories/ops4j-snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-               <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-
-        <!-- Apache SNAPSHOT -->
-        <repository>
-            <id>apache.snapshots.deploy</id>
-            <name>Apache snapshot repository</name>
-            <url>https://repository.apache.org/content/groups/snapshots-group</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-               <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
     </repositories>
 
     <profiles>
