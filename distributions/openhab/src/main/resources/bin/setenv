@@ -52,6 +52,15 @@
 . "$DIRNAME/oh2_dir_layout"
 
 #
+# set listen address for HTTP(S) server
+#
+if [ ! -z ${OPENHAB_HTTP_ADDRESS} ]; then
+    HTTP_ADDRESS=${OPENHAB_HTTP_ADDRESS}
+else
+    HTTP_ADDRESS=0.0.0.0
+fi
+
+#
 # set ports for HTTP(S) server
 #
 if [ ! -z ${OPENHAB_HTTP_PORT} ]; then
@@ -77,6 +86,8 @@ export JAVA_OPTS="${JAVA_OPTS}
   -Dopenhab.userdata=${OPENHAB_USERDATA}
   -Dopenhab.logdir=${OPENHAB_LOGDIR}
   -Dfelix.cm.dir=${OPENHAB_USERDATA}/config
+  -Djetty.host=${HTTP_ADDRESS}
+  -Dorg.ops4j.pax.web.listening.addresses=${HTTP_ADDRESS}
   -Dorg.osgi.service.http.port=${HTTP_PORT}
   -Dorg.osgi.service.http.port.secure=${HTTPS_PORT}"
 

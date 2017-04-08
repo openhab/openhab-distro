@@ -64,6 +64,18 @@ rem SET KARAF_DEBUG
 :: Use openHAB 2 directory layout
 call "%DIRNAME%oh2_dir_layout.bat"
 
+:: set listen address for HTTP(S) server
+:check_http_address
+IF NOT [%OPENHAB_HTTP_ADDRESS%] == [] GOTO :http_address_set
+set HTTP_ADDRESS=0.0.0.0
+goto :http_address_done
+
+:http_address_set
+set HTTP_ADDRESS=%OPENHAB_HTTP_ADDRESS%
+goto :http_address_done
+
+:http_address_done
+
 :: set ports for HTTP(S) server
 :check_http_port
 IF NOT [%OPENHAB_HTTP_PORT%] == [] GOTO :http_port_set
@@ -95,6 +107,8 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.userdata=%OPENHAB_USERDATA% ^
   -Dopenhab.logdir=%OPENHAB_LOGDIR% ^
   -Dfelix.cm.dir=%OPENHAB_USERDATA%\config ^
+  -Djetty.host=%HTTP_ADDRESS% ^
+  -Dorg.ops4j.pax.web.listening.addresses=%HTTP_ADDRESS% ^
   -Dorg.osgi.service.http.port=%HTTP_PORT% ^
   -Dorg.osgi.service.http.port.secure=%HTTPS_PORT%
 
