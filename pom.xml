@@ -2,13 +2,16 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <prerequisites>
-        <maven>3.0</maven>
-    </prerequisites>
+    <parent>
+        <groupId>org.openhab</groupId>
+        <artifactId>pom</artifactId>
+        <version>2.1.0-SNAPSHOT</version>
+        <relativePath></relativePath>
+    </parent>
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>2.1.0-SNAPSHOT</version>
+
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -51,19 +54,8 @@
         <ohc.version>2.1.0-SNAPSHOT</ohc.version>
         <oh2.version>2.1.0-SNAPSHOT</oh2.version>
         <oh1.version>1.10.0-SNAPSHOT</oh1.version>
-        <kat.version>1.4.1</kat.version>
-        <tycho.version>0.24.0</tycho.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-
-        <karaf.version>4.0.8</karaf.version>
-        <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
-        <build.helper.maven.plugin.version>1.9.1</build.helper.maven.plugin.version>
-
+        <jackson.version>1.9.13</jackson.version>
         <!-- provided by Karaf -->
         <dep.slf4j.api.groupId>org.slf4j</dep.slf4j.api.groupId>
         <dep.slf4j.api.artifactId>slf4j-api</dep.slf4j.api.artifactId>
@@ -128,37 +120,8 @@
     </pluginRepositories>
 
     <repositories>
-       <!-- ESH releases -->
-        <repository>
-            <id>eclipse-releases</id>
-            <name>Eclipse Release Repository</name>
-            <layout>default</layout>
-            <url>https://repo.eclipse.org/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <!-- ESH Snapshots -->
-        <repository>
-            <id>eclipse-snapshots</id>
-            <name>Eclipse Snapshot Repository</name>
-            <layout>default</layout>
-            <url>https://repo.eclipse.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-
-        <!-- openHAB releases -->
+        
+        <!-- releases -->
         <repository>
             <id>jcenter</id>
             <name>JCenter Repository</name>
@@ -173,9 +136,9 @@
         </repository>
 
         <repository>
-            <id>openhab-bintray</id>
-            <name>Bintray Repository for openHAB</name>
-            <url>https://dl.bintray.com/openhab/mvn/</url>
+            <id>openhab-artifactory-release</id>
+            <name>JFrog Artifactory Repository</name>
+            <url>https://openhab.jfrog.io/openhab/libs-release</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
@@ -185,11 +148,11 @@
             </snapshots>
         </repository>
 
-        <!-- openHAB snapshots -->
+        <!-- snapshots -->
         <repository>
-            <id>jfrog</id>
-            <name>JFrog OSS Repository</name>
-            <url>https://openhab.jfrog.io/openhab/libs-snapshot/</url>
+            <id>openhab-artifactory-snapshot</id>
+            <name>JFrog Artifactory Repository</name>
+            <url>https://openhab.jfrog.io/openhab/libs-snapshot</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -199,60 +162,18 @@
             </snapshots>
         </repository>
 
-        <!-- SHK releases -->
+        <!-- SmartHome p2 repository -->
         <repository>
-            <id>shk-bintray</id>
-            <name>Bintray Repository for shk</name>
-            <url>https://dl.bintray.com/maggu2810/maven</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>p2-smarthome</id>
+            <url>https://openhab.jfrog.io/openhab/eclipse-smarthome-stable</url>
+            <layout>p2</layout>
         </repository>
 
-        <!-- Apache ServiceMix repository (for region) -->
+        <!-- openHAB dependencies p2 repository -->
         <repository>
-            <id>apache.servicemix.m2</id>
-            <name>Apache ServiceMix M2 repository</name>
-            <url>http://svn.apache.org/repos/asf/servicemix/m2-repo</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <!-- Gemini Blueprint repository -->
-        <repository>
-            <id>zodiac-repository</id>
-            <name>Zodiac Release Repository</name>
-            <url>http://repository.springsource.com/maven/bundles/release</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>                
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <!-- Spring EBR repository -->
-        <repository>
-            <id>spring-ebr-repository</id>
-            <name>Spring EBR Repository</name>
-            <url>http://repository.springsource.com/maven/bundles/external</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>                
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>p2-openhab-deps-repo</id>
+            <url>https://dl.bintray.com/openhab/p2/openhab-deps-repo/${ohdr.version}</url>
+            <layout>p2</layout>
         </repository>
 
     </repositories>
