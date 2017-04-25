@@ -3,6 +3,10 @@
 
     <!-- binding -->
 
+    <feature name="openhab-binding-astro" description="Astro Binding" version="${project.version}">
+        <feature>esh-binding-astro</feature>
+    </feature>
+
     <feature name="openhab-binding-digitalstrom" description="digitalSTROM Binding" version="${project.version}">
         <feature>esh-binding-digitalstrom</feature>
     </feature>
