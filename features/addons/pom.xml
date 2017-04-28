@@ -14,10 +14,6 @@
 
 	<name>openHAB Add-ons</name>
 
-    <properties>
-        <jackson.version>1.9.13</jackson.version>
-    </properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.smarthome</groupId>
