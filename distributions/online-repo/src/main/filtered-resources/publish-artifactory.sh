@@ -25,13 +25,7 @@ function main() {
 
   echo "Uploading archive $PACKAGE_ARCHIVE"
   response=$(curl -s -u ${ARTIFACTORY_USER}:${ARTIFACTORY_API_KEY} -H "X-Explode-Archive-Atomic: true" -X PUT "${ARTIFACTORY_URL}/repo.zip" -T ${PACKAGE_ARCHIVE} )
-  if [[ $response == *"success"* ]]
-  then
-    echo "Archive uploaded: $response"
-  else
-    echo "Error uploading: $response"
-    exit 1;
-  fi
+  echo "Upload finished: $response"
 }
 
 main "$@"
