@@ -117,7 +117,7 @@
         <bundle>mvn:org.openhab.core/org.openhab.io.rest.docs/${project.version}</bundle>
     </feature>
 
-    <feature name="openhab-misc-marketplace" description="IoT Marketplace" version="${project.version}">
+    <feature name="openhab-misc-market" description="Eclipse IoT Market" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>esh-extensionservice-marketplace</feature>
     </feature>
