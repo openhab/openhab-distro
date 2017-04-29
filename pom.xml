@@ -48,8 +48,8 @@
 
     <properties>
         <build.number>- local build -</build.number>
-        <online.repo.version>2.1.nightly</online.repo.version>
-		<online.repo>https://openhab.jfrog.io/openhab/online-repo-snapshot/${online.repo.version}@id=openhab@snapshots</online.repo>
+        <online.repo.version>2.1</online.repo.version>
+        <online.repo>https://openhab.jfrog.io/openhab/online-repo-snapshot/${online.repo.version}</online.repo>
 
         <esh.version>0.9.0-SNAPSHOT</esh.version>
         <ohc.version>2.1.0-SNAPSHOT</ohc.version>
