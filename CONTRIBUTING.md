@@ -70,7 +70,10 @@ your documentation changes for clarity, concision, and correctness, as
 well as a clean documentation build.
 
 Write clean code. Universally formatted code promotes ease of writing, reading,
-and maintenance. 
+and maintenance. The Eclipse formatter is installed automatically if [these
+instructions](http://docs.openhab.org/developers/development/ide.html) are used
+when installing Eclipse. Here is [an exported rule set](https://gist.github.com/9037568/7e104f35a7666caf7871cad621c4f0aa)
+that can be imported into existing Eclipse installations.
 
 Pull requests descriptions should be as clear as possible and include a
 reference to all the issues that they address.
