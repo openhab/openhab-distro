@@ -11,6 +11,7 @@
         <configfile finalname="${openhab.conf}/persistence/rrd4j.persist" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/persistence-rrd4j</configfile>
         <configfile finalname="${openhab.conf}/transform/en.map" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/transform-en</configfile>
         <configfile finalname="${openhab.conf}/transform/de.map" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/transform-de</configfile>
+        <configfile finalname="${openhab.conf}/automation/jsr223/demo.js" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/automation-js</configfile>
         <configfile finalname="${openhab.conf}/services/basicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-basicui</configfile>
         <configfile finalname="${openhab.conf}/services/classicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-classicui</configfile>
         <configfile finalname="${openhab.conf}/services/logging.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-logging</configfile>
