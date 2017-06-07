@@ -2361,9 +2361,14 @@
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.openhab.location/bundles/binding}">
+        <excludedPath>org.openhab.binding.exec.test</excludedPath>
         <excludedPath>org.openhab.binding.fritzaha</excludedPath>
+        <excludedPath>org.openhab.binding.harmonyhub1</excludedPath>
+        <excludedPath>org.openhab.binding.homematic.test</excludedPath>
         <excludedPath>org.openhab.binding.hue</excludedPath>
+        <excludedPath>org.openhab.binding.netatmo.test</excludedPath>
         <excludedPath>org.openhab.binding.sagercaster</excludedPath>
+        <excludedPath>org.openhab.binding.smarthomatic</excludedPath>
       </sourceLocator>
       <sourceLocator
           rootFolder="${git.clone.openhab.location/bundles/action}"/>
@@ -2458,6 +2463,9 @@
             pattern=".*/openhab-core/bundles/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
+            pattern=".*/smarthome/bundles/automation.*"/>
+        <predicate
+            xsi:type="predicates:LocationPredicate"
             pattern=".*/smarthome/bundles/core.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
@@ -2475,6 +2483,8 @@
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.esh2.location/bundles/automation}"/>
       <sourceLocator
           rootFolder="${git.clone.esh2.location/bundles/core}"/>
       <sourceLocator
