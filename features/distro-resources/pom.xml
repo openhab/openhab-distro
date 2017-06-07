@@ -68,6 +68,7 @@
 								<artifact><file>src/main/resources/services/logging.cfg</file><type>cfg</type><classifier>services-logging</classifier></artifact>
 								<artifact><file>src/main/resources/services/basicui.cfg</file><type>cfg</type><classifier>services-basicui</classifier></artifact>
 								<artifact><file>src/main/resources/services/classicui.cfg</file><type>cfg</type><classifier>services-classicui</classifier></artifact>
+								<artifact><file>src/main/resources/automation/jsr223/demo.js</file><type>cfg</type><classifier>automation-js</classifier></artifact>
 							</artifacts>
 						</configuration>
 					</execution>
