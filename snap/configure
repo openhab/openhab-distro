@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -x
+
+exec >> $SNAP_COMMON/configure-hook.log 2>&1
+echo "$(date '+%Y-%m-%d %H:%M:%S') configure-hook: Entering hook"
+
+# configure hook can be called as result of: snap set / install / update / rollback. Handle each independently
+# version key to track reason for configure hook call
+LAST_REVISION=$(snapctl get revision)
+# this is revision before last installed one, used to track rollback
+REVERT_REVISION=$(snapctl get rev-revision)
+
+# handle bug when snap uninstall will not clear value of 'revision' key
+if [ "x$LAST_REVISION" == "x$SNAP_REVISION" ] &&  [ -d $SNAP_DATA/userdata ]; then
+    echo "Handle config change"
+    # read openhab config
+    . $SNAP/bin/config
+    # settings were altered by user, safest way to get them applied is to restart service
+
+    # TODO: remove this workaround once it's not needed
+    # for the moment we can't read settings outside of the hook,
+    # so store all settings in helpper script which is then picked by main wrapper
+    echo -e "#!/bin/sh\n" > $SETTINGS_FILE
+    for key in ${keys[@]}
+    do
+      # snappy is picky about key syntax, using mapping
+      MAP_KEY="KEY_$key"
+      if value=$(snapctl get ${!MAP_KEY}); then
+          echo "export $key='$value'" >> $SETTINGS_FILE
+      elif [ -d "${!key}" ]; then
+          # store back value from SETTINGS_FILE
+          echo "export $key='${!key}'" >> $SETTINGS_FILE
+      fi
+    done
+
+    # set file executable
+    chmod 755 $SETTINGS_FILE
+    # we can't use snapctl to restart service, may be one day ....
+    echo "Setting has been updated, restart service. $ sudo openhab.stop"
+elif [ "x$LAST_REVISION" == "x" ] || [ ! -d $SNAP_COMMON/conf ]; then
+    # this is fresh install or previus version has no userdata
+    echo "detected fresh install or missing previous user data, populate with fresh one"
+    cp -rf $SNAP/userdata $SNAP_DATA/
+    cp -rf $SNAP/conf $SNAP_DATA/
+elif [ "x$LAST_REVISION" != "x$SNAP_REVISION" ] && [ "x$REVERT_REVISION" == "x$SNAP_REVISION" ]; then
+    # this is rollback: update logging properties
+    echo "detected rollback"
+    # this is potentially rollback, we better do nothing
+    # empty previous revision key
+    snapctl set rev-revision=""
+elif [ "x$LAST_REVISION" != "x$SNAP_REVISION" ]; then
+    # this is update:  update logging properties
+    echo "detected udpate"
+    # wipe cache and tmp for new version
+    shopt -s dotglob; rm -rf $(dirname $SNAP_DATA)/$VERSION/userdata/cache/*
+    shopt -s dotglob; rm -rf $(dirname $SNAP_DATA)/$VERSION/userdata/tmp/*
+    # add here more custom migration steps
+    # update revert revision key
+    snapctl set rev-revision=$LAST_REVISION
+fi
+snapctl set revision=$SNAP_REVISION

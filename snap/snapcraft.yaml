@@ -1,0 +1,82 @@
+name: openhab
+version: 2.1.0-SNAPSHOT
+summary: openhab smart home server
+description: |
+ openHAB - a vendor and technology agnostic open source automation software for your home.
+ webgui is available at user defined port(default is 8080 for http and 8443 for https)
+ http://<snap device address>:{specified http port}
+ https:///<snap device address>:{specified https port}
+ Port settings can be altered by user, refer to:
+ $ openhab.help
+
+confinement: strict
+grade: stable
+
+apps:
+    openhab:
+        command: openhab-control karaf server
+        stop-command: openhab-control stop
+        daemon: simple
+        plugs: [home, network, network-bind, serial-port]
+
+    start:
+        command: openhab-control karaf
+        plugs: [home, network, network-bind]
+
+    clean:
+        command: openhab-control karaf clean
+        plugs: [home, network, network-bind]
+
+    debug:
+        command: openhab-control karaf debug
+        plugs: [home, network, network-bind]
+
+    status:
+        command: openhab-control status
+        plugs: [home, network, network-bind]
+
+    stop:
+        command: openhab-control stop
+        plugs: [home, network, network-bind]
+
+    client:
+        command: openhab-control client
+        plugs: [home, network, network-bind]
+
+    help:
+        command: openhab-help
+
+parts:
+    openhab:
+        source: .
+        plugin: openhab
+        stage:
+          - -start*
+          - -runtime/bin/*.bat
+        prime:
+          - -start*
+          - -runtime/bin/*.bat
+
+    # java run time
+    jre:
+        plugin: zulu-jre
+        # zulu supported arcghitectures(armhf, amd64) are already handled by plugin itself
+        # define here overide for pluging's defaults, or to add additional architectures
+        # example overide:
+        # zulu:
+        #     amd64: https://www.azul.com/downloads/zulu/zdk-8-ga-linux_x64.tar.gz
+
+    # helper scripts
+    openhab-control:
+        source: snap
+        plugin: dump
+        organize:
+            openhab-control: bin/openhab-control
+            connect-interfaces: bin/connect-interfaces
+            config: bin/config
+            openhab-help: bin/openhab-help
+            configure: meta/hooks/configure
+        stage:
+            - -plugins
+        prime:
+            - -plugins

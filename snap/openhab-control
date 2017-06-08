@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# read openhab config
+source $SNAP/bin/config
+
+# read settings if available
+# TODO: uncomment following, once snapctl can be called from outside the hooks
+# list of supported keys
+# keys=("OPENHAB_HTTP_PORT" "OPENHAB_HTTPS_PORT")
+# for key in ${keys[@]}
+# do
+#   # snappy is picky about key syntax, using mapping
+#   MAP_KEY="KEY_$key"
+#   SNAPPY_KEY=
+#   if value=$(snapctl get ${!MAP_KEY}); then
+#       echo "$key='$value'"
+#       export $key=$value
+#   fi
+# done
+
+# TODO: get rid of this workaround once above can be used
+# loop through all values, and if not defined, use default value
+for key in ${keys[@]}
+do
+  if [ "x" == "x${!key}" ]; then
+      # use default value
+      default_value="DEFAULT_$key"
+      # echo "using default value: $key='${!default_value}'"
+      export $key=${!default_value}
+  else
+      echo "$key='${!key}'"
+  fi
+done
+
+DIRNAME=$SNAP
+exec "${DIRNAME}/runtime/bin/${@}"
