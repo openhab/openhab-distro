@@ -89,7 +89,6 @@
         <feature>esh-ui-basic</feature>
         <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.basicui/${project.version}</bundle>
         <config name="org.eclipse.smarthome.basicui">
-            defaultSitemap = _default
             iconType = svg
         </config>
     </feature>
