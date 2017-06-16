@@ -90,8 +90,8 @@
 
     <feature name="openhab-ui-basic" description="Basic UI" version="${project.version}">
         <feature>openhab-runtime-base</feature>
+        <bundle start-level="75">mvn:org.openhab.core/org.openhab.ui.basicui/${project.version}</bundle>
         <feature>esh-ui-basic</feature>
-        <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.basicui/${project.version}</bundle>
         <config name="org.eclipse.smarthome.basicui">
             iconType = svg
         </config>
@@ -99,8 +99,8 @@
 
     <feature name="openhab-ui-classic" description="Classic UI" version="${project.version}">
         <feature>openhab-runtime-base</feature>
+        <bundle start-level="75">mvn:org.openhab.core/org.openhab.ui.classicui/${project.version}</bundle>
         <feature>esh-ui-classic</feature>
-        <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.classicui/${project.version}</bundle>
         <config name="org.eclipse.smarthome.classicui">
             defaultSitemap = _default
         </config>
@@ -108,8 +108,8 @@
 
     <feature name="openhab-ui-paper" description="Paper UI" version="${project.version}">
         <feature>openhab-runtime-base</feature>
+        <bundle start-level="75">mvn:org.openhab.core/org.openhab.ui.paperui/${project.version}</bundle>
         <feature>esh-ui-paper</feature>
-        <bundle start-level="80">mvn:org.openhab.core/org.openhab.ui.paperui/${project.version}</bundle>
     </feature>
 
 	<!-- misc -->
