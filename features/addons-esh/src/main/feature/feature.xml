@@ -34,6 +34,10 @@
         </config>
     </feature>
 
+    <feature name="openhab-binding-tradfri" description="Trådfri Binding" version="${project.version}">
+        <feature>esh-binding-tradfri</feature>
+    </feature>
+
     <feature name="openhab-binding-wemo" description="Wemo Binding" version="${project.version}">
         <feature>esh-binding-wemo</feature>
     </feature>
