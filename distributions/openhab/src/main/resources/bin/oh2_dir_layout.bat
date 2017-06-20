@@ -23,6 +23,10 @@ IF NOT [%OPENHAB_LOGDIR%] == [] GOTO :logs_set
 set OPENHAB_LOGDIR=%OPENHAB_USERDATA%\logs
 :logs_set
 
+# Make sure the tmp folder exists as Karaf requires it
+IF NOT EXIST "%OPENHAB_USERDATA%\tmp" (
+  mkdir "%OPENHAB_USERDATA%\tmp"
+)
 
 set KARAF_HOME=%OPENHAB_RUNTIME%
 set KARAF_DATA=%OPENHAB_USERDATA%
