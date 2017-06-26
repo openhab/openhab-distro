@@ -13,6 +13,10 @@ setup(){
     echo "Use this script to change openHAB to another version. Specifying the version allows"
     echo "you to upgrade or downgrade to that version, or to the latest snapshot. Not specifying"
     echo "any parameters will attempt to find the next version for you."
+    echo ""
+    echo "You can place this script anywhere, but you should run it from inside the openHAB root folder"
+    echo "Do not try to run the script from inside the runtime folder."
+    echo ""
     exit 0
   fi
 
