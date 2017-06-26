@@ -14,7 +14,7 @@ setup(){
     echo "you to upgrade or downgrade to that version, or to the latest snapshot. Not specifying"
     echo "any parameters will attempt to find the next version for you."
     echo ""
-    echo "You can place this script anywhere, but you should run it from inside the openHAB root folder"
+    echo "You can place this script anywhere, but you should run it from inside the openHAB root folder."
     echo "Do not try to run the script from inside the runtime folder."
     echo ""
     exit 0
@@ -67,11 +67,15 @@ setup(){
   ## Choose bintray for releases, cloudbees for snapshot.
   if test "${OHVersion#*-SNAPSHOT}" != "$OHVersion"; then
     DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
+    LegacyAddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
   elif [ "$OHVersion" = "$CurrentVersion" ]; then
     echo "You are already on openHAB $CurrentVersion" >&2
     exit 1
   else
     DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
+    LegacyAddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons-legacy%2F$OHVersion%2Fopenhab-addons-legacy-$OHVersion.kar"
   fi
 
   ## Set the temporary directories.
@@ -124,8 +128,8 @@ setup "$SpecifiedDir" "$SpecifiedVersion"
 download "$SkipModifier"
 
 echo "The script will attempt to update openHAB to version $OHVersion"
-echo "Is this okay? [y/N]:"
-read answer
+printf "Is this okay? [y/N]: "
+read -r answer
 case $answer in
   [Yy]*)
     ;;
@@ -172,6 +176,27 @@ unzip -nq "$OutputFile" -d "$WorkingDir/" || {
   cp -a "$TempDir/userdata/etc/"* "$WorkingDir/userdata/etc/"
   exit 1
 }
+
+
+## If there's an existing addons file, we need to replace it with the correct version.
+AddonsFile="$WorkingDir/addons/openhab-addons-$CurrentVersion.kar"
+if [ -f "$AddonsFile" ]; then
+  echo "Found an openHAB addons file, replacing with new version..."
+  rm -f "$AddonsFile"
+  curl -Lf# "$AddonsDownloadLocation" -o "$WorkingDir/addons/openhab-addons-$OHVersion.kar" || {
+      echo "Download of addons file failed, please find it on the openHAB website (www.openhab.org)" >&2
+  }
+fi
+
+## Do the same for the legacy addons file.
+LegacyAddonsFile="$WorkingDir/addons/openhab-addons-legacy-$CurrentVersion.kar"
+if [ -f "$LegacyAddonsFile" ]; then
+  echo "Found an openHAB legacy addons file, replacing with new version..."
+  rm -f "$LegacyAddonsFile"
+  curl -Lf# "$LegacyAddonsDownloadLocation" -o "$WorkingDir/addons/openhab-addons-legacy-$OHVersion.kar" || {
+      echo "Download of legacy addons file failed, please find it on the openHAB website (www.openhab.org)" >&2
+  }
+fi
 
 ## Remove the downloaded zip-file.
 echo "Deleting temporary files..."
