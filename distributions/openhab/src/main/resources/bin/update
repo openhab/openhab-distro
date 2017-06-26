@@ -1,0 +1,186 @@
+#!/bin/sh
+
+setup(){
+  ## Keep the script general by allowing the user to provide the version number to download.
+  if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: ./runtime/bin/update [VersionNumber] [openHAB Dir]"
+    echo ""
+    echo "  e.g. ./runtime/bin/update                << Updates to the next version"
+    echo "       ./runtime/bin/update 2.0.0          << Updates to a specific version"
+    echo "       ./update 2.1.0 /opt/openHAB2        << Updates a specific root folder"
+    echo "       ./runtime/bin/update 2.2.0-SNAPSHOT << Updates to latest SNAPSHOT"
+    echo ""
+    echo "Use this script to change openHAB to another version. Specifying the version allows"
+    echo "you to upgrade or downgrade to that version, or to the latest snapshot. Not specifying"
+    echo "any parameters will attempt to find the next version for you."
+    echo ""
+    echo "You can place this script anywhere, but you should run it from inside the openHAB root folder"
+    echo "Do not try to run the script from inside the runtime folder."
+    echo ""
+    exit 0
+  fi
+
+  ## Ask to run as root to prevent us from running sudo in this script.
+  if [ "$(id -u)" -ne 0 ]; then
+    echo "Please run this script as root! (e.g. use sudo)" >&2
+    exit 1
+  fi
+
+  ## Second parameter can be the openHAB path, if not assume the script is called from root!
+  if [ -z "$2" ]; then
+    WorkingDir="."
+    DirError="The script must be called from openHAB's root directory."
+  else
+    WorkingDir="$2"
+    DirError="The specified directory is not openHAB's root directory."
+  fi
+
+  ## Check two of the standard openHAB folders to make sure we're updating the right thing.
+  if [ ! -d "$WorkingDir/userdata" ] || [ ! -d "$WorkingDir/conf" ]; then
+    echo "$DirError" >&2
+    echo "Either specify a directory or place this update script in and run from openHAB's root folder." >&2
+    exit 1
+  fi
+
+  ## Check to see if processes are running before updating
+  if [ ! -z "$(ps aux  | grep "openhab2.*java" | grep -v grep)" ]; then
+    echo "openHAB is running! Please stop the process before updating." >&2
+    exit 1
+  fi
+
+  CurrentVersion="$(awk '/openhab-distro/{print $3}' "$WorkingDir/userdata/etc/version.properties")"
+
+  OHVersion="$1"
+
+  ## If no OHVersion is specified, try incrementing the second point.
+  if [ -z "$OHVersion" ]; then
+    FirstPart="$(echo "$CurrentVersion" | awk -F'.' '{print $1}')"
+    SecondPart="$(echo "$CurrentVersion" | awk -F'.' '{print $2}')"
+    ThirdPart="$(echo "$CurrentVersion" | awk -F'.' '{print $3}')"
+    if test "${ThirdPart#*-SNAPSHOT}" != "$ThirdPart"; then
+      OHVersion="$CurrentVersion"
+    else
+      OHVersion="$FirstPart.$((SecondPart + 1)).$ThirdPart"
+    fi
+  fi
+
+  ## Choose bintray for releases, cloudbees for snapshot.
+  if test "${OHVersion#*-SNAPSHOT}" != "$OHVersion"; then
+    DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
+  elif [ "$OHVersion" = "$CurrentVersion" ]; then
+    echo "You are already on openHAB $CurrentVersion" >&2
+    exit 1
+  else
+    DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
+  fi
+
+  ## Set the temporary directories.
+  TempDir="/tmp/openhab"
+  OutputFile="$TempDir/openhab-$OHVersion.zip"
+
+  ## Store anything in temporary folders
+  echo "Making Temporary Directory"
+  mkdir -p "$TempDir" || {
+    echo "Failed to make temporary directory: $TempDir" >&2
+    exit 1
+  }
+}
+
+## Download the specified version of openHAB and check for an update script.
+download(){
+  ## Skip this part if the script was called by an older version of itself.
+  if [ "$1" != "--skipnew" ]; then
+    echo "Downloading openHAB $OHVersion..."
+    curl -Lf# "$DownloadLocation" -o "$OutputFile" || {
+      echo "Download failed, version $OHVersion does not exist." >&2
+      echo "If you believe this to be an error, please check the openHAB website. (www.openhab.org)"
+      exit 1
+  }
+  ## First check if there's a newer version of this update script
+  unzip -qp "$OutputFile" runtime/bin/update > "$TempDir/update" 2>/dev/null && {
+    echo "Update script in .zip archive found, using that instead."
+    chmod a+x "$TempDir/update"
+    "$TempDir/update" "$OHVersion" "$(cd "$WorkingDir" && pwd -P)" "--skipnew"; exit 0
+  }
+  fi
+}
+
+########################################################
+## UPDATE SCRIPT AND MODIFICATIONS SHOULD START HERE! ##
+########################################################
+
+echo "                                         "
+echo "#########################################"
+echo "       openHAB 2.x.x update script       "
+echo "#########################################"
+echo "                                         "
+
+SpecifiedDir="$1"
+SpecifiedVersion="$2"
+SkipModifier="$3"
+
+##Run the initialisation functions defined above
+setup "$SpecifiedDir" "$SpecifiedVersion"
+download "$SkipModifier"
+
+echo "The script will attempt to update openHAB to version $OHVersion"
+echo "Is this okay? [y/N]:"
+read answer
+case $answer in
+  [Yy]*)
+    ;;
+  *)
+    echo "Cancelling update..."
+    rm -rf "$TempDir"
+    exit 0
+    ;;
+esac
+
+## Preserve file ownership of old setup.
+FileOwner=$(ls -ld "$WorkingDir/userdata" | awk '{print $3}')
+FileGroup=$(ls -ld "$WorkingDir/userdata" | awk '{print $4}')
+
+## Remove only the files that are to be replaced.
+echo "Removing openHAB System Files..."
+mkdir -p "$TempDir/runtime"
+mkdir -p "$TempDir/userdata/etc"
+mv "$WorkingDir/runtime"                                "$TempDir/runtime/"
+mv "$WorkingDir/userdata/etc/all.policy"                "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/branding.properties"       "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/branding-ssh.properties"   "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/config.properties"         "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/custom.properties"         "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/version.properties"        "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/distribution.info"         "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/jre.properties"            "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/profile.cfg"               "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/startup.properties"        "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/org.apache.karaf"*         "$TempDir/userdata/etc/"
+mv "$WorkingDir/userdata/etc/org.ops4j.pax.url.mvn.cfg" "$TempDir/userdata/etc/"
+
+## Clearing the cache and tmp folders is necessary for upgrade.
+echo "Clearing cache..."
+rm -rf "$WorkingDir/userdata/cache"
+rm -rf "$WorkingDir/userdata/tmp"
+
+## Unzip the downloaded folder into openHAB's directory WITHOUT replacing any existing files.
+echo "Updating openHAB..."
+unzip -nq "$OutputFile" -d "$WorkingDir/" || {
+  echo "Failed to unzip archive, restoring system files..." >&2
+  ## An error has occured so try to restore openHAB to it's previous state.
+  cp -a "$TempDir/runtime"        "$WorkingDir/runtime"
+  cp -a "$TempDir/userdata/etc/"* "$WorkingDir/userdata/etc/"
+  exit 1
+}
+
+## Remove the downloaded zip-file.
+echo "Deleting temporary files..."
+rm -rf "$TempDir"
+
+## Restore file ownership.
+echo "Restoring previous file ownership ($FileOwner:$FileGroup)"
+chown -R "$FileOwner:$FileGroup" "$WorkingDir"
+
+echo ""
+echo "SUCCESS: openHAB updated from $CurrentVersion to $OHVersion"
+echo ""
