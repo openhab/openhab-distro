@@ -1,9 +1,9 @@
-﻿Function Update-OpenHAB {
+﻿Function Update-openHAB {
     <#
     .SYNOPSIS
     Updates openHAB to the latest version.
     .DESCRIPTION
-    The Update-OpenHAB function performs the necessary tasks to update openHAB.
+    The Update-openHAB function performs the necessary tasks to update openHAB.
     .PARAMETER OHDirectory
     The directory where openHAB is installed (default: current directory).
     .PARAMETER OHVersion
@@ -12,10 +12,10 @@
     Upgrade to a snapshot version ($true) or a release version ($false) (default: $false)
     .EXAMPLE
     Update the openHAB distribution in the current directory to the current stable version
-    Update-OpenHAB
+    Update-openHAB
     .EXAMPLE
     Update the openHAB distribution in the C:\oh-snapshot directory to the next snapshot version
-    Update-OpenHAB -OHDirectory C:\oh-snapshot -OHVersion 2.2.0 -Snapshot $true
+    Update-openHAB -OHDirectory C:\oh-snapshot -OHVersion 2.2.0 -Snapshot $true
     #>
 
     [CmdletBinding()]
