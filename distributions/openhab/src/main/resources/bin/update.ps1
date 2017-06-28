@@ -9,12 +9,12 @@
     .PARAMETER OHVersion
     The version to upgrade to.
     .PARAMETER Snapshot
-    Upgrade to a snapshot ($true) or a release version ($false) (default: $false)
+    Upgrade to a snapshot version ($true) or a release version ($false) (default: $false)
     .EXAMPLE
     Update the openHAB distribution in the current directory to the current stable version
     Update-OpenHAB
     .EXAMPLE
-    Update the openHAB distribution in the C:\oh-directory to the next snapshot version
+    Update the openHAB distribution in the C:\oh-snapshot directory to the next snapshot version
     Update-OpenHAB -OHDirectory C:\oh-snapshot -OHVersion 2.2.0 -Snapshot $true
     #>
 
@@ -34,7 +34,7 @@
 
         if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
             ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "This script must be run as an Administrator. Start PowerShell with the Run as Administration option"
+            throw "This script must be run as an Administrator. Start PowerShell with the Run as Administrator option"
         }
 
         Write-Host -ForegroundColor Cyan "Checking whether a service exists..."
