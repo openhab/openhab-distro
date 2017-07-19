@@ -23,6 +23,10 @@
         <feature>esh-binding-lifx</feature>
     </feature>
 
+    <feature name="openhab-binding-lirc" description="LIRC Binding" version="${project.version}">
+        <feature>esh-binding-lirc</feature>
+    </feature>
+
     <feature name="openhab-binding-ntp" description="NTP Binding" version="${project.version}">
         <feature>esh-binding-ntp</feature>
     </feature>
