@@ -2375,7 +2375,7 @@
           rootFolder="${git.clone.openhab.location/bundles/binding}">
         <excludedPath>org.openhab.binding.exec.test</excludedPath>
         <excludedPath>org.openhab.binding.fritzaha</excludedPath>
-        <excludedPath>org.openhab.binding.harmonyhub1</excludedPath>
+        <excludedPath>org.openhab.binding.harmonyhub</excludedPath>
         <excludedPath>org.openhab.binding.homematic.test</excludedPath>
         <excludedPath>org.openhab.binding.hue</excludedPath>
         <excludedPath>org.openhab.binding.netatmo.test</excludedPath>
