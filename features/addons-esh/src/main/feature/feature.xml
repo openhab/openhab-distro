@@ -42,6 +42,10 @@
         <feature>esh-binding-tradfri</feature>
     </feature>
 
+    <feature name="openhab-binding-weatherunderground" description="WeatherUnderground Binding" version="${project.version}">
+        <feature>esh-binding-weatherunderground</feature>
+    </feature>
+
     <feature name="openhab-binding-wemo" description="Wemo Binding" version="${project.version}">
         <feature>esh-binding-wemo</feature>
     </feature>
