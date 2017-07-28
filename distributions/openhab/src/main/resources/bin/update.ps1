@@ -1,4 +1,5 @@
-﻿Function Update-openHAB {
+#Requires -Version 5.0
+Function Update-openHAB {
     <#
     .SYNOPSIS
     Updates openHAB to the latest version.
