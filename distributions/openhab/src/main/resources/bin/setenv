@@ -108,6 +108,12 @@ export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTR
 # The functions below are copied from the karaf script to set JAVA_HOME to a default value.
 # This avoids Karaf printing a warning message at startup.
 
+die() {
+  # echo and exit, && /bin/true delays the exit for systemd logging (workaround).
+  echo "$*" && /bin/true
+  exit 1
+}
+
 detectOS() {
     # OS specific support (must be 'true' or 'false').
     cygwin=false;
@@ -190,8 +196,7 @@ locateJava() {
 checkJvmVersion() {
    VERSION=`$JAVA -version 2>&1 | egrep '"([0-9].[0-9]\..*[0-9]).*"' | awk '{print substr($3,2,length($3)-2)}' | awk '{print substr($1, 3, 3)}' | sed -e 's;\.;;g'`
    if [ "$VERSION" -lt "80" ]; then
-       echo "Java 1.8 or higher is required. Aborting launch."
-       exit 1;
+       die "Java 1.8 or higher is required. Aborting launch."
    fi
 }
 
