@@ -21,6 +21,11 @@ if [ -z ${OPENHAB_LOGDIR} ]; then
     export OPENHAB_LOGDIR="${OPENHAB_USERDATA}/logs"
 fi
 
+if [ -z ${OPENHAB_BACKUP} ]; then
+    export OPENHAB_BACKUPS="${OPENHAB_HOME}/backups"
+fi
+
+
 # Make sure the tmp folder exists as Karaf requires it
 if [ ! -d "${OPENHAB_USERDATA}/tmp" ]; then
     mkdir "${OPENHAB_USERDATA}/tmp"
