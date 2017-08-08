@@ -12,10 +12,10 @@
     The name of the zip file to create
     .EXAMPLE
     Backup an openHAB instance to a zip file
-    Update-openHAB
+    Backup-openHAB
     .EXAMPLE
-    Update the openHAB distribution in the C:\oh-snapshot directory to the next snapshot version
-    Backup-openHAB -OHDirectory C:\openHAB2 -OHBackups c:\openHAB2-backup -ZipFileOut backup.zip
+    Backup the openHAB distribution in the C:\openHAB2 directory to c:\openhab-backup\backup.zip
+    Backup-openHAB -OHDirectory C:\openHAB2 -OHBackups c:\openHAB-backup -ZipFileOut backup.zip
     #>
 
     [CmdletBinding()]
