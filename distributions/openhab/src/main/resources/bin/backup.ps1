@@ -56,8 +56,8 @@
             if ([Environment]::GetEnvironmentVariable("OPENHAB_BACKUPS", "Machine")) {
                 $OHBackups = [Environment]::GetEnvironmentVariable("OPENHAB_BACKUPS", "Machine")
             } else {
-                $OHBackups = "$OHDirectory\runtime\bin\backups"
-                if (!(Test-Path "$OHDirectory\runtime\bin\backups")){
+                $OHBackups = "$OHDirectory\backups"
+                if (!(Test-Path "$OHDirectory\backups")){
                     mkdir "$OHBackups" | Out-Null
                 }
             }
