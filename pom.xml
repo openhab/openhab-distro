@@ -58,6 +58,10 @@
         <oh1.version>1.11.0-SNAPSHOT</oh1.version>
 
         <jackson.version>1.9.13</jackson.version>
+
+        <karaf.version>4.1.2</karaf.version>
+        <jetty.version>9.3.14</jetty.version>
+
         <!-- provided by Karaf -->
         <dep.slf4j.api.groupId>org.slf4j</dep.slf4j.api.groupId>
         <dep.slf4j.api.artifactId>slf4j-api</dep.slf4j.api.artifactId>

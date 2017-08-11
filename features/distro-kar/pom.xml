@@ -33,6 +33,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <startLevel>80</startLevel>
+                    <enableGeneration>true</enableGeneration>
                     <aggregateFeatures>true</aggregateFeatures>
                     <!--  <resolver>(obr)</resolver> -->
                     <checkDependencyChange>true</checkDependencyChange>
@@ -47,6 +48,15 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-features-file</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-generate-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
