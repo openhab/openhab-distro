@@ -162,6 +162,10 @@ mv "$WorkingDir/userdata/etc/startup.properties"        "$TempDir/userdata/etc/"
 mv "$WorkingDir/userdata/etc/org.apache.karaf"*         "$TempDir/userdata/etc/"
 mv "$WorkingDir/userdata/etc/org.ops4j.pax.url.mvn.cfg" "$TempDir/userdata/etc/"
 
+## We need to keep a backup in case the user modified that file
+cp "$WorkingDir/userdata/etc/org.ops4j.pax.logging.cfg" "$WorkingDir/userdata/etc/org.ops4j.pax.logging.cfg.bak"
+mv "$WorkingDir/userdata/etc/org.ops4j.pax.logging.cfg" "$TempDir/userdata/etc/"
+
 ## Clearing the cache and tmp folders is necessary for upgrade.
 echo "Clearing cache..."
 rm -rf "$WorkingDir/userdata/cache"

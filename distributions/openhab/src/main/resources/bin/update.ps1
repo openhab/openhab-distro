@@ -112,6 +112,10 @@ Function Update-openHAB {
         Remove-Item ($userdata + '\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\tmp') -Recurse -ErrorAction SilentlyContinue
 
+        # We need to keep a backup in case the user modified that file
+        Copy-Item ($userdata + '\etc\org.ops4j.pax.logging.cfg') -Destination ($userdata + '\etc\org.ops4j.pax.logging.cfg.bak') -Force
+        Remove-Item ($userdata + '\etc\org.ops4j.pax.logging.cfg') -ErrorAction SilentlyContinue
+
         Write-Host -ForegroundColor Cyan "Deleting current runtime..."
         Remove-Item ($OHDirectory + '\runtime') -Recurse -ErrorAction SilentlyContinue
 
