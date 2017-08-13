@@ -27,7 +27,6 @@ if [ ! -d "${OPENHAB_USERDATA}/tmp" ]; then
 fi
 
 
-export KARAF_HOME="${OPENHAB_RUNTIME}"
 export KARAF_DATA="${OPENHAB_USERDATA}"
 export KARAF_BASE="${OPENHAB_USERDATA}"
 export KARAF_ETC="${OPENHAB_USERDATA}/etc"

@@ -54,6 +54,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <startLevel>50</startLevel>
+                    <enableGeneration>true</enableGeneration>
                     <aggregateFeatures>true</aggregateFeatures>
                     <!--  <resolver>(obr)</resolver> -->
                     <checkDependencyChange>true</checkDependencyChange>
@@ -61,6 +62,15 @@
                     <logDependencyChanges>true</logDependencyChanges>
                     <overwriteChangedDependencies>true</overwriteChangedDependencies>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-features-file</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-generate-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
