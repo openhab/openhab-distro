@@ -28,9 +28,17 @@
             <outputDirectory>runtime</outputDirectory>
             <includes>
                 <include>bin/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>target/assembly</directory>
+            <outputDirectory>runtime</outputDirectory>
+            <includes>
                 <include>lib/**</include>
                 <include>system/**</include>
             </includes>
+            <!-- specifically fixes https://github.com/openhab/openhab-distro/issues/503 --> 
+            <fileMode>0644</fileMode>
         </fileSet>
 
         <!-- KARAF_DATA -->
