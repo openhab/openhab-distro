@@ -13,38 +13,8 @@
 	<packaging>feature</packaging>
 
 	<name>openHAB Add-ons</name>
+	<description>These are 2.x add-ons in separate repositories (which do not have their own Karaf feature defined).</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.smarthome</groupId>
-			<artifactId>esh-ext</artifactId>
-			<version>${esh.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.distro</groupId>
-			<artifactId>addons-esh</artifactId>
-			<version>${project.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.addons</groupId>
-			<artifactId>openhab2-addons</artifactId>
-			<version>${oh2.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.addons</groupId>
-			<artifactId>openhab-addons</artifactId>
-			<version>${oh1.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-	</dependencies>
-	
 	<build>
 		<plugins>
 			<plugin>
