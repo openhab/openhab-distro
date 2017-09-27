@@ -48,10 +48,7 @@
     </distributionManagement>
 
     <properties>
-        <build.number>- local build -</build.number>
-        <online.repo.version>2.2</online.repo.version>
-        <online.repo>https://openhab.jfrog.io/openhab/online-repo-snapshot/${online.repo.version}</online.repo>
-        <!-- repo for releases: https://dl.bintray.com/openhab/mvn/online-repo/${online.repo.version} -->
+        <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
         <ohc.version>2.2.0-SNAPSHOT</ohc.version>
         <oh2.version>2.2.0-SNAPSHOT</oh2.version>
@@ -101,13 +98,23 @@
                         <target>${maven.compiler.target}</target>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>${build.helper.maven.plugin.version}</version>
-                </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build.helper.maven.plugin.version}</version>
+                <executions>
+                  <execution>
+                    <id>parse-version</id>
+                    <goals>
+                      <goal>parse-version</goal>
+                    </goals>
+                  </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <pluginRepositories>
@@ -205,6 +212,32 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>snapshotbuild</id>
+            <activation>
+                <property>
+                    <name>!release</name>
+                </property>
+            </activation>
+            <properties>
+                <build.number>- local build -</build.number>
+                <online.repo>https://openhab.jfrog.io/openhab/online-repo-snapshot/${online.repo.version}</online.repo>
+                <pax.url.suffix>@snapshots</pax.url.suffix>
+            </properties>
+        </profile>
+        <profile>
+            <id>releasebuild</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+            <properties>
+                <build.number>Release Build</build.number>
+                <online.repo>https://dl.bintray.com/openhab/mvn/online-repo/${online.repo.version}</online.repo>
+                <pax.url.suffix/>
+            </properties>
         </profile>
     </profiles>
 

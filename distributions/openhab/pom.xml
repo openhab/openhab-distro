@@ -95,6 +95,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
+                <configuration>
+                  <escapeString>\</escapeString>
+                </configuration>
                 <executions>
                     <execution>
                         <id>process-resources</id>
