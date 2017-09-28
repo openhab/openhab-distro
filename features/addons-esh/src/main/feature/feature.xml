@@ -136,4 +136,10 @@
         <feature>openhab-runtime-base</feature>
         <feature>esh-extensionservice-marketplace</feature>
     </feature>
+
+    <feature name="openhab-misc-lsp" description="Language Server Support" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-model-lsp</feature>
+    </feature>
+
 </features>
