@@ -50,6 +50,9 @@ setup(){
     exit 1
   fi
 
+  currentUser=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $3}')
+  currentGroup=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $4}')
+
   CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
 
   ## Store anything in temporary folders
@@ -106,7 +109,7 @@ echo " Backup Timestamp       | $BackupTime"
 echo " Config belongs to user | $OHUser"
 echo "             from group | $OHGroup"
 echo ""
-echo "Your current configuration will become owned by $OHUser:$OHGroup."
+echo "Your current configuration will become owned by $currentUser:$currentGroup."
 echo ""
 echo "Any existing files with the same name will be replaced."
 echo "Any file without a replacement will be deleted."
@@ -174,13 +177,11 @@ command cp -af "$TempDir/userdata/"* "${OPENHAB_USERDATA:?}/" || {
 }
 
 ## Reset ownership
-chown -R "$OHUser:$OHGroup" "$OPENHAB_USERDATA" || {
-  echo "Failed to change userdata permissions to $OHUser:$OHGroup" >&2
-  exit 1
+chown -R "$currentUser:$currentGroup" "$OPENHAB_USERDATA" || {
+  echo "WARNING: Failed to change userdata folder permissions to $currentUser:$currentGroup" >&2
 }
-chown -R "$OHUser:$OHGroup" "$OPENHAB_CONF" || {
-  echo "Failed to change conf permissions to $OHUser:$OHGroup" >&2
-  exit 1
+chown -R "$currentUser:$currentGroup" "$OPENHAB_CONF" || {
+  echo "WARNING: Failed to change conf folder permissions to $currentUser:$currentGroup" >&2
 }
 
 echo "Deleting temporary files..."
