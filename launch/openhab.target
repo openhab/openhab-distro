@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="172">
+<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="174">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.smarthome.feature.runtime.core.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.smarthome.feature.runtime.binding.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.smarthome.feature.runtime.console.equinox.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.smarthome.feature.runtime.rest.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.smarthome.feature.runtime.automation.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.smarthome.feature.test.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/smarthome/updates-stable/"/>
-</location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.13.0.v20170531-1133"/>
-<repository location="http://download.eclipse.org/releases/oxygen/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.feature.p2.feature.group" version="0.0.0"/>
 <repository location="https://dl.bintray.com/openhab/p2/openhab-core/2.2.x"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.smarthome.feature.runtime.automation.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.smarthome.feature.runtime.binding.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.smarthome.feature.runtime.console.equinox.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.smarthome.feature.runtime.core.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.smarthome.feature.runtime.rest.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.smarthome.feature.test.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/smarthome/updates-stable/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.7/R-4.7-201706120950"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.deps.runtime.feature.group" version="0.0.0"/>
 <unit id="org.openhab.deps.test.feature.group" version="0.0.0"/>
-<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.16"/>
+<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.17"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtend" version="2.2.0.v201605260315"/>
+<repository location="http://download.eclipse.org/releases/oxygen/201709271000"/>
 </location>
 </locations>
 </target>
