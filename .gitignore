@@ -22,3 +22,4 @@ distribution/openhabhome/userdata/mapdb/storage.mapdb.t
 maven-metadata-local.xml
 launch/home/logs
 launch/home/userdata
+Californium.properties

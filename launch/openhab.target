@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="174">
+<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="176">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.feature.p2.feature.group" version="0.0.0"/>
@@ -21,7 +21,7 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.deps.runtime.feature.group" version="0.0.0"/>
 <unit id="org.openhab.deps.test.feature.group" version="0.0.0"/>
-<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.17"/>
+<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.18"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtend" version="2.2.0.v201605260315"/>
