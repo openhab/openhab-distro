@@ -1,53 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
-    <feature name="openhab-package-demo" description="openHAB Demo Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.conf}/items/demo.items" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/items</configfile>
-        <configfile finalname="${openhab.conf}/sitemaps/demo.sitemap" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/sitemaps</configfile>
-        <configfile finalname="${openhab.conf}/things/demo.things" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/things</configfile>
-        <configfile finalname="${openhab.conf}/rules/demo.rules" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/rules</configfile>
-        <configfile finalname="${openhab.conf}/scripts/demo.script" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/scripts</configfile>
-        <configfile finalname="${openhab.conf}/persistence/rrd4j.persist" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/persistence-rrd4j</configfile>
-        <configfile finalname="${openhab.conf}/transform/en.map" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/transform-en</configfile>
-        <configfile finalname="${openhab.conf}/transform/de.map" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/transform-de</configfile>
-        <configfile finalname="${openhab.conf}/services/basicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-basicui</configfile>
-        <configfile finalname="${openhab.conf}/services/classicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-classicui</configfile>
-        <configfile finalname="${openhab.conf}/services/logging.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-logging</configfile>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="true">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-demo</configfile>
-    </feature>
-
-    <feature name="openhab-package-minimal" description="openHAB Minimal Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-minimal</configfile>
-        <config name="org.eclipse.smarthome.links">
-			autoLinks = false
-        </config>
-    </feature>
-
-    <feature name="openhab-package-simple" description="openHAB Simple Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-simple</configfile>
-        <config name="org.eclipse.smarthome.links">
-			autoLinks = true
-        </config>
-    </feature>
-
-    <feature name="openhab-package-standard" description="openHAB Standard Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-standard</configfile>
-        <config name="org.eclipse.smarthome.links">
-			autoLinks = false
-        </config>
-    </feature>
-
-    <feature name="openhab-package-expert" description="openHAB Expert Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <feature>openhab-runtime-compat1x</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-expert</configfile>
-        <config name="org.eclipse.smarthome.links">
-			autoLinks = false
-        </config>
+    <!-- "we need to package our own version of Jetty in order to have the desired version packaged. Note that we do not install/use this feature though -->
+    <!-- Details see https://github.com/openhab/openhab-distro/issues/567 -->
+    <feature name="openhab-jetty" version="9.3.22">
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-continuation/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-http/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-io/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jaspi/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-plus/9.3.22.v20171030</bundle>
+       	<bundle start-level="30">mvn:org.eclipse.jetty/jetty-jndi/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-rewrite/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-security/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-server/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-servlet/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-servlets/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-util/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-util-ajax/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-webapp/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jaas/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-xml/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-client/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-deploy/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jmx/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-server/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-client/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-common/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-servlet/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-api/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/javax-websocket-server-impl/9.3.22.v20171030</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/javax-websocket-client-impl/9.3.22.v20171030</bundle>
     </feature>
 
 </features>

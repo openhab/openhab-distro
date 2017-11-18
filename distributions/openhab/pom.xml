@@ -55,7 +55,6 @@
     </dependencies>
 
     <build>
-
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -120,6 +119,8 @@
                     </startupFeatures>
                     <bootFeatures>
                         <feature>jaas</feature>
+                        <feature>jetty</feature>
+                        <feature>http</feature>
                         <feature>shell</feature>
                         <feature>ssh</feature>
                         <feature>bundle</feature>

@@ -33,6 +33,9 @@
         <fileSet>
             <directory>target/assembly</directory>
             <outputDirectory>runtime</outputDirectory>
+            <excludes>
+                <exclude>system/org/eclipse/jetty/**/9.3.14.v20161028/**</exclude>
+            </excludes>
             <includes>
                 <include>lib/**</include>
                 <include>system/**</include>
