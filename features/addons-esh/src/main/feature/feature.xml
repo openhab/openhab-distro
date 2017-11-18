@@ -35,6 +35,10 @@
         <feature>esh-binding-ntp</feature>
     </feature>
 
+    <feature name="openhab-binding-serialbutton" description="Serial Button Binding" version="${project.version}">
+        <feature>esh-binding-serialbutton</feature>
+    </feature>
+
     <feature name="openhab-binding-sonos" description="Sonos Binding" version="${project.version}">
         <feature>esh-binding-sonos</feature>
         <config name="binding.sonos">
@@ -135,11 +139,6 @@
     <feature name="openhab-misc-market" description="Eclipse IoT Market" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>esh-extensionservice-marketplace</feature>
-    </feature>
-
-    <feature name="openhab-misc-lsp" description="Language Server Support" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <feature>esh-model-lsp</feature>
     </feature>
 
 </features>
