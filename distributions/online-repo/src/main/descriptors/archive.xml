@@ -8,8 +8,8 @@
 
   <fileSets>
     <fileSet>
-      <outputDirectory>/</outputDirectory>
-      <directory>target/repository</directory>
+      <outputDirectory></outputDirectory>
+      <directory>${basedir}/target/repository</directory>
 	  <useDefaultExcludes>false</useDefaultExcludes>
     </fileSet>
   </fileSets>
