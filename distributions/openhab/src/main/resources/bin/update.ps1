@@ -107,6 +107,8 @@ Function Update-openHAB {
         Remove-Item ($userdata + '\etc\jre.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\profile.cfg') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\startup.properties') -ErrorAction SilentlyContinue
+        Remove-Item ($userdata + '\etc\system.properties') -ErrorAction SilentlyContinue
+        Remove-Item ($userdata + '\etc\version.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\org.ops4j.pax.url.mvn.cfg') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\cache') -Recurse -ErrorAction SilentlyContinue
