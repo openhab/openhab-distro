@@ -103,14 +103,16 @@ Function Update-openHAB {
         Remove-Item ($userdata + '\etc\branding-ssh.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\config.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\custom.properties') -ErrorAction SilentlyContinue
+        Remove-Item ($userdata + '\etc\custom.system.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\distribution.info') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\jre.properties') -ErrorAction SilentlyContinue
+        Remove-Item ($userdata + '\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
+        Remove-Item ($userdata + '\etc\org.ops4j.pax.url.mvn.cfg') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\profile.cfg') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\startup.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\system.properties') -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\etc\version.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($userdata + '\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
-        Remove-Item ($userdata + '\etc\org.ops4j.pax.url.mvn.cfg') -ErrorAction SilentlyContinue
+
         Remove-Item ($userdata + '\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($userdata + '\tmp') -Recurse -ErrorAction SilentlyContinue
 
