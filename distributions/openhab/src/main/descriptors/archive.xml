@@ -35,6 +35,7 @@
             <outputDirectory>runtime</outputDirectory>
             <excludes>
                 <exclude>system/org/eclipse/jetty/**/9.3.14.v20161028/**</exclude>
+                <exclude>system/org/jline/jline/3.5.0/**</exclude>
             </excludes>
             <includes>
                 <include>lib/**</include>
