@@ -52,11 +52,6 @@
 						</goals>
 						<configuration>
 							<artifacts>
-								<artifact><file>src/main/resources/etc/addons-minimal.cfg</file><type>cfg</type><classifier>addons-minimal</classifier></artifact>
-								<artifact><file>src/main/resources/etc/addons-simple.cfg</file><type>cfg</type><classifier>addons-simple</classifier></artifact>
-								<artifact><file>src/main/resources/etc/addons-standard.cfg</file><type>cfg</type><classifier>addons-standard</classifier></artifact>
-								<artifact><file>src/main/resources/etc/addons-expert.cfg</file><type>cfg</type><classifier>addons-expert</classifier></artifact>
-								<artifact><file>src/main/resources/etc/addons-demo.cfg</file><type>cfg</type><classifier>addons-demo</classifier></artifact>
 								<artifact><file>src/main/resources/items/demo.items</file><type>cfg</type><classifier>items</classifier></artifact>
 								<artifact><file>src/main/resources/sitemaps/demo.sitemap</file><type>cfg</type><classifier>sitemaps</classifier></artifact>
 								<artifact><file>src/main/resources/things/demo.things</file><type>cfg</type><classifier>things</classifier></artifact>
