@@ -32,7 +32,7 @@ when
     Item Light_GF_Corridor_Ceiling received command
 then
     if(receivedCommand==ON) {
-        if(timer==null) {
+        if(timer===null) {
             // first ON command, so create a timer to turn the light off again
             timer = createTimer(now.plusSeconds(10)) [|
                 sendCommand(Light_GF_Corridor_Ceiling, OFF)
@@ -43,7 +43,7 @@ then
         }
     } else if(receivedCommand==OFF) {
         // remove any previously scheduled timer
-        if(timer!=null) {
+        if(timer!==null) {
             timer.cancel
             timer = null
         }
@@ -106,7 +106,7 @@ when
 then
 	val max = Weather_Temperature.maximumSince(now.withTimeAtStartOfDay)
 	val min = Weather_Temperature.minimumSince(now.withTimeAtStartOfDay)
-	if( max != null && min != null) {
+	if( max !== null && min !== null) {
 		postUpdate(Weather_Temp_Max, max.state)
 		postUpdate(Weather_Temp_Min, min.state)
 	}
