@@ -12,13 +12,41 @@
     <artifactId>openhab-addons</artifactId>
     <packaging>kar</packaging>
 
-    <name>openHAB Add-ons KAR</name>
+    <name>openHAB Add-ons Aggregator</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.smarthome</groupId>
+            <artifactId>esh-ext</artifactId>
+            <version>${esh.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openhab.distro</groupId>
+            <artifactId>addons-esh</artifactId>
+            <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
         <dependency>
             <groupId>org.openhab.distro</groupId>
             <artifactId>addons</artifactId>
             <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openhab.addons</groupId>
+            <artifactId>openhab2-addons</artifactId>
+            <version>${oh2.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openhab.addons</groupId>
+            <artifactId>openhab-addons</artifactId>
+            <version>${oh1.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
         </dependency>
@@ -32,6 +60,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <startLevel>80</startLevel>
+                    <enableGeneration>true</enableGeneration>
                     <aggregateFeatures>true</aggregateFeatures>
                     <!--  <resolver>(obr)</resolver> -->
                     <checkDependencyChange>true</checkDependencyChange>
@@ -46,6 +75,15 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-features-file</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-generate-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
