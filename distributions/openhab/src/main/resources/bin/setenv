@@ -87,6 +87,7 @@ export JAVA_OPTS="${JAVA_OPTS}
   -Dopenhab.logdir=${OPENHAB_LOGDIR}
   -Dfelix.cm.dir=${OPENHAB_USERDATA}/config
   -Djetty.host=${HTTP_ADDRESS}
+  -Djetty.http.compliance=RFC2616
   -Dorg.ops4j.pax.web.listening.addresses=${HTTP_ADDRESS}
   -Dorg.osgi.service.http.port=${HTTP_PORT}
   -Dorg.osgi.service.http.port.secure=${HTTPS_PORT}"
