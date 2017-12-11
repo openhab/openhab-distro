@@ -34,16 +34,6 @@
         </config>
     </feature>
 
-    <feature name="openhab-package-minimal" description="openHAB Minimal Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <config name="org.openhab.addons" append="true">
-			package = minimal
-        </config>
-        <config name="org.eclipse.smarthome.links">
-			autoLinks = false
-        </config>
-    </feature>
-
     <feature name="openhab-package-simple" description="openHAB Simple Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <config name="org.openhab.addons" append="true">
