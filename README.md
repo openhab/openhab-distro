@@ -34,6 +34,9 @@ In case of problems or questions, please join our vibrant [openHAB community](ht
 <tr><td width=30%><img src="http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png" alt="Powered By CloudBees"></td>
 <td><a href="http://www.cloudbees.com">CloudBees</a> is providing a hosted <a href="https://openhab.ci.cloudbees.com/">Jenkins</a> through their CloudBees FOSS program.</td>
 </tr>
+<tr><td width=30%><img src="https://www.digitalocean.com/assets/media/logos-badges/png/DO_Powered_by_Badge_blue-fe4c6688.png"></td>
+<td><a href="https://www.digitalocean.com">DigitalOcean</a> sponsors our <a href="https://community.openhab.org/">community forum</a> hosting.</td>
+</tr>
 <tr><td width=30%><img src="http://www.openhab.org/assets/images/bintray.png"/></td>
 <td><a href="https://www.jfrog.com">JFrog</a> is providing an <a href="https://openhab.jfrog.io">Artifactory instance for our snapshots</a> as well as distributing our <a href="https://bintray.com/openhab">releases through Bintray</a>.</td>
 </tr>
