@@ -50,7 +50,7 @@
         <feature>openhab-runtime-base</feature>
         <config name="org.openhab.addons" append="true">
 			package = standard
-			ui = basic,paper,habpanel
+			ui = basic,paper,habpanel,homebuilder
         </config>
         <config name="org.eclipse.smarthome.links">
 			autoLinks = false
