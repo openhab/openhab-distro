@@ -43,10 +43,6 @@ __load_class = {
 // as they do occur if the session is headless / non-interactive
 jlineReader = $.reader
 if { %(jlineReader != null) } {
-
-  # On 256 colors terminal, add a right prompt
-  max_colors = ($.jline.terminal getNumericCapability max_colors)
-
   setopt group
   setopt auto-fresh-line
   unsetopt insert-tab
