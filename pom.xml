@@ -29,6 +29,7 @@
         <connection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</connection>
         <developerConnection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</developerConnection>
         <url>https://github.com/openhab/openhab-distro</url>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
