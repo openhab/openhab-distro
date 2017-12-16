@@ -1,0 +1,190 @@
+#!/bin/sh
+
+setup(){
+  if [ -z "$1" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: restore filename"
+    echo ""
+    echo "  e.g. ./restore myBackup.zip  << Restores config from myBackup.zip"
+    echo ""
+    echo "Use this script to restore an openHAB configuration that was previously made with"
+    echo "the openHAB 'backup' script."
+    echo ""
+    exit 0
+  fi
+
+  ## Ask to run as root to prevent us from running sudo in this script.
+  if [ "$(id -u)" -ne 0 ]; then
+    echo "Please run this script as root! (e.g. use sudo)" >&2
+    exit 1
+  fi
+
+  command -v unzip >/dev/null 2>&1 || {
+    echo "'unzip' program was not found, please install it first." >&2
+    exit 1
+  }
+
+  ## Check to see if processes are running before restoring
+  if [ ! -z "$(pgrep -f "openhab2.*java")" ]; then
+    echo "openHAB is running! Please stop the process before restoring." >&2
+    exit 1
+  fi
+
+  WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
+
+  ## Set path variables
+  if [ -r /etc/profile.d/openhab2.sh ]; then
+    . /etc/profile.d/openhab2.sh
+  elif [ -r /etc/default/openhab2 ]; then
+    . /etc/default/openhab2
+  fi
+  if [ -z "$OPENHAB_CONF" ];       then OPENHAB_CONF="$WorkingDir/conf"; fi
+  if [ -z "$OPENHAB_USERDATA" ];   then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
+
+  echo "Using '$OPENHAB_CONF' as conf folder..."
+  echo "Using '$OPENHAB_USERDATA' as userdata folder..."
+
+  ## Check two of the standard openHAB folders to make sure we're updating the right thing.
+  if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
+    echo "Configuration paths are invalid..." >&2
+    echo "Try setting OPENHAB_USERDATA and OPENHAB_CONF environment variables." >&2
+    exit 1
+  fi
+
+  currentUser=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $3}')
+  currentGroup=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $4}')
+
+  CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
+
+  ## Store anything in temporary folders
+  TempDir="/tmp/openhab2/restore"
+  ## Clear older stuff if it exists
+  rm -rf "${TempDir:?}"
+  echo "Making Temporary Directory"
+  mkdir -p "$TempDir" || {
+    echo "Failed to make temporary directory: $TempDir" >&2
+    exit 1
+  }
+}
+
+echo "                                          "
+echo "##########################################"
+echo "       openHAB 2.x.x restore script       "
+echo "##########################################"
+echo "                                          "
+
+InputFile="$1"
+
+setup "$InputFile"
+
+## Extract zip file
+echo "Extracting zip file to temporary folder."
+
+unzip -oq "$InputFile" -d "$TempDir" || {
+  echo "Unable to unzip $InputFile, Aborting..." >&2
+  exit 1
+}
+
+## Check for backup properties list.
+if [ ! -f "$TempDir/backup.properties" ]; then
+  echo "Backup was not created by openHAB scripts, please resort to a manual restore..." >&2
+  exit 1
+fi
+
+## Grab information with backup.properties
+str="$(awk '/version=/{print $1}' "$TempDir/backup.properties")"
+BackupVersion=${str#*=}
+str="$(awk '/timestamp=/{print $1}' "$TempDir/backup.properties")"
+BackupTime=${str#*=}
+str="$(awk '/user=/{print $1}' "$TempDir/backup.properties")"
+OHUser=${str#*=}
+str="$(awk '/group=/{print $1}' "$TempDir/backup.properties")"
+OHGroup=${str#*=}
+
+## Feeback to user
+echo ""
+echo " Backup Information:"
+echo " -------------------"
+echo " Backup Version         | $BackupVersion (You are on $CurrentVersion)"
+echo " Backup Timestamp       | $BackupTime"
+echo " Config belongs to user | $OHUser"
+echo "             from group | $OHGroup"
+echo ""
+echo "Your current configuration will become owned by $currentUser:$currentGroup."
+echo ""
+echo "Any existing files with the same name will be replaced."
+echo "Any file without a replacement will be deleted."
+echo ""
+printf "Okay to Continue? [y/N]: "
+read -r answer
+case "$answer" in
+  [Yy]*)
+    ;;
+  *)
+    echo "Cancelling restore..."
+    rm -rf /tmp/openhab2
+    exit 0
+    ;;
+esac
+
+## Move old configuration
+rm -rf /tmp/openhab/old
+mkdir -p /tmp/openhab/old
+echo "Moving system files in userdata to temporary folder"
+if [ -d "$OPENHAB_USERDATA/backups" ]; then
+  mv "$OPENHAB_USERDATA/backups" /tmp/openhab/old || {
+    echo "Could not move backup folder to temporary folder..." >&2
+    exit 1
+  }
+fi
+if [ -d "${OPENHAB_USERDATA:?}/etc" ]; then
+  mv "${OPENHAB_USERDATA:?}/etc" /tmp/openhab/old || {
+    echo "Could not move etc folder to temporary folder" >&2
+    exit 1
+  }
+fi
+
+echo "Deleting old userdata folder..."
+rm -rf "${OPENHAB_USERDATA:?}/"*
+
+echo "Restoring system files in userdata..."
+if [ -d /tmp/openhab/old/backups ]; then
+  mv /tmp/openhab/old/backups "${OPENHAB_USERDATA:?}/" || {
+    echo "Unable to move other backup files back..."
+    exit 1
+  }
+fi
+if [ -d /tmp/openhab/old/etc ]; then
+  mv /tmp/openhab/old/etc "${OPENHAB_USERDATA:?}/" || {
+    echo "Unable to move system files back..."
+    exit 1
+  }
+fi
+
+echo "Deleting old conf folder..."
+rm -rf "${OPENHAB_CONF:?}/"*
+
+## Restore configuration
+echo "Restoring openHAB with backup configuration..."
+command cp -af "$TempDir/conf/"*     "${OPENHAB_CONF:?}/" || {
+  echo "Failed to copy $TempDir/conf/ to $OPENHAB_CONF/..." >&2
+  echo "Please check $TempDir and replace conf and userdata." >&2
+  exit 1
+}
+command cp -af "$TempDir/userdata/"* "${OPENHAB_USERDATA:?}/" || {
+  echo "Failed to copy $TempDir/userdata/ to $OPENHAB_USERDATA/..." >&2
+  echo "Please check $TempDir and replace userdata." >&2
+  exit 1
+}
+
+## Reset ownership
+chown -R "$currentUser:$currentGroup" "$OPENHAB_USERDATA" || {
+  echo "WARNING: Failed to change userdata folder permissions to $currentUser:$currentGroup" >&2
+}
+chown -R "$currentUser:$currentGroup" "$OPENHAB_CONF" || {
+  echo "WARNING: Failed to change conf folder permissions to $currentUser:$currentGroup" >&2
+}
+
+echo "Deleting temporary files..."
+rm -rf /tmp/openhab2
+echo "Backup successfully restored!"
+echo ""

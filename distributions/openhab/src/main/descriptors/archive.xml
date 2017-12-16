@@ -24,13 +24,36 @@
 
         <!-- KARAF_HOME -->
         <fileSet>
+            <!-- see https://github.com/openhab/openhab-distro/issues/562 -->
             <directory>target/assembly</directory>
             <outputDirectory>runtime</outputDirectory>
             <includes>
+                <include>bin/*.bat</include>
+            </includes>
+            <lineEnding>crlf</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>target/assembly</directory>
+            <outputDirectory>runtime</outputDirectory>
+            <excludes>
+                <exclude>bin/*.bat</exclude>
+            </excludes>
+            <includes>
                 <include>bin/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>target/assembly</directory>
+            <outputDirectory>runtime</outputDirectory>
+            <excludes>
+                <exclude>system/org/eclipse/jetty/**/9.3.14.v20161028/**</exclude>
+            </excludes>
+            <includes>
                 <include>lib/**</include>
                 <include>system/**</include>
             </includes>
+            <!-- specifically fixes https://github.com/openhab/openhab-distro/issues/503 --> 
+            <fileMode>0644</fileMode>
         </fileSet>
 
         <!-- KARAF_DATA -->
@@ -66,14 +89,14 @@
             <source>src/main/resources/home/start.bat</source>
             <outputDirectory></outputDirectory>
             <fileMode>0644</fileMode>
-            <lineEnding>windows</lineEnding>
+            <lineEnding>crlf</lineEnding>
             <filtered>true</filtered>
         </file>
         <file>
             <source>src/main/resources/home/start_debug.bat</source>
             <outputDirectory></outputDirectory>
             <fileMode>0644</fileMode>
-            <lineEnding>windows</lineEnding>
+            <lineEnding>crlf</lineEnding>
         </file>
     </files>
 

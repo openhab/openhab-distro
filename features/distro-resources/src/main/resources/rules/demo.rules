@@ -11,28 +11,28 @@ val Random random = new Random()
  * and posting an updated state on the bus
  */
 rule "Dimmed Light"
-	when
-		Item DimmedLight received command
-	then
-        if ((receivedCommand==INCREASE) || (receivedCommand==DECREASE)) {
-    		var Number percent = 0
-    		if(DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType
-    			
-    		if(receivedCommand==INCREASE) percent = percent + 5
-    		if(receivedCommand==DECREASE) percent = percent - 5
-    
-    		if(percent<0)   percent = 0
-    		if(percent>100) percent = 100
-    		postUpdate(DimmedLight, percent);
-    	}
+when
+    Item DimmedLight received command
+then
+    if ((receivedCommand == INCREASE) || (receivedCommand == DECREASE)) {
+        var Number percent = 0
+        if (DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType
+
+        if (receivedCommand == INCREASE) percent = percent + 5
+        if (receivedCommand == DECREASE) percent = percent - 5
+
+        if (percent < 0)   percent = 0
+        if (percent > 100) percent = 100
+        postUpdate(DimmedLight, percent);
+    }
 end
 
 rule "Timer Demo"
 when
     Item Light_GF_Corridor_Ceiling received command
 then
-    if(receivedCommand==ON) {
-        if(timer==null) {
+    if (receivedCommand == ON) {
+        if (timer === null) {
             // first ON command, so create a timer to turn the light off again
             timer = createTimer(now.plusSeconds(10)) [|
                 sendCommand(Light_GF_Corridor_Ceiling, OFF)
@@ -41,9 +41,9 @@ then
             // subsequent ON command, so reschedule the existing timer
             timer.reschedule(now.plusSeconds(10))
         }
-    } else if(receivedCommand==OFF) {
+    } else if (receivedCommand == OFF) {
         // remove any previously scheduled timer
-        if(timer!=null) {
+        if (timer !== null) {
             timer.cancel
             timer = null
         }
@@ -54,113 +54,113 @@ end
  * The following rules help initializing the demo items with some helpful states.
  */
 rule "Initialize light states"
-	when
-		System started
-	then
-		Lights?.members.forEach(light|
-			postUpdate(light, if(Math::random > 0.7) ON else OFF)
-		)
+when
+    System started
+then
+    Lights?.members.forEach(light|
+        postUpdate(light, if (Math::random > 0.7) ON else OFF)
+    )
 end
 
 rule "Initialize heating states"
-	when
-		System started
-	then
-		Heating?.members.forEach(heating|
-			postUpdate(heating, if(Math::random > 0.8) ON else OFF)
-		)
-		postUpdate(Temperature_Setpoint, 22)
+when
+    System started
+then
+    Heating?.members.forEach(heating|
+        postUpdate(heating, if (Math::random > 0.8) ON else OFF)
+    )
+    postUpdate(Temperature_Setpoint, 22)
 end
 
 rule "Initialize contact states"
-	when
-		System started
-	then
-		Windows?.members.forEach(window|
-			postUpdate(window, if(Math::random > 0.5) OPEN else CLOSED)
-		)
+when
+    System started
+then
+    Windows?.members.forEach(window|
+        postUpdate(window, if (Math::random > 0.5) OPEN else CLOSED)
+    )
 end
 
 rule "Initialize Location"
-	when
-		System started
-	then
-		DemoLocation.postUpdate(new PointType("52.5200066,13.4049540"))
+when
+    System started
+then
+    DemoLocation.postUpdate(new PointType("52.5200066,13.4049540"))
 end
 
 rule "Set random room temperatures"
-	when
-		System started or
-		Time cron "0 0/5 * * * ?"
-	then
-		Temperature?.members.forEach(temperature|
-			postUpdate(temperature, 20.0 + (25.0 - (Math::random * 50.0).intValue) / 10.0)
-		)
+when
+    System started or
+    Time cron "0 0/5 * * * ?"
+then
+    Temperature?.members.forEach(temperature|
+        postUpdate(temperature, 20.0 + (25.0 - (Math::random * 50.0).intValue) / 10.0)
+    )
 end
 
 rule "Set daily max and min temperature"
 when
-	Item Weather_Temperature changed or
-	Time cron "0 0 0 * * ?" or
-	System started
+    Item Weather_Temperature changed or
+    Time cron "0 0 0 * * ?" or
+    System started
 then
-	val max = Weather_Temperature.maximumSince(now.withTimeAtStartOfDay)
-	val min = Weather_Temperature.minimumSince(now.withTimeAtStartOfDay)
-	if( max != null && min != null) {
-		postUpdate(Weather_Temp_Max, max.state)
-		postUpdate(Weather_Temp_Min, min.state)
-	}
+    val max = Weather_Temperature.maximumSince(now.withTimeAtStartOfDay)
+    val min = Weather_Temperature.minimumSince(now.withTimeAtStartOfDay)
+    if (max !== null && min !== null) {
+        postUpdate(Weather_Temp_Max, max.state)
+        postUpdate(Weather_Temp_Min, min.state)
+    }
 end
 
 // Creates an item that stores the last update time of this item
 rule "Records last weather update time"
 when
-  Item Weather_Temperature received update
+    Item Weather_Temperature received update
 then
-  postUpdate(Weather_LastUpdate, new DateTimeType())
+    postUpdate(Weather_LastUpdate, new DateTimeType())
 end
 
 rule "Set random wifi variations"
-    when
-        System started or
-        Time cron "/20 * * * * ?"
-    then
-        postUpdate(Wifi_Level, (Math::random * 4.0).intValue)
+when
+    System started or
+    Time cron "/20 * * * * ?"
+then
+    postUpdate(Wifi_Level, (Math::random * 4.0).intValue)
 end
 
 rule "Set random image URLs"
-    when
-        Time cron "/10 * * * * ?"
-    then
-        val url = urlList.get(random.nextInt(urlList.length))
-        val res = resList.get(random.nextInt(resList.length))
+when
+    Time cron "/10 * * * * ?"
+then
+    val url = urlList.get(random.nextInt(urlList.length))
+    val res = resList.get(random.nextInt(resList.length))
 
-        postUpdate(ImageURL, url + "/" + res)
+    postUpdate(ImageURL, url + "/" + res)
 end
 
 rule "Volume"
-	when
-		Item Volume received command
-	then
-		if(receivedCommand instanceof PercentType) {
-			setMasterVolume(receivedCommand)
-		} else {
-			if(receivedCommand==INCREASE) increaseMasterVolume(20)
-			if(receivedCommand==DECREASE) decreaseMasterVolume(20)	
-		}
+when
+    Item Volume received command
+then
+    if (receivedCommand instanceof PercentType) {
+        setMasterVolume(receivedCommand)
+    } else {
+        if (receivedCommand == INCREASE) increaseMasterVolume(20)
+        if (receivedCommand == DECREASE) decreaseMasterVolume(20)
+    }
 end
 
 rule "Select Radio Station"
-	when
-		Item Radio_Station received command
-	then
-		switch(receivedCommand) {
-			case 0 : playStream(null)
-			case 1 : playStream("http://metafiles.gl-systemhaus.de/hr/hr3_2.m3u")
-			case 2 : playStream("http://mp3-live.swr3.de/swr3_m.m3u")
-			case 3 : playStream("http://edge.live.mp3.mdn.newmedia.nacamar.net/radioffh/livestream.mp3.m3u")
-			case 4 : playStream("http://stream.laut.fm/club93")
-		}
+when
+    Item Radio_Station received command
+then
+    switch(receivedCommand) {
+        case 0 : playStream(null)
+        case 1 : playStream("http://metafiles.gl-systemhaus.de/hr/hr3_2.m3u")
+        case 2 : playStream("http://mp3-live.swr3.de/swr3_m.m3u")
+        case 3 : playStream("http://edge.live.mp3.mdn.newmedia.nacamar.net/radioffh/livestream.mp3.m3u")
+        case 4 : playStream("http://stream.laut.fm/club93")
+    }
 end
 
 // vim: syntax=Xtend

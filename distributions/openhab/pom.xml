@@ -46,7 +46,15 @@
         </dependency>
         <dependency>
             <groupId>org.openhab.distro</groupId>
-            <artifactId>addons</artifactId>
+            <artifactId>openhab-addons</artifactId>
+            <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openhab.distro</groupId>
+            <artifactId>overrides</artifactId>
             <version>${project.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
@@ -55,7 +63,6 @@
     </dependencies>
 
     <build>
-
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -95,6 +102,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
+                <configuration>
+                  <escapeString>\</escapeString>
+                </configuration>
                 <executions>
                     <execution>
                         <id>process-resources</id>
@@ -111,12 +121,15 @@
                     <installedFeatures>
                         <feature>wrapper</feature>
                         <feature>wrap</feature>
+                        <feature>openhab-overrides</feature>
                     </installedFeatures>
                     <startupFeatures>
                         <feature>eventadmin</feature>
                     </startupFeatures>
                     <bootFeatures>
                         <feature>jaas</feature>
+                        <feature>jetty</feature>
+                        <feature>http</feature>
                         <feature>shell</feature>
                         <feature>ssh</feature>
                         <feature>bundle</feature>

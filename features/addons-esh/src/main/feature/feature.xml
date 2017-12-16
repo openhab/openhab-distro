@@ -11,6 +11,10 @@
         <feature>esh-binding-digitalstrom</feature>
     </feature>
 
+    <feature name="openhab-binding-dmx" description="DMX Binding" version="${project.version}">
+        <feature>esh-binding-dmx</feature>
+    </feature>
+
     <feature name="openhab-binding-hue" description="Hue Binding" version="${project.version}">
         <feature>esh-binding-hue</feature>
     </feature>
@@ -29,6 +33,10 @@
 
     <feature name="openhab-binding-ntp" description="NTP Binding" version="${project.version}">
         <feature>esh-binding-ntp</feature>
+    </feature>
+
+    <feature name="openhab-binding-serialbutton" description="Serial Button Binding" version="${project.version}">
+        <feature>esh-binding-serialbutton</feature>
     </feature>
 
     <feature name="openhab-binding-sonos" description="Sonos Binding" version="${project.version}">
@@ -132,4 +140,5 @@
         <feature>openhab-runtime-base</feature>
         <feature>esh-extensionservice-marketplace</feature>
     </feature>
+
 </features>

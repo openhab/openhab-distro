@@ -88,25 +88,13 @@
 		<Set name="sendServerVersion">true</Set>
 		<Set name="sendDateHeader">false</Set>
 		<Set name="headerCacheSize">512</Set>
-	</New>
 
-	<!-- =========================================================== -->
-	<!-- Create a TLS specific HttpConfiguration based on the -->
-	<!-- common HttpConfiguration defined in jetty.xml -->
-	<!-- Add a SecureRequestCustomizer to extract certificate and -->
-	<!-- session information -->
-	<!-- =========================================================== -->
-	<New id="sslHttpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
-		<Arg>
-			<Ref refid="httpConfig" />
-		</Arg>
-		<Call name="addCustomizer">
-			<Arg>
-				<New class="org.eclipse.jetty.server.SecureRequestCustomizer" />
-			</Arg>
-		</Call>
+        <Call name="addCustomizer">
+            <Arg>
+                <New class="org.eclipse.jetty.server.SecureRequestCustomizer" />
+            </Arg>
+        </Call>
 	</New>
-
 
 	<!-- =========================================================== -->
 	<!-- extra options -->
@@ -188,7 +176,7 @@
 						<Item>
 							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
 								<Arg name="config">
-									<Ref refid="sslHttpConfig" />
+									<Ref refid="httpConfig" />
 								</Arg>
 							</New>
 						</Item>

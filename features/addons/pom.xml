@@ -13,37 +13,7 @@
 	<packaging>feature</packaging>
 
 	<name>openHAB Add-ons</name>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.smarthome</groupId>
-			<artifactId>esh-ext</artifactId>
-			<version>${esh.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.distro</groupId>
-			<artifactId>addons-esh</artifactId>
-			<version>${project.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.addons</groupId>
-			<artifactId>openhab2-addons</artifactId>
-			<version>${oh2.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.addons</groupId>
-			<artifactId>openhab-addons</artifactId>
-			<version>${oh1.version}</version>
-			<classifier>features</classifier>
-			<type>xml</type>
-		</dependency>
-	</dependencies>
+	<description>These are 2.x add-ons in separate repositories (which do not have their own Karaf feature defined).</description>
 
 	<build>
 		<plugins>
@@ -53,6 +23,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<startLevel>80</startLevel>
+					<enableGeneration>true</enableGeneration>
 					<aggregateFeatures>true</aggregateFeatures>
 					<!--  <resolver>(obr)</resolver> -->
 					<checkDependencyChange>true</checkDependencyChange>
@@ -60,6 +31,15 @@
 					<logDependencyChanges>true</logDependencyChanges>
 					<overwriteChangedDependencies>true</overwriteChangedDependencies>
 				</configuration>
+				<executions>
+					<execution>
+						<id>generate-features-file</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>features-generate-descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

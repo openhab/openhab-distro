@@ -1,0 +1,142 @@
+#!/bin/sh
+
+setup(){
+  if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: backup [filename]"
+    echo ""
+    echo "  e.g. ./backup                 << Makes a file with a timed filename"
+    echo "       ./backup myBackup.zip    << Makes a file called myBackup.zip"
+    echo ""
+    echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
+    echo "from any machine to transfer your configuration across to another instance."
+    echo ""
+    echo "Set $OPENHAB_BACKUPS to change the default backup directory."
+    exit 0
+  fi
+
+  ## Ask to run as root to prevent us from running sudo in this script.
+  if [ "$(id -u)" -ne 0 ]; then
+    echo "Please run this script as root! (e.g. use sudo)" >&2
+    exit 1
+  fi
+
+  command -v zip >/dev/null 2>&1 || {
+    echo "'zip' program was not found, please install it first." >&2
+    exit 1
+  }
+
+  ## Set path variables
+  if [ -r /etc/profile.d/openhab2.sh ]; then
+    . /etc/profile.d/openhab2.sh
+  elif [ -r /etc/default/openhab2 ]; then
+    . /etc/default/openhab2
+  fi
+
+  WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
+
+  if [ -z "$OPENHAB_CONF" ];       then OPENHAB_CONF="$WorkingDir/conf"; fi
+  if [ -z "$OPENHAB_USERDATA" ];   then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
+  if [ -z "$OPENHAB_BACKUPS" ];     then OPENHAB_BACKUPS="$WorkingDir/backups"; fi
+
+  echo "Using '$OPENHAB_CONF' as conf folder..."
+  echo "Using '$OPENHAB_USERDATA' as userdata folder..."
+
+  timestamp=$(date +"%y_%m_%d-%H_%M_%S")
+  ## Set the filename
+  if [ -z "$1" ]; then
+    echo "Using '$OPENHAB_BACKUPS' as backup folder..."
+    OutputFile="$OPENHAB_BACKUPS/openhab2-backup-$timestamp.zip"
+  else
+    OutputFile="$1"
+  fi
+
+  ## Check two of the standard openHAB folders to make sure we're backing up the right thing.
+  if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
+    echo "Configuration paths are invalid..." >&2
+    echo "Try setting OPENHAB_USERDATA and OPENHAB_CONF environment variables." >&2
+    exit 1
+  fi
+
+  ## Find the group and user of the current openHAB folders.
+  OHUser=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $3}')
+  OHGroup=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $4}')
+
+  CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
+
+  ## Store anything in temporary folders
+  TempDir="/tmp/openhab2/backup"
+  echo "Making Temporary Directory"
+  mkdir -p "$TempDir" || {
+    echo "Failed to make temporary directory: $TempDir" >&2
+    exit 1
+  }
+
+  ## Clear older stuff if it exists
+  rm -rf "${TempDir:?}/"*
+}
+
+echo "                                         "
+echo "#########################################"
+echo "       openHAB 2.x.x backup script       "
+echo "#########################################"
+echo "                                         "
+
+setup "$1"
+
+## Set backup properties file.
+{
+  echo "version=$CurrentVersion"
+  echo "timestamp=$timestamp"
+  echo "user=$OHUser"
+  echo "group=$OHGroup"
+} > "$TempDir/backup.properties"
+
+## Copy userdata and conf folders
+echo "Copying configuration to temporary folder..."
+mkdir -p "$TempDir/userdata"
+cp -a "${OPENHAB_USERDATA:?}/"*  "$TempDir/userdata"
+mkdir -p "$TempDir/conf"
+cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
+
+## Remove non-transferable userdata files
+echo "Removing unnecessary files..."
+rm -rf "$TempDir/userdata/cache"
+rm -rf "$TempDir/userdata/tmp"
+rm -rf "$TempDir/userdata/etc/all.policy"
+rm -rf "$TempDir/userdata/etc/branding.properties"
+rm -rf "$TempDir/userdata/etc/branding-ssh.properties"
+rm -rf "$TempDir/userdata/etc/config.properties"
+rm -rf "$TempDir/userdata/etc/custom.properties"
+rm -rf "$TempDir/userdata/etc/version.properties"
+rm -rf "$TempDir/userdata/etc/distribution.info"
+rm -rf "$TempDir/userdata/etc/jre.properties"
+rm -rf "$TempDir/userdata/etc/profile.cfg"
+rm -rf "$TempDir/userdata/etc/startup.properties"
+rm -rf "$TempDir/userdata/etc/org.apache.karaf"*
+rm -rf "$TempDir/userdata/etc/org.ops4j.pax.url.mvn.cfg"
+
+## If the backup directory is inside userdata folder do not include it
+## Mainly for apt/rpm automatic
+if [ "$OPENHAB_BACKUPS" = "$OPENHAB_USERDATA/backups" ]; then
+  echo "Backup Directory is inside userdata, not including in this backup!"
+  rm -rf "$TempDir/userdata/backups"
+fi
+
+## Create archive
+mkdir -p "$OPENHAB_BACKUPS"
+echo "Zipping folder..."
+
+## Jump into directory before making zip
+## Cleans file structure
+( cd "$TempDir" || exit
+  zip -qr "$OutputFile" . || {
+    echo "zip failed to store a backup."
+    exit 1
+  }
+) || exit 1
+
+echo "Removing temporary files..."
+rm -rf /tmp/openhab2
+
+echo "Success! Backup made in $OutputFile"
+echo ""

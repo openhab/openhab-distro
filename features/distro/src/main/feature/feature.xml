@@ -15,9 +15,16 @@
         <configfile finalname="${openhab.conf}/services/basicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-basicui</configfile>
         <configfile finalname="${openhab.conf}/services/classicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-classicui</configfile>
         <configfile finalname="${openhab.conf}/services/logging.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-logging</configfile>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="true">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-demo</configfile>
         <config name="org.eclipse.smarthome.persistence">
 			default = rrd4j
+        </config>
+        <config name="org.openhab.addons" append="true">
+			package = demo
+			ui = basic,paper,habpanel
+			misc = restdocs,homekit,hueemulation
+			binding = yahooweather,wemo,hue,sonos,ipp,astro,avmfritz,ntp
+			persistence = rrd4j
+			transformation = map
         </config>
         <config name="org.openhab.habpanel"><![CDATA[
 			initialPanelConfig=demo
@@ -27,17 +34,13 @@
         </config>
     </feature>
 
-    <feature name="openhab-package-minimal" description="openHAB Minimal Package" version="${project.version}">
-        <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-minimal</configfile>
-        <config name="org.eclipse.smarthome.links">
-			autoLinks = false
-        </config>
-    </feature>
-
     <feature name="openhab-package-simple" description="openHAB Simple Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-simple</configfile>
+        <config name="org.openhab.addons" append="true">
+			package = simple
+			ui = paper,habpanel
+			misc = ruleengine
+        </config>
         <config name="org.eclipse.smarthome.links">
 			autoLinks = true
         </config>
@@ -45,7 +48,10 @@
 
     <feature name="openhab-package-standard" description="openHAB Standard Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-standard</configfile>
+        <config name="org.openhab.addons" append="true">
+			package = standard
+			ui = basic,paper,habpanel,homebuilder
+        </config>
         <config name="org.eclipse.smarthome.links">
 			autoLinks = false
         </config>
@@ -54,7 +60,12 @@
     <feature name="openhab-package-expert" description="openHAB Expert Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>openhab-runtime-compat1x</feature>
-        <configfile finalname="${openhab.userdata}/etc/org.openhab.addons.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/addons-expert</configfile>
+        <config name="org.openhab.addons" append="true">
+			package = expert
+			ui = classic,basic,paper,habpanel,habmin
+			misc = restdocs
+			transformation = map,regex,xslt,exec,javascript,scale,xpath,jsonpath
+        </config>
         <config name="org.eclipse.smarthome.links">
 			autoLinks = false
         </config>

@@ -25,7 +25,7 @@ Group:Number:AVG                Temperature "Avg. Room Temperature [%.1f °C]"  
 Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
 
 /* Lights */
-Dimmer Light_GF_Living_Table        "Table"     (GF_Living, Lights)     ["Lighting"]
+Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)     ["Lighting"]
 Switch Light_GF_Corridor_Ceiling    "Ceiling"       (GF_Corridor, Lights)
 Switch Light_GF_Kitchen_Ceiling     "Ceiling"       (GF_Kitchen, Lights)
 Switch Light_GF_Kitchen_Table       "Table"         (GF_Kitchen, Lights)
@@ -43,21 +43,21 @@ Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)
 Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)
 Switch Light_C_Staircase            "Staircase"     (gC, Lights)
 Switch Light_C_Washing_Ceiling      "Washing"       (gC, Lights)
-Switch Light_C_Workshop             "Workshop"      (gC, Lights)        ["Lighting"]
+Switch Light_C_Workshop             "Workshop"      (gC, Lights)            ["Lighting"]
 
-Switch Light_Garden_Garage          "Garage"        (Garden, Lights)      ["Lighting"]
+Switch Light_Garden_Garage          "Garage"        (Garden, Lights)        ["Lighting"]
 Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)
 
 /* Heating */
-Switch Heating_GF_Corridor  "Corridor"      <heating>   (GF_Corridor, Heating)
-Switch Heating_GF_Toilet    "Toilet"        <heating>   (GF_Toilet, Heating)
-Switch Heating_GF_Living    "Livingroom"    <heating>   (GF_Living, Heating)
-Switch Heating_GF_Kitchen   "Kitchen"       <heating>   (GF_Kitchen, Heating)
+Switch Heating_GF_Corridor          "Corridor"      <heating>   (GF_Corridor, Heating)
+Switch Heating_GF_Toilet            "Toilet"        <heating>   (GF_Toilet, Heating)
+Switch Heating_GF_Living            "Livingroom"    <heating>   (GF_Living, Heating)
+Switch Heating_GF_Kitchen           "Kitchen"       <heating>   (GF_Kitchen, Heating)
 
-Switch Heating_FF_Bath      "Bath"          <heating>   (FF_Bath, Heating)
-Switch Heating_FF_Office    "Office"        <heating>   (FF_Office, Heating)
-Switch Heating_FF_Child     "Child's Room"  <heating>   (FF_Child, Heating)
-Switch Heating_FF_Bed       "Bedroom"       <heating>   (FF_Bed, Heating)
+Switch Heating_FF_Bath              "Bath"          <heating>   (FF_Bath, Heating)
+Switch Heating_FF_Office            "Office"        <heating>   (FF_Office, Heating)
+Switch Heating_FF_Child             "Child's Room"  <heating>   (FF_Child, Heating)
+Switch Heating_FF_Bed               "Bedroom"       <heating>   (FF_Bed, Heating)
 
 /* Rollershutters */
 Rollershutter Shutter_GF_Toilet         "Toilet"        (GF_Toilet, Shutters)
@@ -111,15 +111,15 @@ String Moon_Phase               "Moon Phase"                    <moon>      { ch
 /* Demo items */
 DateTime CurrentDate            "Date [%1$tA, %1$td.%1$tm.%1$tY]"   <calendar>  { channel="ntp:ntp:demo:dateTime" }
 Switch DemoSwitch               "Switch"
-Dimmer DimmedLight              "Dimmer [%d %%]"        <slider>
-Color  RGBLight                 "RGB Light"             <slider>
+Dimmer DimmedLight              "Dimmer [%d %%]"                    <slider>
+Color  RGBLight                 "RGB Light"                         <slider>
 Rollershutter DemoShutter       "Roller Shutter"
-Dimmer DemoBlinds               "Blinds [%d %%]"        <rollershutter>
-Number Scene_General            "Scene"                 <sofa>
-Number Radio_Station            "Radio"                 <network>
+Dimmer DemoBlinds               "Blinds [%d %%]"                    <rollershutter>
+Number Scene_General            "Scene"                             <sofa>
+Number Radio_Station            "Radio"                             <network>
 Dimmer Volume                   "Volume [%.1f %%]"
 Location DemoLocation           "Brandenburg Gate Berlin"
-Number Wifi_Level               "Wifi Level [%d/4]"     <signal>        (FF_Office)
+Number Wifi_Level               "Wifi Level [%d/4]"                 <signal>        (FF_Office)
 String ImageURL                 "Image URL [%s]"
 
 Group Thermostat                "Thermostat"            <temperature>                    ["Thermostat"]
