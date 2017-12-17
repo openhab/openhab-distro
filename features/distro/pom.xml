@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>distro</artifactId>
-    <packaging>feature</packaging>
+    <packaging>pom</packaging>
 
     <name>openHAB Distro Feature</name>
     <description>openHAB Distro Feature</description>
