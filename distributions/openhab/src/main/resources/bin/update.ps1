@@ -66,7 +66,7 @@ Function Update-openHAB {
     .PARAMETER OHDirectory
     The directory where openHAB is installed (default: current directory).
     .PARAMETER OHVersion
-    The version to upgrade to.
+    The version to upgrade to (will attempt autoincrement if not defined).
     .PARAMETER Snapshot
     Upgrade to a snapshot version ($true) or a release version ($false) (default: $false)
     .PARAMETER SkipNew
@@ -84,7 +84,7 @@ Function Update-openHAB {
         [Parameter(ValueFromPipeline=$True)]
         [string]$OHDirectory = ".",
         [Parameter(ValueFromPipeline=$True)]
-        [string]$OHVersion = "2.1.0",
+        [string]$OHVersion,
         [Parameter(ValueFromPipeline=$True)]
         [boolean]$Snapshot = $false,
         [Parameter(ValueFromPipeline=$True)]
@@ -98,6 +98,7 @@ Function Update-openHAB {
             ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
             throw "This script must be run as an Administrator. Start PowerShell with the Run as Administrator option"
         }
+        
 
         # Verify we're in an openHAB directory
         Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory..."
@@ -107,12 +108,69 @@ Function Update-openHAB {
         }
 
 
-        # Get current openHAB version
-        if (Test-Path "$OHDirectory\userdata\etc\version.properties")
+        # If target $OHVersion not defined
+        if (!$OHVersion)
         {
-            $VersionLine = Get-Content "$OHDirectory\userdata\etc\version.properties" | Where-Object { $_.Contains("openhab-distro")}
-            $CurrentVersionIndex = $VersionLine.IndexOf(":")
-            $CurrentVersion = $VersionLine.Substring($currentVersionIndex + 2)
+            # Get current version
+            if (Test-Path "$OHDirectory\userdata\etc\version.properties")
+            {
+                $VersionLine = Get-Content "$OHDirectory\userdata\etc\version.properties" | Where-Object { $_.Contains("openhab-distro")}
+                $CurrentVersionIndex = $VersionLine.IndexOf(":")
+                $CurrentVersion = $VersionLine.Substring($currentVersionIndex + 2)
+                Write-Host -ForegroundColor Cyan "Current version is $CurrentVersion"
+
+                
+                # Auto increment
+                $CVersion = $CurrentVersion.Split(".")
+                $MajorVer = $CVersion[0]
+                $MinorVer = $CVersion[1]
+                $BuildVer = $CVersion[2]
+                if ($MinorVer -eq "9")
+                {
+                    # Shift Major up one
+                    $IMajorVer = [int]$MajorVer
+                    $IMajorVer += 1
+                    $MajorVer = [string]$IMajorVer
+                    # Set Minor to 0
+                    $MinorVer = "0"
+                }
+                else
+                {
+                    # Shift Minor up one
+                    $IMinorVer = [int]$MinorVer
+                    $IMinorVer += 1
+                    $MinorVer = [string]$IMinorVer
+                }
+
+                # Set target to incremented version
+                $OHVersion = "$MajorVer.$MinorVer.$BuildVer"
+
+
+                #Verify if this file is a thing
+                Write-Host -ForegroundColor Cyan "Checking for Auto-Incremented version $OHVersion"
+                if ($Snapshot)
+                {
+                    $NewVerCheck = Invoke-WebRequest "https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion-snapshot.zip" -DisableKeepAlive -UseBasicParsing -Method head -ErrorAction SilentlyContinue
+                    if ($NewVerCheck.StatusCode -ne 200)
+                    {
+                        throw "You are already on the current version $OHVersion"
+                    }
+                }
+                else
+                {
+                    $NewVerCheck = Invoke-WebRequest "https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip" -DisableKeepAlive -UseBasicParsing -Method head -ErrorAction SilentlyContinue
+                    if ($NewVerCheck.StatusCode -ne 200)
+                    {
+                        throw "You are already on the current version $OHVersion"
+                    }
+                }
+
+                Write-Host -ForegroundColor Yellow "Auto-Incremented version $OHVersion available."
+            }
+        }
+        else
+        {
+            # Compare current version to requested version
             if ($OHVersion -eq $CurrentVersion) {
                 throw "You are already on openHAB $OHVersion"
             }
@@ -120,24 +178,24 @@ Function Update-openHAB {
 
 
         # Check if service is installed, stop and delete it
-        Write-Host -ForegroundColor Cyan "Checking whether a service exists..."
-        $service = (Get-WmiObject Win32_Service -filter "name LIKE 'openHAB%'")
-        if ($service) {
-            # Stop and delete the service
-            Write-Host -ForegroundColor Cyan "Stopping the service..."
-            Stop-Service $service.Name -Force
-            Write-Host -ForegroundColor Cyan "Deleting the service..."
-            $service.Delete()
-        }
+        #Write-Host -ForegroundColor Cyan "Checking whether a service exists..."
+        #$service = (Get-WmiObject Win32_Service -filter "name LIKE 'openHAB%'")
+        #if ($service) {
+        #    # Stop and delete the service
+        #    Write-Host -ForegroundColor Cyan "Stopping the service..."
+        #    Stop-Service $service.Name -Force
+        #    Write-Host -ForegroundColor Cyan "Deleting the service..."
+        #    $service.Delete()
+        #}
         
 
         # Checking if openHAB is running
-        Write-Host -ForegroundColor Cyan "Checking whether openHAB is running..."
-        $m = (Get-WmiObject Win32_Process -Filter "name = 'java.exe'" |
-              where { $_.CommandLine.Contains("openhab") } | measure)
-        if ($m.Count -gt 0) {
-            throw "openHAB seems to be running, stop it before running this update script"
-        }
+        #Write-Host -ForegroundColor Cyan "Checking whether openHAB is running..."
+        #$m = (Get-WmiObject Win32_Process -Filter "name = 'java.exe'" |
+        #      where { $_.CommandLine.Contains("openhab") } | measure)
+        #if ($m.Count -gt 0) {
+        #    throw "openHAB seems to be running, stop it before running this update script"
+        #}
 
 
         # Backup openHAB only if not coming via new update script
@@ -146,9 +204,9 @@ Function Update-openHAB {
             Write-Host ""
             Write-Host -ForegroundColor Magenta "Backup script starting..."
             Write-Host -ForegroundColor Cyan "Making a backup in '$OHDirectory\backups' ..."
-            $BackupScript = Join-Path (pwd) '\runtime\bin\backup.ps1'
+            $BackupScript = Join-Path $OHDirectory 'runtime\bin\backup.ps1'
             . $BackupScript
-            Backup-openHAB -OHDirectory (pwd)
+            Backup-openHAB -OHDirectory $OHDirectory
             Write-Host -ForegroundColor Magenta "Backup script finished."
             Write-Host ""
         }
