@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.openhab.distro</groupId>
 		<artifactId>pom-distributions</artifactId>
-		<version>2.2.0-SNAPSHOT</version>
+		<version>2.3.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>online-repo</artifactId>
@@ -39,9 +38,9 @@
 			<phase>generate-resources</phase>
 			<configuration>
 			   <tasks>
-				  <echo message="unzipping file" />
-				  <unzip src="../openhab-addons/target/openhab-addons-${project.version}.kar" dest="target" />
-				  <unzip src="../openhab-addons-legacy/target/openhab-addons-legacy-${project.version}.kar" dest="target" />
+				  <echo message="unzipping file"/>
+				  <unzip dest="target" src="../openhab-addons/target/openhab-addons-${project.version}.kar"/>
+				  <unzip dest="target" src="../openhab-addons-legacy/target/openhab-addons-legacy-${project.version}.kar"/>
 			   </tasks>
 			</configuration>
 			<goals>
