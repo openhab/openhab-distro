@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>overrides</artifactId>
-  <packaging>feature</packaging>
+  <packaging>pom</packaging>
 
   <name>openHAB Overrides</name>
 
