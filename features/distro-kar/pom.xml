@@ -48,6 +48,15 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-features-file</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-generate-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

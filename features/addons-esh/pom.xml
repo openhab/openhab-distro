@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>addons-esh</artifactId>
-    <packaging>pom</packaging>
+    <packaging>feature</packaging>
 
     <name>openHAB Feature ESH Add-ons</name>
     <description>openHAB Feature ESH Add-ons</description>
@@ -30,15 +30,6 @@
                     <logDependencyChanges>true</logDependencyChanges>
                     <overwriteChangedDependencies>true</overwriteChangedDependencies>
                 </configuration>
-				<executions>
-					<execution>
-						<id>generate-features-file</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>features-generate-descriptor</goal>
-						</goals>
-					</execution>
-				</executions>
             </plugin>
         </plugins>
     </build>
