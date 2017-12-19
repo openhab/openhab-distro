@@ -124,7 +124,7 @@ Function Update-openHAB {
         # Verify current directory isn't deeper within openHAB root
         Write-Host -ForegroundColor Cyan "Checking that current directory is not within openHAB root..."
         $CurrentDir = (pwd).ToString().ToLower()
-        if ($CurrentDir -ne $OHDirectory -And $OHDirectory.Contains($CurrentDir) )
+        if ($CurrentDir -ne $OHDirectory -And $CurrentDir.Contains($OHDirectory) )
         {
             throw "You are in a folder that may need deleting/altering. Please change your current directory to the openHAB root or outside of it."
         }
@@ -188,6 +188,10 @@ Function Update-openHAB {
                 }
 
                 Write-Host -ForegroundColor Yellow "Auto-Incremented version $OHVersion available."
+            }
+            else
+            {
+                throw "OHVersion paramter not defined and version.properties not found. Please provide a target version using '-OHVersion #.#.#'"
             }
         }
         else
@@ -276,7 +280,13 @@ Function Update-openHAB {
         [System.IO.Compression.ZipFile]::ExtractToDirectory("$TempDir\openhab-$OHVersion.zip", "$TempDir\openhab-$OHVersion")
 
 
-        # Delete current userdata files
+        # Update runtime files
+        Write-Host -ForegroundColor Cyan "Updating 'runtime' files..."
+        Remove-Item ($OHDirectory + '\runtime') -Recurse -ErrorAction SilentlyContinue
+        Copy-Item $TempDir\openhab-$OHVersion\runtime -Destination $OHDirectory\runtime -Force -Recurse
+
+
+        # Update userdata files
         Write-Host -ForegroundColor Cyan "Deleting current files in userdata that should not persist..."
         Remove-Item ($OHDirectory + '\userdata\etc\all.policy') -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\etc\branding.properties') -ErrorAction SilentlyContinue
@@ -292,27 +302,16 @@ Function Update-openHAB {
         Remove-Item ($OHDirectory + '\userdata\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\tmp') -Recurse -ErrorAction SilentlyContinue
-
-
         # Keep a backup of this file in case the user modified it
         Copy-Item ($OHDirectory + '\userdata\etc\org.ops4j.pax.logging.cfg') ($OHDirectory + '\userdata\etc\org.ops4j.pax.logging.cfg.bak')
-
-
-        # Update openHAB
-        Write-Host -ForegroundColor Cyan "Deleting current runtime..."
-        Remove-Item ($OHDirectory + '\runtime') -Recurse -ErrorAction SilentlyContinue
-        Write-Host -ForegroundColor Cyan "Copying new runtime..."
-        Copy-Item $TempDir\openhab-$OHVersion\runtime -Destination $OHDirectory\runtime -Force -Recurse
-        Write-Host -ForegroundColor Cyan "Copying userdata files to new install without overwriting existing ones..."
+        Write-Host -ForegroundColor Cyan "Updating userdata files without overwriting existing ones..."
         $newuserdata = Get-Item $TempDir\openhab-$OHVersion\userdata
         Get-ChildItem -Path $newuserdata -Recurse | Copy-Item -Destination {
             if ($_.PSIsContainer) {
                 $path = Join-Path "$OHDirectory\userdata" $_.Parent.FullName.Substring($newuserdata.FullName.Length)
-                #Write-Host $path
                 $path
             } else {
                 $path = Join-Path "$OHDirectory\userdata" $_.FullName.Substring($newuserdata.FullName.Length)
-                #Write-Host $path
                 $path
             }
         } -ErrorAction SilentlyContinue | Out-Null
@@ -352,12 +351,14 @@ Function Update-openHAB {
         }
 
 
-        # Delete Temp Directory
+        # Clean up, delete temp directory
         Write-Host -ForegroundColor Cyan "Removing the extracted files..."
         Remove-Item $TempDir -Recurse -ErrorAction SilentlyContinue
 
+
+        # Done
         Write-Host -ForegroundColor Green "openHAB updated to version $OHVersion!"
-        Write-Host -ForegroundColor Green "Run start.bat to launch it."
+        Write-Host -ForegroundColor Green "Run $OHDirectory\runtime\bin\start.bat to launch it."
         Write-Host -ForegroundColor Green "Check http://docs.openhab.org/installation/windows.html "
         Write-Host -ForegroundColor Green "for instructions on re-installing the Windows Service if desired"
     }
