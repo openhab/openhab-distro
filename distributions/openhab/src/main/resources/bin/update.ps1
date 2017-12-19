@@ -1,4 +1,6 @@
 ﻿#Requires -Version 4.0
+#ScriptVersion:2.2.0.2
+#Update $ScriptVersion also
 function DownloadFiles {
     param(
         [Parameter(Mandatory=$true)]
@@ -8,6 +10,8 @@ function DownloadFiles {
         [Parameter(Mandatory=$false)]
         [string]$SkipNew
     )
+
+    $ScriptVersion = "2.2.0.2"
 
     $uri = New-Object "System.Uri" "$DownloadSource"
     $request = [System.Net.HttpWebRequest]::Create($uri)
@@ -44,14 +48,22 @@ function DownloadFiles {
         {
             $newUpdate = Join-Path $TempDir $update.Name
             [IO.Compression.ZipFileExtensions]::ExtractToFile($update, $newUpdate)
-            Write-Host -ForegroundColor Red "==================================="
-            Write-Host -ForegroundColor Red "New Update.ps1 found. Using that..."
-            Write-Host -ForegroundColor Red "==================================="
             $zip.Dispose()
-            Remove-Item $OutputFile -Force
-            . $newUpdate
-            Update-openHAB -OHDirectory $OHDirectory -OHVersion $OHVersion -Snapshot $Snapshot -SkipNew $true
-            Return 2
+            $NewScriptVersionLine = Get-Content $newUpdate | Where-Object { $_.Contains("#ScriptVersion")}
+            $NewScriptVersion = $NewScriptVersionLine.Split(":")[1]
+            if ($ScriptVersion -ne $NewScriptVersion)
+            {
+                Write-Host -ForegroundColor Red "==================================="
+                Write-Host -ForegroundColor Red "New Update.ps1 found. Using that..."
+                Write-Host -ForegroundColor Red "==================================="
+
+                Remove-Item $OutputFile -Force
+                . $newUpdate
+                Update-openHAB -OHDirectory $OHDirectory -OHVersion $OHVersion -Snapshot $Snapshot -SkipNew $true
+                Return 2
+            }
+            # We've checked so set this true so we don't check again
+            $SkipNew = $true
         }
         $zip.Dispose()
     }
@@ -93,18 +105,28 @@ Function Update-openHAB {
 
     begin {}
     process {
-
+        
         if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
             ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
             throw "This script must be run as an Administrator. Start PowerShell with the Run as Administrator option"
         }
         
 
-        # Verify we're in an openHAB directory
+        # Verify current or specified directory is an openHAB directory
+        $OHDirectory = $OHDirectory.TrimEnd("\").ToLower()
         Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory..."
         if (!(Test-Path "$OHDirectory\userdata") -And !(Test-Path -Path "$OHDirectory\conf")) {
             throw "$OHDirectory\userdata doesn't exist! Make sure you are in the " +
                 "openHAB directory or specify the -OHDirectory parameter!"
+        }
+
+
+        # Verify current directory isn't deeper within openHAB root
+        Write-Host -ForegroundColor Cyan "Checking that current directory is not within openHAB root..."
+        $CurrentDir = (pwd).ToString().ToLower()
+        if ($CurrentDir -ne $OHDirectory -And $OHDirectory.Contains($CurrentDir) )
+        {
+            throw "You are in a folder that may need deleting/altering. Please change your current directory to the openHAB root or outside of it."
         }
 
 
@@ -146,7 +168,7 @@ Function Update-openHAB {
                 $OHVersion = "$MajorVer.$MinorVer.$BuildVer"
 
 
-                #Verify if this file is a thing
+                #Verify if this file(version) is a thing
                 Write-Host -ForegroundColor Cyan "Checking for Auto-Incremented version $OHVersion"
                 if ($Snapshot)
                 {
@@ -177,25 +199,43 @@ Function Update-openHAB {
         }
 
 
+        # Set file locations
+        # Choose bintray for releases, cloudbees for snapshot.
+        if ($Snapshot) {
+            $DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion-SNAPSHOT.zip"
+            $AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion-SNAPSHOT.kar"
+            $LegacyAddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion-SNAPSHOT.kar"
+        } else {
+            $DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
+            $AddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
+            $LegacyAddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons-legacy%2F$OHVersion%2Fopenhab-addons-legacy-$OHVersion.kar"
+        }
+
+
+        # Verify file is available for download
+        $MainDLCheck = Invoke-WebRequest $DownloadLocation -DisableKeepAlive -UseBasicParsing -Method head -ErrorAction SilentlyContinue
+        if ($MainDLCheck.StatusCode -ne 200) {throw "openHAB-$OHVersion.zip could not be found"}
+
+
         # Check if service is installed, stop and delete it
-        #Write-Host -ForegroundColor Cyan "Checking whether a service exists..."
-        #$service = (Get-WmiObject Win32_Service -filter "name LIKE 'openHAB%'")
-        #if ($service) {
-        #    # Stop and delete the service
-        #    Write-Host -ForegroundColor Cyan "Stopping the service..."
-        #    Stop-Service $service.Name -Force
-        #    Write-Host -ForegroundColor Cyan "Deleting the service..."
-        #    $service.Delete()
-        #}
+        Write-Host -ForegroundColor Cyan "Checking whether a service exists..."
+        $service = (Get-WmiObject Win32_Service -filter "name LIKE 'openHAB%'")
+        if ($service) {
+            # Stop and delete the service
+            Write-Host -ForegroundColor Cyan "Stopping the service..."
+            Stop-Service $service.Name -Force
+            Write-Host -ForegroundColor Cyan "Deleting the service..."
+            $service.Delete()
+        }
         
 
         # Checking if openHAB is running
-        #Write-Host -ForegroundColor Cyan "Checking whether openHAB is running..."
-        #$m = (Get-WmiObject Win32_Process -Filter "name = 'java.exe'" |
-        #      where { $_.CommandLine.Contains("openhab") } | measure)
-        #if ($m.Count -gt 0) {
-        #    throw "openHAB seems to be running, stop it before running this update script"
-        #}
+        Write-Host -ForegroundColor Cyan "Checking whether openHAB is running..."
+        $m = (Get-WmiObject Win32_Process -Filter "name = 'java.exe'" |
+              where { $_.CommandLine.Contains("openhab") } | measure)
+        if ($m.Count -gt 0) {
+            throw "openHAB seems to be running, stop it before running this update script"
+        }
 
 
         # Backup openHAB only if not coming via new update script
@@ -224,22 +264,10 @@ Function Update-openHAB {
 
         # Download the selected openHAB version
         # Choose bintray for releases, cloudbees for snapshot.
-        if ($Snapshot) {
-            $OHVersion = "$OHVersion-SNAPSHOT"
-            $DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
-            $AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
-            $LegacyAddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
-            Write-Host -ForegroundColor Cyan "Downloading the openHAB $OHVersion distribution..."
-            $DL = DownloadFiles $DownloadLocation "$TempDir\openhab-$OHVersion.zip" $SkipNew
-            if ($DL -eq 2) {Return}
-        } else {
-            $DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
-            $AddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
-            $LegacyAddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons-legacy%2F$OHVersion%2Fopenhab-addons-legacy-$OHVersion.kar"
-            Write-Host -ForegroundColor Cyan "Downloading the openHAB $OHVersion distribution..."
-            $DL = DownloadFiles $DownloadLocation "$TempDir\openhab-$OHVersion.zip" $SkipNew
-            if ($DL -eq 2) {Return}
-        }
+        Write-Host -ForegroundColor Cyan "Downloading the openHAB $OHVersion distribution..."
+        $DL = DownloadFiles $DownloadLocation "$TempDir\openhab-$OHVersion.zip" $SkipNew
+        # if $DL returns 2, a new update script was found and run and when we return to this script, we need to 'return' to console.
+        if ($DL -eq 2) {Return}
 
 
         # Unzip new files
@@ -273,10 +301,8 @@ Function Update-openHAB {
         # Update openHAB
         Write-Host -ForegroundColor Cyan "Deleting current runtime..."
         Remove-Item ($OHDirectory + '\runtime') -Recurse -ErrorAction SilentlyContinue
-
         Write-Host -ForegroundColor Cyan "Copying new runtime..."
         Copy-Item $TempDir\openhab-$OHVersion\runtime -Destination $OHDirectory\runtime -Force -Recurse
-
         Write-Host -ForegroundColor Cyan "Copying userdata files to new install without overwriting existing ones..."
         $newuserdata = Get-Item $TempDir\openhab-$OHVersion\userdata
         Get-ChildItem -Path $newuserdata -Recurse | Copy-Item -Destination {
@@ -295,18 +321,34 @@ Function Update-openHAB {
         # If there's an existing addons file, we need to replace it with the correct version.
         $AddonsFile="$OHDirectory\addons\openhab-addons-$CurrentVersion.kar"
         if (Test-Path -Path $AddonsFile) {
-            Write-Host "Found an openHAB addons file, replacing with new version..."
-            Remove-Item $AddonsFile
-            DownloadFiles $AddonsDownloadLocation "$OHDirectory\addons\openhab-addons-$OHVersion.kar"
+            Write-Host -ForegroundColor Cyan "Found an openHAB addons file, attempting to update with new version..."
+            $AddonsDLCheck = Invoke-WebRequest $AddonsDownloadLocation -DisableKeepAlive -UseBasicParsing -Method head -ErrorAction SilentlyContinue
+            if ($AddonsDLCheck.StatusCode -ne 200)
+            {
+                Write-Host -ForegroundColor Red "$AddonsDownloadLocation could not be found. Please find and download this manually."
+            }
+            else
+            {
+                Remove-Item $AddonsFile
+                DownloadFiles $AddonsDownloadLocation "$OHDirectory\addons\openhab-addons-$OHVersion.kar"
+            }
         }
 
 
         # Do the same for the legacy addons file.
         $LegacyAddonsFile="$OHDirectory\addons\openhab-addons-legacy-$CurrentVersion.kar"
         if (Test-Path -Path $LegacyAddonsFile) {
-            Write-Host "Found an openHAB legacy addons file, replacing with new version..."
-            Remove-Item $LegacyAddonsFile
-            DownloadFiles $LegacyAddonsDownloadLocation "$OHDirectory\addons\openhab-addons-legacy-$OHVersion.kar"
+            Write-Host -ForegroundColor Cyan "Found an openHAB legacy addons file, attempting to update with new version..."
+            $LegacyDLCheck = Invoke-WebRequest $LegacyAddonsDownloadLocation -DisableKeepAlive -UseBasicParsing -Method head -ErrorAction SilentlyContinue
+            if ($LegacyDLCheck.StatusCode -ne 200)
+            {
+                Write-Host -ForegroundColor Red "$LegacyAddonsDownloadLocation could not be found. Please find and download this manually."    
+            }
+            else
+            {
+                Remove-Item $LegacyAddonsFile
+                DownloadFiles $LegacyAddonsDownloadLocation "$OHDirectory\addons\openhab-addons-legacy-$OHVersion.kar"
+            }
         }
 
 
