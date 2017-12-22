@@ -204,6 +204,7 @@ Function Update-openHAB {
         Remove-Item ($OHDirectory + '\userdata\etc\startup.properties') -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\etc\version.properties') -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
+        Remove-Item ($OHDirectory + '\userdata\etc\org.apache.felix*') -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\tmp') -Recurse -ErrorAction SilentlyContinue
 
