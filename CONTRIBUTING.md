@@ -1,16 +1,16 @@
 # Contributing to openHAB
 
-Before reporting an issue, please check the [openHAB forum] (https://community.openhab.org) for solutions and help. More people will see your issue when it is posted in the forum and community members may be able to help you find known solutions/workarounds for your issue.
+Before reporting an issue, please check the [openHAB forum](https://community.openhab.org) for solutions and help. More people will see your issue when it is posted in the forum and community members may be able to help you find known solutions/workarounds for your issue.
 
 When no solution was found, use the table below to determine where your issue should be logged:
 
 Issue | Where to report
 ------|----------------
-Problems and feature requests for openHAB 1 addons | [openHAB1-addons] (https://github.com/openhab/openhab1-addons/issues)
-Problems and feature requests for openHAB 2 addons | [openHAB2-addons] (https://github.com/openhab/openhab2-addons/issues)
-Issues related to the runtime environment, IDE and packaging | [openHAB-distro] (https://github.com/openhab/openhab-distro/issues)
-Issues related to the core openHAB bundles that are not from Eclipse SmartHome | [openHAB-core] (https://github.com/kaikreuzer/openhab-core/issues)
-Issues related to Eclipse SmartHome addons and core runtime | [Eclipse SmartHome] (https://github.com/eclipse/smarthome/issues)
+Problems and feature requests for openHAB 1 addons | [openHAB1-addons](https://github.com/openhab/openhab1-addons/issues)
+Problems and feature requests for openHAB 2 addons | [openHAB2-addons](https://github.com/openhab/openhab2-addons/issues)
+Issues related to the runtime environment, IDE and packaging | [openHAB-distro](https://github.com/openhab/openhab-distro/issues)
+Issues related to the core openHAB bundles that are not from Eclipse SmartHome | [openHAB-core](https://github.com/kaikreuzer/openhab-core/issues)
+Issues related to Eclipse SmartHome addons and core runtime | [Eclipse SmartHome](https://github.com/eclipse/smarthome/issues)
 
 But do not worry - if you are not clear, which category your issue belongs to - we will redirect you, if necessary.
 
@@ -41,8 +41,7 @@ else is working on the same thing.
 
 ### Create issues...
 
-Any significant improvement should be documented as [a GitHub
-issue](https://github.com/openhab/openhab-distro/issues?labels=enhancement&page=1&state=open) before anybody
+Any significant improvement should be documented as [a GitHub issue](https://github.com/openhab/openhab-distro/issues?labels=enhancement&page=1&state=open) before anybody
 starts working on it.
 
 ### ...but check for existing issues first!
@@ -176,7 +175,7 @@ There are several exceptions to the signing requirement. Currently these are:
 
 * Step 1: learn the component inside out
 * Step 2: make yourself useful by contributing code, bugfixes, support etc.
-* Step 3: volunteer on [in the community] (https://community.openhab.org/)
+* Step 3: volunteer on [in the community](https://community.openhab.org/)
 
 Don't forget: being a maintainer is a time investment. Make sure you will have time to make yourself available.
 You don't have to be a maintainer to make a difference on the project!
