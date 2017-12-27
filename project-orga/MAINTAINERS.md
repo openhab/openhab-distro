@@ -27,8 +27,8 @@ It is every maintainer's responsibility to:
 1. Expose a clear road map for improving their component.
 2. Deliver prompt feedback and decisions on pull requests.
 3. Be available to anyone with questions, bug reports, criticism etc.
-  on their component. This includes GitHub requests and the mailing
-  list.
+  on their component. This includes GitHub requests and the
+  [community forum](https://community.openhab.org).
 4. Make sure their component respects the philosophy, design and
   road map of the project.
 
@@ -55,26 +55,26 @@ All decisions affecting openHAB, big and small, follow the same 3 steps:
 
 * Step 3: Accept (`LGTM`) or refuse a pull request. The relevant maintainers do 
 this (see below "Who decides what?")
- + Accepting pull requests
-  - If the pull request appears to be ready to merge, give it a `LGTM`, which
+   + Accepting pull requests
+      - If the pull request appears to be ready to merge, give it a `LGTM`, which
     stands for "Looks Good To Me".
-  - If the pull request has some small problems that need to be changed, make
+      - If the pull request has some small problems that need to be changed, make
     a comment adressing the issues.
-  - If the changes needed to a PR are small, you can add a "LGTM once the
+      - If the changes needed to a PR are small, you can add a "LGTM once the
     following comments are adressed..." this will reduce needless back and
     forth.
-  - If the PR only needs a few changes before being merged, any MAINTAINER can
+      - If the PR only needs a few changes before being merged, any MAINTAINER can
     make a replacement PR that incorporates the existing commits and fixes the
     problems before a fast track merge.
- + Closing pull requests
-  - If a PR appears to be abandoned, after having attempted to contact the
+   + Closing pull requests
+      - If a PR appears to be abandoned, after having attempted to contact the
     original contributor, then a replacement PR may be made.  Once the
     replacement PR is made, any contributor may close the original one.
-  - If you are not sure if the pull request implements a good feature or you
+      - If you are not sure if the pull request implements a good feature or you
     do not understand the purpose of the PR, ask the contributor to provide
     more documentation.  If the contributor is not able to adequately explain
     the purpose of the PR, the PR may be closed by any MAINTAINER.
-  - If a MAINTAINER feels that the pull request is sufficiently architecturally
+      - If a MAINTAINER feels that the pull request is sufficiently architecturally
     flawed, or if the pull request needs significantly more design discussion
     before being considered, the MAINTAINER should close the pull request with
     a short explanation of what discussion still needs to be had.  It is
