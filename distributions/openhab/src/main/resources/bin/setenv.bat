@@ -115,7 +115,8 @@ set JAVA_OPTS=%JAVA_OPTS% ^
 
 :: set jvm options
 set EXTRA_JAVA_OPTS=-XX:+UseG1GC ^
-  -Djava.awt.headless=true
+  -Djava.awt.headless=true ^
+  -Dfile.encoding=UTF-8
 
 :: set JAVA_HOME if not set yet
 rem Setup the Java Virtual Machine
