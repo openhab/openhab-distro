@@ -1,5 +1,15 @@
 #!/bin/sh
 
+getFullPath() {
+  specDir="$(dirname "$1")"
+  if cd "$specDir" 2>/dev/null; then
+    OutputFile="$(pwd)/$(basename "$1")"
+  else
+    echo "Unable to locate specified directory '$specDir'"
+    exit 1
+  fi
+}
+
 setup(){
   if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "Usage: backup [filename]"
@@ -47,8 +57,9 @@ setup(){
     echo "Using '$OPENHAB_BACKUPS' as backup folder..."
     OutputFile="$OPENHAB_BACKUPS/openhab2-backup-$timestamp.zip"
   else
-    OutputFile="$1"
+    getFullPath "$1"
   fi
+  echo "Writing to '${OutputFile}'..."
 
   ## Check two of the standard openHAB folders to make sure we're backing up the right thing.
   if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
