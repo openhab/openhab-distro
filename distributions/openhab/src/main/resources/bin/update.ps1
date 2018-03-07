@@ -94,7 +94,7 @@ Function Update-openHAB {
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipeline=$True)]
-        [string]$OHDirectory = ".",
+        [string]$OHDirectory = (pwd).ToString().ToLower(),
         [Parameter(ValueFromPipeline=$True)]
         [string]$OHVersion,
         [Parameter(ValueFromPipeline=$True)]
