@@ -19,7 +19,6 @@
 		<module>distro-kar</module>
 		<module>distro-resources</module>
 		<module>addons</module>
-		<module>overrides</module>
 	</modules>
 
 </project>

@@ -51,14 +51,6 @@
             <type>xml</type>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.openhab.distro</groupId>
-            <artifactId>overrides</artifactId>
-            <version>${project.version}</version>
-            <classifier>features</classifier>
-            <type>xml</type>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -120,15 +112,12 @@
                     <installedFeatures>
                         <feature>wrapper</feature>
                         <feature>wrap</feature>
-                        <feature>openhab-overrides</feature>
                     </installedFeatures>
                     <startupFeatures>
                         <feature>eventadmin</feature>
                     </startupFeatures>
                     <bootFeatures>
                         <feature>jaas</feature>
-                        <feature>jetty</feature>
-                        <feature>http</feature>
                         <feature>shell</feature>
                         <feature>ssh</feature>
                         <feature>bundle</feature>

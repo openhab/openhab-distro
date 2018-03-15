@@ -148,7 +148,9 @@ init() {
 run() {
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
-    CHECK_ROOT_INSTANCE_RUNNING=true
+    if [ "x$CHECK_ROOT_INSTANCE_RUNNING" = "x" ]; then
+        CHECK_ROOT_INSTANCE_RUNNING=true
+    fi
     JAVA_ENDORSED_DIRS="${JAVA_HOME}/jre/lib/endorsed:${JAVA_HOME}/lib/endorsed:${KARAF_HOME}/lib/endorsed"
     JAVA_EXT_DIRS="${JAVA_HOME}/jre/lib/ext:${JAVA_HOME}/lib/ext:${KARAF_HOME}/lib/ext"
     if ${cygwin}; then
