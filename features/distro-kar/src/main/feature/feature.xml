@@ -1,35 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
-    <!-- "we need to package our own version of Jetty in order to have the desired version packaged. Note that we do not install/use this feature though -->
-    <!-- Details see https://github.com/openhab/openhab-distro/issues/567 -->
-    <feature name="openhab-jetty" version="9.3.22">
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-continuation/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-http/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-io/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jaspi/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-plus/9.3.22.v20171030</bundle>
-       	<bundle start-level="30">mvn:org.eclipse.jetty/jetty-jndi/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-rewrite/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-security/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-server/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-servlet/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-servlets/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-util/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-util-ajax/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-webapp/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jaas/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-xml/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-client/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-deploy/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jmx/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-server/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-client/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-common/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-servlet/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-api/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/javax-websocket-server-impl/9.3.22.v20171030</bundle>
-        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/javax-websocket-client-impl/9.3.22.v20171030</bundle>
-    </feature>
-
 </features>
