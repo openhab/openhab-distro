@@ -175,8 +175,8 @@ rm -rf "$WorkingDir/userdata/cache"
 rm -rf "$WorkingDir/userdata/tmp"
 
 ## Removing files that must not exist anymore in an installation.
-rm "$WorkingDir/userdata/etc/overrides.properties"
-rm "$WorkingDir/userdata/etc/org.openhab.addons.cfg"
+rm -f "$WorkingDir/userdata/etc/overrides.properties"
+rm -f "$WorkingDir/userdata/etc/org.openhab.addons.cfg"
 
 ## Unzip the downloaded folder into openHAB's directory WITHOUT replacing any existing files.
 echo "Updating openHAB..."
