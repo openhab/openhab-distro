@@ -208,6 +208,9 @@ Function Update-openHAB {
         Remove-Item ($OHDirectory + '\userdata\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\tmp') -Recurse -ErrorAction SilentlyContinue
 
+        ## Removing files that must not exist anymore in an installation.
+        Remove-Item ($OHDirectory + '\userdata\etc\overrides.properties') -ErrorAction SilentlyContinue
+        Remove-Item ($OHDirectory + '\userdata\etc\org.openhab.addons.cfg') -ErrorAction SilentlyContinue
 
         # Keep a backup of this file in case the user modified it
         Copy-Item ($OHDirectory + '\userdata\etc\org.ops4j.pax.logging.cfg') ($OHDirectory + '\userdata\etc\org.ops4j.pax.logging.cfg.bak')
