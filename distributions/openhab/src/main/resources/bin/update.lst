@@ -1,0 +1,16 @@
+[[MSG]]
+[2.2.0]
+NOTE;Logging configuration has changed. 'org.ops4j.pax.logging.cfg' has been backed up and restored to defaults!
+NOTE;*.rules files are now validated upon startup. Files with errors will from now on be logged and ignored by the runtime.
+
+[2.3.0]
+ALERT;Oceanic Binding: The 'softener' Thing Type no longer exists and is replaced by the 'serial' and 'ethernet' Thing Types
+
+[[PRE]]
+[2.2.0]
+DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
+
+[[POST]]
+[2.3.0]
+DELETE;$OPENHAB_USERDATA/etc/overrides.properties
+DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg

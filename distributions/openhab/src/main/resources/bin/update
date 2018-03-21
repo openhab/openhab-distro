@@ -28,15 +28,23 @@ setup(){
 
   ## Second parameter can be the openHAB path, if not assume the script is called from root!
   if [ -z "$2" ]; then
-    WorkingDir="."
-    DirError="The script must be called from openHAB's root directory."
-  else
+    if [ -n "$OPENHAB_HOME" ]; then 
+      WorkingDir="$OPENHAB_HOME"
+      DirError="'OPENHAB_HOME' does not point towards openHAB's root directory."
+    else
+      WorkingDir="."
+      DirError="The script must be called from openHAB's root directory."
+    fi
+  else 
     WorkingDir="$2"
     DirError="The specified directory is not openHAB's root directory."
   fi
 
+  if [ -z "$OPENHAB_CONF" ];     then OPENHAB_CONF="$WorkingDir/conf"; fi
+  if [ -z "$OPENHAB_USERDATA" ]; then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
+
   ## Check two of the standard openHAB folders to make sure we're updating the right thing.
-  if [ ! -d "$WorkingDir/userdata" ] || [ ! -d "$WorkingDir/conf" ]; then
+  if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
     echo "$DirError" >&2
     echo "Either specify a directory or place this update script in and run from openHAB's root folder." >&2
     exit 1
@@ -48,7 +56,7 @@ setup(){
     exit 1
   fi
 
-  CurrentVersion="$(awk '/openhab-distro/{print $3}' "$WorkingDir/userdata/etc/version.properties")"
+  CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
 
   OHVersion="$1"
 
@@ -109,9 +117,88 @@ download(){
   fi
 }
 
-########################################################
-## UPDATE SCRIPT AND MODIFICATIONS SHOULD START HERE! ##
-########################################################
+runCommand() {
+    string="$1"
+    string="$(echo "$string" | sed "s:\$OPENHAB_USERDATA:${OPENHAB_USERDATA:?}:g")"
+    string="$(echo "$string" | sed "s:\$OPENHAB_CONF:${OPENHAB_CONF:?}:g")"
+    string="$(echo "$string" | sed "s:\$OPENHAB_HOME:${WorkingDir:?}:g")"
+
+    command="$(echo "$string" | awk -F';' '{print $1}')"
+    param1="$(echo "$string" | awk -F';' '{print $2}')"
+    param2="$(echo "$string" | awk -F';' '{print $3}')"
+
+    case $command in
+    'DEFAULT')
+      # Just rename the file, the update process adds back the new version
+      echo "  Adding '.bak' to $param1"
+      mv "$param1" "$param1.bak"
+    ;;
+    'DELETE')
+      echo "  Deleting: $param1"
+      rm -f "$param1"
+    ;;
+    'MOVE')
+      echo "  Moving:   From $param1 to $param2"
+      mv "$param1" "$param2"
+    ;;
+    'NOTE')  printf '  \033[32mNote:\033[m     %s\n' "$param1";;
+    'ALERT') printf '  \033[31mWarning:\033[m  %s\n' "$param1";;
+    esac
+}
+
+getVersionNumber() {
+  firstPart="$(echo "$1" | awk -F'.' '{print $1}')"
+  secondPart="$(echo "$1" | awk -F'.' '{print $2}')"
+  thirdPart="$(echo "$1" | awk -F'.' '{print $3}')"
+  thirdPart="${thirdPart%%-*}"
+  echo $((firstPart*10000+secondPart*100+thirdPart))
+}
+
+scanVersioningList() {
+  Section="$1"
+  VersionMessage="$2"
+  InSection=false
+  InNewVersion=false
+
+  ## Read the file line by line.
+  while IFS= read -r Line
+  do
+    case $Line in
+    '')
+      continue
+    ;;
+    ## Flag to run the relevant [[section]] only.
+    "[[$Section]]")
+      InSection=true
+    ;;
+    ## Stop reading the file if another [[section]] starts.
+    "[["*"]]")
+      if $InSection; then
+        break
+      fi
+    ;;
+    ## Detect the [version] and execute the line if relevant.
+    '['*'.'*'.'*']')
+      if $InSection; then
+        LineVersion="$(echo "$Line" | awk -F'[][]' '{print $2}')"
+        LineVersionNumber=$(getVersionNumber "$LineVersion")
+        if [ "$CurrentVersionNumber" -lt "$LineVersionNumber" ]; then
+          InNewVersion=true
+          echo ""
+          echo "$VersionMessage $LineVersion:"
+        else
+          InNewVersion=false
+        fi
+      fi
+    ;;
+    *)
+      if $InSection && $InNewVersion; then
+        runCommand "$Line"
+      fi
+    ;;
+    esac
+  done < "$TempDir/$transferFile"
+}
 
 echo "                                         "
 echo "#########################################"
@@ -119,32 +206,56 @@ echo "       openHAB 2.x.x update script       "
 echo "#########################################"
 echo "                                         "
 
-SpecifiedDir="$1"
-SpecifiedVersion="$2"
+SpecifiedVersion="$1"
+SpecifiedDir="$2"
 SkipModifier="$3"
 
 ##Run the initialisation functions defined above
-setup "$SpecifiedDir" "$SpecifiedVersion"
+setup "$SpecifiedVersion" "$SpecifiedDir"
 download "$SkipModifier"
 
-echo "The script will attempt to update openHAB to version $OHVersion"
-printf "Is this okay? [y/N]: "
-read -r answer
-case $answer in
-  [Yy]*)
-    ;;
-  *)
-    echo "Cancelling update..."
-    rm -rf "$TempDir"
-    exit 0
-    ;;
+transferFile="update.lst"
+CurrentVersionNumber=$(getVersionNumber "$CurrentVersion")
+case $CurrentVersion in
+  *"-"*) CurrentVersionNumber=$((CurrentVersionNumber-1));;
 esac
 
+
+## Go through a list of transitional commands that are stored in the update archive.
+echo "New update list required, extracting from zip..."
+unzip -qp "$OutputFile" "runtime/bin/$transferFile" > "$TempDir/$transferFile" || {
+  echo "Additional update commands not found in archive, exiting..."
+  exit 1
+}
+
+## Notify the user of important changes first
+echo "The script will attempt to update openHAB to version $OHVersion"
+printf 'Please read the following \033[32mnotes\033[m and \033[31mwarnings\033[m:\n'
+scanVersioningList "MSG" "Important notes for version"
+
+if [ -z "$OPENHAB_NONINTERACT" ]; then
+  printf '\nIs this okay? [y/N]: '
+  read -r answer
+  case $answer in
+    [Yy]*)
+      ;;
+    *)
+      echo "Cancelling update..."
+      rm -rf "${TempDir:?}"
+      exit 0
+      ;;
+  esac
+fi
+
 ## Preserve file ownership of old setup.
-FileOwner=$(ls -ld "$WorkingDir/userdata" | awk '{print $3}')
-FileGroup=$(ls -ld "$WorkingDir/userdata" | awk '{print $4}')
+FileOwner=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $3}')
+FileGroup=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $4}')
+
+## Perform version specific pre-update commands
+scanVersioningList "PRE" "Performing pre-update tasks for version"
 
 ## Remove only the files that are to be replaced.
+echo ""
 echo "Removing openHAB System Files..."
 mkdir -p "$TempDir/runtime"
 mkdir -p "$TempDir/userdata/etc"
@@ -165,18 +276,10 @@ mv "$WorkingDir/userdata/etc/startup.properties"        "$TempDir/userdata/etc/"
 mv "$WorkingDir/userdata/etc/system.properties"         "$TempDir/userdata/etc/"
 mv "$WorkingDir/userdata/etc/version.properties"        "$TempDir/userdata/etc/"
 
-## We need to keep a backup in case the user modified that file
-cp "$WorkingDir/userdata/etc/org.ops4j.pax.logging.cfg" "$WorkingDir/userdata/etc/org.ops4j.pax.logging.cfg.bak"
-mv "$WorkingDir/userdata/etc/org.ops4j.pax.logging.cfg" "$TempDir/userdata/etc/"
-
 ## Clearing the cache and tmp folders is necessary for upgrade.
 echo "Clearing cache..."
-rm -rf "$WorkingDir/userdata/cache"
-rm -rf "$WorkingDir/userdata/tmp"
-
-## Removing files that must not exist anymore in an installation.
-rm -f "$WorkingDir/userdata/etc/overrides.properties"
-rm -f "$WorkingDir/userdata/etc/org.openhab.addons.cfg"
+rm -rf "${OPENHAB_USERDATA:?}/cache"
+rm -rf "${OPENHAB_USERDATA:?}/tmp"
 
 ## Unzip the downloaded folder into openHAB's directory WITHOUT replacing any existing files.
 echo "Updating openHAB..."
@@ -184,16 +287,18 @@ unzip -nq "$OutputFile" -d "$WorkingDir/" || {
   echo "Failed to unzip archive, restoring system files..." >&2
   ## An error has occured so try to restore openHAB to it's previous state.
   cp -a "$TempDir/runtime"        "$WorkingDir/runtime"
-  cp -a "$TempDir/userdata/etc/"* "$WorkingDir/userdata/etc/"
+  cp -a "$TempDir/userdata/etc/"* "${OPENHAB_USERDATA:?}/etc/"
   exit 1
 }
 
+## Perform version specific post-update commands
+scanVersioningList "POST" "Performing post-update tasks for version"
 
 ## If there's an existing addons file, we need to replace it with the correct version.
 AddonsFile="$WorkingDir/addons/openhab-addons-$CurrentVersion.kar"
 if [ -f "$AddonsFile" ]; then
   echo "Found an openHAB addons file, replacing with new version..."
-  rm -f "$AddonsFile"
+  rm -f "${AddonsFile:?}"
   curl -Lf# "$AddonsDownloadLocation" -o "$WorkingDir/addons/openhab-addons-$OHVersion.kar" || {
       echo "Download of addons file failed, please find it on the openHAB website (www.openhab.org)" >&2
   }
@@ -203,15 +308,15 @@ fi
 LegacyAddonsFile="$WorkingDir/addons/openhab-addons-legacy-$CurrentVersion.kar"
 if [ -f "$LegacyAddonsFile" ]; then
   echo "Found an openHAB legacy addons file, replacing with new version..."
-  rm -f "$LegacyAddonsFile"
+  rm -f "${LegacyAddonsFile:?}"
   curl -Lf# "$LegacyAddonsDownloadLocation" -o "$WorkingDir/addons/openhab-addons-legacy-$OHVersion.kar" || {
       echo "Download of legacy addons file failed, please find it on the openHAB website (www.openhab.org)" >&2
   }
 fi
-
+echo ""
 ## Remove the downloaded zip-file.
 echo "Deleting temporary files..."
-rm -rf "$TempDir"
+rm -rf "${TempDir:?}"
 
 ## Restore file ownership.
 echo "Restoring previous file ownership ($FileOwner:$FileGroup)"
