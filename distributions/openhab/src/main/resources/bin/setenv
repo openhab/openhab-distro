@@ -18,9 +18,9 @@
 
 #
 # handle specific scripts; the SCRIPT_NAME is exactly the name of the Karaf
-# script; for example karaf, start, stop, admin, client, ...
+# script: client, instance, shell, start, status, stop, karaf
 #
-# if [ "$KARAF_SCRIPT" == "SCRIPT_NAME" ]; then
+# if [ "${KARAF_SCRIPT}" == "SCRIPT_NAME" ]; then
 #   Actions go here...
 # fi
 
@@ -32,24 +32,34 @@
 #
 
 #
-# The following section shows the possible configuration options for the default
+# The following section shows the possible configuration options for the default 
 # karaf scripts
 #
 # export JAVA_HOME # Location of Java installation
+# export JAVA_MIN_MEM # Minimum memory for the JVM
+# export JAVA_MAX_MEM # Maximum memory for the JVM
 # export JAVA_PERM_MEM # Minimum perm memory for the JVM
 # export JAVA_MAX_PERM_MEM # Maximum perm memory for the JVM
+# export EXTRA_JAVA_OPTS # Additional JVM options
 # export KARAF_HOME # Karaf home folder
 # export KARAF_DATA # Karaf data folder
 # export KARAF_BASE # Karaf base folder
 # export KARAF_ETC  # Karaf etc  folder
+# export KARAF_SYSTEM_OPTS # First citizen Karaf options
 # export KARAF_OPTS # Additional available Karaf options
 # export KARAF_DEBUG # Enable debug mode
 # export KARAF_REDIRECT # Enable/set the std/err redirection when using bin/start
+# export KARAF_NOROOT # Prevent execution as root if set to true
 
 #
 # Import openHAB 2 directory layout
 #
 . "$DIRNAME/oh2_dir_layout"
+
+#
+# Import Karaf shared functions
+#
+. "$DIRNAME/inc"
 
 #
 # set listen address for HTTP(S) server
@@ -106,7 +116,7 @@ esac
 export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTRA_JAVA_OPTS}"
 
 
-# The functions below are copied from the karaf script to set JAVA_HOME to a default value.
+# The functions below are modified from the Karaf inc script to set JAVA_HOME to a default value.
 # This avoids Karaf printing a warning message at startup.
 
 die() {
@@ -115,90 +125,35 @@ die() {
   exit 1
 }
 
-detectOS() {
-    # OS specific support (must be 'true' or 'false').
-    cygwin=false;
-    darwin=false;
-    aix=false;
-    os400=false;
-    case "`uname`" in
-        CYGWIN*)
-            cygwin=true
-            ;;
-        Darwin*)
-            darwin=true
-            ;;
-        AIX*)
-            aix=true
-            ;;
-        OS400*)
-            os400=true
-            ;;
-    esac
-    # For AIX, set an environment variable
-    if $aix; then
-         export LDR_CNTRL=MAXDATA=0xB0000000@DSA
-    fi
-}
-
-pathCanonical() {
-    local dst="${1}"
-    while [ -h "${dst}" ] ; do
-        ls=`ls -ld "${dst}"`
-        link=`expr "$ls" : '.*-> \(.*\)$'`
-        if expr "$link" : '/.*' > /dev/null; then
-            dst="$link"
-        else
-            dst="`dirname "${dst}"`/$link"
-        fi
-    done
-    local bas=`basename "${dst}"`
-    local dir=`dirname "${dst}"`
-    if [ "$bas" != "$dir" ]; then
-      dst="`pathCanonical "$dir"`/$bas"
-    fi
-    echo "${dst}" | sed -e 's#//#/#g' -e 's#/./#/#g' -e 's#/[^/]*/../#/#g'
-}
-
 locateJava() {
     # Setup the Java Virtual Machine
-    if $cygwin ; then
-        [ -n "$JAVA" ] && JAVA=`cygpath --unix "$JAVA"`
-        [ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+    if ${cygwin} ; then
+        [ -n "${JAVA}" ] && JAVA=$(cygpath --unix "${JAVA}")
+        [ -n "${JAVA_HOME}" ] && JAVA_HOME=$(cygpath --unix "${JAVA_HOME}")
     fi
 
-    if [ "x$JAVA_HOME" = "x" ] && [ "$darwin" = "true" ]; then
+    if [ "x${JAVA_HOME}" = "x" ] && [ "${darwin}" = "true" ]; then
         JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
     fi
-    if [ "x$JAVA" = "x" ] && [ -r /etc/gentoo-release ] ; then
-        JAVA_HOME=`java-config --jre-home`
+    if [ "x${JAVA}" = "x" ] && [ -r /etc/gentoo-release ] ; then
+        JAVA_HOME=$(java-config --jre-home)
     fi
-    if [ "x$JAVA" = "x" ]; then
-        if [ "x$JAVA_HOME" != "x" ]; then
-            if [ ! -d "$JAVA_HOME" ]; then
-                die "JAVA_HOME is not valid: $JAVA_HOME"
+    if [ "x${JAVA}" = "x" ]; then
+        if [ "x${JAVA_HOME}" != "x" ]; then
+            if [ ! -d "${JAVA_HOME}" ]; then
+                die "JAVA_HOME is not valid: ${JAVA_HOME}"
             fi
-            JAVA="$JAVA_HOME/bin/java"
+            JAVA="${JAVA_HOME}/bin/java"
         else
-            JAVA=`type java`
-            JAVA=`expr "$JAVA" : '.* \(/.*\)$'`
-            if [ "x$JAVA" = "x" ]; then
+            JAVA=$(command -v java)
+            if [ "x${JAVA}" = "x" ]; then
                 die "java command not found"
             fi
         fi
     fi
-    if [ "x$JAVA_HOME" = "x" ]; then
-        JAVA_HOME="$(dirname $(dirname $(pathCanonical "$JAVA")))"
-        export JAVA_HOME
+    if [ "x${JAVA_HOME}" = "x" ]; then
+        JAVA_HOME="$(dirname "$(dirname "$(pathCanonical "${JAVA}")")")"
     fi
-
-}
-
-checkJvmVersion() {
-   VERSION=`$JAVA -version 2>&1 | egrep '"([0-9].[0-9]\..*[0-9]).*"' | awk '{print substr($3,2,length($3)-2)}' | awk '{print substr($1, 3, 3)}' | sed -e 's;\.;;g'`
-   if [ "$VERSION" -lt "80" ]; then
-       die "Java 1.8 or higher is required. Aborting launch."
-   fi
 }
 
 detectOS

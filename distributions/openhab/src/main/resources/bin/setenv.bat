@@ -33,7 +33,7 @@ rem karaf script afterwards.
 rem
 
 rem
-rem The following section shows the possible configuration options for the default
+rem The following section shows the possible configuration options for the default 
 rem karaf scripts
 rem
 rem Window name of the windows console
@@ -48,6 +48,8 @@ rem Minimum perm memory for the JVM
 rem SET JAVA_PERM_MEM
 rem Maximum perm memory for the JVM
 rem SET JAVA_MAX_PERM_MEM
+rem Additional JVM options
+rem SET EXTRA_JAVA_OPTS 
 rem Karaf home folder
 rem SET KARAF_HOME
 rem Karaf data folder
@@ -56,6 +58,8 @@ rem Karaf base folder
 rem SET KARAF_BASE
 rem Karaf etc folder
 rem SET KARAF_ETC
+rem First citizen Karaf options
+rem SET KARAF_SYSTEM_OPTS
 rem Additional available Karaf options
 rem SET KARAF_OPTS
 rem Enable debug mode
