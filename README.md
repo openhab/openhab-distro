@@ -1,5 +1,3 @@
-_NOTE:_ The official documentation has moved from this repo to [http://docs.openhab.org/](http://docs.openhab.org/)!
-
 ## Introduction
 
 The open Home Automation Bus (openHAB) project aims at providing a universal integration platform for all things around home automation. It is a pure Java solution, fully based on OSGi.
