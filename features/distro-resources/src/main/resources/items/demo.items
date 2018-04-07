@@ -82,17 +82,17 @@ Number Temperature_FF_Child     "Temperature [%.1f °C]" <temperature>   (Temper
 Number Temperature_FF_Bed       "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Bed)
 
 /* Windows */
-Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"        (GF_Corridor, Windows)
-Contact Window_GF_Kitchen       "Kitchen [MAP(en.map):%s]"          (GF_Kitchen, Windows)
-Contact Window_GF_Living        "Terrace door [MAP(en.map):%s]"     (GF_Living, Windows)
-Contact Window_GF_Toilet        "Toilet [MAP(en.map):%s]"           (GF_Toilet, Windows)
+Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"     <frontdoor>  (GF_Corridor, Windows)
+Contact Window_GF_Kitchen       "Kitchen [MAP(en.map):%s]"                    (GF_Kitchen, Windows)
+Contact Window_GF_Living        "Terrace door [MAP(en.map):%s]"  <door>       (GF_Living, Windows)
+Contact Window_GF_Toilet        "Toilet [MAP(en.map):%s]"                     (GF_Toilet, Windows)
 
-Contact Window_FF_Bath          "Bath [MAP(en.map):%s]"             (FF_Bath, Windows)
-Contact Window_FF_Bed           "Bedroom [MAP(en.map):%s]"          (FF_Bed, Windows)
-Contact Window_FF_Office_Window "Office Window [MAP(en.map):%s]"    (FF_Office, Windows)
-Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"     (FF_Office, Windows)
+Contact Window_FF_Bath          "Bath [MAP(en.map):%s]"                       (FF_Bath, Windows)
+Contact Window_FF_Bed           "Bedroom [MAP(en.map):%s]"                    (FF_Bed, Windows)
+Contact Window_FF_Office_Window "Office Window [MAP(en.map):%s]"              (FF_Office, Windows)
+Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"  <door>       (FF_Office, Windows)
 
-Contact Garage_Door             "Garage Door [MAP(en.map):%s]"      (Garden, Windows)
+Contact Garage_Door             "Garage Door [MAP(en.map):%s]"   <garagedoor> (Garden, Windows)
 
 Group Weather_Chart
 Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart) { channel="yahooweather:weather:berlin:temperature" }
