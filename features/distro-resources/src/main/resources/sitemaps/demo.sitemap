@@ -1,10 +1,84 @@
 sitemap demo label="Main Menu"
 {
 	Frame {
-		Group item=gFF label="First Floor" icon="firstfloor"
-		Group item=gGF label="Ground Floor" icon="groundfloor"
-		Group item=gC label="Cellar" icon="cellar"
-		Group item=Garden icon="garden"
+		Text label="First Floor" icon="firstfloor" {
+			Text label="Bathroom" icon="bath" {
+				Switch item=Light_FF_Bath_Ceiling label="Ceiling"
+				Switch item=Light_FF_Bath_Mirror label="Mirror"
+				Switch item=Heating_FF_Bath label="Heating"
+				Switch item=Shutter_FF_Bath label="Roller shutter"
+				Text item=Temperature_FF_Bath label="Temperature [%.1f °C]"
+				Text item=Window_FF_Bath label="Window [MAP(en.map):%s]"
+			}
+			Text label="Office" icon="office" {
+				Switch item=Light_FF_Office_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Office label="Heating"
+				Switch item=Shutter_FF_Office_Window label="Window"
+				Switch item=Shutter_FF_Office_Door label="Door"
+				Text item=Temperature_FF_Office label="Temperature [%.1f °C]"
+				Text item=Window_FF_Office_Window label="Window [MAP(en.map):%s]"
+				Text item=Window_FF_Office_Door label="Balcony Door [MAP(en.map):%s]"
+				Text item=Wifi_Level label="Wifi Level [%d/4]"
+			}
+			Text label="Child's Room" icon="boy_1" {
+				Switch item=Light_FF_Child_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Child label="Heating"
+				Text item=Temperature_FF_Child label="Temperature [%.1f °C]"
+			}
+			Text label="Bedroom" icon="bedroom" {
+				Switch item=Light_FF_Bed_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Bed label="Heating"
+				Switch item=Shutter_FF_Bed label="Roller shutter"
+				Text item=Temperature_FF_Bed label="Temperature [%.1f °C]"
+				Text item=Window_FF_Bed label="Window [MAP(en.map):%s]"
+			}
+			Text label="Corridor" icon="corridor" {
+				Switch item=Light_FF_Corridor_Ceiling label="Ceiling"
+			}
+		}
+		Text label="Ground Floor" icon="groundfloor" {
+			Text label="Living Room" icon="video" {
+				Slider item=Light_GF_Living_Table label="Table"
+				Switch item=Heating_GF_Living label="Heating"
+				Switch item=Shutter_GF_Living label="Roller shutter"
+				Text item=Temperature_GF_Living label="Temperature [%.1f °C]"
+				Text item=Window_GF_Living label="Terrace door [MAP(en.map):%s]"
+			}
+			Text label="Kitchen" icon="kitchen" {
+				Switch item=Light_GF_Kitchen_Ceiling label="Ceiling"
+				Switch item=Light_GF_Kitchen_Table label="Table"
+				Switch item=Heating_GF_Kitchen label="Heating"
+				Switch item=Shutter_GF_Kitchen label="Roller shutter"
+				Text item=Temperature_GF_Kitchen label="Temperature [%.1f °C]"
+				Text item=Window_GF_Kitchen label="Window [MAP(en.map):%s]"
+			}
+			Text label="Toilet" icon="bath" {
+				Switch item=Light_GF_Toilet_Ceiling label="Ceiling"
+				Switch item=Light_GF_Toilet_Mirror label="Mirror"
+				Switch item=Heating_GF_Toilet label="Heating"
+				Switch item=Shutter_GF_Toilet label="Roller shutter"
+				Text item=Temperature_GF_Toilet label="Temperature [%.1f °C]"
+				Text item=Window_GF_Toilet label="Window [MAP(en.map):%s]"
+			}
+			Text label="Corridor" icon="corridor" {
+				Switch item=Light_GF_Corridor_Ceiling label="Ceiling"
+				Switch item=Light_GF_Corridor_Wardrobe label="Wardrobe"
+				Switch item=Heating_GF_Corridor label="Heating"
+				Text item=Temperature_GF_Corridor label="Temperature [%.1f °C]"
+				Text item=Window_GF_Frontdoor label="Frontdoor [MAP(en.map):%s]"
+			}
+		}
+		Text label="Cellar" icon="cellar" {
+			Switch item=Light_C_Corridor_Ceiling label="Ceiling"
+			Switch item=Light_C_Staircase label="Staircase"
+			Switch item=Light_C_Washing_Ceiling label="Washing"
+			Switch item=Light_C_Workshop label="Workshop"
+		}
+		Text label="Garden" icon="garden" {
+			Switch item=Light_Garden_Garage label="Garage"
+			Switch item=Light_Garden_Terrace label="Terrace"
+			Text item=Garage_Door label="Garage Door [MAP(en.map):%s]"
+		}
 	}
 	Frame label="Weather" {
 		Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="NULL"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
@@ -20,17 +94,17 @@ sitemap demo label="Main Menu"
 				Chart item=Weather_Chart period=W refresh=3600000 visibility=[Weather_Chart_Period==2]
 			}
 		}
-        Text label="Astronomical Data" icon="sun" {
-            Text item=Sun_Elevation
-            Text item=Sun_Azimuth
-            Text item=Sunrise_Time
-            Text item=Sunset_Time
-            Text item=Moon_Elevation
-            Text item=Moon_Azimuth
-            Text item=Moon_Phase
-        }
+		Text label="Astronomical Data" icon="sun" {
+			Text item=Sun_Elevation
+			Text item=Sun_Azimuth
+			Text item=Sunrise_Time
+			Text item=Sunset_Time
+			Text item=Moon_Elevation
+			Text item=Moon_Azimuth
+			Text item=Moon_Phase
+		}
 	}
-    Frame label="Demo" {
+	Frame label="Demo" {
 		Text item=CurrentDate
 		Text label="Group Demo" icon="firstfloor" {
 			Switch item=Lights mappings=[OFF="All Off"]
@@ -69,7 +143,7 @@ sitemap demo label="Main Menu"
 				}
 				Video url="http://www.openhab.org/assets/smarthome.mp4"
 				Webview url="http://heise-online.mobi/" height=8
-                Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
+				Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
 			}
 		}
 	}
