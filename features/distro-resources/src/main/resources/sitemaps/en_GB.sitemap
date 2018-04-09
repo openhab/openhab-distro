@@ -20,10 +20,15 @@ sitemap en_GB label="Main Menu"
 				Text item=Window_FF_Office_Door label="Balcony Door [MAP(en.map):%s]"
 				Text item=Wifi_Level label="Wifi Level [%d/4]"
 			}
-			Text label="Child's Room" icon="boy_1" {
-				Switch item=Light_FF_Child_Ceiling label="Ceiling"
-				Switch item=Heating_FF_Child label="Heating"
-				Text item=Temperature_FF_Child label="Temperature [%.1f °C]"
+			Text label="Oliver's Room" icon="boy_1" {
+				Switch item=Light_FF_Son_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Son label="Heating"
+				Text item=Temperature_FF_Son label="Temperature [%.1f °C]"
+			}
+			Text label="Amelia's Room" icon="boy_1" {
+				Switch item=Light_FF_Daughter_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Daughter label="Heating"
+				Text item=Temperature_FF_Daughter label="Temperature [%.1f °C]"
 			}
 			Text label="Bedroom" icon="bedroom" {
 				Switch item=Light_FF_Bed_Ceiling label="Ceiling"
@@ -111,7 +116,8 @@ sitemap en_GB label="Main Menu"
 			Text item=Heating label="No. of Active Heatings [(%d)]" {
 				Switch item=Heating_FF_Bath label="Bath"
 				Switch item=Heating_FF_Office label="Office"
-				Switch item=Heating_FF_Child label="Child's Room"
+				Switch item=Heating_FF_Son label="Oliver's Room"
+				Switch item=Heating_FF_Daughter label="Amelia's Room"
 				Switch item=Heating_FF_Bed label="Bedroom"
 				Switch item=Heating_GF_Living label="Living Room"
 				Switch item=Heating_GF_Kitchen label="Kitchen"
