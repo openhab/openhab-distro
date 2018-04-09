@@ -108,8 +108,27 @@ sitemap en_GB label="Main Menu"
 		Text item=CurrentDate label="Date [%1$tA, %1$td.%1$tm.%1$tY]"
 		Text label="Group Demo" icon="firstfloor" {
 			Switch item=Lights mappings=[OFF="All Off"] label="All Lights [(%d)]"
-			Group item=Heating label="No. of Active Heatings [(%d)]"
-			Group item=Windows label="Open windows [(%d)]"
+			Text item=Heating label="No. of Active Heatings [(%d)]" {
+				Switch item=Heating_FF_Bath label="Bath"
+				Switch item=Heating_FF_Office label="Office"
+				Switch item=Heating_FF_Child label="Child's Room"
+				Switch item=Heating_FF_Bed label="Bedroom"
+				Switch item=Heating_GF_Living label="Living Room"
+				Switch item=Heating_GF_Kitchen label="Kitchen"
+				Switch item=Heating_GF_Toilet label="Toilet"
+				Switch item=Heating_GF_Corridor label="Corridor"
+			}
+			Text item=Windows label="Open windows [(%d)]" {
+				Text item=Window_FF_Bath label="Bath [MAP(en.map):%s]"
+				Text item=Window_FF_Office_Window label="Office [MAP(en.map):%s]"
+				Text item=Window_FF_Office_Door label="Balcony Door [MAP(en.map):%s]"
+				Text item=Window_FF_Bed label="Bedroom [MAP(en.map):%s]"
+				Text item=Window_GF_Living label="Terrace Door [MAP(en.map):%s]"
+				Text item=Window_GF_Kitchen label="Kitchen [MAP(en.map):%s]"
+				Text item=Window_GF_Toilet label="Toilet [MAP(en.map):%s]"
+				Text item=Window_GF_Frontdoor label="Frontdoor [MAP(en.map):%s]"
+				Text item=Garage_Door label="Garage Door [MAP(en.map):%s]"
+			}
 			Text item=Temperature label="Avg. Room Temperature [%.1f °C]"
 		}
 		Text label="Widget Overview" icon="chart" {
