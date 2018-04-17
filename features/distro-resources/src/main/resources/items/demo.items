@@ -14,7 +14,8 @@ Group GF_Corridor   "Corridor"      <corridor>  (gGF)
 
 Group FF_Bath       "Bathroom"      <bath>      (gFF)
 Group FF_Office     "Office"        <office>    (gFF)
-Group FF_Child      "Child's Room"  <boy_1>      (gFF)
+Group FF_Son        "Oliver's Room" <boy_1>     (gFF)
+Group FF_Daughter   "Amelia's Room" <girl_1>    (gFF)
 Group FF_Bed        "Bedroom"       <bedroom>   (gFF)
 Group FF_Corridor   "Corridor"      <corridor>  (gFF)
 
@@ -37,7 +38,8 @@ Switch Light_FF_Bath_Ceiling        "Ceiling"       (FF_Bath, Lights)
 Switch Light_FF_Bath_Mirror         "Mirror"        (FF_Bath, Lights)
 Switch Light_FF_Corridor_Ceiling    "Corridor"      (FF_Corridor, Lights)
 Switch Light_FF_Office_Ceiling      "Ceiling"       (FF_Office, Lights)
-Switch Light_FF_Child_Ceiling       "Ceiling"       (FF_Child, Lights)
+Switch Light_FF_Son_Ceiling         "Ceiling"       (FF_Son, Lights)
+Switch Light_FF_Daughter_Ceiling    "Ceiling"       (FF_Daughter, Lights)
 Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)
 
 Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)
@@ -56,7 +58,8 @@ Switch Heating_GF_Kitchen           "Kitchen"       <heating>   (GF_Kitchen, Hea
 
 Switch Heating_FF_Bath              "Bath"          <heating>   (FF_Bath, Heating)
 Switch Heating_FF_Office            "Office"        <heating>   (FF_Office, Heating)
-Switch Heating_FF_Child             "Child's Room"  <heating>   (FF_Child, Heating)
+Switch Heating_FF_Son               "Oliver's Room" <heating>   (FF_Son, Heating)
+Switch Heating_FF_Daughter          "Amelia's Room" <heating>   (FF_Daughter, Heating)
 Switch Heating_FF_Bed               "Bedroom"       <heating>   (FF_Bed, Heating)
 
 /* Rollershutters */
@@ -78,21 +81,22 @@ Number Temperature_GF_Living    "Temperature [%.1f °C]" <temperature>   (Temper
 Number Temperature_GF_Kitchen   "Temperature [%.1f °C]" <temperature>   (Temperature, GF_Kitchen, Thermostat) ["CurrentTemperature"]
 Number Temperature_FF_Bath      "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Bath)
 Number Temperature_FF_Office    "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Office)
-Number Temperature_FF_Child     "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Child)
+Number Temperature_FF_Son       "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Son)
+Number Temperature_FF_Daughter  "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Daughter)
 Number Temperature_FF_Bed       "Temperature [%.1f °C]" <temperature>   (Temperature, FF_Bed)
 
 /* Windows */
-Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"        (GF_Corridor, Windows)
-Contact Window_GF_Kitchen       "Kitchen [MAP(en.map):%s]"          (GF_Kitchen, Windows)
-Contact Window_GF_Living        "Terrace door [MAP(en.map):%s]"     (GF_Living, Windows)
-Contact Window_GF_Toilet        "Toilet [MAP(en.map):%s]"           (GF_Toilet, Windows)
+Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"     <frontdoor>  (GF_Corridor, Windows)
+Contact Window_GF_Kitchen       "Kitchen [MAP(en.map):%s]"                    (GF_Kitchen, Windows)
+Contact Window_GF_Living        "Terrace door [MAP(en.map):%s]"  <door>       (GF_Living, Windows)
+Contact Window_GF_Toilet        "Toilet [MAP(en.map):%s]"                     (GF_Toilet, Windows)
 
-Contact Window_FF_Bath          "Bath [MAP(en.map):%s]"             (FF_Bath, Windows)
-Contact Window_FF_Bed           "Bedroom [MAP(en.map):%s]"          (FF_Bed, Windows)
-Contact Window_FF_Office_Window "Office Window [MAP(en.map):%s]"    (FF_Office, Windows)
-Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"     (FF_Office, Windows)
+Contact Window_FF_Bath          "Bath [MAP(en.map):%s]"                       (FF_Bath, Windows)
+Contact Window_FF_Bed           "Bedroom [MAP(en.map):%s]"                    (FF_Bed, Windows)
+Contact Window_FF_Office_Window "Office Window [MAP(en.map):%s]"              (FF_Office, Windows)
+Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"  <door>       (FF_Office, Windows)
 
-Contact Garage_Door             "Garage Door [MAP(en.map):%s]"      (Garden, Windows)
+Contact Garage_Door             "Garage Door [MAP(en.map):%s]"   <garagedoor> (Garden, Windows)
 
 Group Weather_Chart
 Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart) { channel="yahooweather:weather:berlin:temperature" }

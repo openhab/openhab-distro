@@ -2,8 +2,8 @@ import java.util.Random
 
 var Timer timer = null
 val resList = newArrayList("640/480", "320/240", "480/360")
-val urlList = newArrayList("http://www.fillmurray.com", "http://www.fillmurray.com/g",
-                 "http://www.placecage.com", "http://www.placecage.com/c", "http://www.placecage.com/g")
+val urlList = newArrayList("https://www.fillmurray.com", "https://www.fillmurray.com/g",
+                 "https://www.placecage.com", "https://www.placecage.com/c", "https://www.placecage.com/g")
 val Random random = new Random()
 
 /**

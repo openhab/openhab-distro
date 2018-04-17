@@ -20,17 +20,17 @@ sitemap demo label="Main Menu"
 				Chart item=Weather_Chart period=W refresh=3600000 visibility=[Weather_Chart_Period==2]
 			}
 		}
-        Text label="Astronomical Data" icon="sun" {
-            Text item=Sun_Elevation
-            Text item=Sun_Azimuth
-            Text item=Sunrise_Time
-            Text item=Sunset_Time
-            Text item=Moon_Elevation
-            Text item=Moon_Azimuth
-            Text item=Moon_Phase
-        }
+		Text label="Astronomical Data" icon="sun" {
+			Text item=Sun_Elevation
+			Text item=Sun_Azimuth
+			Text item=Sunrise_Time
+			Text item=Sunset_Time
+			Text item=Moon_Elevation
+			Text item=Moon_Azimuth
+			Text item=Moon_Phase
+		}
 	}
-    Frame label="Demo" {
+	Frame label="Demo" {
 		Text item=CurrentDate
 		Text label="Group Demo" icon="firstfloor" {
 			Switch item=Lights mappings=[OFF="All Off"]
@@ -65,11 +65,11 @@ sitemap demo label="Main Menu"
 			}
 			Frame label="Multimedia Widgets" {
 				Image url="https://raw.github.com/wiki/openhab/openhab/images/features.png" label="openHAB" {
-					Text label="http://www.openHAB.org" icon="icon"
+					Text label="https://www.openHAB.org" icon="icon"
 				}
-				Video url="http://www.openhab.org/assets/smarthome.mp4"
-				Webview url="http://heise-online.mobi/" height=8
-                Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
+				Video url="https://www.openhab.org/assets/smarthome.mp4"
+				Webview url="https://en.m.wikipedia.org/w/index.php?title=Main_Page" height=8
+				Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
 			}
 		}
 	}

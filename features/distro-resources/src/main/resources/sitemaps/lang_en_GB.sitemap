@@ -1,0 +1,182 @@
+/*
+ * This sitemap file has only been created to show localized sitemaps on the demo server.
+ * For a simple setup for your home, please refer to demo.sitemap.
+ */
+
+sitemap lang_en_GB label="Main Menu"
+{
+	Frame {
+		Text label="First Floor" icon="firstfloor" {
+			Text label="Bathroom" icon="bath" {
+				Switch item=Light_FF_Bath_Ceiling label="Ceiling"
+				Switch item=Light_FF_Bath_Mirror label="Mirror"
+				Switch item=Heating_FF_Bath label="Heating"
+				Switch item=Shutter_FF_Bath label="Roller shutter"
+				Text item=Temperature_FF_Bath label="Temperature [%.1f °C]"
+				Text item=Window_FF_Bath label="Window [MAP(en.map):%s]"
+			}
+			Text label="Office" icon="office" {
+				Switch item=Light_FF_Office_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Office label="Heating"
+				Switch item=Shutter_FF_Office_Window label="Window"
+				Switch item=Shutter_FF_Office_Door label="Door"
+				Text item=Temperature_FF_Office label="Temperature [%.1f °C]"
+				Text item=Window_FF_Office_Window label="Window [MAP(en.map):%s]"
+				Text item=Window_FF_Office_Door label="Balcony Door [MAP(en.map):%s]"
+				Text item=Wifi_Level label="Wifi Level [%d/4]"
+			}
+			Text label="Oliver's Room" icon="boy_1" {
+				Switch item=Light_FF_Son_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Son label="Heating"
+				Text item=Temperature_FF_Son label="Temperature [%.1f °C]"
+			}
+			Text label="Amelia's Room" icon="boy_1" {
+				Switch item=Light_FF_Daughter_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Daughter label="Heating"
+				Text item=Temperature_FF_Daughter label="Temperature [%.1f °C]"
+			}
+			Text label="Bedroom" icon="bedroom" {
+				Switch item=Light_FF_Bed_Ceiling label="Ceiling"
+				Switch item=Heating_FF_Bed label="Heating"
+				Switch item=Shutter_FF_Bed label="Roller shutter"
+				Text item=Temperature_FF_Bed label="Temperature [%.1f °C]"
+				Text item=Window_FF_Bed label="Window [MAP(en.map):%s]"
+			}
+			Text label="Corridor" icon="corridor" {
+				Switch item=Light_FF_Corridor_Ceiling label="Ceiling"
+			}
+		}
+		Text label="Ground Floor" icon="groundfloor" {
+			Text label="Living Room" icon="video" {
+				Slider item=Light_GF_Living_Table label="Table"
+				Switch item=Heating_GF_Living label="Heating"
+				Switch item=Shutter_GF_Living label="Roller shutter"
+				Text item=Temperature_GF_Living label="Temperature [%.1f °C]"
+				Text item=Window_GF_Living label="Terrace door [MAP(en.map):%s]"
+			}
+			Text label="Kitchen" icon="kitchen" {
+				Switch item=Light_GF_Kitchen_Ceiling label="Ceiling"
+				Switch item=Light_GF_Kitchen_Table label="Table"
+				Switch item=Heating_GF_Kitchen label="Heating"
+				Switch item=Shutter_GF_Kitchen label="Roller shutter"
+				Text item=Temperature_GF_Kitchen label="Temperature [%.1f °C]"
+				Text item=Window_GF_Kitchen label="Window [MAP(en.map):%s]"
+			}
+			Text label="Toilet" icon="bath" {
+				Switch item=Light_GF_Toilet_Ceiling label="Ceiling"
+				Switch item=Light_GF_Toilet_Mirror label="Mirror"
+				Switch item=Heating_GF_Toilet label="Heating"
+				Switch item=Shutter_GF_Toilet label="Roller shutter"
+				Text item=Temperature_GF_Toilet label="Temperature [%.1f °C]"
+				Text item=Window_GF_Toilet label="Window [MAP(en.map):%s]"
+			}
+			Text label="Corridor" icon="corridor" {
+				Switch item=Light_GF_Corridor_Ceiling label="Ceiling"
+				Switch item=Light_GF_Corridor_Wardrobe label="Wardrobe"
+				Switch item=Heating_GF_Corridor label="Heating"
+				Text item=Temperature_GF_Corridor label="Temperature [%.1f °C]"
+				Text item=Window_GF_Frontdoor label="Frontdoor [MAP(en.map):%s]"
+			}
+		}
+		Text label="Cellar" icon="cellar" {
+			Switch item=Light_C_Corridor_Ceiling label="Ceiling"
+			Switch item=Light_C_Staircase label="Staircase"
+			Switch item=Light_C_Washing_Ceiling label="Washing"
+			Switch item=Light_C_Workshop label="Workshop"
+		}
+		Text label="Garden" icon="garden" {
+			Switch item=Light_Garden_Garage label="Garage"
+			Switch item=Light_Garden_Terrace label="Terrace"
+			Text item=Garage_Door label="Garage Door [MAP(en.map):%s]"
+		}
+	}
+	Frame label="Weather" {
+		Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="NULL"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] label="Outside Temperature [%.1f °C]" {
+			Frame {
+				Text item=Weather_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] label="Todays Maximum [%.1f °C]"
+				Text item=Weather_Temp_Min valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"] label="Todays Minimum [%.1f °C]"
+				Text item=Weather_LastUpdate visibility=[Weather_LastUpdate>30] valuecolor=[Weather_LastUpdate>120="orange", Weather_LastUpdate>300="red"] label="Chart Period"
+			}
+			Frame {
+				Switch item=Weather_Chart_Period label="Chart Period" icon="chart" mappings=[0="Hour", 1="Day", 2="Week"]
+				Chart item=Weather_Chart period=h refresh=600000 visibility=[Weather_Chart_Period==0, Weather_Chart_Period=="NULL"]
+				Chart item=Weather_Chart period=D refresh=3600000 visibility=[Weather_Chart_Period==1]
+				Chart item=Weather_Chart period=W refresh=3600000 visibility=[Weather_Chart_Period==2]
+			}
+		}
+		Text label="Astronomical Data" icon="sun" {
+			Text item=Sun_Elevation label="Sun Elevation"
+			Text item=Sun_Azimuth label="Sun Azimuth"
+			Text item=Sunrise_Time label="Sunrise [%1$tH:%1$tM]"
+			Text item=Sunset_Time label="Sunset [%1$tH:%1$tM]"
+			Text item=Moon_Elevation label="Moon Elevation"
+			Text item=Moon_Azimuth label="Moon Azimuth"
+			Text item=Moon_Phase label="Moon Phase"
+		}
+	}
+	Frame label="Demo" {
+		Text item=CurrentDate label="Date [%1$tA, %1$td.%1$tm.%1$tY]"
+		Text label="Group Demo" icon="firstfloor" {
+			Switch item=Lights mappings=[OFF="All Off"] label="All Lights [(%d)]"
+			Text item=Heating label="No. of Active Heatings [(%d)]" {
+				Switch item=Heating_FF_Bath label="Bath"
+				Switch item=Heating_FF_Office label="Office"
+				Switch item=Heating_FF_Son label="Oliver's Room"
+				Switch item=Heating_FF_Daughter label="Amelia's Room"
+				Switch item=Heating_FF_Bed label="Bedroom"
+				Switch item=Heating_GF_Living label="Living Room"
+				Switch item=Heating_GF_Kitchen label="Kitchen"
+				Switch item=Heating_GF_Toilet label="Toilet"
+				Switch item=Heating_GF_Corridor label="Corridor"
+			}
+			Text item=Windows label="Open windows [(%d)]" {
+				Text item=Window_FF_Bath label="Bath [MAP(en.map):%s]"
+				Text item=Window_FF_Office_Window label="Office [MAP(en.map):%s]"
+				Text item=Window_FF_Office_Door label="Balcony Door [MAP(en.map):%s]"
+				Text item=Window_FF_Bed label="Bedroom [MAP(en.map):%s]"
+				Text item=Window_GF_Living label="Terrace Door [MAP(en.map):%s]"
+				Text item=Window_GF_Kitchen label="Kitchen [MAP(en.map):%s]"
+				Text item=Window_GF_Toilet label="Toilet [MAP(en.map):%s]"
+				Text item=Window_GF_Frontdoor label="Frontdoor [MAP(en.map):%s]"
+				Text item=Garage_Door label="Garage Door [MAP(en.map):%s]"
+			}
+			Text item=Temperature label="Avg. Room Temperature [%.1f °C]"
+		}
+		Text label="Widget Overview" icon="chart" {
+			Frame label="Binary Widgets" {
+				Switch item=DemoSwitch label="Toggle Switch"
+				Switch item=DemoSwitch label="Button Switch" mappings=[ON="On"]
+			}
+			Frame label="Discrete Widgets" {
+				Selection item=Scene_General label="Scene Selection" mappings=[0=off, 1=TV, 2=Dinner, 3=Reading]
+				Switch item=Scene_General label="Scene" mappings=[1=TV, 2=Dinner, 3=Reading]
+				Setpoint item=Temperature_Setpoint label="Temperature [%.1f °C]" minValue=16 maxValue=28 step=0.5
+			}
+			Frame label="Percent-based Widgets" {
+				Slider item=DimmedLight switchSupport label="Dimmer [%d %%]"
+				Colorpicker item=RGBLight icon="slider" label="RGB Light"
+				Switch item=DemoShutter label="Roller Shutter"
+				Slider item=DemoBlinds label="Blinds [%d %%]"
+			}
+			Frame label="Map/Location" {
+				Mapview item=DemoLocation height=10 label="Brandenburg Gate Berlin"
+			}
+		}
+		Text label="Multimedia" icon="video" {
+			Frame label="Radio Control" {
+				Selection item=Radio_Station label="Radio" mappings=[0=off, 1=HR3, 2=SWR3, 3=FFH]
+				Slider item=Volume icon="soundvolume" label="Volume [%.1f %%]"
+			}
+			Frame label="Multimedia Widgets" {
+				Image url="https://raw.github.com/wiki/openhab/openhab/images/features.png" label="openHAB" {
+					Text label="https://www.openHAB.org" icon="icon"
+				}
+				Video url="https://www.openhab.org/assets/smarthome.mp4"
+				Webview url="https://en.m.wikipedia.org/w/index.php?title=Main_Page" height=8
+				Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
+			}
+		}
+	}
+}
+
+// vim: syntax=Xtend
