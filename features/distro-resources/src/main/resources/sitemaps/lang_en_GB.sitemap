@@ -1,4 +1,9 @@
-sitemap en_GB label="Main Menu"
+/*
+ * This sitemap file has only been created to show localized sitemaps on the demo server.
+ * For a simple setup for your home, please refer to demo.sitemap.
+ */
+
+sitemap lang_en_GB label="Main Menu"
 {
 	Frame {
 		Text label="First Floor" icon="firstfloor" {
