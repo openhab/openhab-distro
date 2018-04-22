@@ -6,6 +6,7 @@
     <feature name="openhab-binding-zigbee" description="ZigBee Binding" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>openhab-transport-serial</feature>
+        <feature>esh-config-discovery-usbserial</feature>
         <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee/1.0.8</bundle>
         <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.cc2531/1.0.8</bundle>
         <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.ember/1.0.8</bundle>
