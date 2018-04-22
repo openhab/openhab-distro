@@ -80,7 +80,7 @@
         Write-Output "timestamp=$timestamp" | Add-Content "$TempDir\backup.properties"
         Write-Output "user=openhab" | Add-Content "$TempDir\backup.properties"
         Write-Output "group=openhab" | Add-Content "$TempDir\backup.properties"
-        
+
         Write-Host -ForegroundColor Cyan "Copying userdata and conf folder contents to temp directory"
         mkdir "$TempDir\userdata" | Out-Null
         Copy-Item $OHUserdata $TempDir -Recurse -Force
@@ -88,18 +88,9 @@
         Copy-Item $OHConf $TempDir -Recurse -Force
 
         Write-Host -ForegroundColor Cyan "Removing unnecessary files..."
-        Remove-Item ($TempDir + '\userdata\etc\all.policy') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\branding.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\branding-ssh.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\config.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\custom.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\distribution.info') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\jre.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\org.ops4j.pax.url.mvn.cfg') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\profile.cfg') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\startup.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\version.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
+        foreach($FileName in Get-Content "$OHDirectory\runtime\bin\userdata_sysfiles.lst"){
+            Remove-Item ($TempDir + '\userdata\etc\' + $FileName) -ErrorAction SilentlyContinue
+        }
         Remove-Item ($TempDir + '\userdata\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($TempDir + '\userdata\tmp') -Recurse -ErrorAction SilentlyContinue
 
@@ -113,7 +104,7 @@
 
         Write-Host -ForegroundColor Cyan "Removing temp files..."
         Remove-Item $TempDir -Recurse -ErrorAction SilentlyContinue
-        
+
         Write-Host -ForegroundColor Green "Backup created at $OHBackups\openhab2-backup-$timestamp.zip"
     }
 }

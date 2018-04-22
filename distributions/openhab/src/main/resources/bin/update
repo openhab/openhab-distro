@@ -28,14 +28,14 @@ setup(){
 
   ## Second parameter can be the openHAB path, if not assume the script is called from root!
   if [ -z "$2" ]; then
-    if [ -n "$OPENHAB_HOME" ]; then 
+    if [ -n "$OPENHAB_HOME" ]; then
       WorkingDir="$OPENHAB_HOME"
       DirError="'OPENHAB_HOME' does not point towards openHAB's root directory."
     else
       WorkingDir="."
       DirError="The script must be called from openHAB's root directory."
     fi
-  else 
+  else
     WorkingDir="$2"
     DirError="The specified directory is not openHAB's root directory."
   fi
@@ -259,22 +259,21 @@ echo ""
 echo "Removing openHAB System Files..."
 mkdir -p "$TempDir/runtime"
 mkdir -p "$TempDir/userdata/etc"
-mv "$WorkingDir/runtime"                                "$TempDir/runtime/"
-mv "$WorkingDir/userdata/etc/all.policy"                "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/branding.properties"       "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/branding-ssh.properties"   "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/config.properties"         "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/custom.properties"         "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/custom.system.properties"  "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/distribution.info"         "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/jre.properties"            "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/org.apache.karaf"*         "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/org.apache.felix"*         "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/org.ops4j.pax.url.mvn.cfg" "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/profile.cfg"               "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/startup.properties"        "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/system.properties"         "$TempDir/userdata/etc/"
-mv "$WorkingDir/userdata/etc/version.properties"        "$TempDir/userdata/etc/"
+mv "$WorkingDir/runtime" "$TempDir/runtime/"
+
+## Go through a list of system files that are stored in the update archive.
+echo "New system filelist required, extracting from zip..."
+unzip -qp "$OutputFile" runtime/bin/userdata_sysfiles.lst > "$TempDir/filelist.lst" || {
+  echo "System Filelist not found in update, exiting..."
+  exit 1
+}
+while IFS= read -r fileName
+do
+  fullPath="$WorkingDir/userdata/etc/$fileName"
+  if [ -f "$fullPath" ]; then
+    mv "$fullPath" "$TempDir/userdata/etc/"
+  fi
+done < "$TempDir/filelist.lst"
 
 ## Clearing the cache and tmp folders is necessary for upgrade.
 echo "Clearing cache..."

@@ -44,12 +44,16 @@ setup(){
 
   WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
 
-  if [ -z "$OPENHAB_CONF" ];       then OPENHAB_CONF="$WorkingDir/conf"; fi
-  if [ -z "$OPENHAB_USERDATA" ];   then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
-  if [ -z "$OPENHAB_BACKUPS" ];     then OPENHAB_BACKUPS="$WorkingDir/backups"; fi
+  if [ -z "$OPENHAB_CONF" ];  then OPENHAB_CONF="$WorkingDir/conf"; fi
+  if [ -z "$OPENHAB_USERDATA" ]; then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
+  if [ -z "$OPENHAB_BACKUPS" ]; then OPENHAB_BACKUPS="$WorkingDir/backups"; fi
+  if [ -z "$OPENHAB_RUNTIME" ]; then OPENHAB_RUNTIME="$WorkingDir/runtime"; fi
 
   echo "Using '$OPENHAB_CONF' as conf folder..."
   echo "Using '$OPENHAB_USERDATA' as userdata folder..."
+  echo "Using '$OPENHAB_RUNTIME' as runtime folder..."
+
+  fileList="$OPENHAB_RUNTIME/bin/userdata_sysfiles.lst"
 
   timestamp=$(date +"%y_%m_%d-%H_%M_%S")
   ## Set the filename
@@ -111,20 +115,15 @@ cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
 
 ## Remove non-transferable userdata files
 echo "Removing unnecessary files..."
-rm -rf "$TempDir/userdata/cache"
-rm -rf "$TempDir/userdata/tmp"
-rm -rf "$TempDir/userdata/etc/all.policy"
-rm -rf "$TempDir/userdata/etc/branding.properties"
-rm -rf "$TempDir/userdata/etc/branding-ssh.properties"
-rm -rf "$TempDir/userdata/etc/config.properties"
-rm -rf "$TempDir/userdata/etc/custom.properties"
-rm -rf "$TempDir/userdata/etc/version.properties"
-rm -rf "$TempDir/userdata/etc/distribution.info"
-rm -rf "$TempDir/userdata/etc/jre.properties"
-rm -rf "$TempDir/userdata/etc/profile.cfg"
-rm -rf "$TempDir/userdata/etc/startup.properties"
-rm -rf "$TempDir/userdata/etc/org.apache.karaf"*
-rm -rf "$TempDir/userdata/etc/org.ops4j.pax.url.mvn.cfg"
+if [ -f "$fileList" ]; then
+  while IFS= read -r fileName
+  do
+    rm -rf "$TempDir/userdata/etc/$fileName"
+  done < "$fileList"
+else
+  echo "System Filelist not found, exiting..."
+  exit 1
+fi
 
 ## If the backup directory is inside userdata folder do not include it
 ## Mainly for apt/rpm automatic
