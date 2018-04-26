@@ -13,6 +13,10 @@
         <feature>esh-binding-bluetooth-bluez</feature>
     </feature>
 
+    <feature name="openhab-binding-bosesoundtouch" description="Bose SoundTouch Binding" version="${project.version}">
+        <feature>esh-binding-bosesoundtouch</feature>
+    </feature>
+
     <feature name="openhab-binding-digitalstrom" description="digitalSTROM Binding" version="${project.version}">
         <feature>esh-binding-digitalstrom</feature>
     </feature>
