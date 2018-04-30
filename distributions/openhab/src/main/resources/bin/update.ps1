@@ -129,7 +129,7 @@ Function Update-openHAB {
             Write-Host -ForegroundColor Cyan "Deleting the service..."
             $service.Delete()
         }
-        
+
 
         # Checking if openHAB is running
         Write-Host -ForegroundColor Cyan "Checking whether openHAB is running..."
@@ -192,19 +192,9 @@ Function Update-openHAB {
 
         # Delete current userdata files
         Write-Host -ForegroundColor Cyan "Deleting current files in userdata that should not persist..."
-        Remove-Item ($OHDirectory + '\userdata\etc\all.policy') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\branding.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\branding-ssh.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\config.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\custom.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\distribution.info') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\jre.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\org.ops4j.pax.url.mvn.cfg') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\profile.cfg') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\startup.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\version.properties') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\org.apache.karaf*') -ErrorAction SilentlyContinue
-        Remove-Item ($OHDirectory + '\userdata\etc\org.apache.felix*') -ErrorAction SilentlyContinue
+        foreach($FileName in Get-Content "$TempDir\openhab-$OHVersion\runtime\bin\userdata_sysfiles.lst"){
+            Remove-Item "$OHDirectory\userdata\etc\$FileName" -ErrorAction SilentlyContinue
+        }
         Remove-Item ($OHDirectory + '\userdata\cache') -Recurse -ErrorAction SilentlyContinue
         Remove-Item ($OHDirectory + '\userdata\tmp') -Recurse -ErrorAction SilentlyContinue
 
