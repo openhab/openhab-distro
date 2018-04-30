@@ -37,6 +37,7 @@
             <outputDirectory>runtime</outputDirectory>
             <excludes>
                 <exclude>bin/*.bat</exclude>
+                <exclude>bin/*.lst</exclude>
             </excludes>
             <includes>
                 <include>bin/**</include>
@@ -48,8 +49,9 @@
             <includes>
                 <include>lib/**</include>
                 <include>system/**</include>
+                <include>bin/*.lst</include>
             </includes>
-            <!-- specifically fixes https://github.com/openhab/openhab-distro/issues/503 --> 
+            <!-- specifically fixes https://github.com/openhab/openhab-distro/issues/503 -->
             <fileMode>0644</fileMode>
         </fileSet>
 
