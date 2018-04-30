@@ -151,4 +151,8 @@
         <feature>esh-extensionservice-marketplace</feature>
     </feature>
 
+    <feature name="openhab-misc-mqttbroker" description="Embedded MQTT Broker" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>esh-io-mqttembeddedbroker</feature>
+    </feature>
 </features>
