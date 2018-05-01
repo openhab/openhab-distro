@@ -5,7 +5,7 @@ NOTE;*.rules files are now validated upon startup. Files with errors will from n
 
 [2.3.0]
 ALERT;Oceanic Binding: The 'softener' Thing Type no longer exists and is replaced by the 'serial' and 'ethernet' Thing Types
-ALERT;YamahaReceiver Binding: Changed configuration keys. For main Thing keys changed from `HOST` to `host`, `PORT` to `port`. For zone Thing keys changed from `ZONE` to `zone`.
+ALERT;Yamaha Receiver Binding: The setting names now use lower camel case convention. Change 'HOST' to 'host', 'PORT' to 'port' etc
 
 [[PRE]]
 [2.2.0]
