@@ -4,6 +4,7 @@ NOTE;Logging configuration has changed. 'org.ops4j.pax.logging.cfg' has been bac
 NOTE;*.rules files are now validated upon startup. Files with errors will from now on be logged and ignored by the runtime.
 
 [2.3.0]
+ALERT;Nest Binding: The 'camera' Thing Type now has channel groups. Add 'camera#' before the channel ID in the channel UID of existing camera channels
 ALERT;Oceanic Binding: The 'softener' Thing Type no longer exists and is replaced by the 'serial' and 'ethernet' Thing Types
 ALERT;Yamaha Receiver Binding: The configuration parameter names now use lower camel case convention. Change 'HOST' to 'host', 'PORT' to 'port' etc
 
