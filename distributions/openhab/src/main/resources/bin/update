@@ -134,8 +134,18 @@ runCommand() {
       mv "$param1" "$param1.bak"
     ;;
     'DELETE')
-      echo "  Deleting: $param1"
-      rm -f "$param1"
+      # We should be strict and specific here, i.e only delete one file.
+      if [ -f "$param1" ]; then
+        echo "  Deleting File: $param1"
+        rm -f "$param1"
+      fi
+    ;;
+    'DELETEDIR')
+      # We should be strict and specific here, i.e only delete one directory.
+      if [ -d "$param1" ]; then
+        echo "  Deleting Directory: $param1"
+        rm -rf "$param1"
+      fi
     ;;
     'MOVE')
       echo "  Moving:   From $param1 to $param2"

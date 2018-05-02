@@ -16,3 +16,4 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 [2.3.0]
 DELETE;$OPENHAB_USERDATA/etc/overrides.properties
 DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg
+DELETEDIR;$OPENHAB_USERDATA/kar
