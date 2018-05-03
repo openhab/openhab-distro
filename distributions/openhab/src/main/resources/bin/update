@@ -42,6 +42,13 @@ setup(){
 
   if [ -z "$OPENHAB_CONF" ];     then OPENHAB_CONF="$WorkingDir/conf"; fi
   if [ -z "$OPENHAB_USERDATA" ]; then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
+  if [ -z "$OPENHAB_LOGDIR" ]; then OPENHAB_LOGDIR="$OPENHAB_USERDATA/logs"; fi
+
+  ## Test to see if the script is being run non-interactively
+  if [ ! -t 0 ] || [ -n "$OPENHAB_NONINTERACT" ] ; then
+    exec > "$OPENHAB_LOGDIR/update.log" 2>&1
+    OPENHAB_NONINTERACT="true"
+  fi
 
   ## Check two of the standard openHAB folders to make sure we're updating the right thing.
   if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
