@@ -14,6 +14,7 @@
     </feature>
 
     <feature name="openhab-binding-bosesoundtouch" description="Bose SoundTouch Binding" version="${project.version}">
+        <feature>openhab-transport-http</feature>
         <feature>esh-binding-bosesoundtouch</feature>
     </feature>
 
