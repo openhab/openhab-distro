@@ -225,6 +225,19 @@
                 <pax.url.suffix/>
             </properties>
         </profile>
+        <profile>
+            <id>milestonebuild</id>
+            <activation>
+                <property>
+                    <name>milestone</name>
+                </property>
+            </activation>
+            <properties>
+                <build.number>Milestone Build</build.number>
+                <online.repo>https://openhab.jfrog.io/openhab/online-repo-milestone/${online.repo.version}</online.repo>
+                <pax.url.suffix/>
+            </properties>
+        </profile>
     </profiles>
 
 </project>
