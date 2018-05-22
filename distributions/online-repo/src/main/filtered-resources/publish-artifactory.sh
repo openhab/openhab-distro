@@ -3,7 +3,7 @@
 # Publish p2 repo to artifactory
 # Usage: publish-artifactory.sh user apikey  
 #
-ARTIFACTORY_URL=https://openhab.jfrog.io/openhab/online-repo-snapshot
+ARTIFACTORY_URL=${online.repo}
 ARTIFACTORY_PACKAGE=online-repo
 PACKAGE_VERSION=${online.repo.version}
 PACKAGE_ARCHIVE=online-repo-${project.version}.zip
