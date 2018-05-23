@@ -158,8 +158,6 @@ then
         case 0 : playStream(null)
         case 1 : playStream("http://metafiles.gl-systemhaus.de/hr/hr3_2.m3u")
         case 2 : playStream("http://mp3-live.swr3.de/swr3_m.m3u")
-        case 3 : playStream("http://edge.live.mp3.mdn.newmedia.nacamar.net/radioffh/livestream.mp3.m3u")
-        case 4 : playStream("http://stream.laut.fm/club93")
     }
 end
 
