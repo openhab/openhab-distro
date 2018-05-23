@@ -60,7 +60,7 @@ sitemap demo label="Main Menu"
 		}
 		Text label="Multimedia" icon="video" {
 			Frame label="Radio Control" {
-                Selection item=Radio_Station label="Radio" mappings=[0=off, 1=HR3, 2=SWR3]
+				Selection item=Radio_Station label="Radio" mappings=[0=off, 1=HR3, 2=SWR3]
 				Slider item=Volume icon="soundvolume"
 			}
 			Frame label="Multimedia Widgets" {
