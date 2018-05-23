@@ -159,12 +159,12 @@ sitemap lang_en_GB label="Main Menu"
 				Slider item=DemoBlinds label="Blinds [%d %%]"
 			}
 			Frame label="Map/Location" {
-				Mapview item=DemoLocation height=10 label="Brandenburg Gate Berlin"
+				Mapview item=DemoLocation icon=movecontrol height=10 label="Brandenburg Gate Berlin"
 			}
 		}
 		Text label="Multimedia" icon="video" {
 			Frame label="Radio Control" {
-				Selection item=Radio_Station label="Radio" mappings=[0=off, 1=HR3, 2=SWR3, 3=FFH]
+				Selection item=Radio_Station label="Radio" mappings=[0=off, 1=HR3, 2=SWR3]
 				Slider item=Volume icon="soundvolume" label="Volume [%.1f %%]"
 			}
 			Frame label="Multimedia Widgets" {
