@@ -14,15 +14,15 @@ For the latest snapshot builds, please see to our [cloudbees job](https://openha
 
 ## Getting Started
 
-Please refer to [our tutorials](http://docs.openhab.org/tutorials/) on how to get started with openHAB 2.
+Please refer to [our tutorials](https://www.openhab.org/docs/tutorial/) on how to get started with openHAB 2.
 
 ## Community: How to Get Involved
 
 As any good open source project, openHAB welcomes community participation in the project. Read more in the [how to contribute](CONTRIBUTING.md) guide.
 
-If you are a developer and want to jump right into the sources and execute openHAB from within Eclipse, please have a look at the [IDE setup](http://docs.openhab.org/developers/development/ide.html) procedures.
+If you are a developer and want to jump right into the sources and execute openHAB from within Eclipse, please have a look at the [IDE setup](https://www.openhab.org/docs/developer/development/ide.html) procedures.
 
-You can also learn [how openHAB 2 bindings are developed](http://docs.openhab.org/developers/development/bindings.html).
+You can also learn [how openHAB 2 bindings are developed](https://www.openhab.org/docs/developer/development/bindings.html).
 
 In case of problems or questions, please join our vibrant [openHAB community](https://community.openhab.org/).
 
