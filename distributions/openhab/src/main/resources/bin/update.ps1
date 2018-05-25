@@ -251,7 +251,7 @@ Function Update-openHAB {
 
         Write-Host -ForegroundColor Green "openHAB updated to version $OHVersion!"
         Write-Host -ForegroundColor Green "Run start.bat to launch it."
-        Write-Host -ForegroundColor Green "Check http://docs.openhab.org/installation/windows.html "
+        Write-Host -ForegroundColor Green "Check https://www.openhab.org/docs/installation/windows.html"
         Write-Host -ForegroundColor Green "for instructions on re-installing the Windows Service if desired"
     }
 

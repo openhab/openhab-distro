@@ -2,4 +2,4 @@ Transformations like map or jsonpath can utilize configuration files with data d
 These files have their specific file extensions and syntax definition.
 
 Check out the openHAB documentation for more details:
-http://docs.openhab.org/addons/transformations.html
+https://www.openhab.org/docs/configuration/transformations.html
