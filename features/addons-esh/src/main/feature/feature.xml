@@ -141,10 +141,20 @@
 
 	<!-- misc -->
 
-    <feature name="openhab-misc-restdocs" description="REST Documentation" version="${project.version}">
+    <feature name="openhab-misc-ruleengine" description="Rule Engine (Experimental)" version="${project.version}">
         <feature>openhab-runtime-base</feature>
-        <requirement>esh.tp;filter:="(feature=jax-rs-provider-swagger)"</requirement>
-        <bundle>mvn:org.openhab.core/org.openhab.io.rest.docs/${project.version}</bundle>
+        <feature>esh-automation-api</feature>
+        <feature>esh-automation-commands</feature>
+        <feature>esh-automation-core</feature>
+        <feature>esh-automation-module-core</feature>
+        <feature>esh-automation-module-media</feature>
+        <feature>esh-automation-module-script</feature>
+        <feature>esh-automation-module-script-defaultscope</feature>
+        <feature>esh-automation-module-script-rulesupport</feature>
+        <feature>esh-automation-module-timer</feature>
+        <feature>esh-automation-parser-gson</feature>
+        <feature>esh-automation-providers</feature>
+        <feature>esh-automation-rest</feature>
     </feature>
 
     <feature name="openhab-misc-market" description="Eclipse IoT Market" version="${project.version}">
