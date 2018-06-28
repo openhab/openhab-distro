@@ -34,11 +34,6 @@
         <feature>esh-binding-fsinternetradio</feature>
     </feature>
 
-    <feature name="openhab-binding-homematic" description="Homematic Binding" version="${project.version}">
-        <feature>openhab-transport-upnp</feature>
-        <feature>esh-binding-homematic</feature>
-    </feature>
-
     <feature name="openhab-binding-lifx" description="LIFX Binding" version="${project.version}">
         <feature>esh-binding-lifx</feature>
     </feature>
