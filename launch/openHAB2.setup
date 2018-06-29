@@ -116,7 +116,7 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.nullUncheckedConversion"
           value="ignore"/>
-       <setupTask
+      <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.parameterAssignment"
           value="warning"/>
@@ -124,7 +124,7 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.pessimisticNullAnalysisForFreeTypeVariables"
           value="ignore"/>
-       <setupTask
+      <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment"
           value="error"/>
@@ -2430,7 +2430,37 @@
     <stream
         name="master"/>
   </project>
-  <project name="4_esh"
+  <project
+        name="4_zigbee"
+        label="openHAB ZigBee binding">
+        <setupTask
+          xsi:type="git:GitCloneTask"
+          id="git.clone.zigbeebinding"
+          remoteURI="https://github.com/openhab/org.openhab.binding.zigbee.git"
+          pushURI="https://github.com/${github.user.id}/org.openhab.binding.zigbee.git">
+        <description>openHAB ZigBee binding</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup.workingsets:WorkingSetTask">
+        <workingSet
+            name="openHAB ZigBee binding"
+            id="">
+          <predicate
+              xsi:type="predicates:LocationPredicate"
+              pattern=".*/org.openhab.binding.zigbee/.*"/>
+        </workingSet>
+      </setupTask>
+      <setupTask
+          xsi:type="projects:ProjectsImportTask">
+        <sourceLocator
+            rootFolder="${git.clone.zigbeebinding.location}"
+            locateNestedProjects="true"/>
+      </setupTask>
+      <stream
+          name="master"
+          label=""/>
+  </project>
+  <project name="5_esh"
       label="Eclipse SmartHome Extensions">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2472,7 +2502,7 @@
     <stream
         name="master"/>
   </project>
-  <project name="5_core"
+  <project name="6_core"
       label="ESH + OH2 Core Bundles">
     <setupTask
         xsi:type="git:GitCloneTask"
