@@ -2402,7 +2402,7 @@
           name="OH1 Add-ons">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/openhab/bundles/.*"/>
+            pattern=".*/openhab1-addons/bundles/.*"/>
       </workingSet>
     </setupTask>
     <setupTask
