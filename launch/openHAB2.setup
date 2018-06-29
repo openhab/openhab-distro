@@ -2430,37 +2430,92 @@
     <stream
         name="master"/>
   </project>
-  <project
-        name="4_zigbee"
-        label="openHAB ZigBee binding">
-        <setupTask
-          xsi:type="git:GitCloneTask"
-          id="git.clone.zigbeebinding"
-          remoteURI="https://github.com/openhab/org.openhab.binding.zigbee.git"
-          pushURI="https://github.com/${github.user.id}/org.openhab.binding.zigbee.git">
-        <description>openHAB ZigBee binding</description>
-      </setupTask>
-      <setupTask
-          xsi:type="setup.workingsets:WorkingSetTask">
-        <workingSet
-            name="openHAB ZigBee binding"
-            id="">
-          <predicate
-              xsi:type="predicates:LocationPredicate"
-              pattern=".*/org.openhab.binding.zigbee/.*"/>
-        </workingSet>
-      </setupTask>
-      <setupTask
-          xsi:type="projects:ProjectsImportTask">
-        <sourceLocator
-            rootFolder="${git.clone.zigbeebinding.location}"
-            locateNestedProjects="true"/>
-      </setupTask>
-      <stream
-          name="master"
-          label=""/>
+  <project name="4_zigbee"
+      label="openHAB ZigBee binding">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.zigbeebinding"
+        remoteURI="https://github.com/openhab/org.openhab.binding.zigbee.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.binding.zigbee.git">
+      <description>openHAB ZigBee binding</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB ZigBee binding"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.binding.zigbee/.*"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.zigbeebinding.location}"
+          locateNestedProjects="true"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
   </project>
-  <project name="5_esh"
+  <project name="5_zwave"
+      label="openHAB Z-Wave binding">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.zwavebinding"
+        remoteURI="https://github.com/openhab/org.openhab.binding.zwave.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.binding.zwave.git">
+      <description>openHAB Z-Wave binding</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB Z-Wave binding"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.binding.zwave"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.zwavebinding.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="6_habpanel"
+      label="openHAB HABPanel">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.habpanel"
+        remoteURI="https://github.com/openhab/org.openhab.ui.habpanel.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habpanel.git">
+      <description>openHAB HABPanel</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB HABPanel"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.ui.habpanel"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.habpanel.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="7_esh"
       label="Eclipse SmartHome Extensions">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2502,7 +2557,7 @@
     <stream
         name="master"/>
   </project>
-  <project name="6_core"
+  <project name="8_core"
       label="ESH + OH2 Core Bundles">
     <setupTask
         xsi:type="git:GitCloneTask"
