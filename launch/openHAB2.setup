@@ -2515,7 +2515,35 @@
         name="master"
         label=""/>
   </project>
-  <project name="7_esh"
+  <project name="7_habmin"
+      label="openHAB HABmin">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.habmin"
+        remoteURI="https://github.com/openhab/org.openhab.ui.habmin.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habmin.git">
+      <description>openHAB HABmin</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB HABmin"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.ui.habmin"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.habmin.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="8_esh"
       label="Eclipse SmartHome Extensions">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2557,7 +2585,7 @@
     <stream
         name="master"/>
   </project>
-  <project name="8_core"
+  <project name="9_core"
       label="ESH + OH2 Core Bundles">
     <setupTask
         xsi:type="git:GitCloneTask"
