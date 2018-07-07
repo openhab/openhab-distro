@@ -2474,8 +2474,17 @@
           name="openHAB Z-Wave binding"
           id="">
         <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.binding.zwave"/>
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:LocationPredicate"
+              pattern=".*/org.openhab.binding.zwave"/>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:LocationPredicate"
+                pattern=".*/openhab1-addons/bundles/.*"/>
+          </operand>
+        </predicate>
       </workingSet>
     </setupTask>
     <setupTask
