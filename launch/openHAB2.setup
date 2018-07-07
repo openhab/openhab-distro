@@ -2496,7 +2496,35 @@
         name="master"
         label=""/>
   </project>
-  <project name="6_habpanel"
+  <project name="6_bacnet"
+      label="openHAB BACNet binding">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.bacnetbinding"
+        remoteURI="https://github.com/openhab/org.openhab.binding.bacnet.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.binding.bacnet.git">
+      <description>openHAB BACNet binding</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB BACNet binding"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.binding.bacnet"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.bacnetbinding.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="7_habpanel"
       label="openHAB HABPanel">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2524,7 +2552,7 @@
         name="master"
         label=""/>
   </project>
-  <project name="7_habmin"
+  <project name="8_habmin"
       label="openHAB HABmin">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2552,7 +2580,7 @@
         name="master"
         label=""/>
   </project>
-  <project name="8_esh"
+  <project name="9_esh"
       label="Eclipse SmartHome Extensions">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2594,7 +2622,7 @@
     <stream
         name="master"/>
   </project>
-  <project name="9_core"
+  <project name="10_core"
       label="ESH + OH2 Core Bundles">
     <setupTask
         xsi:type="git:GitCloneTask"
