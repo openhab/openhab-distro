@@ -116,7 +116,7 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.nullUncheckedConversion"
           value="ignore"/>
-       <setupTask
+      <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.parameterAssignment"
           value="warning"/>
@@ -124,7 +124,7 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.pessimisticNullAnalysisForFreeTypeVariables"
           value="ignore"/>
-       <setupTask
+      <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment"
           value="error"/>
@@ -2402,7 +2402,7 @@
           name="OH1 Add-ons">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/openhab/bundles/.*"/>
+            pattern=".*/openhab1-addons/bundles/.*"/>
       </workingSet>
     </setupTask>
     <setupTask
@@ -2430,7 +2430,157 @@
     <stream
         name="master"/>
   </project>
-  <project name="4_esh"
+  <project name="4_zigbee"
+      label="openHAB ZigBee Binding">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.zigbeebinding"
+        remoteURI="https://github.com/openhab/org.openhab.binding.zigbee.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.binding.zigbee.git">
+      <description>openHAB ZigBee Binding</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB ZigBee Binding"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.binding.zigbee/.*"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.zigbeebinding.location}"
+          locateNestedProjects="true"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="5_zwave"
+      label="openHAB Z-Wave Binding">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.zwavebinding"
+        remoteURI="https://github.com/openhab/org.openhab.binding.zwave.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.binding.zwave.git">
+      <description>openHAB Z-Wave Binding</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB Z-Wave Binding"
+          id="">
+        <predicate
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:LocationPredicate"
+              pattern=".*/org.openhab.binding.zwave"/>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:LocationPredicate"
+                pattern=".*/openhab1-addons/bundles/.*"/>
+          </operand>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.zwavebinding.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="6_bacnet"
+      label="openHAB BACNet Binding">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.bacnetbinding"
+        remoteURI="https://github.com/openhab/org.openhab.binding.bacnet.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.binding.bacnet.git">
+      <description>openHAB BACNet Binding</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB BACNet Binding"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.binding.bacnet"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.bacnetbinding.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="7_habpanel"
+      label="openHAB HABPanel">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.habpanel"
+        remoteURI="https://github.com/openhab/org.openhab.ui.habpanel.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habpanel.git">
+      <description>openHAB HABPanel</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB HABPanel"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.ui.habpanel"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.habpanel.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="8_habmin"
+      label="openHAB HABmin">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.habmin"
+        remoteURI="https://github.com/openhab/org.openhab.ui.habmin.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habmin.git">
+      <description>openHAB HABmin</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB HABmin"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.ui.habmin"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.habmin.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="9_esh"
       label="Eclipse SmartHome Extensions">
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2472,7 +2622,7 @@
     <stream
         name="master"/>
   </project>
-  <project name="5_core"
+  <project name="10_core"
       label="ESH + OH2 Core Bundles">
     <setupTask
         xsi:type="git:GitCloneTask"
