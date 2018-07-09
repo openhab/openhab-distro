@@ -2431,18 +2431,18 @@
         name="master"/>
   </project>
   <project name="4_zigbee"
-      label="openHAB ZigBee binding">
+      label="openHAB ZigBee Binding">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.zigbeebinding"
         remoteURI="https://github.com/openhab/org.openhab.binding.zigbee.git"
         pushURI="https://github.com/${github.user.id}/org.openhab.binding.zigbee.git">
-      <description>openHAB ZigBee binding</description>
+      <description>openHAB ZigBee Binding</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="openHAB ZigBee binding"
+          name="openHAB ZigBee Binding"
           id="">
         <predicate
             xsi:type="predicates:LocationPredicate"
@@ -2460,18 +2460,18 @@
         label=""/>
   </project>
   <project name="5_zwave"
-      label="openHAB Z-Wave binding">
+      label="openHAB Z-Wave Binding">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.zwavebinding"
         remoteURI="https://github.com/openhab/org.openhab.binding.zwave.git"
         pushURI="https://github.com/${github.user.id}/org.openhab.binding.zwave.git">
-      <description>openHAB Z-Wave binding</description>
+      <description>openHAB Z-Wave Binding</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="openHAB Z-Wave binding"
+          name="openHAB Z-Wave Binding"
           id="">
         <predicate
             xsi:type="predicates:AndPredicate">
@@ -2497,18 +2497,18 @@
         label=""/>
   </project>
   <project name="6_bacnet"
-      label="openHAB BACNet binding">
+      label="openHAB BACNet Binding">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.bacnetbinding"
         remoteURI="https://github.com/openhab/org.openhab.binding.bacnet.git"
         pushURI="https://github.com/${github.user.id}/org.openhab.binding.bacnet.git">
-      <description>openHAB BACNet binding</description>
+      <description>openHAB BACNet Binding</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="openHAB BACNet binding"
+          name="openHAB BACNet Binding"
           id="">
         <predicate
             xsi:type="predicates:LocationPredicate"
