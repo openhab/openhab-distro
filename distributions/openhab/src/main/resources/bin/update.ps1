@@ -167,7 +167,7 @@ Function Update-openHAB {
         # Download the selected openHAB version
         # Choose bintray for releases, cloudbees for snapshot.
         if ($Snapshot) {
-            $OHVersion = "$OHVersion-SNAPSHOT"
+            if(!$OHVersion.EndsWith("-SNAPSHOT")){ $OHVersion = "$OHVersion-SNAPSHOT" }
             $DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
             $AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
             $LegacyAddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
