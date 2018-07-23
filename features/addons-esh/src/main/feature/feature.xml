@@ -52,6 +52,7 @@
     </feature>
 
     <feature name="openhab-binding-serialbutton" description="Serial Button Binding" version="${project.version}">
+        <feature>openhab-transport-serial</feature>
         <feature>esh-binding-serialbutton</feature>
     </feature>
 
