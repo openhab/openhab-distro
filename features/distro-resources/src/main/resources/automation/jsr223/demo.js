@@ -10,13 +10,13 @@ var sRule = new SimpleRule() {
 };
 
 sRule.setTriggers([
-        new Trigger(
-            "aTimerTrigger", 
-            "timer.GenericCronTrigger", 
+    TriggerBuilder.create()
+        .withId("aTimerTrigger")
+        .withTypeUID("timer.GenericCronTrigger")
+        .withConfiguration(
             new Configuration({
                 "cronExpression": "0 * * * * ?"
-            })
-        )
+            })).build()
     ]);
 
 automationManager.addRule(sRule);
