@@ -8,6 +8,9 @@ ALERT;Nest Binding: The 'camera' Thing Type now has channel groups. Add 'camera#
 ALERT;Oceanic Binding: The 'softener' Thing Type no longer exists and is replaced by the 'serial' and 'ethernet' Thing Types
 ALERT;Yamaha Receiver Binding: The configuration parameter names now use lower camel case convention. Change 'HOST' to 'host', 'PORT' to 'port' etc
 
+[2.4.0]
+ALERT;Astro Binding: The 'kilometer' and 'miles' channels have been replaced by a new 'distance' channel
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
