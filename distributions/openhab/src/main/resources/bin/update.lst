@@ -10,6 +10,7 @@ ALERT;Yamaha Receiver Binding: The configuration parameter names now use lower c
 
 [2.4.0]
 ALERT;Astro Binding: The 'kilometer' and 'miles' channels have been replaced by a new 'distance' channel
+ALERT;Jeelink Binding: The 'currentWatt' and 'maxWatt' channels have been replaced with 'currentPower' and 'maxPower' channels
 
 [[PRE]]
 [2.2.0]
