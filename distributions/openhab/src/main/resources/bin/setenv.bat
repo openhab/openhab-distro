@@ -111,6 +111,7 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.userdata=%OPENHAB_USERDATA% ^
   -Dopenhab.logdir=%OPENHAB_LOGDIR% ^
   -Dfelix.cm.dir=%OPENHAB_USERDATA%\config ^
+  -Djava.library.path=%OPENHAB_USERDATA%\tmp\lib ^
   -Djetty.host=%HTTP_ADDRESS% ^
   -Djetty.http.compliance=RFC2616 ^
   -Dorg.ops4j.pax.web.listening.addresses=%HTTP_ADDRESS% ^
