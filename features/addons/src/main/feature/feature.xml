@@ -6,11 +6,11 @@
     <feature name="openhab-binding-zigbee" description="ZigBee Binding" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>openhab-transport-serial</feature>
-        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee/1.0.14</bundle>
-        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.cc2531/1.0.14</bundle>
-        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.ember/1.0.14</bundle>
-        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.telegesis/1.0.14</bundle>
-        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.xbee/1.0.14</bundle>
+        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee/1.1.1</bundle>
+        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.cc2531/1.1.1</bundle>
+        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.ember/1.1.1</bundle>
+        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.telegesis/1.1.1</bundle>
+        <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.xbee/1.1.1</bundle>
         <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee/${project.version}</bundle>
         <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee.cc2531/${project.version}</bundle>
         <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee.ember/${project.version}</bundle>
