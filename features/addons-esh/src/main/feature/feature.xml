@@ -115,7 +115,7 @@
 
     <!-- voice -->
 
-    <feature name="openhab-voice-mactts" description="MacOS Text-to-Speech" version="${project.version}">
+    <feature name="openhab-voice-mactts" description="macOS Text-to-Speech" version="${project.version}">
         <feature>esh-voice-mactts</feature>
     </feature>
 
