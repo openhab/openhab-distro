@@ -57,13 +57,13 @@
         <jackson.version>1.9.13</jackson.version>
         <jna.version>4.5.2</jna.version>
 
-        <karaf.version>4.1.5</karaf.version>
-        <jetty.version>9.3.21</jetty.version>
+        <karaf.version>4.2.1</karaf.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
 
         <!-- provided by Karaf -->
         <dep.slf4j.api.groupId>org.slf4j</dep.slf4j.api.groupId>
         <dep.slf4j.api.artifactId>slf4j-api</dep.slf4j.api.artifactId>
-        <dep.slf4j.api.version>1.7.7</dep.slf4j.api.version>
+        <dep.slf4j.api.version>1.7.12</dep.slf4j.api.version>
 
         <dep.org.osgi.compendium.split.groupId>tmp.need.a.home</dep.org.osgi.compendium.split.groupId>
         <dep.org.osgi.compendium.split.component.artifact>org.osgi.compendium.split.service.component</dep.org.osgi.compendium.split.component.artifact>

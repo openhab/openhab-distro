@@ -17,15 +17,25 @@
 #
 
 realpath() {
+  # Use in priority xpg4 awk or nawk on SunOS as standard awk is outdated
+  AWK=awk
+  if ${solaris}; then
+      if [ -x /usr/xpg4/bin/awk ]; then
+          AWK=/usr/xpg4/bin/awk
+      elif [ -x /usr/bin/nawk ]; then
+          AWK=/usr/bin/nawk
+      fi
+  fi
+
   READLINK_EXISTS=$(command -v readlink &> /dev/null)
-  if [ -z $READLINK_EXISTS ]; then
+  if [ -z "$READLINK_EXISTS" ]; then
     OURPWD=${PWD}
     cd "$(dirname "${1}")" || exit 2
-    LINK=$(ls -l "$(basename "${1}")" | awk -F"-> " '{print $2}')
+    LINK=$(ls -l "$(basename "${1}")" | ${AWK} -F"-> " '{print $2}')
     while [ "${LINK}" ]; do
         echo "link: ${LINK}" >&2
         cd "$(dirname "${LINK}")" || exit 2
-        LINK=$(ls -l "$(basename "${1}")" | awk -F"-> " '{print $2}')
+        LINK=$(ls -l "$(basename "${1}")" | ${AWK} -F"-> " '{print $2}')
     done
     REALPATH="${PWD}/$(basename "${1}")"
     cd "${OURPWD}" || exit 2
@@ -48,6 +58,7 @@ realpath() {
 REALNAME=$(realpath "$0")
 DIRNAME=$(dirname "${REALNAME}")
 PROGNAME=$(basename "${REALNAME}")
+LOCAL_CLASSPATH=$CLASSPATH
 
 #
 # Load common functions
@@ -89,9 +100,14 @@ checkRootInstance() {
       ROOT_INSTANCE_PID=$(sed -n -e '/item.0.pid/ s/.*\= *//p' "${KARAF_DATA}/tmp/instances/instance.properties")
       ROOT_INSTANCE_NAME=$(sed -n -e '/item.0.name/ s/.*\= *//p' "${KARAF_DATA}/tmp/instances/instance.properties")
       if [ "${ROOT_INSTANCE_PID}" -ne "0" ]; then
-          if ps p "${ROOT_INSTANCE_PID}" > /dev/null
+          if ps -p "${ROOT_INSTANCE_PID}" > /dev/null
           then
-              ROOT_INSTANCE_RUNNING=true
+              MAIN=org.apache.karaf.main.Main
+              PID_COMMAND=$("${PS_PREFIX}"ps -p "${ROOT_INSTANCE_PID}" -o args | sed 1d)
+
+              if [ "${PID_COMMAND#*$MAIN}" != "$PID_COMMAND" ]; then
+                ROOT_INSTANCE_RUNNING=true
+              fi
           fi
       fi
    fi
@@ -166,6 +182,7 @@ run() {
     fi
 
     debug=false
+    debugs=false
     nodebug=false
     while [ "${1}" != "" ]; do
         case "${1}" in
@@ -175,6 +192,11 @@ run() {
                 ;;
             'debug')
                 debug=true
+                shift
+                ;;
+            'debugs')
+                debug=true
+                debugs=true
                 shift
                 ;;
             'status')
@@ -228,7 +250,11 @@ run() {
     fi
     if ${debug}; then
         if [ "x${JAVA_DEBUG_OPTS}" = "x" ]; then
-            JAVA_DEBUG_OPTS="${DEFAULT_JAVA_DEBUG_OPTS}"
+            if ${debugs}; then
+                JAVA_DEBUG_OPTS="${DEFAULT_JAVA_DEBUGS_OPTS}"
+            else
+                JAVA_DEBUG_OPTS="${DEFAULT_JAVA_DEBUG_OPTS}"
+            fi
         fi
         JAVA_OPTS="${JAVA_DEBUG_OPTS} ${JAVA_OPTS}"
     fi
@@ -240,6 +266,10 @@ run() {
             echo "Updating libs..."
             rm -rf "${KARAF_HOME:?}/lib"
             mv -f "${KARAF_HOME:?}/lib.next" "${KARAF_HOME}/lib"
+
+            echo "Updating classpath..."
+            CLASSPATH=$LOCAL_CLASSPATH
+            setupClassPath
         fi
 
         # Ensure the log directory exists
@@ -252,19 +282,22 @@ run() {
         fi
 
         if [ "${ROOT_INSTANCE_RUNNING}" = "false" ] || [ "${CHECK_ROOT_INSTANCE_RUNNING}" = "false" ] ; then
-            if [ "${VERSION}" -gt "80" ]; then
+            if [ "${VERSION}" -gt "8" ]; then
                 ${KARAF_EXEC} "${JAVA}" ${JAVA_OPTS} \
+                    --add-reads=java.xml=java.logging \
+                    --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.1.jar \
+                    --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.1.jar \
                     --add-opens java.base/java.security=ALL-UNNAMED \
                     --add-opens java.base/java.net=ALL-UNNAMED \
                     --add-opens java.base/java.lang=ALL-UNNAMED \
                     --add-opens java.base/java.util=ALL-UNNAMED \
+                    --add-opens java.naming/javax.naming.spi=ALL-UNNAMED \
+                    --add-opens java.rmi/sun.rmi.transport.tcp=ALL-UNNAMED \
                     --add-exports=java.base/sun.net.www.protocol.http=ALL-UNNAMED \
                     --add-exports=java.base/sun.net.www.protocol.https=ALL-UNNAMED \
                     --add-exports=java.base/sun.net.www.protocol.jar=ALL-UNNAMED \
-                    --add-exports=java.xml.bind/com.sun.xml.internal.bind.v2.runtime=ALL-UNNAMED \
                     --add-exports=jdk.xml.dom/org.w3c.dom.html=ALL-UNNAMED \
                     --add-exports=jdk.naming.rmi/com.sun.jndi.url.rmi=ALL-UNNAMED \
-                    --add-modules java.xml.ws.annotation,java.corba,java.transaction,java.xml.bind,java.xml.ws \
                     -Dkaraf.instances="${KARAF_DATA}/tmp/instances" \
                     -Dkaraf.home="${KARAF_HOME}" \
                     -Dkaraf.base="${KARAF_BASE}" \
@@ -299,7 +332,7 @@ run() {
                     ${MAIN} "$@"
             fi
         else
-            die "There is a Root instance already running with name ${ROOT_INSTANCE_NAME} and pid ${ROOT_INSTANCE_PID}"
+            die "There is a Root instance already running with name ${ROOT_INSTANCE_NAME} and pid ${ROOT_INSTANCE_PID}. If you know what you are doing and want to force the run anyway, export CHECK_ROOT_INSTANCE_RUNNING=false and re run the command."
         fi
 
         KARAF_RC=$?
