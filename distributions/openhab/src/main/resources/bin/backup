@@ -55,9 +55,15 @@ setup(){
 
   fileList="$OPENHAB_RUNTIME/bin/userdata_sysfiles.lst"
 
+  ## Parse arguments
+  if [ "$1" = "--full" ] || [ "$2" = "--full" ]; then
+    echo "including cache"
+    INCLUDE_CACHE="true"
+  fi
+
   timestamp=$(date +"%y_%m_%d-%H_%M_%S")
   ## Set the filename
-  if [ -z "$1" ]; then
+  if [ -z "$1" ] || [ "$1" = "--full" ]; then
     echo "Using '$OPENHAB_BACKUPS' as backup folder..."
     OutputFile="$OPENHAB_BACKUPS/openhab2-backup-$timestamp.zip"
   else
@@ -96,7 +102,7 @@ echo "       openHAB 2.x.x backup script       "
 echo "#########################################"
 echo "                                         "
 
-setup "$1"
+setup "$1" "$2"
 
 ## Set backup properties file.
 {
@@ -109,7 +115,11 @@ setup "$1"
 ## Copy userdata and conf folders
 echo "Copying configuration to temporary folder..."
 mkdir -p "$TempDir/userdata"
-cp -a "${OPENHAB_USERDATA:?}/"*  "$TempDir/userdata"
+if [ -z "$INCLUDE_CACHE" ]; then
+  find "${OPENHAB_USERDATA:?}/"* -prune -not -path '*/tmp' -and -not -path '*/cache' | xargs -I % cp -R % "$TempDir/userdata"
+else
+  cp -a "${OPENHAB_USERDATA:?}/"*  "$TempDir/userdata"
+fi
 mkdir -p "$TempDir/conf"
 cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
 
