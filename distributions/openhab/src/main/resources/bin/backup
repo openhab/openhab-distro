@@ -12,13 +12,17 @@ getFullPath() {
 
 setup(){
   if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    echo "Usage: backup [filename]"
+    echo "Usage: backup [--full] [filename]"
     echo ""
-    echo "  e.g. ./backup                 << Makes a file with a timed filename"
-    echo "       ./backup myBackup.zip    << Makes a file called myBackup.zip"
+    echo "  e.g. ./backup                     << Makes a file with a timed filename"
+    echo "       ./backup myBackup.zip        << Makes a file called myBackup.zip"
+    echo "  e.g. ./backup --full              << Makes a full backup file with a timed filename"
+    echo "       ./backup --full myBackup.zip << Makes a full backup file called myBackup.zip"
     echo ""
     echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
     echo "from any machine to transfer your configuration across to another instance."
+    echo ""
+    echo "A full backup includes the tmp and cache directories that are normally excluded."
     echo ""
     echo "Set $OPENHAB_BACKUPS to change the default backup directory."
     exit 0
@@ -56,9 +60,10 @@ setup(){
   fileList="$OPENHAB_RUNTIME/bin/userdata_sysfiles.lst"
 
   ## Parse arguments
-  if [ "$1" = "--full" ] || [ "$2" = "--full" ]; then
+  if [ "$1" = "--full" ]; then
     echo "including cache"
     INCLUDE_CACHE="true"
+    shift
   fi
 
   timestamp=$(date +"%y_%m_%d-%H_%M_%S")
