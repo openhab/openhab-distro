@@ -121,8 +121,8 @@ export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTR
 # This avoids Karaf printing a warning message at startup.
 
 die() {
-  # echo and exit, && /bin/true delays the exit for systemd logging (workaround).
-  echo "$*" && /bin/true
+  # echo and exit, && command true delays the exit for systemd logging (workaround).
+  echo "$*" && command true
   exit 1
 }
 
