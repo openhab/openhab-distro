@@ -16,7 +16,7 @@ setup(){
     echo ""
     echo "  e.g. ./backup                     << Makes a file with a timed filename"
     echo "       ./backup myBackup.zip        << Makes a file called myBackup.zip"
-    echo "  e.g. ./backup --full              << Makes a full backup file with a timed filename"
+    echo "       ./backup --full              << Makes a full backup file with a timed filename"
     echo "       ./backup --full myBackup.zip << Makes a full backup file called myBackup.zip"
     echo ""
     echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
@@ -68,7 +68,7 @@ setup(){
 
   timestamp=$(date +"%y_%m_%d-%H_%M_%S")
   ## Set the filename
-  if [ -z "$1" ] || [ "$1" = "--full" ]; then
+  if [ -z "$1" ]; then
     echo "Using '$OPENHAB_BACKUPS' as backup folder..."
     OutputFile="$OPENHAB_BACKUPS/openhab2-backup-$timestamp.zip"
   else
