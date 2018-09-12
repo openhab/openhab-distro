@@ -1,0 +1,40 @@
+// This script overrides the default colors for the Karaf console.
+// All colors are set using the original ANSI escape code specification.
+
+// HIGHLIGHTER_COLORS overrides the colors related to console input.
+// From the Apache Felix documentation:
+//   rs : Reserved words
+//   st : Strings
+//   nu : Numbers
+//   co : Constants
+//   va : Variable
+//   vn : Variable name
+//   fu : Function
+//   bf : Bad function
+//   un : Unknown
+//   re : Repair
+
+HIGHLIGHTER_COLORS = "rs=93:st=92:nu=37:co=90:va=97:vn=37:fu=96:bf=91:re=32"
+
+// LS_COLORS overrides the colors used in the ls command output.
+// From the Apache Felix documentation:
+//   dr : Directory
+//   ex : Executable
+//   sl : Symbolic Link
+//   ot : Other
+
+//LS_COLORS = "dr=1;91:ex=1;92:sl=1;96:ot=34;43"
+
+// GREP_COLORS overrides the colors used in the grep command output.
+// From the Apache Felix documentation:
+//   mt : Hits in the text (sets both ms and mc)
+//   ms : Matching text in selected line
+//   mc : Matching text in context line
+//   fn : File names
+//   ln : Line numbers
+//   se : Selected lines
+//   sl : Whole selected line
+//   cx : Context lines
+//   rv : If set and match is inverted, the meaning of sl and cx is inverted
+
+//GREP_COLORS = "mt=1;31:fn=35:ln=32:se=36"
