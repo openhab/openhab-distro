@@ -93,7 +93,7 @@ if { %(jlineReader != null) } {
 
   complete -c shell:cd -e
   complete -c shell:cd -d "Change current directory"
-  complete -c shell:cd -a '__directories'
+  complete -c shell:cd -a 'wi = ($.commandLine wordIndex); if { %(wi==1) } { __directories } { [ ] }'
 
   complete -c shell:sleep -e
   complete -c shell:sleep -d "Pause execution for the specified amount of time"
@@ -238,5 +238,34 @@ if { %(jlineReader != null) } {
   complete -c shell:wc -s m -l chars --description "Print character count"
   complete -c shell:wc -s w -l words --description "Print word count"
   complete -c shell:wc -a '__files'
+
+  __get_scr_components = {
+	list = [ ]
+    scrref = ($.context getServiceReference org.osgi.service.component.runtime.ServiceComponentRuntime)
+    scr = ($.context getService $scrref)
+	each ($scr getComponentDescriptionDTOs ($.context bundles)) {
+		$list add ((($it getClass) getField "name") get $it)
+	}
+	$.context ungetService $scrref
+	$list
+  }
+
+  complete -c scr:config -e
+  complete -c scr:config -d "Show the current SCR configuration"
+
+  complete -c scr:disable -e
+  complete -c scr:disable -d "Disable an enabled component"
+  complete -c scr:disable -a '__get_scr_components'
+
+  complete -c scr:enable -e
+  complete -c scr:enable -d "Enable an disabled component"
+  complete -c scr:enable -a '__get_scr_components'
+
+  complete -c scr:info -e
+  complete -c scr:info -d "Dump information of a component or component configuration"
+  complete -c scr:info -a '__get_scr_components'
+
+  complete -c scr:list -e
+  complete -c scr:list -d "List component configurations of a specific bundle"
 
 }
