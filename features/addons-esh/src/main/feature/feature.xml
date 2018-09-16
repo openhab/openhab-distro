@@ -51,6 +51,10 @@
         <feature>esh-binding-ntp</feature>
     </feature>
 
+    <feature name="openhab-binding-onewire" description="OneWire Binding" version="${project.version}">
+        <feature>esh-binding-onewire</feature>
+    </feature>
+
     <feature name="openhab-binding-serialbutton" description="Serial Button Binding" version="${project.version}">
         <feature>openhab-transport-serial</feature>
         <feature>esh-binding-serialbutton</feature>
