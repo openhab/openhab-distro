@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="187">
+<?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="188">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.feature.p2.feature.group" version="0.0.0"/>
@@ -15,12 +15,9 @@
 <repository location="http://download.eclipse.org/smarthome/updates-stable/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.openhab.deps.runtime.feature.group" version="0.0.0"/>
 <unit id="org.openhab.deps.test.feature.group" version="0.0.0"/>
-<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.31"/>
+<repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.32"/>
 </location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
