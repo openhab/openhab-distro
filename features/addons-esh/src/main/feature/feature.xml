@@ -67,7 +67,8 @@
         </config>
     </feature>
 
-    <feature name="openhab-binding-tradfri" description="Trådfri Binding" version="${project.version}">
+    <feature name="openhab-binding-tradfri" description="TRÅDFRI Binding" version="${project.version}">
+        <feature>openhab-transport-coap</feature>
         <feature>esh-binding-tradfri</feature>
     </feature>
 
