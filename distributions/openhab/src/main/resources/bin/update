@@ -72,14 +72,18 @@ setup(){
     FirstPart="$(echo "$CurrentVersion" | awk -F'.' '{print $1}')"
     SecondPart="$(echo "$CurrentVersion" | awk -F'.' '{print $2}')"
     ThirdPart="$(echo "$CurrentVersion" | awk -F'.' '{print $3}')"
+    FourthPart="$(echo "$CurrentVersion" | awk -F'.' '{print $4}')"
     if test "${ThirdPart#*-SNAPSHOT}" != "$ThirdPart"; then
       OHVersion="$CurrentVersion"
+    elif [ -n "$FourthPart" ]; then
+      OHVersion="$FirstPart.$SecondPart.$ThirdPart"
     else
       OHVersion="$FirstPart.$((SecondPart + 1)).$ThirdPart"
     fi
   fi
 
-  ## Choose bintray for releases, cloudbees for snapshot.
+  milestoneVersion="$(echo "$OHVersion" | awk -F'.' '{print $4}')"
+  ## Choose bintray for releases, cloudbees for snapshot and artifactory for milestones or release candidates.
   if test "${OHVersion#*-SNAPSHOT}" != "$OHVersion"; then
     DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
     AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
@@ -87,6 +91,10 @@ setup(){
   elif [ "$OHVersion" = "$CurrentVersion" ]; then
     echo "You are already on openHAB $CurrentVersion" >&2
     exit 1
+  elif [ -n "$milestoneVersion" ]; then
+    DownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab/$OHVersion/openhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons/$OHVersion/openhab-addons-$OHVersion.kar"
+    LegacyAddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons-legacy/$OHVersion/openhab-addons-legacy-$OHVersion.kar"
   else
     DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
     AddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
@@ -234,7 +242,7 @@ download "$SkipModifier"
 transferFile="update.lst"
 CurrentVersionNumber=$(getVersionNumber "$CurrentVersion")
 case $CurrentVersion in
-  *"-"*) CurrentVersionNumber=$((CurrentVersionNumber-1));;
+  *"-"* | *"."*"."*"."*) CurrentVersionNumber=$((CurrentVersionNumber-1));;
 esac
 
 
