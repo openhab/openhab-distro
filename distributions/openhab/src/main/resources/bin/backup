@@ -21,6 +21,7 @@ setup(){
     echo "from any machine to transfer your configuration across to another instance."
     echo ""
     echo "Set $OPENHAB_BACKUPS to change the default backup directory."
+    echo "Set $OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
     exit 0
   fi
 
@@ -79,12 +80,20 @@ setup(){
   CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
 
   ## Store anything in temporary folders
-  TempDir="/tmp/openhab2/backup"
-  echo "Making Temporary Directory"
-  mkdir -p "$TempDir" || {
+  # Check if we should use TempDir from env $OPENHAB_BACKUPS_TEMP
+  if [ -n "${OPENHAB_BACKUPS_TEMP}" ]; then
+    TempDir="$OPENHAB_BACKUPS_TEMP"; 
+  else 
+    TempDir="/tmp/openhab2/backup" 
+  fi
+  echo "Making Temporary Directory if it is not already there"
+  if [ ! -d "$TempDir" ]; then
+    mkdir -p "$TempDir" || {
     echo "Failed to make temporary directory: $TempDir" >&2
     exit 1
-  }
+    }
+  fi
+  echo "Using $TempDir as TempDir"
 
   ## Clear older stuff if it exists
   rm -rf "${TempDir:?}/"*
@@ -146,7 +155,7 @@ echo "Zipping folder..."
 ) || exit 1
 
 echo "Removing temporary files..."
-rm -rf /tmp/openhab2
+rm -rf $TempDir
 
 echo "Success! Backup made in $OutputFile"
 echo ""
