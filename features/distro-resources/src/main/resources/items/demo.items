@@ -63,14 +63,14 @@ Switch Heating_FF_Daughter          "Amelia's Room" <heating>   (FF_Daughter, He
 Switch Heating_FF_Bed               "Bedroom"       <heating>   (FF_Bed, Heating)       ["HVAC"]
 
 /* Rollershutters */
-Rollershutter Shutter_GF_Toilet         "Toilet"        (GF_Toilet, Shutters)   ["Shutters"]
-Rollershutter Shutter_GF_Kitchen        "Kitchen"       (GF_Kitchen, Shutters)  ["Shutters"]
-Rollershutter Shutter_GF_Living         "Livingroom"    (GF_Living, Shutters)   ["Shutters"]
+Rollershutter Shutter_GF_Toilet         "Toilet"        (GF_Toilet, Shutters)   ["Blinds"]
+Rollershutter Shutter_GF_Kitchen        "Kitchen"       (GF_Kitchen, Shutters)  ["Blinds"]
+Rollershutter Shutter_GF_Living         "Livingroom"    (GF_Living, Shutters)   ["Blinds"]
 
-Rollershutter Shutter_FF_Bed            "Bedroom"       (FF_Bed, Shutters)      ["Shutters"]
-Rollershutter Shutter_FF_Bath           "Bath"          (FF_Bath, Shutters)     ["Shutters"]
-Rollershutter Shutter_FF_Office_Window  "Office Window" (FF_Office, Shutters)   ["Shutters"]
-Rollershutter Shutter_FF_Office_Door    "Office Door"   (FF_Office, Shutters)   ["Shutters"]
+Rollershutter Shutter_FF_Bed            "Bedroom"       (FF_Bed, Shutters)      ["Blinds"]
+Rollershutter Shutter_FF_Bath           "Bath"          (FF_Bath, Shutters)     ["Blinds"]
+Rollershutter Shutter_FF_Office_Window  "Office Window" (FF_Office, Shutters)   ["Blinds"]
+Rollershutter Shutter_FF_Office_Door    "Office Door"   (FF_Office, Shutters)   ["Blinds"]
 
 Switch Shutter_all
 
