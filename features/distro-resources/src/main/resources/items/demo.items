@@ -9,7 +9,7 @@ Group Shutters
 
 Group GF_Living     "Living Room"   <video>     (gGF)   ["LivingRoom"]
 Group GF_Kitchen    "Kitchen"       <kitchen>   (gGF)   ["Kitchen"]
-Group GF_Toilet     "Toilet"        <bath>      (gGF)   ["Room"] { synonyms="Toilets,WC,Restroom" }
+Group GF_Toilet     "Toilet"        <bath>      (gGF)   ["Room"] { synonyms="Toilets,WC,Restroom,Bathroom" }
 Group GF_Corridor   "Corridor"      <corridor>  (gGF)   ["Corridor"]
 
 Group FF_Bath       "Bathroom"      <bath>      (gFF)   ["Bathroom"]
@@ -26,7 +26,7 @@ Group:Number:AVG                Temperature "Avg. Room Temperature [%.1f °C]"  
 Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
 
 /* Lights */
-Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)     ["Light"]
+Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)     ["Light", "Lighting"]
 Switch Light_GF_Corridor_Ceiling    "Ceiling"       (GF_Corridor, Lights)   ["Light"]
 Switch Light_GF_Kitchen_Ceiling     "Ceiling"       (GF_Kitchen, Lights)    ["Light"]
 Switch Light_GF_Kitchen_Table       "Table"         (GF_Kitchen, Lights)    ["Light"]
@@ -45,7 +45,7 @@ Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)        ["Li
 Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)            ["Light"]
 Switch Light_C_Staircase            "Staircase"     (gC, Lights)            ["Light"]
 Switch Light_C_Washing_Ceiling      "Washing"       (gC, Lights)            ["Light"]
-Switch Light_C_Workshop             "Workshop"      (gC, Lights)            ["Light"]
+Switch Light_C_Workshop             "Workshop"      (gC, Lights)            ["Light", "Lighting"]
 
 Switch Light_Garden_Garage          "Garage"        (Garden, Lights)        ["Light"]
 Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)        ["Light"]
@@ -127,8 +127,7 @@ Number Wifi_Level               "Wifi Level [%d/4]"                 <signal>    
 String ImageURL                 "Image URL [%s]"
 
 Group Thermostat                "Thermostat"            <temperature>                    ["Thermostat"]
-Dimmer Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature", "Setpoint", "Temperature"]
-                                { habot="" [ control="knob", min=15, max=35, leftIcon="mdi-thermometer", leftInverted=true ] }
+Dimmer Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature", "Setpoint", "Temperature"] { habot="" [ control="knob", min=15, max=35, leftIcon="mdi-thermometer", leftInverted=true ] }
 String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:HeatingCoolingMode", "Control"]
 
 // vim: syntax=Xtend
