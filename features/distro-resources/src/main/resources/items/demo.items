@@ -86,7 +86,7 @@ Number Temperature_FF_Daughter  "Amelia's Room [%.1f °C]"   <temperature>   (Te
 Number Temperature_FF_Bed       "Bedroom [%.1f °C]"         <temperature>   (Temperature, FF_Bed)       ["Temperature"]
 
 /* Windows */
-Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"     <frontdoor>  (GF_Corridor, Windows)    ["Frontdoor"]
+Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"     <frontdoor>  (GF_Corridor, Windows)    ["FrontDoor"]
 Contact Window_GF_Kitchen       "Kitchen [MAP(en.map):%s]"                    (GF_Kitchen, Windows)     ["Window"]
 Contact Window_GF_Living        "Terrace door [MAP(en.map):%s]"  <door>       (GF_Living, Windows)      ["Door"]
 Contact Window_GF_Toilet        "Toilet [MAP(en.map):%s]"                     (GF_Toilet, Windows)      ["Window"]
