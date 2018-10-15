@@ -9,7 +9,7 @@ Group Shutters
 
 Group GF_Living     "Living Room"   <video>     (gGF)   ["LivingRoom"]
 Group GF_Kitchen    "Kitchen"       <kitchen>   (gGF)   ["Kitchen"]
-Group GF_Toilet     "Toilet"        <bath>      (gGF)   ["Room"] { synonyms="Toilets,WC,Restroom,Bathroom" }
+Group GF_Toilet     "Toilet"        <bath>      (gGF)   ["Bathroom"] { synonyms="Toilets,WC,Restroom" }
 Group GF_Corridor   "Corridor"      <corridor>  (gGF)   ["Corridor"]
 
 Group FF_Bath       "Bathroom"      <bath>      (gFF)   ["Bathroom"]
@@ -26,29 +26,29 @@ Group:Number:AVG                Temperature "Avg. Room Temperature [%.1f °C]"  
 Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
 
 /* Lights */
-Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)     ["Light", "Lighting"]
-Switch Light_GF_Corridor_Ceiling    "Ceiling"       (GF_Corridor, Lights)   ["Light"]
-Switch Light_GF_Kitchen_Ceiling     "Ceiling"       (GF_Kitchen, Lights)    ["Light"]
-Switch Light_GF_Kitchen_Table       "Table"         (GF_Kitchen, Lights)    ["Light"]
-Switch Light_GF_Corridor_Wardrobe   "Wardrobe"      (GF_Corridor, Lights)   ["Light"]
-Switch Light_GF_Toilet_Ceiling      "Ceiling"       (GF_Toilet, Lights)     ["Light"]
-Switch Light_GF_Toilet_Mirror       "Mirror"        (GF_Toilet, Lights)     ["Light"]
+Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)     ["Light", "Control", "Lighting"]
+Switch Light_GF_Corridor_Ceiling    "Ceiling"       (GF_Corridor, Lights)   ["Light", "Control"]
+Switch Light_GF_Kitchen_Ceiling     "Ceiling"       (GF_Kitchen, Lights)    ["Light", "Control"]
+Switch Light_GF_Kitchen_Table       "Table"         (GF_Kitchen, Lights)    ["Light", "Control"]
+Switch Light_GF_Corridor_Wardrobe   "Wardrobe"      (GF_Corridor, Lights)   ["Light", "Control"]
+Switch Light_GF_Toilet_Ceiling      "Ceiling"       (GF_Toilet, Lights)     ["Light", "Control"]
+Switch Light_GF_Toilet_Mirror       "Mirror"        (GF_Toilet, Lights)     ["Light", "Control"]
 
-Switch Light_FF_Bath_Ceiling        "Ceiling"       (FF_Bath, Lights)       ["Light"]
-Switch Light_FF_Bath_Mirror         "Mirror"        (FF_Bath, Lights)       ["Light"]
-Switch Light_FF_Corridor_Ceiling    "Corridor"      (FF_Corridor, Lights)   ["Light"]
-Switch Light_FF_Office_Ceiling      "Ceiling"       (FF_Office, Lights)     ["Light"]
-Switch Light_FF_Son_Ceiling         "Ceiling"       (FF_Son, Lights)        ["Light"]
-Switch Light_FF_Daughter_Ceiling    "Ceiling"       (FF_Daughter, Lights)   ["Light"]
-Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)        ["Light"]
+Switch Light_FF_Bath_Ceiling        "Ceiling"       (FF_Bath, Lights)       ["Light", "Control"]
+Switch Light_FF_Bath_Mirror         "Mirror"        (FF_Bath, Lights)       ["Light", "Control"]
+Switch Light_FF_Corridor_Ceiling    "Corridor"      (FF_Corridor, Lights)   ["Light", "Control"]
+Switch Light_FF_Office_Ceiling      "Ceiling"       (FF_Office, Lights)     ["Light", "Control"]
+Switch Light_FF_Son_Ceiling         "Ceiling"       (FF_Son, Lights)        ["Light", "Control"]
+Switch Light_FF_Daughter_Ceiling    "Ceiling"       (FF_Daughter, Lights)   ["Light", "Control"]
+Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)        ["Light", "Control"]
 
-Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)            ["Light"]
-Switch Light_C_Staircase            "Staircase"     (gC, Lights)            ["Light"]
-Switch Light_C_Washing_Ceiling      "Washing"       (gC, Lights)            ["Light"]
-Switch Light_C_Workshop             "Workshop"      (gC, Lights)            ["Light", "Lighting"]
+Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)            ["Light", "Control"]
+Switch Light_C_Staircase            "Staircase"     (gC, Lights)            ["Light", "Control"]
+Switch Light_C_Washing_Ceiling      "Washing"       (gC, Lights)            ["Light", "Control"]
+Switch Light_C_Workshop             "Workshop"      (gC, Lights)            ["Light", "Control", "Lighting"]
 
-Switch Light_Garden_Garage          "Garage"        (Garden, Lights)        ["Light"]
-Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)        ["Light"]
+Switch Light_Garden_Garage          "Garage"        (Garden, Lights)        ["Light", "Control"]
+Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)        ["Light", "Control"]
 
 /* Heating */
 Switch Heating_GF_Corridor          "Corridor"      <heating>   (GF_Corridor, Heating)  ["HVAC"]
@@ -75,15 +75,15 @@ Rollershutter Shutter_FF_Office_Door    "Office Door"   (FF_Office, Shutters)   
 Switch Shutter_all
 
 /* Indoor Temperatures */
-Number Temperature_GF_Corridor  "Corridor [%.1f °C]"        <temperature>   (Temperature, GF_Corridor)  ["Temperature"]
-Number Temperature_GF_Toilet    "Toilet [%.1f °C]"          <temperature>   (Temperature, GF_Toilet)    ["Temperature"]
-Number Temperature_GF_Living    "Living Room [%.1f °C]"     <temperature>   (Temperature, GF_Living)    ["Temperature"]
-Number Temperature_GF_Kitchen   "Kitchen [%.1f °C]"         <temperature>   (Temperature, GF_Kitchen, Thermostat) ["Temperature", "CurrentTemperature"]
-Number Temperature_FF_Bath      "Bath [%.1f °C]"            <temperature>   (Temperature, FF_Bath)      ["Temperature"]
-Number Temperature_FF_Office    "Office [%.1f °C]"          <temperature>   (Temperature, FF_Office)    ["Temperature"]
-Number Temperature_FF_Son       "Oliver's Room [%.1f °C]"   <temperature>   (Temperature, FF_Son)       ["Temperature"]
-Number Temperature_FF_Daughter  "Amelia's Room [%.1f °C]"   <temperature>   (Temperature, FF_Daughter)  ["Temperature"]
-Number Temperature_FF_Bed       "Bedroom [%.1f °C]"         <temperature>   (Temperature, FF_Bed)       ["Temperature"]
+Number Temperature_GF_Corridor  "Corridor [%.1f °C]"        <temperature>   (Temperature, GF_Corridor)  ["Temperature", "Measurement"]
+Number Temperature_GF_Toilet    "Toilet [%.1f °C]"          <temperature>   (Temperature, GF_Toilet)    ["Temperature", "Measurement"]
+Number Temperature_GF_Living    "Living Room [%.1f °C]"     <temperature>   (Temperature, GF_Living)    ["Temperature", "Measurement"]
+Number Temperature_GF_Kitchen   "Kitchen [%.1f °C]"         <temperature>   (Temperature, GF_Kitchen, Thermostat) ["Temperature", "Measurement", "CurrentTemperature"]
+Number Temperature_FF_Bath      "Bath [%.1f °C]"            <temperature>   (Temperature, FF_Bath)      ["Temperature", "Measurement"]
+Number Temperature_FF_Office    "Office [%.1f °C]"          <temperature>   (Temperature, FF_Office)    ["Temperature", "Measurement"]
+Number Temperature_FF_Son       "Oliver's Room [%.1f °C]"   <temperature>   (Temperature, FF_Son)       ["Temperature", "Measurement"]
+Number Temperature_FF_Daughter  "Amelia's Room [%.1f °C]"   <temperature>   (Temperature, FF_Daughter)  ["Temperature", "Measurement"]
+Number Temperature_FF_Bed       "Bedroom [%.1f °C]"         <temperature>   (Temperature, FF_Bed)       ["Temperature", "Measurement"]
 
 /* Windows */
 Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"     <frontdoor>  (GF_Corridor, Windows)    ["FrontDoor"]
