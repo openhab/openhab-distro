@@ -29,6 +29,11 @@
         <bundle start-level="80">mvn:org.openhab.ui/org.openhab.ui.habmin/${project.version}</bundle>
     </feature>
     
+    <feature name="openhab-ui-habot" description="HABot" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <bundle start-level="80">mvn:org.openhab.ui/org.openhab.ui.habot/${project.version}</bundle>
+    </feature>
+
     <feature name="openhab-ui-habpanel" description="HABPanel" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <bundle start-level="80">mvn:org.openhab.ui/org.openhab.ui.habpanel/${project.version}</bundle>
