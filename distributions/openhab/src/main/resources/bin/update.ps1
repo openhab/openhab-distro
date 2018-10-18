@@ -165,12 +165,12 @@ Function Update-openHAB {
 
 
         # Download the selected openHAB version
-        # Choose bintray for releases, cloudbees for snapshot.
+        # Choose bintray for releases, jenkins for snapshots.
         if ($Snapshot) {
             if(!$OHVersion.EndsWith("-SNAPSHOT")){ $OHVersion = "$OHVersion-SNAPSHOT" }
-            $DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
-            $AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
-            $LegacyAddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
+            $DownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
+            $AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
+            $LegacyAddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
             Write-Host -ForegroundColor Cyan "Downloading the openHAB $OHVersion distribution..."
             $DL = DownloadFiles $DownloadLocation "$TempDir\openhab-$OHVersion.zip" $SkipNew
             if ($DL -eq 2) {Return}

@@ -83,11 +83,11 @@ setup(){
   fi
 
   milestoneVersion="$(echo "$OHVersion" | awk -F'.' '{print $4}')"
-  ## Choose bintray for releases, cloudbees for snapshot and artifactory for milestones or release candidates.
+  ## Choose bintray for releases, jenkins for snapshots and artifactory for milestones or release candidates.
   if test "${OHVersion#*-SNAPSHOT}" != "$OHVersion"; then
-    DownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
-    AddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
-    LegacyAddonsDownloadLocation="https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
+    DownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
+    LegacyAddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
   elif [ "$OHVersion" = "$CurrentVersion" ]; then
     echo "You are already on openHAB $CurrentVersion" >&2
     exit 1

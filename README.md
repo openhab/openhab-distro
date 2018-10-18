@@ -10,7 +10,7 @@ For further Information please refer to our homepage [www.openhab.org](http://ww
 
 openHAB 2 is the successor of [openHAB 1](https://github.com/openhab/openhab/wiki). It is an open-source solution based on the [Eclipse SmartHome](https://www.eclipse.org/smarthome/) framework. It is fully written in Java and uses [Apache Karaf](http://karaf.apache.org/) together with [Eclipse Equinox](https://www.eclipse.org/equinox/) as an OSGi runtime and bundles this with [Jetty](https://www.eclipse.org/jetty/) as an HTTP server.
 
-For the latest snapshot builds, please see to our [cloudbees job](https://openhab.ci.cloudbees.com/job/openHAB-Distribution/).
+For the latest snapshot builds, please see to our [jenkins job](https://ci.openhab.org/job/openHAB-Distribution/).
 
 ## Getting Started
 
@@ -29,9 +29,6 @@ In case of problems or questions, please join our vibrant [openHAB community](ht
 ## Acknowledgements
 
 <table>
-<tr><td width=30%><img src="http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png" alt="Powered By CloudBees"></td>
-<td><a href="http://www.cloudbees.com">CloudBees</a> is providing a hosted <a href="https://openhab.ci.cloudbees.com/">Jenkins</a> through their CloudBees FOSS program.</td>
-</tr>
 <tr><td width=30%><img src="https://www.digitalocean.com/assets/media/logos-badges/png/DO_Powered_by_Badge_blue-fe4c6688.png"></td>
 <td><a href="https://www.digitalocean.com">DigitalOcean</a> sponsors our <a href="https://community.openhab.org/">community forum</a> hosting.</td>
 </tr>
