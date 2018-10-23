@@ -37,13 +37,25 @@
 	<logger name="org.eclipse.smarthome" level="DEBUG" />
 
 	<logger name="org.eclipse.jetty" level="INFO" />
-    <logger name="org.jupnp" level="ERROR"/>
- 	<!-- temporary workaround for https://github.com/openhab/jmdns/issues/12 -->
-    <logger name="javax.jmdns" level="OFF"/>
-    <logger name="javax.jmdns.impl" level="OFF"/>
-    <logger name="javax.jmdns.impl.constants" level="OFF"/>
-    <logger name="tuwien.auto.calimero" level="WARN" />
+	<logger name="org.jupnp" level="ERROR"/>
+	<!-- temporary workaround for https://github.com/openhab/jmdns/issues/12 -->
+	<logger name="javax.jmdns" level="OFF"/>
+	<logger name="javax.jmdns.impl" level="OFF"/>
+	<logger name="javax.jmdns.impl.constants" level="OFF"/>
+	<logger name="tuwien.auto.calimero" level="WARN" />
 
+	<!-- The embedded MQTT server Moquette is quite noisy -->
+	<logger name="io.moquette.spi.impl.ProtocolProcessor" level="WARN" />
+	<logger name="io.moquette.spi.impl.SessionsRepository" level="ERROR" />
+	<logger name="io.moquette.server.netty.NettyMQTTHandler" level="WARN" />
+	<logger name="io.moquette.server.netty.metrics.MQTTMessageLogger" level="WARN" />
+	<logger name="org.eclipse.smarthome.io.mqttembeddedbroker.internal.EmbeddedBrokerServiceImpl" level="DEBUG"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<!-- Bug in Moquette: https://github.com/andsel/moquette/pull/432 -->
+	<logger name="messageLogger" level="WARN" />
+	
 	<root level="INFO">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
