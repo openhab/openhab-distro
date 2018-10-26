@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>	
+<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0">	
+   <feature name="openhab-overrides" description="force to bundle packages" version="${project.version}" hidden="true">	
+    <bundle dependency="true">mvn:org.apache.karaf.shell/org.apache.karaf.shell.ssh/4.2.1-sp1</bundle>	
+  </feature>	
+</features>
