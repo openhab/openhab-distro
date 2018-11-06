@@ -1,6 +1,6 @@
 Group gFF           "First Floor"   <firstfloor>    ["FirstFloor"]
 Group gGF           "Ground Floor"  <groundfloor>   ["GroundFloor"]
-Group gC            "Cellar"        <cellar>        ["Cellar"]
+Group gC            "Cellar"        <cellar>        ["Basement"]
 Group Garden        "Garden"        <garden>        ["Garden"]
 Group Weather       "Weather"       <sun>
 
