@@ -72,6 +72,11 @@
         </config>
     </feature>
 
+    <feature name="openhab-binding-sonyaudio" description="Sony Audio Binding" version="${project.version}">
+        <feature>openhab-transport-upnp</feature>
+        <feature>esh-binding-sonyaudio</feature>
+    </feature>
+
     <feature name="openhab-binding-tradfri" description="TRÅDFRI Binding" version="${project.version}">
         <feature>openhab-transport-coap</feature>
         <feature>esh-binding-tradfri</feature>
