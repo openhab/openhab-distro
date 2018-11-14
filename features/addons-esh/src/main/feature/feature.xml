@@ -60,6 +60,10 @@
         <feature>esh-binding-onewire</feature>
     </feature>
 
+    <feature name="openhab-binding-openweathermap" description="OpenWeatherMap Binding" version="${project.version}">
+        <feature>esh-binding-openweathermap</feature>
+    </feature>
+
     <feature name="openhab-binding-serialbutton" description="Serial Button Binding" version="${project.version}">
         <feature>openhab-transport-serial</feature>
         <feature>esh-binding-serialbutton</feature>
