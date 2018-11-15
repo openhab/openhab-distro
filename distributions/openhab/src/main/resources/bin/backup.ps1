@@ -1,4 +1,7 @@
-﻿Function Backup-openHAB {
+﻿#Requires -Version 5.0
+Set-StrictMode -Version Latest
+
+Function Backup-openHAB {
     <#
     .SYNOPSIS
     Backsup openHAB files.
@@ -8,60 +11,57 @@
     The directory where openHAB is installed (default: current directory).
     .PARAMETER OHBackups
     The directory to backup the files to.
-    .PARAMETER ZipFileOut
+    .PARAMETER FileName
     The name of the zip file to create
     .EXAMPLE
     Backup an openHAB instance to a zip file
     Backup-openHAB
     .EXAMPLE
     Backup the openHAB distribution in the C:\openHAB2 directory to c:\openHAB2-backup\backup.zip
-    Backup-openHAB -OHDirectory C:\openHAB2 -OHBackups c:\openHAB2-backup -ZipFileOut backup.zip
+    Backup-openHAB -OHDirectory C:\openHAB2 -OHBackups c:\openHAB2-backup -FileName backup.zip
     #>
 
     [CmdletBinding()]
     param(
-        [Parameter(ValueFromPipeline=$True)]
+        [Parameter(ValueFromPipeline = $True)]
         [string]$OHDirectory = ".",
-        [Parameter(ValueFromPipeline=$True)]
+        [Parameter(ValueFromPipeline = $True)]
         [string]$OHBackups,
-        [Parameter(ValueFromPipeline=$True)]
-        [string]$ZipFileOut
+        [Parameter(ValueFromPipeline = $True)]
+        [string]$FileName
     )
 
     begin {}
     process {
 
-        if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
-            ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "This script must be run as an Administrator. Start PowerShell with the Run as Administrator option"
+        Import-Module $PSScriptRoot\common.psm1 -Force
+
+        Write-Host ""
+        BoxMessage "openHAB 2.x.x backup script" Magenta
+        Write-Host ""
+
+        CheckForAdmin
+
+        Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory"
+        $OHDirectory = GetOpenHABRoot $OHDirectory
+        if ($OHDirectory -eq "") {
+            return PrintAndReturn "Could not find the userdata directory! Make sure you are in the openHAB directory or specify the -OHDirectory parameter!"
+        }
+    
+        $OHConf = "$OHDirectory\conf"
+        $OHUserdata = "$OHDirectory\userdata"
+
+        if ([string]::IsNullOrEmpty($OHBackups)) {
+            $OHBackups = "$OHDirectory\backups"
         }
 
-        Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory..."
-        if (!(Test-Path "$OHDirectory\userdata") -And !(Test-Path -Path "$OHDirectory\conf")) {
-            throw "$OHDirectory\userdata doesn't exist! Make sure you are in the " +
-                "openHAB directory or specify the -OHDirectory parameter!"
-        }
-
-        if ($OHDirectory -eq '.') {$OHDirectory = pwd }
-
-        if ([Environment]::GetEnvironmentVariable("OPENHAB_CONF", "Machine")) {
-            $OHConf = [Environment]::GetEnvironmentVariable("OPENHAB_CONF", "Machine")
-        } else {
-            $OHConf = "$OHDirectory\conf"
-        }
-        if ([Environment]::GetEnvironmentVariable("OPENHAB_USERDATA", "Machine")) {
-            $OHUserdata = [Environment]::GetEnvironmentVariable("OPENHAB_USERDATA", "Machine")
-        } else {
-            $OHUserdata = "$OHDirectory\userdata"
-        }
-        if (!($OHBackups)) {
-            if ([Environment]::GetEnvironmentVariable("OPENHAB_BACKUPS", "Machine")) {
-                $OHBackups = [Environment]::GetEnvironmentVariable("OPENHAB_BACKUPS", "Machine")
-            } else {
-                $OHBackups = "$OHDirectory\backups"
-                if (!(Test-Path "$OHDirectory\backups")){
-                    mkdir "$OHBackups" | Out-Null
-                }
+        if (!(Test-Path $OHBackups -PathType Container)) {
+            try {
+                Write-Host -ForegroundColor Cyan "Creating backup directory $OHBackups"
+                CreateDirectory $OHBackups
+            }
+            catch {
+                return PrintAndReturn "Error creating backup directory $OHBackups - exiting" $_
             }
         }
 
@@ -69,42 +69,94 @@
         Write-Host -ForegroundColor Yellow "Using $OHUserdata as userdata folder"
         Write-Host -ForegroundColor Yellow "Using $OHBackups as backups folder"
 
-        $TempDir=([Environment]::GetEnvironmentVariable("TEMP", "Machine"))+"\openhab"
-        New-Item $TempDir -Type directory -Force | Out-Null
+        $TempDir = "$(GetOpenHABTempDirectory)\backup"
 
-        $VersionLine = Get-Content "$OHDirectory\userdata\etc\version.properties" | Where-Object { $_.Contains("openhab-distro")}
-        $CurrentVersionIndex = $VersionLine.IndexOf(":")
-        $CurrentVersion = $VersionLine.Substring($currentVersionIndex + 2)
-        $timestamp = Get-Date -Format yyyyMMddHHmm
-        Write-Output "version=$CurrentVersion" | Set-Content "$TempDir\backup.properties"
-        Write-Output "timestamp=$timestamp" | Add-Content "$TempDir\backup.properties"
-        Write-Output "user=openhab" | Add-Content "$TempDir\backup.properties"
-        Write-Output "group=openhab" | Add-Content "$TempDir\backup.properties"
-
-        Write-Host -ForegroundColor Cyan "Copying userdata and conf folder contents to temp directory"
-        mkdir "$TempDir\userdata" | Out-Null
-        Copy-Item $OHUserdata $TempDir -Recurse -Force
-        mkdir "$TempDir\conf" | Out-Null
-        Copy-Item $OHConf $TempDir -Recurse -Force
-
-        Write-Host -ForegroundColor Cyan "Removing unnecessary files..."
-        foreach($FileName in Get-Content "$OHDirectory\runtime\bin\userdata_sysfiles.lst"){
-            Remove-Item ($TempDir + '\userdata\etc\' + $FileName) -ErrorAction SilentlyContinue
+        try {
+            Write-Host -ForegroundColor Cyan "Creating temporary backup directory $TempDir"
+            CreateDirectory $TempDir
         }
-        Remove-Item ($TempDir + '\userdata\cache') -Recurse -ErrorAction SilentlyContinue
-        Remove-Item ($TempDir + '\userdata\tmp') -Recurse -ErrorAction SilentlyContinue
+        catch {
+            return PrintAndReturn "Error creating temporary backup directory $TempDir - exiting" $_
+        }
 
-        Write-Host -ForegroundColor Cyan "Removing backup folder from backup userdata if it exists..."
-        if (Test-Path "$TempDir\userdata\backups") {Remove-Item "$TempDir\userdata\backups" -Recurse -ErrorAction SilentlyContinue}
+        try {
+            $CurrentVersion = GetOpenHABVersion $OHDirectory
+            if ($CurrentVersion -eq "") {
+                return PrintAndReturn "Can't get the current openhab version from $OHDirectory - exiting"
+            }
 
-        Write-Host -ForegroundColor Cyan "Zipping up files..."
-        Add-Type -AssemblyName System.IO.Compression.FileSystem
-        if (!($ZipFileOut)) {$ZipFileOut = "$OHBackups\openhab2-backup-$timestamp.zip"}
-        [System.IO.Compression.ZipFile]::CreateFromDirectory($TempDir, $ZipFileOut)
+            $timestamp = Get-Date -UFormat "%y_%m_%d-%H_%M_%S"
+            $BackupProperites = "$TempDir\backup.properties"
+            try {
+                CreateFile $BackupProperites
+                Write-Output "version=$CurrentVersion" -ErrorAction Stop | Add-Content $BackupProperites -ErrorAction Stop
+                Write-Output "timestamp=$timestamp" -ErrorAction Stop | Add-Content $BackupProperites -ErrorAction Stop 
+                Write-Output "user=openhab" -ErrorAction Stop | Add-Content $BackupProperites -ErrorAction Stop
+                Write-Output "group=openhab" -ErrorAction Stop | Add-Content $BackupProperites -ErrorAction Stop
+            }
+            catch {
+                return PrintAndReturn "Can't create the temporary backup.properties file in $TempDir - exiting" $_
+            }
 
-        Write-Host -ForegroundColor Cyan "Removing temp files..."
-        Remove-Item $TempDir -Recurse -ErrorAction SilentlyContinue
+            Write-Host -ForegroundColor Cyan "Copying userdata and conf folder contents to temp directory"
+            try {
+                Copy-Item $OHUserdata $TempDir -Recurse
+                Copy-Item $OHConf $TempDir -Recurse
+            }
+            catch {
+                return PrintAndReturn "Can't copy the userdata/conf directory to the temporary directory $TempDir - exiting" $_
+            }
 
-        Write-Host -ForegroundColor Green "Backup created at $OHBackups\openhab2-backup-$timestamp.zip"
+            try {
+                Write-Host -ForegroundColor Cyan "Removing unnecessary files"
+                foreach ($sysFile in Get-Content "$OHDirectory\runtime\bin\userdata_sysfiles.lst") {
+                    DeleteIfExists "$TempDir\userdata\etc\$sysFile"
+                }
+                DeleteIfExists "$TempDir\userdata\cache"
+                DeleteIfExists "$TempDir\userdata\tmp"
+
+                Write-Host -ForegroundColor Cyan "Removing backup folder from backup userdata if it exists"
+                DeleteIfExists "$TempDir\userdata\backups"
+            }
+            catch {
+                return PrintAndReturn "Error removing unnecessary files from $TempDir - exiting" $_
+            }
+
+            if ([string]::IsNullOrEmpty($FileName)) {
+                $FileName = "$OHBackups\openhab2-backup-$timestamp.zip"
+            }
+
+            Write-Host -ForegroundColor Cyan "Zipping up files to $FileName"
+            try {
+                Compress-Archive -Path "$TempDir\*" -DestinationPath $FileName -ErrorAction Stop
+            }
+            catch {
+                return PrintAndReturn "Error zipping up files to $FileName - exiting" $_
+            }
+
+            Write-Host -ForegroundColor Green "Backup created at $FileName"
+
+        }
+        finally {
+            $parent = (Get-Item $TempDir).Parent.FullName
+
+            try {
+                Write-Host -ForegroundColor Cyan "Removing temporary directory $TempDir"
+                DeleteIfExists $TempDir
+            }
+            catch {
+                Write-Host -ForegroundColor Red "Could not delete $TempDir - delete it manually"
+            }
+
+            try {
+                if (-Not (Test-Path "$parent\*")) {
+                    Write-Host -ForegroundColor Cyan "Removing temporary directory $parent"
+                    DeleteIfExists $parent
+                }
+            }
+            catch {
+                Write-Host -ForegroundColor Red "Could not delete $parent - delete it manually"
+            }
+       }
     }
 }
