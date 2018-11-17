@@ -142,10 +142,6 @@
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
                     </bootFeatures>
-                    <libraries>
-                        <library>mvn:net.java.dev.jna/jna/${jna.version};type:=boot;export:=false</library>
-                        <library>mvn:net.java.dev.jna/jna-platform/${jna.version};type:=boot;export:=false</library>                        
-                    </libraries>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
                 </configuration>

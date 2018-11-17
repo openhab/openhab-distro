@@ -55,7 +55,6 @@
         <oh1.version>1.13.0-SNAPSHOT</oh1.version>
 
         <jackson.version>1.9.13</jackson.version>
-        <jna.version>4.5.2</jna.version>
 
         <karaf.version>4.2.1</karaf.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
