@@ -13,6 +13,8 @@ Function Backup-openHAB {
     The directory to backup the files to.
     .PARAMETER FileName
     The name of the zip file to create
+    .PARAMETER MaxFiles
+    The maximum number of files to keep
     .EXAMPLE
     Backup an openHAB instance to a zip file
     Backup-openHAB
@@ -28,7 +30,9 @@ Function Backup-openHAB {
         [Parameter(ValueFromPipeline = $True)]
         [string]$OHBackups,
         [Parameter(ValueFromPipeline = $True)]
-        [string]$FileName
+        [string]$FileName,
+        [Parameter(ValueFromPipeline = $True)]
+        [int]$MaxFiles
     )
 
     begin {}
@@ -45,29 +49,43 @@ Function Backup-openHAB {
         Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory"
         $OHDirectory = GetOpenHABRoot $OHDirectory
         if ($OHDirectory -eq "") {
-            return PrintAndReturn "Could not find the userdata directory! Make sure you are in the openHAB directory or specify the -OHDirectory parameter!"
+            exit PrintAndReturn "Could not find the userdata directory! Make sure you are in the openHAB directory or specify the -OHDirectory parameter!"
         }
     
-        $OHConf = "$OHDirectory\conf"
-        $OHUserdata = "$OHDirectory\userdata"
+        $OHConf = GetOpenHABDirectory "OPENHAB_CONF" "$OHDirectory\conf"
+        $OHUserData = GetOpenHABDirectory "OPENHAB_USERDATA" "$OHDirectory\userdata"
+        $OHRuntime = GetOpenHABDirectory "OPENHAB_RUNTIME" "$OHDirectory\runtime"
 
         if ([string]::IsNullOrEmpty($OHBackups)) {
-            $OHBackups = "$OHDirectory\backups"
+            $OHBackups = GetOpenHABDirectory "OPENHAB_BACKUPS" "$OHDirectory\backups"
         }
 
-        if (!(Test-Path $OHBackups -PathType Container)) {
+        if (-NOT (Test-Path -Path $OHConf -PathType Container)) {
+            exit PrintAndReturn "Configuration directory does not exist:  $OHConf"
+        }
+
+        if (-NOT (Test-Path -Path $OHUserData -PathType Container)) {
+            exit PrintAndReturn "Userdata directory does not exist:  $OHUserData"
+        }
+        
+        if (-NOT (Test-Path -Path $OHRuntime -PathType Container)) {
+            exit PrintAndReturn "Runtime directory does not exist:  $OHRuntime"
+        }
+        
+        if (-NOT (Test-Path -Path $OHBackups -PathType Container)) {
             try {
                 Write-Host -ForegroundColor Cyan "Creating backup directory $OHBackups"
                 CreateDirectory $OHBackups
             }
             catch {
-                return PrintAndReturn "Error creating backup directory $OHBackups - exiting" $_
+                exit PrintAndReturn "Error creating backup directory $OHBackups - exiting" $_
             }
         }
 
         Write-Host -ForegroundColor Yellow "Using $OHConf as conf folder"
-        Write-Host -ForegroundColor Yellow "Using $OHUserdata as userdata folder"
+        Write-Host -ForegroundColor Yellow "Using $OHUserData as userdata folder"
         Write-Host -ForegroundColor Yellow "Using $OHBackups as backups folder"
+        Write-Host -ForegroundColor Yellow "Using $OHRuntime as runtime folder"
 
         $TempDir = "$(GetOpenHABTempDirectory)\backup"
 
@@ -76,13 +94,13 @@ Function Backup-openHAB {
             CreateDirectory $TempDir
         }
         catch {
-            return PrintAndReturn "Error creating temporary backup directory $TempDir - exiting" $_
+            exit PrintAndReturn "Error creating temporary backup directory $TempDir - exiting" $_
         }
 
         try {
-            $CurrentVersion = GetOpenHABVersion $OHDirectory
+            $CurrentVersion = GetOpenHABVersion $OHUserData
             if ($CurrentVersion -eq "") {
-                return PrintAndReturn "Can't get the current openhab version from $OHDirectory - exiting"
+                exit PrintAndReturn "Can't get the current openhab version from $OHDirectory - exiting"
             }
 
             $timestamp = Get-Date -UFormat "%y_%m_%d-%H_%M_%S"
@@ -95,35 +113,52 @@ Function Backup-openHAB {
                 Write-Output "group=openhab" -ErrorAction Stop | Add-Content $BackupProperites -ErrorAction Stop
             }
             catch {
-                return PrintAndReturn "Can't create the temporary backup.properties file in $TempDir - exiting" $_
+                exit PrintAndReturn "Can't create the temporary backup.properties file in $TempDir - exiting" $_
             }
 
             Write-Host -ForegroundColor Cyan "Copying userdata and conf folder contents to temp directory"
             try {
-                Copy-Item $OHUserdata $TempDir -Recurse
-                Copy-Item $OHConf $TempDir -Recurse
+                Copy-Item $OHUserData $TempDir -Recurse -ErrorAction Stop
+                Copy-Item $OHConf $TempDir -Recurse -ErrorAction Stop
             }
             catch {
-                return PrintAndReturn "Can't copy the userdata/conf directory to the temporary directory $TempDir - exiting" $_
+                exit PrintAndReturn "Can't copy the userdata/conf directory to the temporary directory $TempDir - exiting" $_
             }
 
             try {
                 Write-Host -ForegroundColor Cyan "Removing unnecessary files"
-                foreach ($sysFile in Get-Content "$OHDirectory\runtime\bin\userdata_sysfiles.lst") {
+                foreach ($sysFile in Get-Content "$OHRuntime\bin\userdata_sysfiles.lst") {
                     DeleteIfExists "$TempDir\userdata\etc\$sysFile"
                 }
-                DeleteIfExists "$TempDir\userdata\cache"
-                DeleteIfExists "$TempDir\userdata\tmp"
+                DeleteIfExists "$TempDir\userdata\cache" $True
+                DeleteIfExists "$TempDir\userdata\tmp" $True
 
                 Write-Host -ForegroundColor Cyan "Removing backup folder from backup userdata if it exists"
-                DeleteIfExists "$TempDir\userdata\backups"
+                DeleteIfExists "$TempDir\userdata\backups" $True
             }
             catch {
-                return PrintAndReturn "Error removing unnecessary files from $TempDir - exiting" $_
+                exit PrintAndReturn "Error removing unnecessary files from $TempDir - exiting" $_
             }
 
             if ([string]::IsNullOrEmpty($FileName)) {
                 $FileName = "$OHBackups\openhab2-backup-$timestamp.zip"
+            } else {
+                if (-NOT $FileName.EndsWith(".zip")) {
+                    $FileName = $FileName + ".zip";
+                }
+
+                if ((Split-Path -Path $FileName) -eq "") {
+                    $FileName = "$OHBackups\$FileName"
+                }
+            }
+
+            if (Test-Path -Path $FileName) {
+                Write-Host -ForegroundColor Yellow "Backup file $FileName already exists!"
+                $confirmation = Read-Host "Do you wish to overwrite that file? [y/N]"
+                if ($confirmation -ne 'y') {
+                    exit PrintAndReturn "Cancelling backup"
+                }
+                DeleteIfExists $FileName
             }
 
             Write-Host -ForegroundColor Cyan "Zipping up files to $FileName"
@@ -131,18 +166,29 @@ Function Backup-openHAB {
                 Compress-Archive -Path "$TempDir\*" -DestinationPath $FileName -ErrorAction Stop
             }
             catch {
-                return PrintAndReturn "Error zipping up files to $FileName - exiting" $_
+                exit PrintAndReturn "Error zipping up files to $FileName - exiting" $_
             }
 
             Write-Host -ForegroundColor Green "Backup created at $FileName"
 
+            if ($MaxFiles -gt 0) {
+                Write-Host -ForegroundColor Cyan "Keeping only the last $MaxFiles backups"
+                Get-ChildItem -Path $OHBackups -Filter *.zip | Sort LastWriteTime -Descending | Select -Skip $MaxFiles | %{
+                    Write-Host -ForegroundColor Cyan "Deleting $_"
+                    DeleteIfExists $_.FullName
+                }
+            }
+        }
+        catch {
+            # No printandthrows so we are catching an unknown error
+            exit PrintAndReturn "Exception occurred backing up file" $_
         }
         finally {
             $parent = (Get-Item $TempDir).Parent.FullName
 
             try {
                 Write-Host -ForegroundColor Cyan "Removing temporary directory $TempDir"
-                DeleteIfExists $TempDir
+                DeleteIfExists $TempDir $True
             }
             catch {
                 Write-Host -ForegroundColor Red "Could not delete $TempDir - delete it manually"
@@ -151,7 +197,7 @@ Function Backup-openHAB {
             try {
                 if (-Not (Test-Path "$parent\*")) {
                     Write-Host -ForegroundColor Cyan "Removing temporary directory $parent"
-                    DeleteIfExists $parent
+                    DeleteIfExists $parent $True
                 }
             }
             catch {

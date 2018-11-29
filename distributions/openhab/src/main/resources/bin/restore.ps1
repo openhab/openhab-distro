@@ -48,7 +48,7 @@ Function Restore-openHAB {
             $StartDir = Get-Location -ErrorAction Stop 
         }
         catch {
-            return PrintAndReturn "Can't retrieve the current location - exiting" $_
+            exit PrintAndReturn "Can't retrieve the current location - exiting" $_
         }
 
         CheckForAdmin
@@ -57,18 +57,33 @@ Function Restore-openHAB {
         Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory"
         $OHDirectory = GetOpenHABRoot $OHDirectory
         if ($OHDirectory -eq "") {
-            return PrintAndReturn "Could not find the userdata directory! Make sure you are in the openHAB directory or specify the -OHDirectory parameter!"
+            exit PrintAndReturn "Could not find the userdata directory! Make sure you are in the openHAB directory or specify the -OHDirectory parameter!"
         }
     
-        $OHConf = "$OHDirectory\conf"
-        $OHUserdata = "$OHDirectory\userdata"
+        $OHConf = GetOpenHABDirectory "OPENHAB_CONF" "$OHDirectory\conf"
+        $OHUserData = GetOpenHABDirectory "OPENHAB_USERDATA" "$OHDirectory\userdata"
 
         if (([string]::IsNullOrEmpty($OHBackups))) {
-            $OHBackups = "$OHDirectory\backups"
+            $OHBackups = GetOpenHABDirectory "OPENHAB_BACKUPS" "$OHDirectory\backups"
         }
 
+        if (-NOT (Test-Path -Path $OHConf -PathType Container)) {
+            exit PrintAndReturn "Configuration directory does not exist:  $OHConf"
+        }
+
+        if (-NOT (Test-Path -Path $OHUserData -PathType Container)) {
+            exit PrintAndReturn "Userdata directory does not exist:  $OHUserData"
+        }
+        
+        if (-NOT (Test-Path -Path $OHBackups -PathType Container)) {
+            exit PrintAndReturn "Backups directory does not exist:  $OHBackups"
+        }
+        
+
         if ([string]::IsNullOrEmpty($FileName)) {
-            $FileName = Get-ChildItem -Path $OHBackups -Filter *.zip -Name | Sort-Object -desc | Select-Object -First 1
+            Write-Host -ForegroundColor Yellow "No backup file specified. Finding latest backup: " -NoNewline
+            $FileName = Get-ChildItem -Path $OHBackups -Filter *.zip | Sort LastWriteTime -Descending | Select -Exp Name -First 1
+            Write-Host -ForegroundColor Green $FileName
         }
 
         if ([string]::IsNullOrEmpty($FileName)) {
@@ -80,31 +95,32 @@ Function Restore-openHAB {
             Set-Location -Path $OHDirectory
         }
         catch {
-            return PrintAndReturn "Could not change location to $OHDirectory - exiting" $_
+            exit PrintAndReturn "Could not change location to $OHDirectory - exiting" $_
         }
 
         $TempDir = "$(GetOpenHABTempDirectory)\restore"
-        Write-Host -ForegroundColor Cyan "Creating temporary restore directort $TempDir"
+        Write-Host -ForegroundColor Cyan "Creating temporary restore directory $TempDir"
         try {
             CreateDirectory $TempDir
         }
         catch {
-            return PrintAndReturn "Could not create directory $TempDir - exiting" $_
+            exit PrintAndReturn "Could not create directory $TempDir - exiting" $_
         }
 
         Write-Host -ForegroundColor Yellow "Using $OHConf as conf folder"
-        Write-Host -ForegroundColor Yellow "Using $OHUserdata as userdata folder"
+        Write-Host -ForegroundColor Yellow "Using $OHUserData as userdata folder"
         Write-Host -ForegroundColor Yellow "Using $OHBackups as backups folder"
         Write-Host -ForegroundColor Yellow "Using $TempDir as temporary restore directory"
 
         $ArchiveName = Join-Path $OHBackups $FileName
 
+        $Failed = $False
         try {
             try {
-                Expand-Archive -Path $ArchiveName -DestinationPath $TempDir -ErrorAction Stop
+                Expand-Archive -Path $ArchiveName -DestinationPath $TempDir -Force -ErrorAction Stop
             }
             catch {
-                return PrintAndReturn "Could not unzip $ArchiveName to $TempDir - exiting" $_
+                return PrintAndThrow "Could not unzip $ArchiveName to $TempDir - exiting" $_
             }
 
             try {
@@ -129,10 +145,10 @@ Function Restore-openHAB {
                 }
             }
             catch {
-                return PrintAndReturn "Error occurred reading/processing $TempDir\backup.properties - exiting" $_
+                return PrintAndThrow "Error occurred reading/processing $TempDir\backup.properties - exiting" $_
             }
 
-            $CurrentVersion = GetOpenHABVersion $OHDirectory
+            $CurrentVersion = GetOpenHABVersion $OHUserData
 
             Write-Host ""
             Write-Host -ForegroundColor Cyan " Backup Information:"
@@ -155,53 +171,66 @@ Function Restore-openHAB {
             if (-Not $AutoConfirm) {
                 $confirmation = Read-Host "Okay to Continue? [y/N]"
                 if ($confirmation -ne 'y') {
-                    return PrintAndReturn "Cancelling restore"
+                    exit PrintAndReturn "Cancelling restore"
                 }
             }
 
-            Write-Host -ForegroundColor Cyan "Copying the $TempDir\conf to $OHDirectory"
+            Write-Host -ForegroundColor Cyan "Copying the $TempDir\conf to $OHConf"
             try {
                 # Replace the entire directory
-                DeleteIfExists $OHConf
-                Copy-Item -Path "$TempDir\conf" -Destination $OHDirectory -Force -Recurse
+                DeleteIfExists "$OHConf\*" $True
+                Copy-Item -Path "$TempDir\conf\*" -Destination $OHConf -Force -Recurse -ErrorAction Stop
             }
             catch {
-                return PrintAndReturn "Error copy $TempDir\conf to $OHDirectory - exiting" $_
+                return PrintAndThrow "Error copy $TempDir\conf to $OHConf - exiting" $_
             }
 
-            Write-Host -ForegroundColor Cyan "Copying the $TempDir\userdata to $OHDirectory"
+            Write-Host -ForegroundColor Cyan "Copying the $TempDir\userdata to $OHUserData"
             try {
-                # Remove everything not in the 'etc' directory
+                # Remove everything not in the 'etc' directory (or backups if user put the backups there)
                 # Will overwrite existing files in 'etc' leaving any non-match (ie new) files intact
-                Get-ChildItem -Path $OHUserData -Recurse -ErrorAction Stop | Where-Object FullName -NotMatch ".*\\etc\\*.*" | ForEach-Object ($_) { 
+                Get-ChildItem -Path "$OHUserData\" -Recurse -ErrorAction Stop | Where-Object { (($_.FullName -NotMatch ".*\\etc\\*.*") -and ($_.FullName -NotMatch ".*\\backups\\*.*")) }  | ForEach-Object { 
                     DeleteIfExists $_.fullname
-                    Copy-Item -Path "$TempDir\userdata" -Destination $OHDirectory -Force -Recurse -ErrorAction Stop
                 }
+                Copy-Item -Path "$TempDir\userdata\*" -Destination $OHUserData -Recurse -Force -ErrorAction Stop
             }
             catch {
-                return PrintAndReturn "Error copy $TempDir\userdata to $OHDirectory - exiting" $_
+                return PrintAndThrow "Error copy $TempDir\userdata to $OHUserData - exiting" $_
             }
 
             Write-Host -ForegroundColor Green "Restore has completed"
+        
+        } catch {
+            # Exception occurred
+            $Failed = $True
+            exit -1
         }
         finally {
-            $parent = (Get-Item $TempDir).Parent.FullName
-            try {
-                Write-Host -ForegroundColor Cyan "Removing temporary directory $TempDir"
-                DeleteIfExists $TempDir
-            }
-            catch {
-                Write-Host -ForegroundColor Red "Could not delete $TempDir - delete it manually"
+            $confirmation = 'n'
+            if ($Failed -eq $True) {
+                Write-Host -ForegroundColor Yellow "Error restoring from $TempDir"
+                $confirmation = Read-Host "Do you wish remove the temporary directory (choose 'n' to restore the files yourself)? [y/N]"
             }
 
-            try {
-                if (-Not (Test-Path "$parent\*")) {
-                    Write-Host -ForegroundColor Cyan "Removing temporary directory $parent"
-                    DeleteIfExists $parent
+            if (($Failed -eq $False) -or ($AutoConfirm -eq $True) -or ($confirmation -eq 'y')) {
+                $parent = (Get-Item $TempDir).Parent.FullName
+                try {
+                    Write-Host -ForegroundColor Cyan "Removing temporary directory $TempDir"
+                    DeleteIfExists $TempDir $True
                 }
-            }
-            catch {
-                Write-Host -ForegroundColor Red "Could not delete $parent - delete it manually"
+                catch {
+                    Write-Host -ForegroundColor Red "Could not delete $TempDir - delete it manually"
+                }
+    
+                try {
+                    if (-Not (Test-Path "$parent\*")) {
+                        Write-Host -ForegroundColor Cyan "Removing temporary directory $parent"
+                        DeleteIfExists $parent $True
+                    }
+                }
+                catch {
+                    Write-Host -ForegroundColor Red "Could not delete $parent - delete it manually"
+                }
             }
 
             Write-Host -ForegroundColor Cyan "Setting location back to $StartDir"
