@@ -363,17 +363,9 @@ Function Update-openHAB() {
 
     # Determine if it's a snapshot
     $CurrentVersionSnapshot = $False;
-    $CurrentVersionMilestone = ""
     if ($CurrentVersion.EndsWith("-SNAPSHOT")) {
         $CurrentVersionSnapshot = $True;
         $CurrentVersion = $CurrentVersion.Substring(0, $CurrentVersion.Length - "-SNAPSHOT".Length);
-    } else {
-        # Split up the current version to validate
-        $parts = $CurrentVersion.Split(".")
-        if ($parts.Length -eq 4) {
-            $CurrentVersionMilestone = $parts[3]
-            $CurrentVersion = $parts[0] + "." + $parts[1] + "." + $parts[2]`
-        }
     }
 
     # Tell the user our current version
@@ -556,7 +548,7 @@ Function Update-openHAB() {
                 # go back to our original directory so the new update script does it as well
                 Set-Location -Path $StartDir  -ErrorAction Continue 
                 . $newUpdate
-                exit Update-openHAB -OHDirectory $OHDirectory -OHVersion $OHVersion -Snapshot $Snapshot -AutoConfirm $AutoConfirm -SkipNew $true -KeepUpdateScript $KeepUpdateScript
+                exit Update-openHAB -OHDirectory $OHDirectory -OHVersion $OHVersionName -AutoConfirm $AutoConfirm -SkipNew $true -KeepUpdateScript $KeepUpdateScript
             } catch {
                 exit PrintAndReturn "Execution of new update.ps1 failed - please execute it yourself (found in $newUpdate)" $_
             }
@@ -565,8 +557,8 @@ Function Update-openHAB() {
 
     # Do the following questions after the update.ps1 check to make sure this question isn't asked twice!
 
-    # Are we resinstalling the current version (as long as it's not a snapshot or milestone)
-    if (($OHVersion -eq $CurrentVersion) -and ($Snapshot -eq $False) -and ($CurrentVersionMilestone -eq "")) {
+    # Are we resinstalling the current version (as long as it's not a snapshot)
+    if ($OHVersion -eq $CurrentVersion -and $Snapshot -eq $False) {
         if ($AutoConfirm) {
             Write-Host -ForegroundColor Magenta "Current version is equal to specified version ($OHVersionName).  ***REINSTALLING*** $OHVersionName instead (rather than upgrading)."
         } else {
