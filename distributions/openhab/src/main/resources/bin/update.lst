@@ -14,7 +14,7 @@ ALERT;Jeelink Binding: The 'currentWatt' and 'maxWatt' channels have been replac
 ALERT;WeatherUnderground Binding: A bridge has been added on top of the current things, you need to add a bridge containing your api-key.
 ALERT;ZWave Binding: Major changes have been merged to support features such as security. All things must be deleted and re-added. Refer to https://community.openhab.org/t/zwave-binding-updates/51080 for further information.
 ALERT;Synop Binding is now using UoM. 'wind-speed-ms' and 'wind-speed-knots' channels have been replaced by a single 'wind-speed' channel.
-
+ALERT;Amazonechocontrol Binding: The account thing does not have settings anymore. You have to login at amazon once again through the proxy server http(s)://<YourOpenHAB>/amazonechocontrol
 
 [[PRE]]
 [2.2.0]
