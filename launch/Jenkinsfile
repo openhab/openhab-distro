@@ -1,0 +1,246 @@
+/*
+This Jenkins pipeline does a full release build of openhab-distro including the release of all openHAB dependencies and ESH.
+It also includes all required SCM operations.
+*/
+
+try {
+    library identifier: 'openhab@master', retriever: modernSCM([$class: 'GitSCMSource', id: 'be5932e8-b631-4947-b26a-8dfa1802f1af', remote: env.GIT_BASE_URL + '/infrastructure'])
+    
+    currentBuild.displayName = OH2_RELEASE_VERSION + ' (#' + env.BUILD_NUMBER + ')'
+    
+    if(env.SANDBOX?.toBoolean() && !env.SKIP_SANDBOX_RESET?.toBoolean() && env.ALT_RELEASE_REPO_ID?.length() > 0) {
+        node {
+            delete_only_openhab = env.SKIP_ESH_BUILD?.toBoolean() ? "/openhab" : ""
+            clearOpenhabMavenRepository env.ALT_RELEASE_REPO_ID + "/org" + delete_only_openhab
+        }
+    }
+    
+    node {
+        sh "free -m"
+        if(!env.SKIP_ESH_BUILD?.toBoolean()) {
+            deleteDir()
+            releaseESH()
+        }
+    }
+    
+    // checkpoint "ESH released"
+    
+    node {
+        deleteDir()
+        installTychoVersionsHotfix()
+        releaseOpenHab2Component('openhab-core', false)
+    }
+    
+    // checkpoint "openHAB Core released"
+    
+    
+    parallel "openhab1-addons": {
+        if(!env.SKIP_OH1_BUILD?.toBoolean()) {
+            node {
+                deleteDir()
+                installTychoVersionsHotfix()
+                releaseOpenHab1Component('openhab1-addons', false)
+            }
+        }
+    },
+    "openhab2-addons": {
+        node {
+            deleteDir()
+            installTychoVersionsHotfix()
+            releaseOpenHab2Component('openhab2-addons', true)
+            releaseOpenHab2Component('org.openhab.binding.zwave', true)
+            releaseOpenHab2Component('org.openhab.binding.zigbee', true)
+            releaseOpenHab2Component('org.openhab.ui.habmin', true)
+            releaseOpenHab2Component('org.openhab.ui.habpanel', true)
+            releaseOpenHab2Component('org.openhab.ui.habot', true)
+        }    
+    }
+    // checkpoint "openHAB Add-Ons released"
+    
+    node {
+        deleteDir()
+        installTychoVersionsHotfix()
+        releaseOpenHab2Component('openhab-distro', true)
+    }
+}
+catch(Exception e) {
+    notifyFailedOpenhabBuild()
+    throw e
+}
+
+if(currentBuild.previousBuild.result.equals("FAILURE")) {
+    notifyBackToNormalOpenhabBuild()
+}
+
+
+def releaseESH() {
+    def branch = env.ESH_BRANCH ?: 'master'
+    releaseOpenHabComponent("smarthome", branch, env.ESH_RELEASE_VERSION, env.ESH_NEXT_VERSION, false, false)
+}
+
+def releaseOpenHab1Component(componentName, updateParent) {
+    def branch = env.OH1_BRANCH ?: 'master'
+    releaseOpenHabComponent(componentName, branch, env.OH1_RELEASE_VERSION, env.OH1_NEXT_VERSION, updateParent, false)
+}
+
+def releaseOpenHab2Component(componentName, updateParent) {
+    def branch = env.OH2_BRANCH ?: 'master'
+    releaseOpenHabComponent(componentName, branch, env.OH2_RELEASE_VERSION, env.OH2_NEXT_VERSION, updateParent, true)
+}
+
+def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, updateParent, updateProperties) {
+    def gitBaseUrl = env.GIT_BASE_URL
+    def gitRepoUrl = gitBaseUrl + '/' + componentName
+    
+    if(env.SANDBOX?.toBoolean() && !env.SKIP_SANDBOX_RESET?.toBoolean()) {
+        resetOpenhabFork(gitBaseUrl, componentName, releaseVersion)
+    }
+
+    withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIALS_ID, passwordVariable: 'githubPassword', usernameVariable: 'githubUser')]) {
+        withMaven(jdk: 'Oracle JDK 1.8 (latest)', maven: 'Maven 3.3.9', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
+            dir(componentName) {
+                deleteDir()
+                checkout([$class: 'GitSCM', branches: [[name: '*/' + branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: branch], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false], [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: gitRepoUrl ]]])
+                def isMilestoneBuild = releaseVersion.contains("M") || releaseVersion.contains("RC")
+                def mvnReleaseOptions = ""
+                def mvnSnapshotOptions = ""
+                def mvnOptionsMap = [:]
+                
+                mvnOptionsMap["build"] = '-DreleaseArgs=skipTests=true,skipChecks=true -DskipChecks=true -DskipTests=true -DgenerateBackupPoms=false' //
+                mvnOptionsMap["unleash"] = "-Dunleash.releaseVersion=${releaseVersion} -Dunleash.developmentVersion=${nextVersion}-SNAPSHOT -Dunleash.scmUsername="+ githubUser + " -Dunleash.scmPassword=" + githubPassword
+                if(isMilestoneBuild) {
+                    mvnOptionsMap["type"] = "-Dmilestone"
+                } else {
+                    mvnOptionsMap["type"] = "-Drelease"
+                }
+                if(env.SANDBOX?.toBoolean()) {
+                    mvnOptionsMap["sandbox"] = "-P sandbox"
+                }
+                if(env.ALT_RELEASE_REPO_ID?.length() > 0) {
+                    mvnReleaseOptions += "-DaltDeploymentRepository=" + env.ALT_RELEASE_REPO_ID + '::default::' + env.ALT_RELEASE_REPO_URL
+                }
+                if(env.ALT_SNAPSHOT_REPO_ID?.length() > 0) {
+                    mvnSnapshotOptions += "-DaltDeploymentRepository=" + env.ALT_SNAPSHOT_REPO_ID + '::default::' + env.ALT_SNAPSHOT_REPO_URL
+                }
+                mvnOptionsMap["global"] = env.GLOBAL_MAVEN_CLI_OPTS + " " + env.MAVEN_EXTRA_OPTS
+                def mvnOptions = mvnOptionsMap.values().join(" ")
+                mvnSnapshotOptions = mvnOptions + " " + mvnSnapshotOptions
+                mvnReleaseOptions = mvnOptions + " " + mvnReleaseOptions
+                
+                stage(componentName + ": Release") {
+                    writeUnleashWorkflows()
+
+                    //Set release versions
+                    if(updateProperties) {
+                        sh "mvn versions:set-property -Dproperty=esh.version -DnewVersion="+ env.ESH_RELEASE_VERSION +" " + mvnOptions
+                        sh "mvn versions:set-property -Dproperty=oh1.version -DnewVersion="+ env.OH1_RELEASE_VERSION +" " + mvnOptions
+                        sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
+                        sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
+                    }
+                    if(updateParent) {
+                        sh "mvn versions:update-parent -DparentVersion=[" + env.OH2_RELEASE_VERSION +"] " + mvnOptions
+                    }
+
+                    sh "mvn unleash:perform-tycho -Dworkflow=unleash.phase1.workflow " + mvnOptions
+                    
+                    //Build and publish artifacts
+                    sh "mvn deploy " + mvnReleaseOptions
+                    
+                    if(componentName == "openhab-distro" && !env.SANDBOX?.toBoolean()) {
+                        if(isMilestoneBuild) {
+                            withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'ARTIFACTORY_API_KEY', usernameVariable: 'ARTIFACTORY_USER')]) {
+                                sh 'chmod 744 distributions/online-repo/target/publish-artifactory.sh && ./distributions/online-repo/target/publish-artifactory.sh ' + ARTIFACTORY_USER + ' ' + ARTIFACTORY_API_KEY
+                            }
+                        }
+                        else {
+                            withCredentials([usernamePassword(credentialsId: 'bintray', passwordVariable: 'BINTRAY_API_KEY', usernameVariable: 'BINTRAY_USER')]) {
+                                sh 'chmod 744 distributions/online-repo/target/publish-bintray.sh && ./distributions/online-repo/target/publish-bintray.sh openhab ' + BINTRAY_USER + ' ' + BINTRAY_API_KEY
+                            }
+                        }                        
+                    }
+                    
+                    //Tag SCM
+                    sh "mvn unleash:perform-tycho -Dworkflow=unleash.phase2.workflow " + mvnOptions
+
+
+                    //Prevent wrong scm tag from being checked in
+                    sh 'git reset --hard ' + branch
+                }
+
+                stage(componentName + ": Prepare next version") {
+                    //Set next development versions
+                    if(!releaseVersion.startsWith(nextVersion)) {
+                        if(updateParent) {
+                            sh "mvn versions:update-parent -DallowSnapshots=true -DparentVersion=[" + env.OH2_NEXT_VERSION +"-SNAPSHOT] " + mvnOptions
+                        }
+                        if(updateProperties) {
+                            sh "mvn versions:set-property -Dproperty=esh.version -DnewVersion="+ env.ESH_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=oh1.version -DnewVersion="+ env.OH1_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                        }
+
+                        sh "mvn unleash:perform-tycho -Dworkflow=unleash.phase3.workflow " + mvnOptions
+
+                        sh "mvn deploy " + mvnSnapshotOptions
+                    }
+                }
+            }
+        }
+    }    
+}
+
+def writeUnleashWorkflows() {
+
+    def unleashPhase1Workflow = """
+    storeScmRevision
+    checkProjectVersions
+    checkParentVersions
+    checkDependencies
+    checkPlugins
+    checkPluginDependencies
+    prepareVersions
+    #checkAether
+    setReleaseVersionsTycho
+    setReleaseVersions
+    addSpyPlugin
+    """
+    
+    sh 'echo "' + unleashPhase1Workflow +'" > unleash.phase1.workflow'
+    
+    
+    def unleashPhase2Workflow = """
+    prepareVersions
+    addSpyPlugin
+    removeSpyPlugin
+    checkForScmChanges
+    tagScm
+    """
+    
+    sh 'echo "' + unleashPhase2Workflow +'" > unleash.phase2.workflow'
+    
+    def unleashPhase3Workflow = """
+    prepareVersions
+    addSpyPlugin
+    removeSpyPlugin
+    checkForScmChanges
+    #detectReleaseArtifacts
+    setDevVersionTycho
+    setDevVersion
+    """
+    
+    sh 'echo "' + unleashPhase3Workflow +'" > unleash.phase3.workflow'
+}
+
+def installTychoVersionsHotfix() {
+    
+    stage("Workaround: Install custom tycho versions plugin") {
+        withMaven(jdk: 'Oracle JDK 1.8 (latest)', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx1024m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: 'sandbox-settings', mavenSettingsFilePath: env.settings_xml_path, options: [artifactsPublisher(disabled: true)]) {
+            dir('tycho-versions') {
+                deleteDir()
+                checkout([$class: 'GitSCM', branches: [[name: '*/0.25-dirty-hotfix']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: '0.25-dirty-hotfix'], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false], [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/pfink/tycho" ]]])
+                sh 'cd tycho-release/tycho-versions-plugin && mvn install -DskipTests=true'
+            }
+        }
+    }
+}
