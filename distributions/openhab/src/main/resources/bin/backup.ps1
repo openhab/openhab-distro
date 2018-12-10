@@ -44,7 +44,8 @@ Function Backup-openHAB {
         BoxMessage "openHAB 2.x.x backup script" Magenta
         Write-Host ""
 
-        CheckForAdmin
+        # Check for admin (commented out - don't think we need it)
+        # CheckForAdmin
 
         Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory"
         $OHDirectory = GetOpenHABRoot $OHDirectory

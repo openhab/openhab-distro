@@ -51,8 +51,12 @@ Function Restore-openHAB {
             exit PrintAndReturn "Can't retrieve the current location - exiting" $_
         }
 
-        CheckForAdmin
+        # Check for admin (commented out - don't think we need it)
+        # CheckForAdmin
+
+        # Check for openhab running
         CheckOpenHABRunning
+
 
         Write-Host -ForegroundColor Cyan "Checking the specified openHAB directory"
         $OHDirectory = GetOpenHABRoot $OHDirectory

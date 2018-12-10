@@ -10,6 +10,9 @@ Set-StrictMode -Version Latest
     The directory where openHAB is installed (default: current directory).
     .PARAMETER OHVersion
     The version to upgrade to.
+    .PARAMETER Snapshot
+    DEPRECATED - Upgrade to a snapshot version ($true) or a release version ($false) (default: $false)
+    DEPRECATED - Please specify "-snapshot" in the OHVersion instead (ex: "2.4.0-SNAPSHOT")
     .PARAMETER AutoConfirm
     Automatically confirm update (used for headless mode)
     .EXAMPLE
@@ -27,6 +30,8 @@ Function Update-openHAB() {
         [string]$OHDirectory = ".",
         [Parameter(ValueFromPipeline = $True)]
         [string]$OHVersion,
+        [Parameter(ValueFromPipeline = $True)]
+        [boolean]$Snapshot = $false,
         [Parameter(ValueFromPipeline = $True)]
         [boolean]$AutoConfirm = $false,
         [Parameter(ValueFromPipeline = $True)]
@@ -298,8 +303,10 @@ Function Update-openHAB() {
     BoxMessage "openHAB 2.x.x update script" Magenta
     Write-Host ""
     
-    # Check for admin/openhab running
-    CheckForAdmin
+    # Check for admin (commented out - don't think we need it)
+    # CheckForAdmin
+
+    # Check for openhab running
     CheckOpenHABRunning
 
     # Check if service is installed, stop and delete it
@@ -363,7 +370,7 @@ Function Update-openHAB() {
 
     # Determine if it's a snapshot
     $CurrentVersionSnapshot = $False;
-    if ($CurrentVersion.EndsWith("-SNAPSHOT")) {
+    if ($CurrentVersion.EndsWith("-SNAPSHOT", "CurrentCultureIgnoreCase")) {
         $CurrentVersionSnapshot = $True;
         $CurrentVersion = $CurrentVersion.Substring(0, $CurrentVersion.Length - "-SNAPSHOT".Length);
     }
@@ -396,6 +403,14 @@ Function Update-openHAB() {
 
     }
 
+    # If snapshot was defined, add "-snapshot" to the OHVersion if not already present
+    if ($Snapshot -eq $true) {
+        BoxMessage "-SNAPSHOT is deprecated - please put '-snapshot' in OHVersion instead (ex: 2.4.0-snapshot)" Magenta
+        if (-Not $OHVersion.EndsWith("-SNAPSHOT", "CurrentCultureIgnoreCase")) {
+            $OHVersion = $OHVersion + "-SNAPSHOT"
+        }
+    }
+
     # Split up the OHVersion to validate
     $parts = $OHVersion.Split(".")
 
@@ -414,9 +429,9 @@ Function Update-openHAB() {
 
     $Snapshot = $False
     $Milestone = ""
-    if ($parts[2].EndsWith("-SNAPSHOT")) {
+    if ($parts[2].EndsWith("-SNAPSHOT", "CurrentCultureIgnoreCase")) {
         $Snapshot = $True
-        $parts[2] = $parts[2].Substring(0, $parts[2].IndexOf("-SNAPSHOT"))
+        $parts[2] = $parts[2].Substring(0, $parts[2].Length - "-SNAPSHOT".Length);
     } elseif ($parts.Length -eq 4) {
         $Milestone = $parts[3]
     }
