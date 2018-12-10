@@ -47,6 +47,10 @@
         <feature>esh-binding-lirc</feature>
     </feature>
 
+    <feature name="openhab-binding-meteoblue" description="meteoblue Binding" version="${project.version}">
+        <feature>esh-binding-meteoblue</feature>
+    </feature>
+
     <feature name="openhab-binding-mqtt" description="MQTT Binding" version="${project.version}">
         <feature>esh-binding-mqtt</feature>
         <feature>esh-binding-mqtt-generic</feature>
