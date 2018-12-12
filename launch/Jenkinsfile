@@ -240,6 +240,7 @@ def installTychoVersionsHotfix() {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/0.25-dirty-hotfix']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: '0.25-dirty-hotfix'], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false], [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/pfink/tycho" ]]])
                 sh 'cd tycho-release/tycho-versions-plugin && mvn install -DskipTests=true'
+                deleteDir()
             }
         }
     }
