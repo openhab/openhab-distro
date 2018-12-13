@@ -2,6 +2,13 @@
 
 echo Launching the openHAB runtime...
 
+
 setlocal
 set DIRNAME=%~dp0%
-"%DIRNAME%runtime\bin\karaf.bat" %*
+
+IF [%OPENHAB_RUNTIME%]==[] (
+	set RUNTIME=%DIRNAME%\runtime
+) ELSE (
+	set RUNTIME=%OPENHAB_RUNTIME%
+)
+"%RUNTIME%\bin\karaf.bat" %*
