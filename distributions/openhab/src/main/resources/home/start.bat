@@ -2,7 +2,6 @@
 
 echo Launching the openHAB runtime...
 
-
 setlocal
 set DIRNAME=%~dp0%
 
