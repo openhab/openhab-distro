@@ -91,6 +91,16 @@ setupClassPath() {
             CLASSPATH="${CLASSPATH}:${file}"
         fi
     done
+    if [ "${VERSION}" -gt "8" ] ; then
+        for file in "${KARAF_HOME}"/lib/jdk9plus/*.jar
+        do
+            if [ -z "${CLASSPATH}" ]; then
+                CLASSPATH="${file}"
+            else
+                CLASSPATH="${CLASSPATH}:${file}"
+            fi
+        done
+    fi
 }
 
 checkRootInstance() {
@@ -285,8 +295,9 @@ run() {
             if [ "${VERSION}" -gt "8" ]; then
                 ${KARAF_EXEC} "${JAVA}" ${JAVA_OPTS} \
                     --add-reads=java.xml=java.logging \
-                    --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.1.jar \
-                    --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.1.jar \
+                    --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED \
+                    --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.2.jar \
+                    --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.2.jar \
                     --add-opens java.base/java.security=ALL-UNNAMED \
                     --add-opens java.base/java.net=ALL-UNNAMED \
                     --add-opens java.base/java.lang=ALL-UNNAMED \
@@ -303,7 +314,7 @@ run() {
                     -Dkaraf.base="${KARAF_BASE}" \
                     -Dkaraf.data="${KARAF_DATA}" \
                     -Dkaraf.etc="${KARAF_ETC}" \
-                    -Dkaraf.logs="${OPENHAB_LOGDIR}" \
+                    -Dkaraf.log="${OPENHAB_LOGDIR}" \
                     -Dkaraf.restart.jvm.supported=true \
                     -Djava.io.tmpdir="${KARAF_DATA}/tmp" \
                     -Djava.util.logging.config.file="${KARAF_BASE}/etc/java.util.logging.properties" \
@@ -321,7 +332,7 @@ run() {
                     -Dkaraf.base="${KARAF_BASE}" \
                     -Dkaraf.data="${KARAF_DATA}" \
                     -Dkaraf.etc="${KARAF_ETC}" \
-                    -Dkaraf.logs="${OPENHAB_LOGDIR}" \
+                    -Dkaraf.log="${OPENHAB_LOGDIR}" \
                     -Dkaraf.restart.jvm.supported=true \
                     -Djava.io.tmpdir="${KARAF_DATA}/tmp" \
                     -Djava.util.logging.config.file="${KARAF_BASE}/etc/java.util.logging.properties" \
