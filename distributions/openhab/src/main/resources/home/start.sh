@@ -2,5 +2,10 @@
 
 echo Launching the openHAB runtime...
 
-DIRNAME=`dirname "$0"`
-exec "${DIRNAME}/runtime/bin/karaf" "${@}"
+if [ ! -z ${OPENHAB_RUNTIME} ]; then
+    RUNTIME=${OPENHAB_RUNTIME}
+else
+    RUNTIME="`dirname "$0"`/runtime"
+fi
+
+exec "${RUNTIME}/bin/karaf" "${@}"
