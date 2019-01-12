@@ -18,6 +18,9 @@ ALERT;Amazonechocontrol Binding: The account thing does not have settings anymor
 ALERT;Milight Binding: The various available bulb types do not appear in the Paper UI Inbox anymore. The correct bulb need to be added manually. The bulb "zone" is now a configuration. Bulb Things need to be recreated to apply this change.
 ALERT;Hue emulation: The item to hue ID mapping is no longer stored in files, but in the openHAB storage service. You need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Google Home, etc).
 
+[2.5.0]
+ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
