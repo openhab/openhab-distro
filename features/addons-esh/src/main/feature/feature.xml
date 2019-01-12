@@ -98,10 +98,6 @@
         <feature>esh-binding-wemo</feature>
     </feature>
 
-    <feature name="openhab-binding-yahooweather" description="Yahoo Weather Binding" version="${project.version}">
-        <feature>esh-binding-yahooweather</feature>
-    </feature>
-
     <!-- transformation -->
 
     <feature name="openhab-transformation-exec" description="Exec Transformation" version="${project.version}">
