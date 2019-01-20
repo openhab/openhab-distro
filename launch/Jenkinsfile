@@ -68,7 +68,7 @@ catch(Exception e) {
     throw e
 }
 
-if(currentBuild.previousBuild.result.equals("FAILURE")) {
+if("FAILURE".equals(currentBuild.previousBuild?.result)) {
     notifyBackToNormalOpenhabBuild()
 }
 
