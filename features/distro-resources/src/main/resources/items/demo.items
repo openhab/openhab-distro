@@ -99,7 +99,7 @@ Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"  <door>       (F
 Contact Garage_Door             "Garage Door [MAP(en.map):%s]"   <garagedoor> (Garden, Windows)         ["GarageDoor"]
 
 Group Weather_Chart
-Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart) { channel="yahooweather:weather:berlin:temperature" }
+Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart)
 Number Weather_Temp_Max         "Todays Maximum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
 Number Weather_Temp_Min         "Todays Minimum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
 Number Weather_Chart_Period     "Chart Period"
