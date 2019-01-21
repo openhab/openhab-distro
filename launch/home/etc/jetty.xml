@@ -34,7 +34,7 @@
 								<Arg>
 									<New
 										class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
-										<Set name="header">X-Forwarded-Proto</Set> <!-- RFC7239 states -Proto not -Scheme as header, Jetty seems to have wrong defaults -->
+										<Set name="header">X-Forwarded-Proto</Set>
 										<Set name="headerValue">https</Set> <!-- if this is unset, any value will match against the rule -->
 										<Set name="scheme">https</Set>
 									</New>
@@ -44,7 +44,7 @@
 								<Arg>
 									<New
 										class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
-										<Set name="header">X-Forwarded-Proto</Set> <!-- RFC7239 states -Proto not -Scheme as header, Jetty seems to have wrong defaults -->
+										<Set name="header">X-Forwarded-Proto</Set>
 										<Set name="headerValue">http</Set> <!-- if this is unset, any value will match against the rule -->
 										<Set name="scheme">http</Set>
 									</New>
