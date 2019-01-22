@@ -21,6 +21,7 @@ ALERT;Hue emulation: The item to hue ID mapping is no longer stored in files, bu
 [2.5.0]
 ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
 ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
+ALERT;OneWire Binding: Some thing types have changed and need to be updated in textual configurations. See documentation for further information.
 
 [[PRE]]
 [2.2.0]
