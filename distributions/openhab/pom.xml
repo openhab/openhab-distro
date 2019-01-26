@@ -132,9 +132,6 @@
                         <feature>service</feature>
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
-                        <feature>openhab-io-javasound</feature>
-                        <feature>openhab-io-webaudio</feature>
-                        <feature>openhab-iconset-classic</feature>
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
