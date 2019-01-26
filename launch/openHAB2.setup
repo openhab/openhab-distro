@@ -2284,8 +2284,6 @@
     <requirement
         name="org.eclipse.mylyn.java_feature.feature.group"/>
     <requirement
-        name="org.codehaus.groovy.eclipse.feature.feature.group"/>
-    <requirement
         name="org.eclipse.mylyn.git.feature.group"/>
     <requirement
         name="org.eclipse.pde.feature.group"/>
@@ -2293,8 +2291,6 @@
         name="org.eclipse.wst.jsdt.feature.feature.group"/>
     <requirement
         name="org.eclipse.wst.web_ui.feature.feature.group"/>
-    <repository
-        url="http://dist.springsource.org/snapshot/GRECLIPSE/e4.8"/>
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
@@ -2580,64 +2576,8 @@
         name="master"
         label=""/>
   </project>
-  <project name="9_esh"
-      label="Eclipse SmartHome Extensions">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.esh"
-        remoteURI="https://github.com/eclipse/smarthome.git"
-        pushURI="https://github.com/${github.user.id}/smarthome.git">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="label">
-          <value>Eclipse SmartHome Git Repository</value>
-        </detail>
-      </annotation>
-      <description>Eclipse SmartHome</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="ESH Extensions">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/extensions/transform/.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/extensions/binding/.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/extensions/ui/.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/extensions/ui/iconset/.*"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.esh.location/extensions}"/>
-    </setupTask>
-    <stream
-        name="master"/>
-  </project>
-  <project name="10_core"
-      label="ESH + OH2 Core Bundles">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.esh2"
-        remoteURI="https://github.com/eclipse/smarthome.git"
-        pushURI="https://github.com/${github.user.id}/smarthome.git">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="label">
-          <value>Eclipse SmartHome Git Repository</value>
-        </detail>
-      </annotation>
-      <description>Eclipse SmartHome</description>
-    </setupTask>
+  <project name="9_core"
+      label="openHAB Core Bundles">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.ohc"
@@ -2647,10 +2587,10 @@
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
             key="label">
-          <value>openHAB 2 Core Git Repository</value>
+          <value>openHAB Core Git Repository</value>
         </detail>
       </annotation>
-      <description>openHAB 2 Core</description>
+      <description>openHAB Core</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
@@ -2659,42 +2599,10 @@
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/openhab-core/bundles/.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/bundles/automation.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/bundles/core.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/bundles/config.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/bundles/storage.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/bundles/ui.*"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/smarthome/bundles/io.*"/>
       </workingSet>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.esh2.location/bundles/automation}"/>
-      <sourceLocator
-          rootFolder="${git.clone.esh2.location/bundles/core}"/>
-      <sourceLocator
-          rootFolder="${git.clone.esh2.location/bundles/config}"/>
-      <sourceLocator
-          rootFolder="${git.clone.esh2.location/bundles/storage}"/>
-      <sourceLocator
-          rootFolder="${git.clone.esh2.location/bundles/ui}"/>
-      <sourceLocator
-          rootFolder="${git.clone.esh2.location/bundles/io}">
-        <excludedPath>org.eclipse.smarthome.io.console.karaf</excludedPath>
-      </sourceLocator>
       <sourceLocator
           rootFolder="${git.clone.ohc.location/bundles}"
           locateNestedProjects="true"/>
