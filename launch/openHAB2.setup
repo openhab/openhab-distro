@@ -2576,40 +2576,6 @@
         name="master"
         label=""/>
   </project>
-  <project name="9_core"
-      label="openHAB Core Bundles">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.ohc"
-        remoteURI="https://github.com/openhab/openhab-core.git"
-        pushURI="https://github.com/${github.user.id}/openhab-core.git">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="label">
-          <value>openHAB Core Git Repository</value>
-        </detail>
-      </annotation>
-      <description>openHAB Core</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="Runtime">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/openhab-core/bundles/.*"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.ohc.location/bundles}"
-          locateNestedProjects="true"/>
-    </setupTask>
-    <stream
-        name="master"/>
-  </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
