@@ -12,7 +12,7 @@
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
-    name="openhab2"
+    name="openhab"
     label="openHAB">
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -747,7 +747,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.ui.ide/WORKSPACE_NAME"
-          value="openHAB2"/>
+          value="openHAB"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -2336,7 +2336,7 @@
     <description>Manually maintained target platform</description>
   </setupTask>
   <project name="1_infra"
-      label="openHAB Development">
+      label="openHAB Add-on Development">
     <stream
         name="master"/>
   </project>
@@ -2575,6 +2575,135 @@
     <stream
         name="master"
         label=""/>
+  </project>
+  <project name="8_habot"
+      label="openHAB HABot">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.habot"
+        remoteURI="https://github.com/openhab/org.openhab.ui.habot.git"
+        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habot.git">
+      <description>openHAB HABot</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="openHAB HABot"
+          id="">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/org.openhab.ui.habot"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.habot.location}"/>
+    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="10_core"
+      label="openHAB Core Development">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.openhabcore"
+        remoteURI="https://github.com/openhab/openhab-core.git"
+        pushURI="https://github.com/${github.user.id}/openhab-core.git">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="label">
+          <value>openHAB Core Git Repository</value>
+        </detail>
+      </annotation>
+      <description>openHAB Core</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="Bundles">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/bundles/.*"/>
+      </workingSet>
+      <workingSet
+          name="BOM">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/bom/.*"/>
+      </workingSet>
+      <workingSet
+          name="Features">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/features/.*"/>
+      </workingSet>
+      <workingSet
+          name="Integration Tests">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/itests/.*"/>
+      </workingSet>
+      <workingSet
+          name="Demo">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/demo/.*"/>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task">
+      <requirement
+          name="org.eclipse.wst.xml_ui.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.logback.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.java_feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.hudson.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.git.feature.group"/>
+      <requirement
+          name="org.eclipse.wst.jsdt.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.wst.web_ui.feature.feature.group"/>
+      <requirement
+          name="bndtools.m2e.feature.feature.group"/>
+      <repository
+          url="https://dl.bintray.com/bndtools/bndtools/latest/"/>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.openhabcore.location}"
+          locateNestedProjects="true"/>
+    </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="launch.smarthome.all"
+        excludedTriggers="STARTUP"
+        launcher="openHABCoreMavenBuild"/>
+    <setupTask
+        xsi:type="projects:ProjectsBuildTask"
+        excludedTriggers="STARTUP"
+        refresh="true"
+        clean="true"/>
+    <setupTask
+        xsi:type="setup:ResourceCreationTask"
+        id="lifecycle-mapping"
+        content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;lifecycleMappingMetadata>&#xA;  &lt;pluginExecutions>&#xA;    &lt;pluginExecution>&#xA;      &lt;pluginExecutionFilter>&#xA;        &lt;groupId>org.codehaus.mojo&lt;/groupId>&#xA;        &lt;artifactId>build-helper-maven-plugin&lt;/artifactId>&#xA;        &lt;versionRange>1.8&lt;/versionRange>&#xA;        &lt;goals>&#xA;          &lt;goal>add-source&lt;/goal>&#xA;          &lt;goal>add-test-source&lt;/goal>&#xA;        &lt;/goals>&#xA;      &lt;/pluginExecutionFilter>&#xA;      &lt;action>&#xA;        &lt;ignore />&#xA;      &lt;/action>&#xA;    &lt;/pluginExecution>&#xA;  &lt;/pluginExecutions>&#xA;&lt;/lifecycleMappingMetadata>&#xA;"
+        targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml"
+        encoding="UTF-8"/>
+    <stream
+        name="master"/>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
