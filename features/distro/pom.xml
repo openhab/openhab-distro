@@ -23,22 +23,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.smarthome</groupId>
-            <artifactId>esh-tp</artifactId>
-            <version>${esh.version}</version>
+            <groupId>org.openhab.core.features.karaf</groupId>
+            <artifactId>org.openhab.core.features.karaf.openhab-core</artifactId>
+            <version>${ohc.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.smarthome</groupId>
-            <artifactId>esh-core</artifactId>
-            <version>${esh.version}</version>
-            <classifier>features</classifier>
-            <type>xml</type>
-        </dependency>
-        <dependency>
-            <groupId>org.openhab.core</groupId>
-            <artifactId>openhab-core</artifactId>
+            <groupId>org.openhab.core.features.karaf</groupId>
+            <artifactId>org.openhab.core.features.karaf.openhab-tp</artifactId>
             <version>${ohc.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
