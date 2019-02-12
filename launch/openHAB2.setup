@@ -5,6 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:launching="http://www.eclipse.org/oomph/setup/launching/1.0"
     xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
@@ -2269,74 +2270,74 @@
     </setupTask>
   </setupTask>
   <setupTask
-      xsi:type="setup:VariableTask"
-      id="eclipse.target.platform"
-      name="eclipse.target.platform"
-      value="Full"/>
-  <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.8"
       location="${jre.location-1.8}"/>
-  <setupTask
-      xsi:type="setup.p2:P2Task">
-    <requirement
-        name="org.eclipse.wst.xml_ui.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.mylyn.java_feature.feature.group"/>
-    <requirement
-        name="org.eclipse.mylyn.git.feature.group"/>
-    <requirement
-        name="org.eclipse.pde.feature.group"/>
-    <requirement
-        name="org.eclipse.wst.jsdt.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.wst.web_ui.feature.feature.group"/>
-  </setupTask>
-  <setupTask
-      xsi:type="git:GitCloneTask"
-      id="git.clone.openhab-distro"
-      remoteURI="https://github.com/openhab/openhab-distro.git"
-      pushURI="https://github.com/${github.user.id}/openhab-distro.git">
-    <annotation
-        source="http://www.eclipse.org/oomph/setup/InducedChoices">
-      <detail
-          key="label">
-        <value>openHAB Distribution Git Repository</value>
-      </detail>
-    </annotation>
-    <description>openHAB Distribution</description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.workingsets:WorkingSetTask">
-    <workingSet
-        name="Infrastructure">
-      <predicate
-          xsi:type="predicates:LocationPredicate"
-          pattern=".*/launch"/>
-      <predicate
-          xsi:type="predicates:LocationPredicate"
-          pattern=".*/docs/.*"/>
-      <predicate
-          xsi:type="predicates:LocationPredicate"
-          pattern=".*/features/.*"/>
-    </workingSet>
-  </setupTask>
-  <setupTask
-      xsi:type="projects:ProjectsImportTask">
-    <sourceLocator
-        rootFolder="${git.clone.openhab-distro.location/features}"
-        locateNestedProjects="true"/>
-    <sourceLocator
-        rootFolder="${git.clone.openhab-distro.location/launch}"
-        locateNestedProjects="true"/>
-  </setupTask>
-  <setupTask
-      xsi:type="pde:TargetPlatformTask"
-      name="openHAB Target Platform">
-    <description>Manually maintained target platform</description>
-  </setupTask>
   <project name="1_infra"
       label="openHAB Add-on Development">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="eclipse.target.platform"
+        name="eclipse.target.platform"
+        value="Full"/>
+    <setupTask
+        xsi:type="setup.p2:P2Task">
+        <requirement
+            name="org.eclipse.wst.xml_ui.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.mylyn.java_feature.feature.group"/>
+        <requirement
+            name="org.eclipse.mylyn.git.feature.group"/>
+        <requirement
+            name="org.eclipse.pde.feature.group"/>
+        <requirement
+            name="org.eclipse.wst.jsdt.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.wst.web_ui.feature.feature.group"/>
+    </setupTask>
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.openhab-distro"
+        remoteURI="https://github.com/openhab/openhab-distro.git"
+        pushURI="https://github.com/${github.user.id}/openhab-distro.git">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="label">
+            <value>openHAB Distribution Git Repository</value>
+        </detail>
+        </annotation>
+        <description>openHAB Distribution</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+        <workingSet
+            name="Infrastructure">
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/launch"/>
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/docs/.*"/>
+        <predicate
+            xsi:type="predicates:LocationPredicate"
+            pattern=".*/features/.*"/>
+        </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+        <sourceLocator
+            rootFolder="${git.clone.openhab-distro.location/features}"
+            locateNestedProjects="true"/>
+        <sourceLocator
+            rootFolder="${git.clone.openhab-distro.location/launch}"
+            locateNestedProjects="true"/>
+    </setupTask>
+    <setupTask
+        xsi:type="pde:TargetPlatformTask"
+        name="openHAB Target Platform">
+        <description>Manually maintained target platform</description>
+    </setupTask>
     <stream
         name="master"/>
   </project>
@@ -2688,7 +2689,7 @@
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="launch.smarthome.all"
+        id="launch.openhabcore.all"
         excludedTriggers="STARTUP"
         launcher="openHABCoreMavenBuild"/>
     <setupTask
