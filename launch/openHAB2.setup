@@ -2338,11 +2338,6 @@
         name="openHAB Target Platform">
         <description>Manually maintained target platform</description>
     </setupTask>
-    <stream
-        name="master"/>
-  </project>
-  <project name="2_openhab2"
-      label="openHAB 2 Add-ons">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.openhab2-addons"
@@ -2374,6 +2369,16 @@
         <excludedPath>ui/org.openhab.ui.cometvisu.php</excludedPath>
       </sourceLocator>
     </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="launch.paperui"
+        excludedTriggers="STARTUP"
+        launcher="PaperUI Setup"/>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="launch.basicui"
+        excludedTriggers="STARTUP"
+        launcher="BasicUI Setup"/>
     <stream
         name="master"/>
   </project>
