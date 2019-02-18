@@ -2273,6 +2273,24 @@
       xsi:type="jdt:JRETask"
       version="JavaSE-1.8"
       location="${jre.location-1.8}"/>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      id="eclipse.ini.memory.start"
+      excludedTriggers="STARTUP MANUAL"
+      option="-Xms"
+      value="512m"
+      vm="true">
+    <description>memory at start</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      id="eclipse.ini.memory.max"
+      excludedTriggers="STARTUP MANUAL"
+      option="-Xmx"
+      value="2048m"
+      vm="true">
+    <description>memory max</description>
+  </setupTask>
   <project name="1_infra"
       label="openHAB Add-on Development">
     <setupTask
