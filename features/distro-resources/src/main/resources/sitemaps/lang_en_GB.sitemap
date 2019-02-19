@@ -145,7 +145,7 @@ sitemap lang_en_GB label="Main Menu"
 		Text label="Widget Overview" icon="chart" {
 			Frame label="Binary Widgets" {
 				Switch item=DemoSwitch label="Toggle Switch"
-				Switch item=DemoSwitch label="Button Switch" mappings=[ON="On"]
+				Switch item=DemoButtonSwitch label="Button Switch" mappings=[ON="On", OFF="Off"]
 			}
 			Frame label="Discrete Widgets" {
 				Selection item=Scene_General label="Scene Selection" mappings=[0=off, 1=TV, 2=Dinner, 3=Reading]

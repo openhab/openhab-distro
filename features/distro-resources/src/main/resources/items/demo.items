@@ -115,6 +115,7 @@ String Moon_Phase               "Moon Phase"                    <moon>      { ch
 /* Demo items */
 DateTime CurrentDate            "Date [%1$tA, %1$td.%1$tm.%1$tY]"   <calendar>  { channel="ntp:ntp:demo:dateTime" }
 Switch DemoSwitch               "Switch"
+Switch DemoButtonSwitch         "Switch"
 Dimmer DimmedLight              "Dimmer [%d %%]"                    <slider>
 Color  RGBLight                 "RGB Light"                         <slider>
 Rollershutter DemoShutter       "Roller Shutter"
