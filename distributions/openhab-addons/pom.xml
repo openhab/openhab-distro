@@ -35,6 +35,13 @@
             <classifier>features</classifier>
             <type>xml</type>
         </dependency>
+        <dependency>
+            <groupId>org.openhab.ui</groupId>
+            <artifactId>openhab-webui</artifactId>
+            <version>${ohw.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
     </dependencies>
 
     <build>

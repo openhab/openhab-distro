@@ -132,10 +132,10 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
 
                     //Set release versions
                     if(updateProperties) {
-                        sh "mvn versions:set-property -Dproperty=esh.version -DnewVersion="+ env.ESH_RELEASE_VERSION +" " + mvnOptions
                         sh "mvn versions:set-property -Dproperty=oh1.version -DnewVersion="+ env.OH1_RELEASE_VERSION +" " + mvnOptions
                         sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
                         sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
+                        sh "mvn versions:set-property -Dproperty=ohw.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
                     }
                     if(updateParent) {
                         sh "mvn versions:update-parent -DparentVersion=[" + env.OH2_RELEASE_VERSION +"] " + mvnOptions
@@ -174,10 +174,10 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                             sh "mvn versions:update-parent -DallowSnapshots=true -DparentVersion=[" + env.OH2_NEXT_VERSION +"-SNAPSHOT] " + mvnOptions
                         }
                         if(updateProperties) {
-                            sh "mvn versions:set-property -Dproperty=esh.version -DnewVersion="+ env.ESH_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=oh1.version -DnewVersion="+ env.OH1_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=ohw.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=repo.version -DnewVersion="+ env.OH2_NEXT_VERSION.replace('[0-9]$', 'x ') + mvnOptions
                         }
 
