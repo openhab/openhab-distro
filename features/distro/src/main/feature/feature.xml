@@ -19,8 +19,8 @@
         </config>
         <config name="org.openhab.addons" append="true">
 			package = demo
-			ui = basic,paper,habpanel
-			misc = restdocs,homekit,hueemulation
+			ui = basic,paper,habpanel,restdocs
+			misc = homekit,hueemulation
 			binding = wemo,hue,sonos,ipp,astro,avmfritz,ntp
 			persistence = rrd4j
 			transformation = map
@@ -61,8 +61,7 @@
         <feature>openhab-runtime-compat1x</feature>
         <config name="org.openhab.addons" append="true">
 			package = expert
-			ui = classic,basic,paper,habpanel,habmin
-			misc = restdocs
+			ui = classic,basic,paper,habpanel,habmin,restdocs
 			transformation = map,regex,xslt,exec,javascript,scale,xpath,jsonpath
         </config>
         <config name="org.eclipse.smarthome.links">
