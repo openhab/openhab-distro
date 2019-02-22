@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="193">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="194">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="net.minidev.accessors-smart" version="0.0.0"/>
@@ -43,9 +43,9 @@
 <repository location="http://eclipse.github.io/smarthome/third-party/target/repository"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.13.0.v20170531-1133"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.13.0.v20170612-0950"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.7/R-4.7-201706120950"/>
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.14.0.v20180518-2029"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.14.0.v20180611-0500"/>
+<repository location="https://download.eclipse.org/releases/photon"/>
 </location>
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
         <repository location="https://dl.bintray.com/openhab/p2/openhab-core/2.5"/>
@@ -213,9 +213,9 @@
         <unit id="org.openhab.core.voice.source" version="0.0.0"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-        <unit id="org.openhab.deps.runtime.feature.group" version="1.0.39"/>
-        <unit id="org.openhab.deps.test.feature.group" version="1.0.39"/>
-        <repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.39"/>
+        <unit id="org.openhab.deps.runtime.feature.group" version="1.0.40"/>
+        <unit id="org.openhab.deps.test.feature.group" version="1.0.40"/>
+        <repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.40"/>
     </location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
