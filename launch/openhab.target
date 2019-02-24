@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="194">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="195">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="net.minidev.accessors-smart" version="0.0.0"/>
@@ -43,8 +43,6 @@
 <repository location="http://eclipse.github.io/smarthome/third-party/target/repository"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.14.0.v20180518-2029"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.14.0.v20180611-0500"/>
 <repository location="https://download.eclipse.org/releases/photon"/>
 </location>
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
