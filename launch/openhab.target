@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="195">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target name="openHAB Target Platform" sequenceNumber="196">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="net.minidev.accessors-smart" version="0.0.0"/>
@@ -214,6 +214,20 @@
         <unit id="org.openhab.deps.runtime.feature.group" version="1.0.40"/>
         <unit id="org.openhab.deps.test.feature.group" version="1.0.40"/>
         <repository location="https://dl.bintray.com/openhab/p2/openhab-deps-repo/1.0.40"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+        <unit id="org.openhab.ui.basic" version="0.0.0"/>
+        <unit id="org.openhab.ui.classic" version="0.0.0"/>
+        <unit id="org.openhab.ui.cometvisu" version="0.0.0"/>
+        <unit id="org.openhab.ui.dashboard" version="0.0.0"/>
+        <unit id="org.openhab.ui.dashboard.source" version="0.0.0"/>
+        <unit id="org.openhab.ui.habmin" version="0.0.0"/>
+        <unit id="org.openhab.ui.habot" version="0.0.0"/>
+        <unit id="org.openhab.ui.habpanel" version="0.0.0"/>
+        <unit id="org.openhab.ui.homebuilder" version="0.0.0"/>
+        <unit id="org.openhab.ui.iconset.classic" version="0.0.0"/>
+        <unit id="org.openhab.ui.paper" version="0.0.0"/>
+        <repository location="https://dl.bintray.com/openhab/p2/openhab-ui/2.5.x"/>
     </location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
