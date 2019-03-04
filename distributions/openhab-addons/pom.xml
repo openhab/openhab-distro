@@ -22,8 +22,8 @@
             <type>xml</type>
         </dependency>
         <dependency>
-            <groupId>org.openhab.addons</groupId>
-            <artifactId>openhab2-addons</artifactId>
+            <groupId>org.openhab.addons.features.karaf</groupId>
+            <artifactId>org.openhab.addons.features.karaf.openhab-addons</artifactId>
             <version>${oh2.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
