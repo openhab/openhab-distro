@@ -130,9 +130,9 @@ setup "$1" "$2"
 echo "Copying configuration to temporary folder..."
 mkdir -p "$TempDir/userdata"
 if [ -z "$INCLUDE_CACHE" ]; then
-  find "${OPENHAB_USERDATA:?}/"* -prune -not -path '*/tmp' -and -not -path '*/cache' | xargs -I % cp -R % "$TempDir/userdata"
+  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" -and -not -path '*/tmp' -and -not -path '*/cache' | xargs -I % cp -R % "$TempDir/userdata"
 else
-  cp -a "${OPENHAB_USERDATA:?}/"*  "$TempDir/userdata"
+  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" | xargs -I % cp -R % "$TempDir/userdata"
 fi
 mkdir -p "$TempDir/conf"
 cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
@@ -147,13 +147,6 @@ if [ -f "$fileList" ]; then
 else
   echo "System Filelist not found, exiting..."
   exit 1
-fi
-
-## If the backup directory is inside userdata folder do not include it
-## Mainly for apt/rpm automatic
-if [ "$OPENHAB_BACKUPS" = "$OPENHAB_USERDATA/backups" ]; then
-  echo "Backup Directory is inside userdata, not including in this backup!"
-  rm -rf "$TempDir/userdata/backups"
 fi
 
 ## Create archive
