@@ -202,7 +202,6 @@ def writeUnleashWorkflows() {
     #checkAether
     setReleaseVersionsTycho
     setReleaseVersions
-    addSpyPlugin
     """
     
     sh 'echo "' + unleashPhase1Workflow +'" > unleash.phase1.workflow'
@@ -210,8 +209,6 @@ def writeUnleashWorkflows() {
     
     def unleashPhase2Workflow = """
     prepareVersions
-    addSpyPlugin
-    removeSpyPlugin
     checkForScmChanges
     tagScm
     """
@@ -220,10 +217,7 @@ def writeUnleashWorkflows() {
     
     def unleashPhase3Workflow = """
     prepareVersions
-    addSpyPlugin
-    removeSpyPlugin
     checkForScmChanges
-    #detectReleaseArtifacts
     setDevVersionTycho
     setDevVersion
     """
