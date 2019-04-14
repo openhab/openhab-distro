@@ -56,7 +56,7 @@
 
         <jackson.version>1.9.13</jackson.version>
 
-        <karaf.version>4.2.2</karaf.version>
+        <karaf.version>4.2.4</karaf.version>
         <jetty.version>9.4.12.v20180830</jetty.version>
 
         <!-- provided by Karaf -->

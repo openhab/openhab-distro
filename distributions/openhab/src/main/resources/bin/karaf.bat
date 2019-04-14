@@ -220,6 +220,12 @@ for /f tokens^=2-5^ delims^=.-_+^" %%j in ('"%JAVA%" -fullversion 2^>^&1') do (
     if %%j==1 (set JAVA_VERSION=%%k) else (set JAVA_VERSION=%%j)
 )
 
+if %JAVA_VERSION% GTR 8 (
+   pushd "%KARAF_HOME%\lib\jdk9plus"
+       for %%G in (*.jar) do call:APPEND_TO_JDK9PLUS_CLASSPATH %%G
+   popd
+)
+
 :CheckRootInstance
     set ROOT_INSTANCE_RUNNING=false
     if exist "%OPENHAB_USERDATA%\tmp\instances\instance.properties" (
@@ -411,14 +417,11 @@ if "%KARAF_PROFILER%" == "" goto :RUN
         rem If major version is greater than 1 (meaning Java 9 or 10), we don't use endorsed lib but module
         rem If major version is 1 (meaning Java 1.6, 1.7, 1.8), we use endorsed lib
         if %JAVA_VERSION% GTR 8 (
-            pushd "%KARAF_HOME%\lib\jdk9plus"
-                for %%G in (*.jar) do call:APPEND_TO_JDK9PLUS_CLASSPATH %%G
-            popd
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
                 --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.2.jar ^
-                --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.2.jar ^
+                --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.4.jar ^
+                --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.4.jar ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^
