@@ -2363,11 +2363,12 @@
             rootFolder="${git.clone.openhab-distro.location/launch}"
             locateNestedProjects="true"/>
     </setupTask>
-    <setupTask
-        xsi:type="pde:TargetPlatformTask"
-        name="openHAB Target Platform">
-        <description>Manually maintained target platform</description>
-    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="2_addons2"
+      label="openHAB Add-ons">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.openhab2-addons"
@@ -2562,7 +2563,8 @@
         targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml"
         encoding="UTF-8"/>
     <stream
-        name="master"/>
+        name="master"
+        label=""/>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
