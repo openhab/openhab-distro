@@ -2345,10 +2345,7 @@
             name="Infrastructure">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/launch"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/docs/.*"/>
+            pattern=".*/launch/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/features/.*"/>
