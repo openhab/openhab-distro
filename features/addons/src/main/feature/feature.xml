@@ -11,11 +11,11 @@
         <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.ember/1.1.6</bundle>
         <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.telegesis/1.1.6</bundle>
         <bundle start-level="80">mvn:com.zsmartsystems.zigbee/com.zsmartsystems.zigbee.dongle.xbee/1.1.6</bundle>
-        <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee/${project.version}</bundle>
-        <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee.cc2531/${project.version}</bundle>
-        <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee.ember/${project.version}</bundle>
-        <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee.telegesis/${project.version}</bundle>
-        <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.zigbee.xbee/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zigbee/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zigbee.cc2531/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zigbee.ember/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zigbee.telegesis/${project.version}</bundle>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zigbee.xbee/${project.version}</bundle>
     </feature>
     
     <feature name="openhab-binding-zwave" description="Z-Wave Binding" version="${project.version}">
