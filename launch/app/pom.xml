@@ -1,120 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.openhab.demo</groupId>
-	<artifactId>org.openhab.demo.app</artifactId>
-	<version>2.5.0-SNAPSHOT</version>
+  <groupId>org.openhab.demo</groupId>
+  <artifactId>org.openhab.demo.app</artifactId>
+  <version>2.5.0-SNAPSHOT</version>
 
-	<name>openHAB Demo :: App</name>
+  <name>openHAB Demo :: App</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.openhab.core.bom</groupId>
-			<artifactId>org.openhab.core.bom.runtime</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openhab.core.bom</groupId>
-			<artifactId>org.openhab.core.bom.openhab-core</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-			<scope>runtime</scope>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.openhab.core.bom</groupId>
+      <artifactId>org.openhab.core.bom.runtime</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openhab.core.bom</groupId>
+      <artifactId>org.openhab.core.bom.openhab-core</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>runtime</scope>
+    </dependency>
 
-		<!-- TODO: Create a BOM for Web UIs in the Web UI repo and use it here -->
-		<dependency>
-			<groupId>org.openhab.ui</groupId>
-			<artifactId>org.openhab.ui.paper</artifactId>
-			<version>${project.version}</version>
-			<scope>runtime</scope>
-		</dependency>
+    <!-- TODO: Create a BOM for Web UIs in the Web UI repo and use it here -->
+    <dependency>
+      <groupId>org.openhab.ui</groupId>
+      <artifactId>org.openhab.ui.paper</artifactId>
+      <version>${project.version}</version>
+      <scope>runtime</scope>
+    </dependency>
 
-		<dependency>
-			<groupId>org.openhab.addons.bom</groupId>
-			<artifactId>org.openhab.addons.bom.openhab-addons</artifactId>
-			<version>${project.version}</version>
-			<type>pom</type>
-			<scope>runtime</scope>
-		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>org.openhab.addons.bom</groupId>
+      <artifactId>org.openhab.addons.bom.openhab-addons</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>biz.aQute.bnd</groupId>
-				<artifactId>bnd-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>biz.aQute.bnd</groupId>
-				<artifactId>bnd-indexer-maven-plugin</artifactId>
-				<configuration>
-					<includeJar>true</includeJar>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>biz.aQute.bnd</groupId>
-				<artifactId>bnd-export-maven-plugin</artifactId>
-				<configuration>
-					<failOnChanges>false</failOnChanges>
-					<bndruns>
-						<bndrun>app.bndrun</bndrun>
-					</bndruns>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>biz.aQute.bnd</groupId>
-				<artifactId>bnd-resolver-maven-plugin</artifactId>
-				<configuration>
-					<bndruns>
-						<bndrun>app.bndrun</bndrun>
-					</bndruns>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-indexer-maven-plugin</artifactId>
+        <configuration>
+          <includeJar>true</includeJar>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-export-maven-plugin</artifactId>
+        <configuration>
+          <failOnChanges>false</failOnChanges>
+          <bndruns>
+            <bndrun>app.bndrun</bndrun>
+          </bndruns>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-resolver-maven-plugin</artifactId>
+        <configuration>
+          <bndruns>
+            <bndrun>app.bndrun</bndrun>
+          </bndruns>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<repositories>
-		<repository>
-			<id>jcenter</id>
-			<name>JCenter Repository</name>
-			<url>https://jcenter.bintray.com/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>openhab-artifactory-release</id>
-			<name>JFrog Artifactory Repository</name>
-			<url>https://openhab.jfrog.io/openhab/libs-release</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<!-- snapshots -->
-		<repository>
-			<id>openhab-artifactory-snapshot</id>
-			<name>JFrog Artifactory Repository</name>
-			<url>https://openhab.jfrog.io/openhab/libs-snapshot</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>
+  <repositories>
+    <repository>
+      <id>jcenter</id>
+      <name>JCenter Repository</name>
+      <url>https://jcenter.bintray.com/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>openhab-artifactory-release</id>
+      <name>JFrog Artifactory Repository</name>
+      <url>https://openhab.jfrog.io/openhab/libs-release</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- snapshots -->
+    <repository>
+      <id>openhab-artifactory-snapshot</id>
+      <name>JFrog Artifactory Repository</name>
+      <url>https://openhab.jfrog.io/openhab/libs-snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 </project>
