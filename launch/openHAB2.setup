@@ -2292,7 +2292,7 @@
     <description>memory max</description>
   </setupTask>
   <project name="1_infra"
-      label="openHAB Add-on Development">
+      label="openHAB Development">
     <setupTask
         xsi:type="setup:VariableTask"
         id="eclipse.target.platform"
@@ -2300,18 +2300,30 @@
         value="Full"/>
     <setupTask
         xsi:type="setup.p2:P2Task">
-        <requirement
-            name="org.eclipse.wst.xml_ui.feature.feature.group"/>
-        <requirement
-            name="org.eclipse.mylyn.java_feature.feature.group"/>
-        <requirement
-            name="org.eclipse.mylyn.git.feature.group"/>
-        <requirement
-            name="org.eclipse.pde.feature.group"/>
-        <requirement
-            name="org.eclipse.wst.jsdt.feature.feature.group"/>
-        <requirement
-            name="org.eclipse.wst.web_ui.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.wst.xml_ui.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.logback.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.java_feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.hudson.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.git.feature.group"/>
+      <requirement
+          name="org.eclipse.wst.jsdt.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.wst.web_ui.feature.feature.group"/>
+      <requirement
+          name="bndtools.m2e.feature.feature.group"/>
+      <repository
+          url="https://dl.bintray.com/bndtools/bndtools/latest/"/>
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
@@ -2333,10 +2345,7 @@
             name="Infrastructure">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/launch"/>
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/docs/.*"/>
+            pattern=".*/launch/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/features/.*"/>
@@ -2351,11 +2360,12 @@
             rootFolder="${git.clone.openhab-distro.location/launch}"
             locateNestedProjects="true"/>
     </setupTask>
-    <setupTask
-        xsi:type="pde:TargetPlatformTask"
-        name="openHAB Target Platform">
-        <description>Manually maintained target platform</description>
-    </setupTask>
+    <stream
+        name="master"
+        label=""/>
+  </project>
+  <project name="2_addons2"
+      label="openHAB Add-ons">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.openhab2-addons"
@@ -2397,56 +2407,6 @@
         id="launch.basicui"
         excludedTriggers="STARTUP"
         launcher="BasicUI Setup"/>
-    <stream
-        name="master"/>
-  </project>
-  <project name="3_openhab1"
-      label="openHAB 1 Add-ons">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.openhab"
-        remoteURI="https://github.com/openhab/openhab1-addons.git"
-        pushURI="https://github.com/${github.user.id}/openhab1-addons.git">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="label">
-          <value>openHAB 1 Git Repository</value>
-        </detail>
-      </annotation>
-      <description>openHAB 1 Add-ons</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="OH1 Add-ons">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/openhab1-addons/bundles/.*"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.openhab.location/bundles/binding}">
-        <excludedPath>org.openhab.binding.exec.test</excludedPath>
-        <excludedPath>org.openhab.binding.fritzaha</excludedPath>
-        <excludedPath>org.openhab.binding.harmonyhub</excludedPath>
-        <excludedPath>org.openhab.binding.homematic.test</excludedPath>
-        <excludedPath>org.openhab.binding.hue</excludedPath>
-        <excludedPath>org.openhab.binding.netatmo.test</excludedPath>
-        <excludedPath>org.openhab.binding.sagercaster</excludedPath>
-        <excludedPath>org.openhab.binding.smarthomatic</excludedPath>
-      </sourceLocator>
-      <sourceLocator
-          rootFolder="${git.clone.openhab.location/bundles/action}"/>
-      <sourceLocator
-          rootFolder="${git.clone.openhab.location/bundles/persistence}"/>
-      <sourceLocator
-          rootFolder="${git.clone.openhab.location/bundles/io}">
-        <excludedPath>org.openhab.io.cv</excludedPath>
-      </sourceLocator>
-    </setupTask>
     <stream
         name="master"/>
   </project>
@@ -2530,9 +2490,9 @@
       <workingSet
           name="openHAB BACNet Binding"
           id="">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.binding.bacnet"/>
+         <predicate
+             xsi:type="predicates:LocationPredicate"
+             pattern=".*/org.openhab.binding.bacnet"/>
       </workingSet>
     </setupTask>
     <setupTask
@@ -2544,92 +2504,36 @@
         name="master"
         label=""/>
   </project>
-  <project name="7_habpanel"
-      label="openHAB HABPanel">
+  <project name="7_webui"
+      label="openHAB Web UIs">
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="git.clone.habpanel"
-        remoteURI="https://github.com/openhab/org.openhab.ui.habpanel.git"
-        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habpanel.git">
-      <description>openHAB HABPanel</description>
+        id="git.clone.webui"
+        remoteURI="https://github.com/openhab/openhab-webui.git"
+        pushURI="https://github.com/${github.user.id}/openhab-webui.git">
+      <description>openHAB Web UIs</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="openHAB HABPanel"
+          name="openHAB Web UIs"
           id="">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.ui.habpanel"/>
+            pattern=".*/openhab-webui"/>
       </workingSet>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${git.clone.habpanel.location}"/>
-    </setupTask>
-    <stream
-        name="master"
-        label=""/>
-  </project>
-  <project name="8_habmin"
-      label="openHAB HABmin">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.habmin"
-        remoteURI="https://github.com/openhab/org.openhab.ui.habmin.git"
-        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habmin.git">
-      <description>openHAB HABmin</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="openHAB HABmin"
-          id="">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.ui.habmin"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.habmin.location}"/>
-    </setupTask>
-    <stream
-        name="master"
-        label=""/>
-  </project>
-  <project name="8_habot"
-      label="openHAB HABot">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.habot"
-        remoteURI="https://github.com/openhab/org.openhab.ui.habot.git"
-        pushURI="https://github.com/${github.user.id}/org.openhab.ui.habot.git">
-      <description>openHAB HABot</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="openHAB HABot"
-          id="">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.ui.habot"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.habot.location}"/>
+          rootFolder="${git.clone.webui.location}"/>
     </setupTask>
     <stream
         name="master"
         label=""/>
   </project>
   <project name="10_core"
-      label="openHAB Core Development">
+      label="openHAB Core Framework">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.openhabcore"
@@ -2647,62 +2551,19 @@
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Bundles">
+          name="openHAB Core">
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/bundles/.*"/>
-      </workingSet>
-      <workingSet
-          name="BOM">
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/bom/.*"/>
-      </workingSet>
-      <workingSet
-          name="Features">
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/features/.*"/>
-      </workingSet>
-      <workingSet
-          name="Integration Tests">
         <predicate
             xsi:type="predicates:LocationPredicate"
             pattern=".*/itests/.*"/>
-      </workingSet>
-      <workingSet
-          name="Demo">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/demo/.*"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task">
-      <requirement
-          name="org.eclipse.wst.xml_ui.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.m2e.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.m2e.logback.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.m2e.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.java_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.hudson.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.git.feature.group"/>
-      <requirement
-          name="org.eclipse.wst.jsdt.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.wst.web_ui.feature.feature.group"/>
-      <requirement
-          name="bndtools.m2e.feature.feature.group"/>
-      <repository
-          url="https://dl.bintray.com/bndtools/bndtools/latest/"/>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
@@ -2727,7 +2588,8 @@
         targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml"
         encoding="UTF-8"/>
     <stream
-        name="master"/>
+        name="master"
+        label=""/>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
