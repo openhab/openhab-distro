@@ -2386,27 +2386,17 @@
           name="OH2 Add-ons">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/addons/.*"/>
+              pattern=".*/openhab2-addons/bundles/.*"/>
       </workingSet>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${git.clone.openhab2-addons.location/addons}"
+          rootFolder="${git.clone.openhab2-addons.location/bundles}"
           locateNestedProjects="true">
         <excludedPath>ui/org.openhab.ui.cometvisu.php</excludedPath>
       </sourceLocator>
     </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="launch.paperui"
-        excludedTriggers="STARTUP"
-        launcher="PaperUI Setup"/>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="launch.basicui"
-        excludedTriggers="STARTUP"
-        launcher="BasicUI Setup"/>
     <stream
         name="master"/>
   </project>
@@ -2426,7 +2416,7 @@
           id="">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.binding.zigbee/.*"/>
+            pattern=".*/org.openhab.binding.zigbee.*"/>
       </workingSet>
     </setupTask>
     <setupTask
@@ -2454,17 +2444,8 @@
           name="openHAB Z-Wave Binding"
           id="">
         <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
               xsi:type="predicates:LocationPredicate"
               pattern=".*/org.openhab.binding.zwave"/>
-          <operand
-              xsi:type="predicates:NotPredicate">
-            <operand
-                xsi:type="predicates:LocationPredicate"
-                pattern=".*/openhab1-addons/bundles/.*"/>
-          </operand>
-        </predicate>
       </workingSet>
     </setupTask>
     <setupTask
@@ -2520,7 +2501,7 @@
           id="">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/openhab-webui"/>
+            pattern=".*/openhab-webui/.*"/>
       </workingSet>
     </setupTask>
     <setupTask
@@ -2528,6 +2509,16 @@
       <sourceLocator
           rootFolder="${git.clone.webui.location}"/>
     </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="launch.paperui"
+        excludedTriggers="STARTUP"
+        launcher="PaperUI Setup"/>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="launch.basicui"
+        excludedTriggers="STARTUP"
+        launcher="BasicUI Setup"/>
     <stream
         name="master"
         label=""/>
@@ -2554,16 +2545,17 @@
           name="openHAB Core">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/bundles/.*"/>
+            pattern=".*/openhab-core/bundles/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/bom/.*"/>
+            pattern=".*/openhab-core/bom/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/features/.*"/>
+            pattern=".*/openhab-core/features/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/itests/.*"/>
+            pattern=".*/openhab-core/itests/.*"/>
+      </workingSet>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
