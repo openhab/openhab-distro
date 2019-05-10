@@ -25,12 +25,11 @@
       <type>pom</type>
       <scope>runtime</scope>
     </dependency>
-
-    <!-- TODO: Create a BOM for Web UIs in the Web UI repo and use it here -->
     <dependency>
-      <groupId>org.openhab.ui</groupId>
-      <artifactId>org.openhab.ui.paper</artifactId>
+      <groupId>org.openhab.ui.bom</groupId>
+      <artifactId>org.openhab.ui.bom.openhab-ui</artifactId>
       <version>${project.version}</version>
+      <type>pom</type>
       <scope>runtime</scope>
     </dependency>
 
