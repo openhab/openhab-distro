@@ -1,6 +1,3 @@
--standalone: \
-    target/index.xml;name="org.openhab.demo.app"
-
 -resolve.effective: active
 
 feature.logging: \

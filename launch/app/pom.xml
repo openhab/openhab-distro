@@ -50,13 +50,6 @@
       </plugin>
       <plugin>
         <groupId>biz.aQute.bnd</groupId>
-        <artifactId>bnd-indexer-maven-plugin</artifactId>
-        <configuration>
-          <includeJar>true</includeJar>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>biz.aQute.bnd</groupId>
         <artifactId>bnd-export-maven-plugin</artifactId>
         <configuration>
           <failOnChanges>false</failOnChanges>
