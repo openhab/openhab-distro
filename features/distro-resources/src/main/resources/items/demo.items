@@ -127,7 +127,7 @@ Number Wifi_Level               "Wifi Level [%d/4]"                 <signal>    
 String ImageURL                 "Image URL [%s]"
 
 Group Thermostat                "Thermostat"            <temperature>                    ["Thermostat"]
-Dimmer Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature", "Setpoint", "Temperature"] { habot="" [ control="knob", min=15, max=35, leftIcon="mdi-thermometer", leftInverted=true ] }
-String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:HeatingCoolingMode", "Control"]
+Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["homekit:TargetTemperature", "Setpoint", "Temperature"] { habot="" [ control="knob", min=15, max=35, leftIcon="mdi-thermometer", leftInverted=true ] }
+String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:TargetHeatingCoolingMode", "Control"]
 
 // vim: syntax=Xtend
