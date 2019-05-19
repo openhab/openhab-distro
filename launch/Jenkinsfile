@@ -195,7 +195,6 @@ def writeUnleashWorkflows() {
     storeScmRevision
     checkProjectVersions
     checkParentVersions
-    checkDependencies
     checkPlugins
     checkPluginDependencies
     prepareVersions
@@ -210,6 +209,7 @@ def writeUnleashWorkflows() {
     def unleashPhase2Workflow = """
     prepareVersions
     checkForScmChanges
+    checkDependencies
     tagScm
     """
     
