@@ -25,6 +25,7 @@ ALERT;OneWire Binding: Some thing types have changed and need to be updated in t
 ALERT;REST Docs: This add-on is now part of the UIs. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
 ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this was a string containing many information. For this, there are three new channels: 'rssi', 'repeatCount' and 'lastReceived'.
 ALERT;Mail Action: The mail action has been replaced by a new mail binding.
+ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
 
 [[PRE]]
 [2.2.0]
