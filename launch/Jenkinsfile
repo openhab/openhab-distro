@@ -128,7 +128,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                 mvnReleaseOptions = mvnOptions + " " + mvnReleaseOptions
                 
                 stage(componentName + ": Release") {
-                    writeUnleashWorkflows()
+                    writeUnleashWorkflows(componentName == "openhab1-addons")
 
                     //Set release versions
                     if(updateProperties) {
@@ -189,8 +189,10 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
     }    
 }
 
-def writeUnleashWorkflows() {
-
+def writeUnleashWorkflows(Boolean tycho) {
+    def tychoReleaseVersionsStep = tycho ? "setReleaseVersionsTycho" : ""
+    def tychoDevVersionsStep = tycho ? "setDevVersionTycho" : ""
+    
     def unleashPhase1Workflow = """
     storeScmRevision
     checkProjectVersions
@@ -199,7 +201,7 @@ def writeUnleashWorkflows() {
     checkPluginDependencies
     prepareVersions
     #checkAether
-    setReleaseVersionsTycho
+    """ + tychoReleaseVersionsStep + """
     setReleaseVersions
     """
     
@@ -218,7 +220,7 @@ def writeUnleashWorkflows() {
     def unleashPhase3Workflow = """
     prepareVersions
     checkForScmChanges
-    setDevVersionTycho
+    """ + tychoDevVersionsStep + """
     setDevVersion
     """
     
