@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+      <groupId>org.openhab</groupId>
+      <artifactId>openhab-super-pom</artifactId>
+      <version>[1.0, 2.0)</version>
+    </parent>
+
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
     <version>2.5.0-SNAPSHOT</version>
@@ -31,18 +37,17 @@
     <distributionManagement>
         <repository>
             <id>bintray</id>
-            <url>https://api.bintray.com/maven/openhab/mvn/openhab-distro/;publish=1;override=1</url>
+            <url>${oh.repo.distBaseUrl}/openhab-distro/;publish=1;override=1</url>
         </repository>
         <snapshotRepository>
             <id>jfrog</id>
-            <url>https://openhab.jfrog.io/openhab/libs-snapshot-local</url>
+            <url>${oh.repo.snapshotBaseUrl}/libs-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <scm.gitBaseUrl>https://github.com/openhab</scm.gitBaseUrl>
 
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
@@ -117,66 +122,6 @@
         </plugins>
     </build>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>openhab-bintray</id>
-            <name>Bintray Repository for openHAB</name>
-            <url>https://dl.bintray.com/openhab/mvn/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <repositories>
-        
-        <!-- releases -->
-        <repository>
-            <id>jcenter</id>
-            <name>JCenter Repository</name>
-            <url>https://jcenter.bintray.com/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>openhab-artifactory-release</id>
-            <name>JFrog Artifactory Repository</name>
-            <url>https://openhab.jfrog.io/openhab/libs-release</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <!-- snapshots -->
-        <repository>
-            <id>openhab-artifactory-snapshot</id>
-            <name>JFrog Artifactory Repository</name>
-            <url>https://openhab.jfrog.io/openhab/libs-snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-
-    </repositories>
-
     <profiles>
         <profile>
             <id>prepare-release</id>
@@ -208,7 +153,7 @@
             </activation>
             <properties>
                 <build.number>- local build -</build.number>
-                <online.repo>https://openhab.jfrog.io/openhab/online-repo-snapshot/${online.repo.version}</online.repo>
+                <online.repo>${oh.repo.snapshotBaseUrl}/online-repo-snapshot/${online.repo.version}</online.repo>
                 <pax.url.suffix>@snapshots</pax.url.suffix>
             </properties>
         </profile>
@@ -221,7 +166,7 @@
             </activation>
             <properties>
                 <build.number>Release Build</build.number>
-                <online.repo>https://dl.bintray.com/openhab/mvn/online-repo/${online.repo.version}</online.repo>
+                <online.repo>${oh.repo.distBaseUrl}/online-repo/${online.repo.version}</online.repo>
                 <pax.url.suffix/>
             </properties>
         </profile>
@@ -234,7 +179,7 @@
             </activation>
             <properties>
                 <build.number>Milestone Build</build.number>
-                <online.repo>https://openhab.jfrog.io/openhab/online-repo-milestone/${online.repo.version}</online.repo>
+                <online.repo>${oh.repo.releaseBaseUrl}/online-repo-milestone/${online.repo.version}</online.repo>
                 <pax.url.suffix/>
             </properties>
         </profile>
