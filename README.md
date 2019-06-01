@@ -1,16 +1,22 @@
+# openHAB 2 Distribution
+
+[![Build Status](https://img.shields.io/jenkins/build/https/ci.openhab.org/openHAB-Distribution.svg)](https://ci.openhab.org/job/openHAB-Distribution/)
+[![EPL-2.0](https://img.shields.io/badge/license-EPL%202-green.svg)](https://opensource.org/licenses/EPL-2.0)
+[![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=28452711)](https://www.bountysource.com/teams/openhab/issues?tracker_ids=28452711)
+
 ## Introduction
 
 The open Home Automation Bus (openHAB) project aims at providing a universal integration platform for all things around home automation. It is a pure Java solution, fully based on OSGi.
 
 It is designed to be absolutely vendor-neutral as well as hardware/protocol-agnostic. openHAB brings together different bus systems, hardware devices and interface protocols by dedicated bindings. These bindings send and receive commands and status updates on the openHAB event bus. This concept allows designing user interfaces with a unique look&feel, but with the possibility to operate devices based on a big number of different technologies. Besides the user interfaces, it also brings the power of automation logics across different system boundaries.
 
-For further Information please refer to our homepage [www.openhab.org](http://www.openhab.org). 
+For further Information please refer to our homepage [www.openhab.org](https://www.openhab.org). 
 
-## openHAB 2 Distribution
+## openHAB 2
 
 openHAB 2 is the successor of [openHAB 1](https://github.com/openhab/openhab/wiki). It is an open-source solution. It is fully written in Java and uses [Apache Karaf](http://karaf.apache.org/) together with [Eclipse Equinox](https://www.eclipse.org/equinox/) as an OSGi runtime and bundles this with [Jetty](https://www.eclipse.org/jetty/) as an HTTP server.
 
-For the latest snapshot builds, please see to our [jenkins job](https://ci.openhab.org/job/openHAB-Distribution/).
+For the latest snapshot builds, please see to our [Jenkins job](https://ci.openhab.org/job/openHAB-Distribution/).
 
 ## Getting Started
 
@@ -22,6 +28,6 @@ As any good open source project, openHAB welcomes community participation in the
 
 If you are a developer and want to jump right into the sources and execute openHAB from within Eclipse, please have a look at the [IDE setup](https://www.openhab.org/docs/developer/development/ide.html) procedures.
 
-You can also learn [how openHAB 2 bindings are developed](https://www.openhab.org/docs/developer/development/bindings.html).
+You can also learn [how openHAB 2 bindings are developed](https://www.openhab.org/docs/developer/bindings/).
 
 In case of problems or questions, please join our vibrant [openHAB community](https://community.openhab.org/).
