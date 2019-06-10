@@ -27,37 +27,38 @@ realpath() {
       fi
   fi
 
-  READLINK_EXISTS=$(command -v readlink &> /dev/null)
+  READLINK_EXISTS=`command -v readlink &> /dev/null`
+  BINARY_NAME=`basename "${1}"`
   if [ -z "$READLINK_EXISTS" ]; then
-    OURPWD=${PWD}
-    cd "$(dirname "${1}")" || exit 2
-    LINK=$(ls -l "$(basename "${1}")" | ${AWK} -F"-> " '{print $2}')
+    OURPWD="`pwd`"
+    cd "`dirname "${1}"`" || exit 2
+    LINK=`ls -l "${BINARY_NAME}" | ${AWK} -F"-> " '{print $2}'`
     while [ "${LINK}" ]; do
         echo "link: ${LINK}" >&2
-        cd "$(dirname "${LINK}")" || exit 2
-        LINK=$(ls -l "$(basename "${1}")" | ${AWK} -F"-> " '{print $2}')
+        cd "`dirname "${LINK}"`" || exit 2
+        LINK=`ls -l "${BINARY_NAME}" | ${AWK} -F"-> " '{print $2}'`
     done
-    REALPATH="${PWD}/$(basename "${1}")"
+    REALPATH="`pwd`/${BINARY_NAME}"
     cd "${OURPWD}" || exit 2
     echo "${REALPATH}"
   else
-    OURPWD=${PWD}
-    cd "$(dirname "${1}")" || exit 2
-    LINK=$(readlink "$(basename "${1}")")
+    OURPWD="`pwd`"
+    cd "`dirname "${1}"`" || exit 2
+    LINK=`readlink "${BINARY_NAME}"`
     while [ "${LINK}" ]; do
-	    echo "link: ${LINK}" >&2
-        cd "$(dirname "${LINK}")" || exit 2
-        LINK=$(readlink "$(basename "${1}")")
+        echo "link: ${LINK}" >&2
+        cd "`dirname "${LINK}"`" || exit 2
+        LINK=`readlink "${BINARY_NAME}"`
     done
-    REALPATH="${PWD}/$(basename "${1}")"
+    REALPATH="`pwd`/${BINARY_NAME}"
     cd "${OURPWD}" || exit 2
     echo "${REALPATH}"
   fi
 }
 
-REALNAME=$(realpath "$0")
-DIRNAME=$(dirname "${REALNAME}")
-PROGNAME=$(basename "${REALNAME}")
+REALNAME=`realpath "$0"`
+DIRNAME=`dirname "${REALNAME}"`
+PROGNAME=`basename "${REALNAME}"`
 LOCAL_CLASSPATH=$CLASSPATH
 
 #
@@ -76,7 +77,7 @@ fi
 
 forceNoRoot() {
     # If configured, prevent execution as root
-    if [ "${KARAF_NOROOT}" ] && [ "$(id -u)" -eq 0 ]; then
+    if [ "${KARAF_NOROOT}" ] && [ "`id -u`" -eq 0 ]; then
         die "Do not run as root!"
     fi
 }
@@ -107,13 +108,13 @@ checkRootInstance() {
    ROOT_INSTANCE_RUNNING=false
    if [ -f "${KARAF_DATA}/tmp/instances/instance.properties" ];
    then
-      ROOT_INSTANCE_PID=$(sed -n -e '/item.0.pid/ s/.*\= *//p' "${KARAF_DATA}/tmp/instances/instance.properties")
-      ROOT_INSTANCE_NAME=$(sed -n -e '/item.0.name/ s/.*\= *//p' "${KARAF_DATA}/tmp/instances/instance.properties")
+      ROOT_INSTANCE_PID=`sed -n -e '/item.0.pid/ s/.*\= *//p' "${KARAF_DATA}/tmp/instances/instance.properties"`
+      ROOT_INSTANCE_NAME=`sed -n -e '/item.0.name/ s/.*\= *//p' "${KARAF_DATA}/tmp/instances/instance.properties"`
       if [ "${ROOT_INSTANCE_PID}" -ne "0" ]; then
           if ps -p "${ROOT_INSTANCE_PID}" > /dev/null
           then
               MAIN=org.apache.karaf.main.Main
-              PID_COMMAND=$("${PS_PREFIX}"ps -p "${ROOT_INSTANCE_PID}" -o args | sed 1d)
+              PID_COMMAND=`"${PS_PREFIX}"ps -p "${ROOT_INSTANCE_PID}" -o args | sed 1d`
 
               if [ "${PID_COMMAND#*$MAIN}" != "$PID_COMMAND" ]; then
                 ROOT_INSTANCE_RUNNING=true
@@ -180,9 +181,9 @@ run() {
     JAVA_ENDORSED_DIRS="${JAVA_HOME}/jre/lib/endorsed:${JAVA_HOME}/lib/endorsed:${KARAF_HOME}/lib/endorsed"
     JAVA_EXT_DIRS="${JAVA_HOME}/jre/lib/ext:${JAVA_HOME}/lib/ext:${KARAF_HOME}/lib/ext"
     if ${cygwin}; then
-        JAVA_HOME=$(cygpath --path --windows "${JAVA_HOME}")
-        JAVA_ENDORSED_DIRS=$(cygpath --path --windows "${JAVA_ENDORSED_DIRS}")
-        JAVA_EXT_DIRS=$(cygpath --path --windows "${JAVA_EXT_DIRS}")
+        JAVA_HOME=`cygpath --path --windows "${JAVA_HOME}"`
+        JAVA_ENDORSED_DIRS=`cygpath --path --windows "${JAVA_ENDORSED_DIRS}"`
+        JAVA_EXT_DIRS=`cygpath --path --windows "${JAVA_EXT_DIRS}"`
     fi
     convertPaths
     cd "${KARAF_BASE}" || exit 2
@@ -296,8 +297,8 @@ run() {
                 ${KARAF_EXEC} "${JAVA}" ${JAVA_OPTS} \
                     --add-reads=java.xml=java.logging \
                     --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED \
-                    --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.4.jar \
-                    --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.4.jar \
+                    --patch-module java.base=lib/endorsed/org.apache.karaf.specs.locator-4.2.6.jar \
+                    --patch-module java.xml=lib/endorsed/org.apache.karaf.specs.java.xml-4.2.6.jar \
                     --add-opens java.base/java.security=ALL-UNNAMED \
                     --add-opens java.base/java.net=ALL-UNNAMED \
                     --add-opens java.base/java.lang=ALL-UNNAMED \
