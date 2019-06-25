@@ -69,10 +69,11 @@ feature.openhab-model-runtime-all: \
 
 -runproperties: \
 	osgi.console=,\
-	osgi.console.enable.builtin=false,\
-	logback.configurationFile=file:${.}/runtime/logback.xml,\
+	smarthome.servicepid=org.openhab,\
 	smarthome.configdir=${.}/runtime/conf,\
-	smarthome.userdata=${.}/runtime/userdata
+	smarthome.userdata=${.}/runtime/userdata,\
+	osgi.console.enable.builtin=false,\
+	logback.configurationFile=file:${.}/runtime/logback.xml
 
 -runblacklist: bnd.identity;id='org.apache.aries.javax.jax.rs-api'
 
