@@ -349,7 +349,7 @@
       </releases>
       <snapshots>
         <enabled>true</enabled>
-        <updatePolicy>24h</updatePolicy>
+        <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
   </repositories>
