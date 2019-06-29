@@ -32,7 +32,6 @@
       <type>pom</type>
       <scope>runtime</scope>
     </dependency>
-
     <dependency>
       <groupId>org.openhab.addons.bom</groupId>
       <artifactId>org.openhab.addons.bom.openhab-addons</artifactId>
@@ -40,6 +39,14 @@
       <type>pom</type>
       <scope>runtime</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>org.openhab.addons.bundles</groupId>
+      <artifactId>org.openhab.binding.zwave</artifactId>
+      <version>${project.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    
   </dependencies>
 
   <build>
