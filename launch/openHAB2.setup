@@ -2345,6 +2345,9 @@
             name="Infrastructure">
         <predicate
             xsi:type="predicates:LocationPredicate"
+            pattern=".*/launch"/>
+        <predicate
+            xsi:type="predicates:LocationPredicate"
             pattern=".*/launch/.*"/>
         <predicate
             xsi:type="predicates:LocationPredicate"
@@ -2509,16 +2512,6 @@
       <sourceLocator
           rootFolder="${git.clone.webui.location}"/>
     </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="launch.paperui"
-        excludedTriggers="STARTUP"
-        launcher="PaperUI Setup"/>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="launch.basicui"
-        excludedTriggers="STARTUP"
-        launcher="BasicUI Setup"/>
     <stream
         name="master"
         label=""/>
@@ -2560,19 +2553,25 @@
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${git.clone.openhabcore.location}"
+          rootFolder="${git.clone.openhabcore.location}/bom"
+          locateNestedProjects="true"/>
+      <sourceLocator
+          rootFolder="${git.clone.openhabcore.location}/bundles"
+          locateNestedProjects="true"/>
+      <sourceLocator
+          rootFolder="${git.clone.openhabcore.location}/itests"
           locateNestedProjects="true"/>
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="launch.openhabcore.all"
+        id="launch.model.gen"
         excludedTriggers="STARTUP"
-        launcher="openHABCoreMavenBuild"/>
+        launcher="ModelGen"/>
     <setupTask
         xsi:type="projects:ProjectsBuildTask"
         excludedTriggers="STARTUP"
         refresh="true"
-        clean="true"/>
+        clean="false"/>
     <setupTask
         xsi:type="setup:ResourceCreationTask"
         id="lifecycle-mapping"
