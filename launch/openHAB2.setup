@@ -2346,8 +2346,12 @@
           name="org.eclipse.wst.web_ui.feature.feature.group"/>
       <requirement
           name="bndtools.m2e.feature.feature.group"/>
+      <requirement
+          name="bjmi.m2e.sourcelookup.feature.feature.group"/>
       <repository
           url="https://dl.bintray.com/bndtools/bndtools/latest/"/>
+      <repository
+          url="https://bjmi.github.io/update-site/"/>
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
