@@ -27,10 +27,6 @@ ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this w
 ALERT;Mail Action: The mail action has been replaced by a new mail binding.
 ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
 ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
-[2.5.0-M2]
-REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules.json
-REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules_disabled.json
-DELETEDIR;$OPENHAB_USERDATA/jsondb/backup
 
 [[PRE]]
 [2.2.0]
@@ -40,3 +36,7 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 [2.3.0]
 DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg
 DELETEDIR;$OPENHAB_USERDATA/kar
+
+[2.5.0]
+REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules.json
+DELETEDIR;$OPENHAB_USERDATA/jsondb/backup

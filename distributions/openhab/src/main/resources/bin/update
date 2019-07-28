@@ -141,7 +141,7 @@ runCommand() {
     command="$(echo "$string" | awk -F';' '{print $1}')"
     param1="$(echo "$string" | awk -F';' '{print $2}')"
     param2="$(echo "$string" | awk -F';' '{print $3}')"
-    param3="$(echo "$string" | awk -F';' '{print $3}')"
+    param3="$(echo "$string" | awk -F';' '{print $4}')"
 
     case $command in
     'DEFAULT')
