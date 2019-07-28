@@ -169,7 +169,7 @@ runCommand() {
     ;;
     'REPLACE')
       echo "  Replacing: String $param1 to $param2 in file $param3"
-      sed -i 's#$param1#$param2#g' "$param3"
+      sed -i "s:$param1:$param2:g" "$param3"
     ;;
     'NOTE')  printf '  \033[32mNote:\033[m     %s\n' "$param1";;
     'ALERT') printf '  \033[31mWarning:\033[m  %s\n' "$param1";;
