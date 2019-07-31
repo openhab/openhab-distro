@@ -39,4 +39,3 @@ DELETEDIR;$OPENHAB_USERDATA/kar
 
 [2.5.0]
 REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules.json
-DELETEDIR;$OPENHAB_USERDATA/jsondb/backup
