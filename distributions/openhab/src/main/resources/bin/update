@@ -168,8 +168,11 @@ runCommand() {
       mv "$param1" "$param2"
     ;;
     'REPLACE')
-      echo "  Replacing: String $param1 to $param2 in file $param3"
-      sed -i "s:$param1:$param2:g" "$param3"
+      # Avoid error if file does not exist
+      if [ -f "$param3" ]; then
+        echo "  Replacing: String $param1 to $param2 in file $param3"
+        sed -i "s:$param1:$param2:g" "$param3"
+      fi
     ;;
     'NOTE')  printf '  \033[32mNote:\033[m     %s\n' "$param1";;
     'ALERT') printf '  \033[31mWarning:\033[m  %s\n' "$param1";;
