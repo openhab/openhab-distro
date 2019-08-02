@@ -204,6 +204,22 @@ Function Update-openHAB() {
             }
         }
 
+        # Replaces text in a file
+        ElseIf ($parts[0] -eq "REPLACE") {
+            if ($parts.length -le 3) {
+                Write-Host -ForegroundColor Red "Badly formatted: $Line"
+            }
+            else {
+                try {
+                    (Get-Content $parts[3]).replace($parts[1], $parts[2]) | Set-Content $parts[3]
+                    Write-Host -ForegroundColor Cyan "Replaced string $($parts[1]) to $($parts[2]) in file $($parts[3])"
+                }
+                catch {
+                    Write-Host -ForegroundColor Yellow "Could not replace string $($parts[1]) to $($parts[2]) in file $($parts[3])"
+                }
+            }
+        }
+
         # Shows a note (console message with a green label)
         ElseIf ($parts[0] -eq "NOTE") {
             if ($parts.length -le 1) {

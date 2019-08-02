@@ -36,3 +36,6 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 [2.3.0]
 DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg
 DELETEDIR;$OPENHAB_USERDATA/kar
+
+[2.5.0]
+REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules.json
