@@ -27,6 +27,7 @@ ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this w
 ALERT;Mail Action: The mail action has been replaced by a new mail binding.
 ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
 ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
+ALERT;DarkSky Binding: The item type of `rain` and `snow` channels have been changed to `Number:Speed`.
 
 [[PRE]]
 [2.2.0]
