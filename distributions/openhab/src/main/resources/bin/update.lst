@@ -19,17 +19,18 @@ ALERT;Milight Binding: The various available bulb types do not appear in the Pap
 ALERT;Hue emulation: The item to hue ID mapping is no longer stored in files, but in the openHAB storage service. You need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Google Home, etc).
 
 [2.5.0]
-ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
-ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
-ALERT;OneWire Binding: Some thing types have changed and need to be updated in textual configurations. See documentation for further information.
-ALERT;REST Docs: This add-on is now part of the UIs. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
-ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this was a string containing many information. For this, there are three new channels: 'rssi', 'repeatCount' and 'lastReceived'.
-ALERT;Mail Action: The mail action has been replaced by a new mail binding.
-ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
-ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
+ALERT;Azure IoT: Due to remote changes the addon is no longer working and has been removed temporarily.
 ALERT;DarkSky Binding: The item type of 'rain' and 'snow' channels have been changed to 'Number:Speed'.
+ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this was a string containing many information. For this, there are three new channels: 'rssi', 'repeatCount' and 'lastReceived'.
+ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
+ALERT;Mail Action: The mail action has been replaced by a new mail binding.
+ALERT;OneWire Binding: Some thing types have changed and need to be updated in textual configurations. See documentation for further information.
 ALERT;OpenSprinkler Binding: The stationXX channels have been removed and replaced by a bridge/thing combination. See documentation for further information.
+ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
+ALERT;REST Docs: This add-on is now part of the UIs. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
+ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
 ALERT;Systeminfo Binding: The 'cpu#load' channel has been removed because the OSHI library no longer provides this information.
+ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
 
 [[PRE]]
 [2.2.0]
