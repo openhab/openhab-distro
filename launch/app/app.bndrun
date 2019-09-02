@@ -75,7 +75,9 @@ feature.openhab-model-runtime-all: \
 	osgi.console.enable.builtin=false,\
 	logback.configurationFile=file:${.}/runtime/logback.xml
 
--runblacklist: bnd.identity;id='org.apache.aries.javax.jax.rs-api'
+-runblacklist: bnd.identity;id='org.apache.aries.javax.jax.rs-api',\
+    bnd.identity;id='org.apache.aries.jpa.container',\
+    bnd.identity;id='org.openhab.core.test'
 
 #
 # done
