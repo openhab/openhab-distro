@@ -31,7 +31,7 @@ ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbu
 ALERT;REST Docs: This add-on is now part of the UIs. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
 ALERT;SenseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
 ALERT;Systeminfo Binding: The 'cpu#load' channel has been removed because the OSHI library no longer provides this information.
-ALERT;TP-Link Smart Home Binding: The enery and rssi channels are now using Units of Measurements. Items must be adapted and the things must be recreated.
+ALERT;TP-Link Smart Home Binding: The energy and rssi channels are now using Units of Measurements. Items must be adapted and the things must be recreated.
 ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
 
 [[PRE]]
