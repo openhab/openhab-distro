@@ -75,9 +75,7 @@ feature.openhab-model-runtime-all: \
 	osgi.console.enable.builtin=false,\
 	logback.configurationFile=file:${.}/runtime/logback.xml
 
--runblacklist: bnd.identity;id='org.apache.aries.javax.jax.rs-api',\
-    bnd.identity;id='org.apache.aries.jpa.container',\
-    bnd.identity;id='org.openhab.core.test'
+-runblacklist: bnd.identity;id='org.apache.aries.javax.jax.rs-api'
 
 #
 # done
@@ -143,6 +141,7 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.xtext.xbase.lib;version='[2.17.0,2.17.1)',\
 	org.glassfish.hk2.external.aopalliance-repackaged;version='[2.4.0,2.4.1)',\
 	org.glassfish.hk2.external.javax.inject;version='[2.4.0,2.4.1)',\
+	org.glassfish.hk2.utils;version='[2.4.0,2.4.1)',\
 	org.mapdb.mapdb;version='[1.0.9,1.0.10)',\
 	org.objectweb.asm;version='[7.0.0,7.0.1)',\
 	org.objectweb.asm.commons;version='[7.0.0,7.0.1)',\
@@ -212,5 +211,4 @@ feature.openhab-model-runtime-all: \
 	org.threeten.extra;version='[1.4.0,1.4.1)',\
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	tec.uom.lib.uom-lib-common;version='[1.0.3,1.0.4)',\
-	tec.uom.se;version='[1.0.10,1.0.11)',\
-	slf4j.simple;version='[1.7.21,1.7.22)'
+	tec.uom.se;version='[1.0.10,1.0.11)'
