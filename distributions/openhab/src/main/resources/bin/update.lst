@@ -23,6 +23,7 @@ ALERT;Azure IoT: Due to changes in the Azure API, this add-on is no longer worki
 ALERT;DarkSky Binding: The item type of 'rain' and 'snow' channels have been changed to 'Number:Speed'.
 ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this was a string containing many information. For this, there are three new channels: 'rssi', 'repeatCount' and 'lastReceived'.
 ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
+ALERT;LGWebOS Binding: The binding parameter 'localIP' has been removed. The binding now uses system defaults for network communication. The thing type parameter 'deviceId' is no longer a parameter, but a property. Parameters 'host' and 'key' have been added.
 ALERT;Mail Action: The mail action has been replaced by a new mail binding.
 ALERT;MQTT Binding: Homie channel names may have changed if special characters are used for MQTT topic names.
 ALERT;OneWire Binding: Some thing types have changed and need to be updated in textual configurations. See documentation for further information.
