@@ -14,7 +14,9 @@ For further Information please refer to our homepage [www.openhab.org](https://w
 
 ## openHAB 2
 
-openHAB 2 is the successor of [openHAB 1](https://github.com/openhab/openhab/wiki). It is an open-source solution. It is fully written in Java and uses [Apache Karaf](http://karaf.apache.org/) together with [Eclipse Equinox](https://www.eclipse.org/equinox/) as an OSGi runtime and bundles this with [Jetty](https://www.eclipse.org/jetty/) as an HTTP server.
+openHAB 2 is the successor of [openHAB 1](https://github.com/openhab/openhab/wiki).
+It is an open-source solution.
+It is fully written in Java and uses [Apache Karaf](https://karaf.apache.org/) together with [Eclipse Equinox](https://www.eclipse.org/equinox/) as an OSGi runtime and bundles this with [Jetty](https://www.eclipse.org/jetty/) as an HTTP server.
 
 For the latest snapshot builds, please see to our [Jenkins job](https://ci.openhab.org/job/openHAB-Distribution/).
 
@@ -24,9 +26,10 @@ Please refer to [our tutorials](https://www.openhab.org/docs/tutorial/) on how t
 
 ## Community: How to Get Involved
 
-As any good open source project, openHAB welcomes community participation in the project. Read more in the [how to contribute](CONTRIBUTING.md) guide.
+As any good open source project, openHAB welcomes community participation in the project.
+Read more in the [how to contribute](CONTRIBUTING.md) guide.
 
-If you are a developer and want to jump right into the sources and execute openHAB from within Eclipse, please have a look at the [IDE setup](https://www.openhab.org/docs/developer/development/ide.html) procedures.
+If you are a developer and want to jump right into the sources and execute openHAB from within an IDE, please have a look at the [IDE setup](https://www.openhab.org/docs/developer/#setup-the-development-environment) procedures.
 
 You can also learn [how openHAB 2 bindings are developed](https://www.openhab.org/docs/developer/bindings/).
 
