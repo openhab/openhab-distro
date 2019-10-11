@@ -47,3 +47,5 @@ DELETEDIR;$OPENHAB_USERDATA/kar
 
 [2.5.0]
 REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules.json
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/core/i18nprovider.config;$OPENHAB_USERDATA/config/org/eclipse/smarthome/i18n.config
+REPLACE;org.eclipse.smarthome.core.i18nprovider;org.eclipse.smarthome.i18n;$OPENHAB_USERDATA/config/org/eclipse/smarthome/i18n.config
