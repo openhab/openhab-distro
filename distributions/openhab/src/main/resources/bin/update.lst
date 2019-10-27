@@ -28,6 +28,7 @@ ALERT;Mail Action: The mail action has been replaced by a new mail binding.
 ALERT;MQTT Binding: Homie channel names may have changed if special characters are used for MQTT topic names.
 ALERT;OneWire Binding: Some thing types have changed and need to be updated in textual configurations. See documentation for further information.
 ALERT;OpenSprinkler Binding: The stationXX channels have been removed and replaced by a bridge/thing combination. See documentation for further information.
+ALERT;OpenSprinkler Binding: The Pi interface was removed, as it does not provide all of the features of the binding anymore. Please use the HTTP interface instead.
 ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
 ALERT;REST Docs: This add-on is now part of the UIs. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
 ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
