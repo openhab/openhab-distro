@@ -31,6 +31,8 @@
   <!-- log DEBUG from any log API using a logger name starting with `org.my.foo` -->
   <!-- <logger name="org.my.foo" level="DEBUG" /> -->
 
+  <!-- Ignore warnings given by ServletContainerInitializerScanner -->
+  <logger name="org.ops4j.pax.web.utils" level="ERROR" />
 
   <root level="WARN">
     <appender-ref ref="STDOUT" />
