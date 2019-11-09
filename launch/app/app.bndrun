@@ -93,7 +93,7 @@ feature.openhab-model-runtime-all: \
 	com.google.inject;version='[3.0.0,3.0.1)',\
 	javax.measure.unit-api;version='[1.0.0,1.0.1)',\
 	joda-time;version='[2.9.2,2.9.3)',\
-	jollyday;version='[0.5.9,0.5.10)',\
+	jollyday;version='[0.5.8,0.5.9)',\
 	log4j;version='[1.2.17,1.2.18)',\
 	org.antlr.runtime;version='[3.2.0,3.2.1)',\
 	org.apache.commons.codec;version='[1.10.0,1.10.1)',\
@@ -211,7 +211,7 @@ feature.openhab-model-runtime-all: \
 	org.ops4j.pax.web.pax-web-spi;version='[7.2.3,7.2.4)',\
 	org.osgi.service.event;version='[1.4.0,1.4.1)',\
 	org.osgi.service.metatype;version='[1.4.0,1.4.1)',\
-	org.threeten.extra;version='[1.5.0,1.5.1)',\
+	org.threeten.extra;version='[1.4.0,1.4.1)',\
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	tec.uom.lib.uom-lib-common;version='[1.0.3,1.0.4)',\
 	tec.uom.se;version='[1.0.10,1.0.11)'
