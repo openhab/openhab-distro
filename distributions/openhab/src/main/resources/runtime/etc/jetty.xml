@@ -44,7 +44,7 @@
 						<Arg>
 							<New class="org.eclipse.jetty.rewrite.handler.RedirectRegexRule">
 								<Set name="regex">/$</Set>
-								<Set name="replacement">/start/index</Set>
+								<Set name="location">/start/index</Set>
 							</New>
 						</Arg>
 					</Call>
@@ -96,7 +96,7 @@
 	<Set name="dumpAfterStart">false</Set>
 	<Set name="dumpBeforeStop">false</Set>
 
-	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
+	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory$Server">
 		<Set name="KeyStorePath"><SystemProperty name="jetty.keystore.path" default="/etc/myKeystore" /></Set>
 		<Set name="KeyStorePassword"><SystemProperty name="jetty.ssl.password" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
 		<Set name="KeyManagerPassword"><SystemProperty name="jetty.ssl.keypassword" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>

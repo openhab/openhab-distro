@@ -57,8 +57,8 @@
 
         <jackson.version>1.9.13</jackson.version>
 
-        <karaf.version>4.2.6</karaf.version>
-        <jetty.version>9.4.18.v20190429</jetty.version>
+        <karaf.version>4.2.7</karaf.version>
+        <jetty.version>9.4.20.v20190813</jetty.version>
 
         <!-- provided by Karaf -->
         <dep.slf4j.api.groupId>org.slf4j</dep.slf4j.api.groupId>
