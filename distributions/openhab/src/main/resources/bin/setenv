@@ -45,6 +45,7 @@
 # export KARAF_DATA # Karaf data folder
 # export KARAF_BASE # Karaf base folder
 # export KARAF_ETC  # Karaf etc  folder
+# export KARAF_LOG  # Karaf log  folder
 # export KARAF_SYSTEM_OPTS # First citizen Karaf options
 # export KARAF_OPTS # Additional available Karaf options
 # export KARAF_DEBUG # Enable debug mode
