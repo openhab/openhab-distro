@@ -30,7 +30,7 @@ ALERT;OneWire Binding: Some thing types have changed and need to be updated in t
 ALERT;OpenSprinkler Binding: The stationXX channels have been removed and replaced by a bridge/thing combination. See documentation for further information.
 ALERT;OpenSprinkler Binding: The Pi interface was removed, as it does not provide all of the features of the binding anymore. Please use the HTTP interface instead.
 ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
-ALERT;REST Docs: This add-on is now part of the UIs. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
+ALERT;REST Docs: This add-on is now part of the UIs. When previously installed using a UI, uninstall the REST Docs before updating and reinstall it after the update to prevent errors. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
 ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
 ALERT;Somfytahoma Binding: The following channels have been renamed: 'cyclic_button_state' to 'cyclic_button', 'battery_status_state' to 'battery_status' and 'lighting_led_pod_mod_state' to 'lighting_led_pod_mode'.
 ALERT;Systeminfo Binding: The 'cpu#load' channel has been removed because the OSHI library no longer provides this information.
