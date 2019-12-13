@@ -35,6 +35,7 @@ ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements,
 ALERT;Somfytahoma Binding: The following channels have been renamed: 'cyclic_button_state' to 'cyclic_button', 'battery_status_state' to 'battery_status' and 'lighting_led_pod_mod_state' to 'lighting_led_pod_mode'.
 ALERT;Systeminfo Binding: The 'cpu#load' channel has been removed because the OSHI library no longer provides this information.
 ALERT;TP-Link Smart Home Binding: The energy and rssi channels are now using Units of Measurements. Items must be adapted and the things must be recreated.
+ALERT;Tesla Binding: The binding has been heavily refactored. It is required to delete old Tesla Things and set them up from scratch.
 ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
 
 [[PRE]]
