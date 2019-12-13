@@ -74,7 +74,9 @@ feature.openhab-model-runtime-all: \
 	smarthome.userdata=${.}/runtime/userdata,\
 	osgi.console.enable.builtin=false,\
 	logback.configurationFile=file:${.}/runtime/logback.xml,\
-	log4j.configuration=file:${.}/runtime/log4j.xml
+	log4j.configuration=file:${.}/runtime/log4j.xml,\
+	org.osgi.service.http.port=8080,\
+	org.osgi.framework.bootdelegation="sun.misc"
 
 -runblacklist: bnd.identity;id='org.apache.aries.javax.jax.rs-api',\
     bnd.identity;id='org.apache.aries.jpa.container',\
