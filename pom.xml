@@ -9,7 +9,7 @@
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>2.5.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -51,9 +51,9 @@
 
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
-        <ohc.version>2.5.0-SNAPSHOT</ohc.version>
-        <oh2.version>2.5.0-SNAPSHOT</oh2.version>
-        <oh1.version>1.14.0-SNAPSHOT</oh1.version>
+        <ohc.version>3.0.0-SNAPSHOT</ohc.version>
+        <oh2.version>3.0.0-SNAPSHOT</oh2.version>
+        <oh1.version>1.15.0-SNAPSHOT</oh1.version>
 
         <jackson.version>1.9.13</jackson.version>
 
