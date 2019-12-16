@@ -24,8 +24,10 @@ setup(){
     echo ""
     echo "A full backup includes the tmp and cache directories that are normally excluded."
     echo ""
-    echo "Set $OPENHAB_BACKUPS to change the default backup directory."
-    echo "Set $OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
+    echo "Backup directory: '$OPENHAB_BACKUPS'"
+    echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
+    echo "Backup temporary directory: '$OPENHAB_BACKUPS_TEMP'"
+    echo "Set \$OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
     exit 0
   fi
 
