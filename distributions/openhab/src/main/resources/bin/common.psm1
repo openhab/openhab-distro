@@ -136,7 +136,7 @@ function GetOpenHABDirectory() {
 
 function CheckOpenHABRunning() {
     $m = (Get-WmiObject Win32_Process -Filter "name = 'java.exe'" |
-            Where-Object { $_.CommandLine.Contains("openhab") } | Measure-Object)
+		Where-Object { $_ -ne $null -and $_.CommandLine -ne $null -and $_.CommandLine.Contains("openhab") } | Measure-Object)
     if ($m.Count -gt 0) {
         throw "openHAB seems to be running, stop it before running this update script"
     }
