@@ -6,7 +6,7 @@
 
   <groupId>org.openhab.demo</groupId>
   <artifactId>org.openhab.demo.app</artifactId>
-  <version>2.5.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
 
   <name>openHAB Demo :: App</name>
 
@@ -32,12 +32,6 @@
       <artifactId>org.openhab.core.bom.openhab-core</artifactId>
       <version>${project.version}</version>
       <type>pom</type>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openhab.addons.bundles</groupId>
-      <artifactId>org.openhab.transform.map</artifactId>
-      <version>${project.version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
