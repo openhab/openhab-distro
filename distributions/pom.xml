@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>2.5.0</version>
+    <version>2.5.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>pom-distributions</artifactId>
@@ -16,7 +16,7 @@
   <modules>
     <module>openhab-addons</module>
     <module>openhab-addons-legacy</module>
-    <module>openhab</module>
+<!--    <module>openhab</module>-->
     <module>openhab-verify</module>
     <module>online-repo</module>
   </modules>

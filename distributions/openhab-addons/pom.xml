@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.openhab.distro</groupId>
         <artifactId>pom-distributions</artifactId>
-        <version>2.5.0</version>
+        <version>2.5.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>openhab-addons</artifactId>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.openhab.ui.features</groupId>
             <artifactId>org.openhab.ui.features</artifactId>
-            <version>${project.version}</version>
+            <version>${oh2.version}</version>
             <classifier>features</classifier>
             <type>xml</type>
         </dependency>
