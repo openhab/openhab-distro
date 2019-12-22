@@ -1,5 +1,5 @@
 /*
-This Jenkins pipeline does a full release build of openhab-distro including the release of all openHAB dependencies and ESH.
+This Jenkins pipeline does a full release build of openhab-distro including the release of all openHAB dependencies.
 It also includes all required SCM operations.
 */
 
@@ -59,11 +59,6 @@ if("FAILURE".equals(currentBuild.previousBuild?.result)) {
     notifyBackToNormalOpenhabBuild()
 }
 
-
-def releaseESH() {
-    def branch = env.ESH_BRANCH ?: 'master'
-    releaseOpenHabComponent("smarthome", branch, env.ESH_RELEASE_VERSION, env.ESH_NEXT_VERSION, false, false)
-}
 
 def releaseOpenHab1Component(componentName, updateParent) {
     def branch = env.OH1_BRANCH ?: 'master'
