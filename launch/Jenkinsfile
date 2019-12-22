@@ -16,7 +16,6 @@ try {
     
     node {
         deleteDir()
-        installTychoVersionsHotfix()
         releaseOpenHab2Component('openhab-core', false)
     }
     
@@ -26,19 +25,14 @@ try {
     parallel "openhab2-addons": {
         node {
             deleteDir()
-            installTychoVersionsHotfix()
             releaseOpenHab2Component('openhab2-addons', true)
+        }    
+    }, "openhab2-extra-addons": {
+        node {
+            deleteDir()         
             releaseOpenHab2Component('org.openhab.binding.zwave', true)
             releaseOpenHab2Component('org.openhab.binding.zigbee', true)
             releaseOpenHab2Component('openhab-webui', true)
-        }    
-    }, "openhab1-addons": {
-        if(!env.SKIP_OH1_BUILD?.toBoolean()) {
-            node {
-                deleteDir()
-                installTychoVersionsHotfix()
-                releaseOpenHab1Component('openhab1-addons', false)
-            }
         }
     }
     
@@ -46,7 +40,6 @@ try {
     
     node {
         deleteDir()
-        installTychoVersionsHotfix()
         releaseOpenHab2Component('openhab-distro', true)
     }
 }
@@ -59,11 +52,6 @@ if("FAILURE".equals(currentBuild.previousBuild?.result)) {
     notifyBackToNormalOpenhabBuild()
 }
 
-
-def releaseOpenHab1Component(componentName, updateParent) {
-    def branch = env.OH1_BRANCH ?: 'master'
-    releaseOpenHabComponent(componentName, branch, env.OH1_RELEASE_VERSION, env.OH1_NEXT_VERSION, updateParent, false)
-}
 
 def releaseOpenHab2Component(componentName, updateParent) {
     def branch = env.OH2_BRANCH ?: 'master'
@@ -108,11 +96,10 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                 mvnReleaseOptions = mvnOptions + " " + mvnReleaseOptions
                 
                 stage(componentName + ": Release") {
-                    writeUnleashWorkflows(componentName == "openhab1-addons")
+                    writeUnleashWorkflows()
 
                     //Set release versions
                     if(updateProperties) {
-                        sh "mvn versions:set-property -Dproperty=oh1.version -DnewVersion="+ env.OH1_RELEASE_VERSION +" " + mvnOptions
                         sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
                         sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
                     }
@@ -120,7 +107,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                         sh "mvn versions:update-parent -DparentVersion=[" + env.OH2_RELEASE_VERSION +"] " + mvnOptions
                     }
 
-                    sh "mvn unleash:perform-tycho -Dworkflow=unleash.phase1.workflow " + mvnOptions
+                    sh "mvn unleash:perform -Dworkflow=unleash.phase1.workflow " + mvnOptions
                     
                     //Build and publish artifacts
                     sh "mvn deploy " + mvnReleaseOptions
@@ -139,7 +126,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                     }
                     
                     //Tag SCM
-                    sh "mvn unleash:perform-tycho -Dworkflow=unleash.phase2.workflow " + mvnOptions
+                    sh "mvn unleash:perform -Dworkflow=unleash.phase2.workflow " + mvnOptions
 
 
                     //Prevent wrong scm tag from being checked in
@@ -153,13 +140,12 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                             sh "mvn versions:update-parent -DallowSnapshots=true -DparentVersion=[" + env.OH2_NEXT_VERSION +"-SNAPSHOT] " + mvnOptions
                         }
                         if(updateProperties) {
-                            sh "mvn versions:set-property -Dproperty=oh1.version -DnewVersion="+ env.OH1_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
                             sh "mvn versions:set-property -Dproperty=repo.version -DnewVersion="+ env.OH2_NEXT_VERSION.replace('[0-9]$', 'x ') + mvnOptions
                         }
 
-                        sh "mvn unleash:perform-tycho -Dworkflow=unleash.phase3.workflow " + mvnOptions
+                        sh "mvn unleash:perform -Dworkflow=unleash.phase3.workflow " + mvnOptions
 
                         sh "mvn deploy " + mvnSnapshotOptions
                     }
@@ -169,10 +155,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
     }    
 }
 
-def writeUnleashWorkflows(Boolean tycho) {
-    def tychoReleaseVersionsStep = tycho ? "setReleaseVersionsTycho" : ""
-    def tychoDevVersionsStep = tycho ? "setDevVersionTycho" : ""
-    
+def writeUnleashWorkflows() {    
     def unleashPhase1Workflow = """
     storeScmRevision
     checkProjectVersions
@@ -181,7 +164,6 @@ def writeUnleashWorkflows(Boolean tycho) {
     checkPluginDependencies
     prepareVersions
     #checkAether
-    """ + tychoReleaseVersionsStep + """
     setReleaseVersions
     """
     
@@ -200,23 +182,8 @@ def writeUnleashWorkflows(Boolean tycho) {
     def unleashPhase3Workflow = """
     prepareVersions
     checkForScmChanges
-    """ + tychoDevVersionsStep + """
     setDevVersion
     """
     
     sh 'echo "' + unleashPhase3Workflow +'" > unleash.phase3.workflow'
-}
-
-def installTychoVersionsHotfix() {
-    
-    stage("Workaround: Install custom tycho versions plugin") {
-        withMaven(jdk: 'Oracle JDK 1.8 (latest)', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx1024m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: 'sandbox-settings', mavenSettingsFilePath: env.settings_xml_path, options: [artifactsPublisher(disabled: true)]) {
-            dir('tycho-versions') {
-                deleteDir()
-                checkout([$class: 'GitSCM', branches: [[name: '*/0.25-dirty-hotfix']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: '0.25-dirty-hotfix'], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false], [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/pfink/tycho" ]]])
-                sh 'cd tycho-release/tycho-versions-plugin && mvn install -DskipTests=true'
-                deleteDir()
-            }
-        }
-    }
 }
