@@ -2399,31 +2399,31 @@
       label="openHAB Add-ons">
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="git.clone.openhab2-addons"
-        remoteURI="https://github.com/openhab/openhab2-addons.git"
-        pushURI="https://github.com/${github.user.id}/openhab2-addons.git">
+        id="git.clone.openhab-addons"
+        remoteURI="https://github.com/openhab/openhab-addons.git"
+        pushURI="https://github.com/${github.user.id}/openhab-addons.git">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
             key="label">
-          <value>openHAB 2 Git Repository</value>
+          <value>openHAB Git Repository</value>
         </detail>
       </annotation>
-      <description>openHAB 2 Add-ons</description>
+      <description>openHAB Add-ons</description>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="OH2 Add-ons">
+          name="OH Add-ons">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/openhab2-addons/bundles/.*"/>
+            pattern=".*/openhab-addons/bundles/.*"/>
       </workingSet>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${git.clone.openhab2-addons.location/bundles}"
+          rootFolder="${git.clone.openhab-addons.location/bundles}"
           locateNestedProjects="true">
         <excludedPath>ui/org.openhab.ui.cometvisu.php</excludedPath>
       </sourceLocator>
