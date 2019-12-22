@@ -58,7 +58,6 @@
 
     <feature name="openhab-package-expert" description="openHAB Expert Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
-        <feature>openhab-runtime-compat1x</feature>
         <config name="org.openhab.addons" append="true">
 			package = expert
 			ui = classic,basic,paper,habpanel,habmin,restdocs
