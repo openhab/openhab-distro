@@ -6,7 +6,6 @@ When no solution was found, use the table below to determine where your issue sh
 
 | Issue                                                        | Where to report                                                            |
 |--------------------------------------------------------------|---------------------------------------------------------------------------|
-| Problems and feature requests for openHAB 1 addons           | [openHAB1-addons](https://github.com/openhab/openhab1-addons/issues) |
 | Problems and feature requests for openHAB addons             | [openHAB-addons](https://github.com/openhab/openhab-addons/issues) |
 | Problems and feature requests for openHAB Web UIs            | [openHAB-webui](https://github.com/openhab/openhab-webui/issues)  |
 | Issues related to the runtime environment, IDE and packaging | [openHAB-distro](https://github.com/openhab/openhab-distro/issues) |

@@ -20,12 +20,6 @@
 			<version>${project.version}</version>
 			<type>kar</type>
 		</dependency>
-		<dependency>
-			<groupId>org.openhab.distro</groupId>
-			<artifactId>openhab-addons-legacy</artifactId>
-			<version>${project.version}</version>
-			<type>kar</type>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -40,7 +34,6 @@
 			   <tasks>
 				  <echo message="unzipping file"/>
 				  <unzip dest="target" src="../openhab-addons/target/openhab-addons-${project.version}.kar"/>
-				  <unzip dest="target" src="../openhab-addons-legacy/target/openhab-addons-legacy-${project.version}.kar"/>
 			   </tasks>
 			</configuration>
 			<goals>

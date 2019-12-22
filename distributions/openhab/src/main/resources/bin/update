@@ -87,18 +87,15 @@ setup(){
   if test "${OHVersion#*-SNAPSHOT}" != "$OHVersion"; then
     DownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
     AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
-    LegacyAddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersion.kar"
   elif [ "$OHVersion" = "$CurrentVersion" ]; then
     echo "You are already on openHAB $CurrentVersion" >&2
     exit 1
   elif [ -n "$milestoneVersion" ]; then
     DownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab/$OHVersion/openhab-$OHVersion.zip"
     AddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons/$OHVersion/openhab-addons-$OHVersion.kar"
-    LegacyAddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons-legacy/$OHVersion/openhab-addons-legacy-$OHVersion.kar"
   else
     DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
     AddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
-    LegacyAddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons-legacy%2F$OHVersion%2Fopenhab-addons-legacy-$OHVersion.kar"
   fi
 
   ## Set the temporary directories.
@@ -336,15 +333,6 @@ if [ -f "$AddonsFile" ]; then
   }
 fi
 
-## Do the same for the legacy addons file.
-LegacyAddonsFile="$WorkingDir/addons/openhab-addons-legacy-$CurrentVersion.kar"
-if [ -f "$LegacyAddonsFile" ]; then
-  echo "Found an openHAB legacy addons file, replacing with new version..."
-  rm -f "${LegacyAddonsFile:?}"
-  curl -Lf# "$LegacyAddonsDownloadLocation" -o "$WorkingDir/addons/openhab-addons-legacy-$OHVersion.kar" || {
-      echo "Download of legacy addons file failed, please find it on the openHAB website (www.openhab.org)" >&2
-  }
-fi
 echo ""
 ## Remove the downloaded zip-file.
 echo "Deleting temporary files..."
