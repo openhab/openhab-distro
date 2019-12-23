@@ -488,17 +488,14 @@ Function Update-openHAB() {
     if ($Snapshot) {
         $DownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersionName.zip"
         $AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersionName.kar"
-        $LegacyAddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons-legacy/target/openhab-addons-legacy-$OHVersionName.kar"
     }
     elseif ($Milestone -ne "") {
         $DownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab/$OHVersionName/openhab-$OHVersionName.zip"
         $AddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons/$OHVersionName/openhab-addons-$OHVersionName.kar"
-        $LegacyAddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons-legacy/$OHVersionName/openhab-addons-legacy-$OHVersionName.kar"
     }
     else {
         $DownloadLocation = "https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
         $AddonsDownloadLocation = "https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
-        $LegacyAddonsDownloadLocation = "https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons-legacy%2F$OHVersion%2Fopenhab-addons-legacy-$OHVersion.kar"
     }
 
     # If we are not in SkipNew (or SkipNew and the temporary distribution file/folders have not been created yet):
@@ -797,18 +794,6 @@ Function Update-openHAB() {
             return PrintAndThrow "Could not replace the $AddonsFile" $_
         }
 
-
-        # Do the same for the legacy addons file.
-        try {
-            $LegacyAddonsFile = "$OHAddons\openhab-addons-legacy-$OHVersionName.kar"
-            if (Test-Path -Path $LegacyAddonsFile) {
-                Write-Host "Found an openHAB legacy addons file, replacing with new version"
-                DeleteIfExists $LegacyAddonsFile
-                DownloadFiles $LegacyAddonsDownloadLocation "$OHAddons\openhab-addons-legacy-$OHVersionName.kar"
-            }
-        } catch {
-            return PrintAndThrow "Could not replace the $LegacyAddonsFile" $_
-        }
 
         # Hop for joy - we did it!
         Write-Host -ForegroundColor Green "openHAB updated to version $OHVersionName!"

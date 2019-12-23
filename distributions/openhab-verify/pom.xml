@@ -37,13 +37,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>openhab-addons-legacy</artifactId>
-            <version>${project.version}</version>
-            <type>kar</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>distro-kar</artifactId>
             <version>${project.version}</version>
             <type>kar</type>
