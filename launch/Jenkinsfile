@@ -22,18 +22,12 @@ try {
     // checkpoint "openHAB Core released"
     
     
-    parallel "openhab2-addons": {
-        node {
-            deleteDir()
-            releaseOpenHab2Component('openhab2-addons', true)
-        }    
-    }, "openhab2-extra-addons": {
-        node {
-            deleteDir()         
-            releaseOpenHab2Component('org.openhab.binding.zwave', true)
-            releaseOpenHab2Component('org.openhab.binding.zigbee', true)
-            releaseOpenHab2Component('openhab-webui', true)
-        }
+    node {
+        deleteDir()
+        releaseOpenHab2Component('openhab-addons', true)
+        releaseOpenHab2Component('org.openhab.binding.zwave', true)
+        releaseOpenHab2Component('org.openhab.binding.zigbee', true)
+        releaseOpenHab2Component('openhab-webui', true)
     }
     
     // checkpoint "openHAB Add-Ons released"
