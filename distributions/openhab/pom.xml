@@ -139,6 +139,7 @@
                         <feature>service</feature>
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
+                        <feature>openhab-ui-dashboard</feature>
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
@@ -162,6 +163,24 @@
                     </arguments>
                     <includePluginDependencies>True</includePluginDependencies>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                <execution>
+                    <phase>prepare-package</phase>
+                    <configuration>
+                    <tasks>
+                        <replace token="/${project.version}" value="/[2.5.0,2.6)" dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}">                                 
+                        <include name="*.xml"/>
+                        </replace>
+                    </tasks>
+                    </configuration>
+                    <goals>
+                    <goal>run</goal>
+                    </goals>
+                </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
