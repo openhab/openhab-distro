@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
+    <feature name="openhab-ui-dashboard" description="Dashboard UI" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui.dashboard/${project.version}</bundle>
+    </feature>
+
     <feature name="openhab-package-demo" description="openHAB Demo Package" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <configfile finalname="${openhab.conf}/items/demo.items" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/items</configfile>
@@ -19,7 +24,7 @@
         </config>
         <config name="org.openhab.addons" append="true">
 			package = demo
-			ui = basic,paper,habpanel,restdocs
+			ui = dashboard,basic,paper,habpanel,restdocs
 			misc = homekit,hueemulation
 			binding = wemo,hue,sonos,ipp,astro,avmfritz,ntp
 			persistence = rrd4j
@@ -37,7 +42,7 @@
         <feature>openhab-runtime-base</feature>
         <config name="org.openhab.addons" append="true">
 			package = simple
-			ui = paper,habpanel
+			ui = dashboard,paper,habpanel
 			misc = ruleengine
         </config>
         <config name="org.eclipse.smarthome.links">
@@ -49,7 +54,7 @@
         <feature>openhab-runtime-base</feature>
         <config name="org.openhab.addons" append="true">
 			package = standard
-			ui = basic,paper,habpanel,homebuilder
+			ui = dashboard,basic,paper,habpanel,homebuilder
         </config>
         <config name="org.eclipse.smarthome.links">
 			autoLinks = false
@@ -61,7 +66,7 @@
         <feature>openhab-runtime-compat1x</feature>
         <config name="org.openhab.addons" append="true">
 			package = expert
-			ui = classic,basic,paper,habpanel,habmin,restdocs
+			ui = dashboard,classic,basic,paper,habpanel,habmin,restdocs
 			transformation = map,regex,xslt,exec,javascript,scale,xpath,jsonpath
         </config>
         <config name="org.eclipse.smarthome.links">

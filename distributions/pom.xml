@@ -16,9 +16,8 @@
   <modules>
     <module>openhab-addons</module>
     <module>openhab-addons-legacy</module>
-<!--    <module>openhab</module>-->
+    <module>openhab</module>
     <module>openhab-verify</module>
-    <module>online-repo</module>
   </modules>
 
 </project>
