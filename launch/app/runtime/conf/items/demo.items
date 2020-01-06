@@ -14,9 +14,3 @@ Image DemoImage
 Color MagicColor { channel="magic:color-light:magicColor:color" }
 Switch MagicOnOff { channel="magic:onoff-light:magicOnOff:switch" }
 Dimmer MagicDimmer { channel="magic:dimmable-light:magicDimmer:brightness" }
-
-Group Weather "Weather Information"
-
-Number:Temperature Weather_Temperature "Outside Temperature [%.1f °C]" <temperature> (Weather) { channel="yahooweather:weather:berlin:temperature" }
-Number:Pressure Weather_Pressure "Pressure [%.1f %unit%]" (Weather) { channel="yahooweather:weather:berlin:pressure" }
-Number:Dimensionless Weather_Humidity "Humidity [%.1f %unit%]" (Weather) { channel="yahooweather:weather:berlin:humidity" }
