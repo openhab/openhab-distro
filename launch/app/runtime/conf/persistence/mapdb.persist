@@ -10,6 +10,6 @@ Strategies {
  * item (excl. the group item itself).
  */
 Items {
-	// log all weather data on every change
-	Weather*;
+	// log demo number on every change
+	DemoNumber;
 }
