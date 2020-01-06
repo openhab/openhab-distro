@@ -13,9 +13,4 @@ sitemap demo label="Demo Sitemap" {
 	Frame label="Location" {
 		Mapview item=DemoLocation height=10
 	}
-	Frame label="Weather" {
-		Text item=Weather_Temperature
-		Text item=Weather_Pressure
-		Text item=Weather_Humidity
-	}
 }
