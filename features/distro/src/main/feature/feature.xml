@@ -14,7 +14,7 @@
         <configfile finalname="${openhab.conf}/services/basicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-basicui</configfile>
         <configfile finalname="${openhab.conf}/services/classicui.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-classicui</configfile>
         <configfile finalname="${openhab.conf}/services/logging.cfg" override="false">mvn:${project.groupId}/distro-resources/${project.version}/cfg/services-logging</configfile>
-        <config name="org.eclipse.smarthome.persistence">
+        <config name="org.openhab.persistence">
 			default = rrd4j
         </config>
         <config name="org.openhab.addons" append="true">
@@ -40,7 +40,7 @@
 			ui = paper,habpanel
 			misc = ruleengine
         </config>
-        <config name="org.eclipse.smarthome.links">
+        <config name="org.openhab.links">
 			autoLinks = true
         </config>
     </feature>
@@ -51,7 +51,7 @@
 			package = standard
 			ui = basic,paper,habpanel,homebuilder
         </config>
-        <config name="org.eclipse.smarthome.links">
+        <config name="org.openhab.links">
 			autoLinks = false
         </config>
     </feature>
@@ -63,7 +63,7 @@
 			ui = classic,basic,paper,habpanel,habmin,restdocs
 			transformation = map,regex,xslt,exec,javascript,scale,xpath,jsonpath
         </config>
-        <config name="org.eclipse.smarthome.links">
+        <config name="org.openhab.links">
 			autoLinks = false
         </config>
     </feature>

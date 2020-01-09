@@ -38,7 +38,6 @@
     <appender-ref ref="STDOUT" />
   </root>
 
-  <logger name="org.eclipse.smarthome" level="INFO" />
   <logger name="org.openhab.core" level="INFO" />
 
 </configuration>
