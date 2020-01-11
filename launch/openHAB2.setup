@@ -2422,13 +2422,6 @@
             pattern=".*/openhab-addons/bundles/.*"/>
       </workingSet>
     </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.openhab-addons.location/bundles}"
-          locateNestedProjects="true">
-      </sourceLocator>
-    </setupTask>
     <stream
         name="2.5.x"/>
     <stream
