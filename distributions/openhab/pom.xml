@@ -172,7 +172,10 @@
                     <configuration>
                     <tasks>
                         <replace token="/${project.version}" value="/[2.5.0,2.6)" dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}">                                 
-                        <include name="*.xml"/>
+                            <include name="*.xml"/>
+                        </replace>
+                        <replace token="/${oh1.version}" value="/[1.14.0,1.15)" dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}">                                 
+                            <include name="*.xml"/>
                         </replace>
                     </tasks>
                     </configuration>
