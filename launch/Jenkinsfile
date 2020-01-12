@@ -97,20 +97,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                     
                     //Build and publish artifacts
                     sh "mvn deploy " + mvnReleaseOptions
-                    
-                    if(componentName == "openhab-distro" && !env.SANDBOX?.toBoolean()) {
-                        if(isMilestoneBuild) {
-                            withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'ARTIFACTORY_API_KEY', usernameVariable: 'ARTIFACTORY_USER')]) {
-                                sh 'chmod 744 distributions/online-repo/target/publish-artifactory.sh && ./distributions/online-repo/target/publish-artifactory.sh ' + ARTIFACTORY_USER + ' ' + ARTIFACTORY_API_KEY
-                            }
-                        }
-                        else {
-                            withCredentials([usernamePassword(credentialsId: 'bintray', passwordVariable: 'BINTRAY_API_KEY', usernameVariable: 'BINTRAY_USER')]) {
-                                sh 'chmod 744 distributions/online-repo/target/publish-bintray.sh && ./distributions/online-repo/target/publish-bintray.sh openhab ' + BINTRAY_USER + ' ' + BINTRAY_API_KEY
-                            }
-                        }                        
-                    }
-                    
+                                        
                     //Tag SCM
                     sh "mvn unleash:perform -Dworkflow=unleash.phase2.workflow " + mvnOptions
 
