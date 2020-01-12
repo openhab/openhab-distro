@@ -2392,8 +2392,10 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
+        name="2.5.x"/>
+    <stream
         name="master"
-        label=""/>
+        label="3.0"/>
   </project>
   <project name="2_addons2"
       label="openHAB Add-ons">
@@ -2425,11 +2427,13 @@
       <sourceLocator
           rootFolder="${git.clone.openhab-addons.location/bundles}"
           locateNestedProjects="true">
-        <excludedPath>ui/org.openhab.ui.cometvisu.php</excludedPath>
       </sourceLocator>
     </setupTask>
     <stream
-        name="master"/>
+        name="2.5.x"/>
+    <stream
+        name="master"
+        label="3.0"/>
   </project>
   <project name="4_zigbee"
       label="openHAB ZigBee Binding">
@@ -2457,8 +2461,10 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
+        name="2.5.x"/>
+    <stream
         name="master"
-        label=""/>
+        label="3.0"/>
   </project>
   <project name="5_zwave"
       label="openHAB Z-Wave Binding">
@@ -2485,8 +2491,10 @@
           rootFolder="${git.clone.zwavebinding.location}"/>
     </setupTask>
     <stream
+        name="2.5.x"/>
+    <stream
         name="master"
-        label=""/>
+        label="3.0"/>
   </project>
   <project name="6_bacnet"
       label="openHAB BACNet Binding">
@@ -2541,8 +2549,10 @@
           rootFolder="${git.clone.webui.location}"/>
     </setupTask>
     <stream
+        name="2.5.x"/>
+    <stream
         name="master"
-        label=""/>
+        label="3.0"/>
   </project>
   <project name="10_core"
       label="openHAB Core Framework">
@@ -2607,7 +2617,7 @@
         encoding="UTF-8"/>
     <stream
         name="master"
-        label=""/>
+        label="3.0"/>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
