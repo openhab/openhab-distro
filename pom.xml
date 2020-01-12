@@ -180,7 +180,7 @@
             </activation>
             <properties>
                 <build.number>Release Build</build.number>
-                <online.repo>https://dl.bintray.com/openhab/mvn</online.repo>
+                <online.repo>https://openhab.jfrog.io/openhab/libs-release</online.repo>
                 <pax.url.suffix/>
             </properties>
         </profile>
