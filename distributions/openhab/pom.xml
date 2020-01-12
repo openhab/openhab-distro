@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.openhab.distro</groupId>
         <artifactId>pom-distributions</artifactId>
-        <version>2.5.1-SNAPSHOT</version>
+        <version>2.5.1</version>
     </parent>
 
     <artifactId>openhab</artifactId>
@@ -171,10 +171,10 @@
                     <phase>prepare-package</phase>
                     <configuration>
                     <tasks>
-                        <replace token="/${project.version}" value="/[2.5.0,2.6)" dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}">                                 
+                        <replace dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}" token="/${project.version}" value="/[2.5.0,2.6)">                                 
                             <include name="*.xml"/>
                         </replace>
-                        <replace token="/${oh1.version}" value="/[1.14.0,1.15)" dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}">                                 
+                        <replace dir="target/assembly/system/org/openhab/distro/openhab-addons/${project.version}" token="/${oh1.version}" value="/[1.14.0,1.15)">                                 
                             <include name="*.xml"/>
                         </replace>
                     </tasks>
