@@ -64,7 +64,7 @@
                                 <descriptor>mvn:${project.groupId}/distro/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <distribution>org.apache.karaf.features:framework</distribution>
-                            <javase>1.8</javase>
+                            <javase>${oh.java.version}</javase>
                             <framework>
                                 <feature>framework</feature>
                             </framework>
