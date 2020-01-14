@@ -2295,8 +2295,8 @@
   </setupTask>
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-11"
-      location="${jre.location-11}"/>
+      version="JavaSE-1.8"
+      location="${jre.location-1.8}"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       id="eclipse.ini.memory.start"
