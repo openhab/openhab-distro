@@ -139,6 +139,7 @@
                         <feature>service</feature>
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
+                        <feature>openhab-ui-default</feature>
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
