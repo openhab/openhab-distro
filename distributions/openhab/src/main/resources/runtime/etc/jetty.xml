@@ -38,16 +38,6 @@
 							</New>
 						</Arg>
 					</Call>
-
-					<!-- show the dashboard as default -->
-					<Call name="addRule">
-						<Arg>
-							<New class="org.eclipse.jetty.rewrite.handler.RedirectRegexRule">
-								<Set name="regex">/$</Set>
-								<Set name="location">/start/index</Set>
-							</New>
-						</Arg>
-					</Call>
 				</New>
 			</Arg>
 		</Call>
