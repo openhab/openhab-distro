@@ -114,4 +114,8 @@ MOVE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.Thing.json;$OPENH
 REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.Thing.json
 REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.Thing.json
 
+DELETE;$OPENHAB_USERDATA/config/org/openhab/classicui.config
 DELETE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.link.ItemThingLink.json
+
+DELETEDIR;$OPENHAB_USERDATA/config/org/eclipse/smarthome
+DELETEDIR;$OPENHAB_USERDATA/habmin
