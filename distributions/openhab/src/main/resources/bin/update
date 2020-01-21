@@ -1,5 +1,9 @@
 #!/bin/sh
 
+###########################################################################
+# NOTE: changes in this script should be reflected in update.ps1 as well
+###########################################################################
+
 setup(){
   ## Keep the script general by allowing the user to provide the version number to download.
   if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
