@@ -42,6 +42,13 @@
             <classifier>features</classifier>
             <type>xml</type>
         </dependency>
+        <dependency>
+            <groupId>org.openhab.addons.features.karaf</groupId>
+            <artifactId>org.openhab.addons.features.karaf.zigbee</artifactId>
+            <version>${oh2.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
     </dependencies>
 
     <build>
