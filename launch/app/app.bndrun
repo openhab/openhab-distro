@@ -210,10 +210,10 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.ui;version='[2.5.0,2.5.1)',\
 	org.openhab.core.ui.icon;version='[2.5.0,2.5.1)',\
 	org.openhab.core.voice;version='[2.5.0,2.5.1)',\
-	org.openhab.transform.map;version='[2.5.1,2.5.2)',\
-	org.openhab.ui.basic;version='[2.5.1,2.5.2)',\
-	org.openhab.ui.dashboard;version='[2.5.1,2.5.2)',\
-	org.openhab.ui.iconset.classic;version='[2.5.1,2.5.2)',\
-	org.openhab.ui.paper;version='[2.5.1,2.5.2)',\
-	org.openhab.ui.restdocs;version='[2.5.1,2.5.2)',\
-	slf4j.simple;version='[1.7.21,1.7.22)'
+	slf4j.simple;version='[1.7.21,1.7.22)',\
+	org.openhab.transform.map;version='[2.5.3,2.5.4)',\
+	org.openhab.ui.basic;version='[2.5.3,2.5.4)',\
+	org.openhab.ui.dashboard;version='[2.5.3,2.5.4)',\
+	org.openhab.ui.iconset.classic;version='[2.5.3,2.5.4)',\
+	org.openhab.ui.paper;version='[2.5.3,2.5.4)',\
+	org.openhab.ui.restdocs;version='[2.5.3,2.5.4)'
