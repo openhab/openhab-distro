@@ -73,9 +73,9 @@ feature.openhab-model-runtime-all: \
 	org.osgi.service.http.port=8080,\
 	osgi.console=,\
 	osgi.console.enable.builtin=false,\
-	smarthome.servicepid=org.openhab,\
-	smarthome.configdir=${.}/runtime/conf,\
-	smarthome.userdata=${.}/runtime/userdata
+    openhab.servicecfg=${.}/runtime/services.cfg,\
+	openhab.conf=${.}/runtime/conf,\
+	openhab.userdata=${.}/runtime/userdata
 
 -runblacklist: \
 	bnd.identity;id='org.apache.aries.javax.jax.rs-api',\
