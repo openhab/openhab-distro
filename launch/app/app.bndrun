@@ -69,6 +69,7 @@ feature.openhab-model-runtime-all: \
 -runproperties: \
 	log4j.configuration=file:${.}/runtime/log4j.xml,\
 	logback.configurationFile=file:${.}/runtime/logback.xml,\
+	nashorn.args=--no-deprecation-warning,\
 	org.osgi.framework.bootdelegation="sun.misc",\
 	org.osgi.service.http.port=8080,\
 	osgi.console=,\
