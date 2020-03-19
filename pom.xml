@@ -9,7 +9,7 @@
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>2.5.3-SNAPSHOT</version>
+    <version>2.5.3</version>
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -26,6 +26,7 @@
         <connection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</connection>
         <developerConnection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</developerConnection>
         <url>https://github.com/openhab/openhab-distro</url>
+<tag>2.5.3</tag>
     </scm>
 
     <issueManagement>
@@ -51,7 +52,7 @@
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
         <ohc.version>2.5.0</ohc.version>
-        <oh2.version>2.5.3-SNAPSHOT</oh2.version>
+        <oh2.version>2.5.3</oh2.version>
         <oh1.version>1.14.0</oh1.version>
 
         <jackson.version>1.9.13</jackson.version>
