@@ -6,7 +6,7 @@
 
   <groupId>org.openhab.demo</groupId>
   <artifactId>org.openhab.demo.app</artifactId>
-  <version>2.5.3-SNAPSHOT</version>
+  <version>2.5.4-SNAPSHOT</version>
 
   <name>openHAB Demo :: App</name>
 
