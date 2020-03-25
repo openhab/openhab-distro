@@ -12,6 +12,7 @@
         <config name="org.openhab.addons" append="true">
 			package = standard
 			ui = basic,habpanel
+			persistence = rrd4j
         </config>
         <config name="org.openhab.links">
 			autoLinks = false
