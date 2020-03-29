@@ -17,6 +17,7 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core.config.dispatch',\
 	bnd.identity;id='org.openhab.core.config.xml',\
 	bnd.identity;id='org.openhab.core',\
+	bnd.identity;id='org.openhab.core.auth.jaas',\
 	bnd.identity;id='org.openhab.core.storage.mapdb',\
 	bnd.identity;id='org.openhab.core.binding.xml',\
 	bnd.identity;id='org.openhab.core.id',\
@@ -31,7 +32,9 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core.io.monitor',\
 	bnd.identity;id='org.openhab.core.io.net',\
 	bnd.identity;id='org.openhab.core.io.http',\
+	bnd.identity;id='org.openhab.core.io.http.auth',\
 	bnd.identity;id='org.openhab.core.io.rest',\
+	bnd.identity;id='org.openhab.core.io.rest.auth',\
 	bnd.identity;id='org.openhab.core.io.rest.optimize',\
 	bnd.identity;id='org.openhab.core.io.rest.core',\
 	bnd.identity;id='org.openhab.core.io.rest.sse'
@@ -115,7 +118,6 @@ feature.openhab-model-runtime-all: \
 	com.google.inject;version='[3.0.0,3.0.1)',\
 	io.github.classgraph;version='[4.8.35,4.8.36)',\
 	javax.measure.unit-api;version='[1.0.0,1.0.1)',\
-	jaxb-api;version='[2.2.11,2.2.12)',\
 	jollyday;version='[0.5.8,0.5.9)',\
 	log4j;version='[1.2.17,1.2.18)',\
 	org.antlr.runtime;version='[3.2.0,3.2.1)',\
@@ -177,7 +179,6 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.automation.rest;version='[3.0.0,3.0.1)',\
 	org.openhab.core.automation;version='[3.0.0,3.0.1)',\
 	org.openhab.core.binding.xml;version='[3.0.0,3.0.1)',\
-	org.openhab.core.boot;version='[3.0.0,3.0.1)',\
 	org.openhab.core.config.core;version='[3.0.0,3.0.1)',\
 	org.openhab.core.config.discovery;version='[3.0.0,3.0.1)',\
 	org.openhab.core.config.dispatch;version='[3.0.0,3.0.1)',\
@@ -234,5 +235,9 @@ feature.openhab-model-runtime-all: \
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	slf4j.simple;version='[1.7.21,1.7.22)',\
 	tec.uom.lib.uom-lib-common;version='[1.0.3,1.0.4)',\
-	tec.uom.se;version='[1.0.10,1.0.11)'
+	tec.uom.se;version='[1.0.10,1.0.11)',\
+	org.bitbucket.b_c.jose4j;version='[0.7.0,0.7.1)',\
+	org.openhab.core.auth.jaas;version='[3.0.0,3.0.1)',\
+	org.openhab.core.io.rest.auth;version='[3.0.0,3.0.1)',\
+	org.openhab.core.io.http.auth;version='[3.0.0,3.0.1)'
 
