@@ -40,6 +40,7 @@ ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_tem
 
 [2.5.4]
 ALERT;Mail Binding: The option 'TLS' of configuration parameter 'security' has been renamed to 'STARTTLS' and thus needs to be changed in existing configurations.
+ALERT;Satel Binding: New rule action 'readEvent' for reading records from the event log has been added. All channels of 'event-log' thing are now obsolete and will be removed in the future. See documentation for further information.
 
 [[PRE]]
 [2.2.0]
