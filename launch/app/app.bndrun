@@ -74,6 +74,7 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.apache.servicemix.specs.jaxb-api-2.2'
 
 -runproperties: \
+	felix.cm.dir=${.}/runtime/userdata/config,\
 	log4j.configuration=file:${.}/runtime/log4j.xml,\
 	logback.configurationFile=file:${.}/runtime/logback.xml,\
 	org.osgi.framework.bootdelegation="sun.misc",\
