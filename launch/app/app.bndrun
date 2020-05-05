@@ -27,6 +27,7 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core.io.monitor',\
 	bnd.identity;id='org.openhab.core.io.net',\
 	bnd.identity;id='org.openhab.core.io.rest',\
+	bnd.identity;id='org.openhab.core.io.rest.auth',\
 	bnd.identity;id='org.openhab.core.io.rest.core',\
 	bnd.identity;id='org.openhab.core.io.rest.sse',\
 	bnd.identity;id='org.openhab.core.scheduler',\
@@ -159,6 +160,7 @@ feature.openhab-model-runtime-all: \
 	org.apache.servicemix.specs.stax-api-1.2;version='[2.9.0,2.9.1)',\
 	org.apache.xbean.bundleutils;version='[4.12.0,4.12.1)',\
 	org.apache.xbean.finder;version='[4.12.0,4.12.1)',\
+	org.bitbucket.b_c.jose4j;version='[0.7.0,0.7.1)',\
 	org.eclipse.emf.common;version='[2.12.0,2.12.1)',\
 	org.eclipse.emf.ecore;version='[2.12.0,2.12.1)',\
 	org.eclipse.emf.ecore.xmi;version='[2.12.0,2.12.1)',\
@@ -198,7 +200,6 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.automation.rest;version='[3.0.0,3.0.1)',\
 	org.openhab.core.automation;version='[3.0.0,3.0.1)',\
 	org.openhab.core.binding.xml;version='[3.0.0,3.0.1)',\
-	org.openhab.core.boot;version='[3.0.0,3.0.1)',\
 	org.openhab.core.config.core;version='[3.0.0,3.0.1)',\
 	org.openhab.core.config.discovery;version='[3.0.0,3.0.1)',\
 	org.openhab.core.config.dispatch;version='[3.0.0,3.0.1)',\
@@ -211,6 +212,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.io.http;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.monitor;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.net;version='[3.0.0,3.0.1)',\
+	org.openhab.core.io.rest.auth;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest.core;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest.sitemap;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest.sse;version='[3.0.0,3.0.1)',\
