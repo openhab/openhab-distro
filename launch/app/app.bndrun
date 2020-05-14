@@ -59,7 +59,7 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.core.automation.rest',\
 	bnd.identity;id='org.openhab.core.io.console.rfc147',\
 	bnd.identity;id='org.openhab.core.io.rest.sitemap',\
-	bnd.identity;id='org.openhab.core.io.rest.swagger1',\
+	bnd.identity;id='org.openhab.core.io.rest.swagger',\
 	bnd.identity;id='org.openhab.core.io.rest.ui',\
 	bnd.identity;id='org.openhab.ui',\
 	bnd.identity;id='org.openhab.ui.basic',\
@@ -216,7 +216,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.io.rest.core;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest.sitemap;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest.sse;version='[3.0.0,3.0.1)',\
-	org.openhab.core.io.rest.swagger1;version='[3.0.0,3.0.1)',\
+	org.openhab.core.io.rest.swagger;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest.ui;version='[3.0.0,3.0.1)',\
 	org.openhab.core.io.rest;version='[3.0.0,3.0.1)',\
 	org.openhab.core.model.core;version='[3.0.0,3.0.1)',\
