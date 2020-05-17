@@ -32,7 +32,7 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core.io.rest.sse',\
 	bnd.identity;id='org.openhab.core.scheduler',\
 	bnd.identity;id='org.openhab.core.semantics',\
-	bnd.identity;id='org.openhab.core.storage.mapdb',\
+	bnd.identity;id='org.openhab.core.storage.json',\
 	bnd.identity;id='org.openhab.core.thing',\
 	bnd.identity;id='org.openhab.core.thing.xml',\
 	bnd.identity;id='org.openhab.core.transform',\
@@ -188,7 +188,6 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.xtext.xbase;version='[2.19.0,2.19.1)',\
 	org.glassfish.hk2.external.aopalliance-repackaged;version='[2.4.0,2.4.1)',\
 	org.glassfish.hk2.external.javax.inject;version='[2.4.0,2.4.1)',\
-	org.mapdb.mapdb;version='[1.0.9,1.0.10)',\
 	org.objectweb.asm.commons;version='[7.1.0,7.1.1)',\
 	org.objectweb.asm.tree;version='[7.1.0,7.1.1)',\
 	org.objectweb.asm;version='[7.1.0,7.1.1)',\
@@ -235,7 +234,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.persistence;version='[3.0.0,3.0.1)',\
 	org.openhab.core.scheduler;version='[3.0.0,3.0.1)',\
 	org.openhab.core.semantics;version='[3.0.0,3.0.1)',\
-	org.openhab.core.storage.mapdb;version='[3.0.0,3.0.1)',\
+	org.openhab.core.storage.json;version='[3.0.0,3.0.1)',\
 	org.openhab.core.thing;version='[3.0.0,3.0.1)',\
 	org.openhab.core.thing.xml;version='[3.0.0,3.0.1)',\
 	org.openhab.core.transform;version='[3.0.0,3.0.1)',\
