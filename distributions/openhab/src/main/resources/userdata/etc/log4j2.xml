@@ -62,6 +62,10 @@
 		<Logger level="ERROR" name="smarthome.event.ThingAddedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.ThingRemovedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.InboxUpdatedEvent"/>
+		<Logger level="ERROR" name="smarthome.event.RuleStatusInfoEvent"/>
+		<Logger level="ERROR" name="smarthome.event.RuleAddedEvent"/>
+		<Logger level="ERROR" name="smarthome.event.RuleRemovedEvent"/>
+		<Logger level="ERROR" name="smarthome.event.StartlevelEvent"/>
 
 		<Logger additivity="false" level="INFO" name="smarthome.event">
 			<AppenderRef ref="EVENT"/>
