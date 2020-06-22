@@ -13,16 +13,7 @@ try {
             clearOpenhabMavenRepository env.ALT_RELEASE_REPO_ID + "/org"
         }
     }
-    
-    
-    node {
-        deleteDir()
-        releaseOpenHab2Component('openhab-addons', true)
-        releaseOpenHab2Component('org.openhab.binding.zwave', true)
-        releaseOpenHab2Component('org.openhab.binding.zigbee', true)
-        releaseOpenHab2Component('openhab-webui', true)
-    }
-    
+            
     // checkpoint "openHAB Add-Ons released"
     
     node {
