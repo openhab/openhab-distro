@@ -487,6 +487,10 @@
           value="java;javax;org;com;"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.javadoc=true"
+          value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.ondemandthreshold"
           value="99"/>
       <setupTask
@@ -497,6 +501,10 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.staticondemandthreshold"
           value="2"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_code_templates"
+          value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&lt;templates>&lt;template autoinsert=&quot;false&quot; context=&quot;filecomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for created Java files&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.filecomment&quot; name=&quot;filecomment&quot;>/**&#xA; * Copyright (c) 2010-$${currentDate:date('yyyy')} Contributors to the openHAB project&#xA; *&#xA; * See the NOTICE file(s) distributed with this work for additional&#xA; * information.&#xA; *&#xA; * This program and the accompanying materials are made available under the&#xA; * terms of the Eclipse Public License 2.0 which is available at&#xA; * http://www.eclipse.org/legal/epl-2.0&#xA; *&#xA; * SPDX-License-Identifier: EPL-2.0&#xA; */&lt;/template>&lt;template autoinsert=&quot;false&quot; context=&quot;typecomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for created types&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.typecomment&quot; name=&quot;typecomment&quot;>/**&#xA; * @author $${name:git_config(user.name)} - Initial contribution&#xA; *&#xA; * $${tags}&#xA; */&lt;/template>&lt;/templates>"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.wizards.srcBinFoldersBinName"
