@@ -14,9 +14,6 @@
 			ui = basic,habpanel
 			persistence = rrd4j
         </config>
-        <config name="org.openhab.links">
-			autoLinks = false
-        </config>
     </feature>
 
     <feature name="openhab-package-demo" description="openHAB Demo Package" version="${project.version}">
