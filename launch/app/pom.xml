@@ -16,7 +16,7 @@
     <oh.java.version>11</oh.java.version>
     <maven.compiler.source>${oh.java.version}</maven.compiler.source>
     <maven.compiler.target>${oh.java.version}</maven.compiler.target>
-    <bnd.version>4.3.0</bnd.version>
+    <bnd.version>5.1.2</bnd.version>
   </properties>
 
   <dependencies>
