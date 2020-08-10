@@ -12,7 +12,7 @@ Set-StrictMode -Version Latest
     The version to upgrade to.
     .PARAMETER Snapshot
     DEPRECATED - Upgrade to a snapshot version ($true) or a release version ($false) (default: $false)
-    DEPRECATED - Please specify "-snapshot" in the OHVersion instead (ex: "2.4.0-SNAPSHOT")
+    DEPRECATED - Please specify "-snapshot" in the OHVersion instead (ex: "3.0.0-SNAPSHOT")
     .PARAMETER AutoConfirm
     Automatically confirm update (used for headless mode)
     .EXAMPLE
@@ -20,7 +20,7 @@ Set-StrictMode -Version Latest
     Update-openHAB
     .EXAMPLE
     Update the openHAB distribution in the C:\oh-snapshot directory to the next snapshot version
-    Update-openHAB -OHDirectory C:\oh-snapshot -OHVersion 2.3.0-SNAPSHOT
+    Update-openHAB -OHDirectory C:\oh-snapshot -OHVersion 3.0.0-SNAPSHOT
 #>
 
 ###########################################################################
@@ -491,7 +491,7 @@ Function Update-openHAB() {
 
     # Create the proper download URLs
     if ($Snapshot) {
-        $DownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersionName.zip"
+        $DownloadLocation="https://ci.openhab.org/job/openHAB3-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersionName.zip"
         $AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersionName.kar"
     }
     elseif ($Milestone -ne "") {
