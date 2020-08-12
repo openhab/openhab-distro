@@ -65,8 +65,8 @@ rem SET KARAF_OPTS
 rem Enable debug mode
 rem SET KARAF_DEBUG
 
-:: Use openHAB 2 directory layout
-call "%DIRNAME%oh2_dir_layout.bat"
+:: Use openHAB directory layout
+call "%DIRNAME%oh_dir_layout.bat"
 
 :: set listen address for HTTP(S) server
 :check_http_address
@@ -102,6 +102,19 @@ set HTTPS_PORT=%OPENHAB_HTTPS_PORT%
 goto :https_port_done
 
 :https_port_done
+
+:: set the Java debug port with a wildcard, so that it is bound to all interfaces
+:: (java/karaf otherwise only binds it to localhost)
+:check_debug_port
+IF NOT [%OPENHAB_JAVA_DEBUG_PORT%] == [] GOTO :debug_port_set
+set JAVA_DEBUG_PORT=*:5005
+goto :debug_port_done
+
+:debug_port_set
+set JAVA_DEBUG_PORT=%OPENHAB_JAVA_DEBUG_PORT%
+goto :debug_port_done
+
+:debug_port_done
 
 :: set java options
 set JAVA_OPTS=%JAVA_OPTS% ^

@@ -53,9 +53,9 @@
 # export KARAF_NOROOT # Prevent execution as root if set to true
 
 #
-# Import openHAB 2 directory layout
+# Import openHAB directory layout
 #
-. "$DIRNAME/oh2_dir_layout"
+. "$DIRNAME/oh_dir_layout"
 
 #
 # Import Karaf shared functions
@@ -84,6 +84,14 @@ if [ ! -z ${OPENHAB_HTTPS_PORT} ]; then
     HTTPS_PORT=${OPENHAB_HTTPS_PORT}
 else
     HTTPS_PORT=8443
+fi
+
+# set the Java debug port with a wildcard, so that it is bound to all interfaces
+# (java/karaf otherwise only binds it to localhost)
+if [ ! -z ${OPENHAB_JAVA_DEBUG_PORT} ]; then
+    JAVA_DEBUG_PORT=${OPENHAB_JAVA_DEBUG_PORT}
+else
+    JAVA_DEBUG_PORT="*:5005"
 fi
 
 #
