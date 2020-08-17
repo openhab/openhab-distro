@@ -119,3 +119,7 @@ DELETE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.link.ItemThingL
 
 DELETEDIR;$OPENHAB_USERDATA/config/org/eclipse/smarthome
 DELETEDIR;$OPENHAB_USERDATA/habmin
+
+DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg	
+DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
+DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
