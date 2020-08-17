@@ -62,7 +62,7 @@ setup(){
   fi
 
   ## Check to see if processes are running before updating
-  if [ ! -z "$(ps aux  | grep "openhab.*java" | grep -v grep)" ]; then
+  if [ ! -z "$(pgrep -f "openhab.*java")" ]; then
     echo "openHAB is running! Please stop the process before updating." >&2
     exit 1
   fi
