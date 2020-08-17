@@ -1,8 +1,6 @@
 all.policy
 branding.properties
 branding-ssh.properties
-com.eclipsesource.jaxrs.connector.cfg
-com.eclipsesource.jaxrs.swagger.cfg
 config.properties
 custom.properties
 custom.system.properties
