@@ -30,7 +30,6 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core.io.rest.auth',\
 	bnd.identity;id='org.openhab.core.io.rest.core',\
 	bnd.identity;id='org.openhab.core.io.rest.sse',\
-	bnd.identity;id='org.openhab.core.scheduler',\
 	bnd.identity;id='org.openhab.core.semantics',\
 	bnd.identity;id='org.openhab.core.storage.json',\
 	bnd.identity;id='org.openhab.core.thing',\
@@ -95,16 +94,16 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='slf4j.simple'
 
 -runvm.java9plus: \
-	--add-opens java.base/java.io=ALL-UNNAMED,\
-	--add-opens java.base/java.lang=ALL-UNNAMED,\
-	--add-opens java.base/java.lang.reflect=ALL-UNNAMED,\
-	--add-opens java.base/java.net=ALL-UNNAMED,\
-	--add-opens java.base/java.security=ALL-UNNAMED,\
-	--add-opens java.base/java.text=ALL-UNNAMED,\
-	--add-opens java.base/java.util=ALL-UNNAMED,\
-	--add-opens java.desktop/java.awt.font=ALL-UNNAMED,\
-	--add-opens java.naming/javax.naming.spi=ALL-UNNAMED,\
-	--add-opens java.rmi/sun.rmi.transport.tcp=ALL-UNNAMED
+	--add-opens=java.base/java.io=ALL-UNNAMED,\
+	--add-opens=java.base/java.lang=ALL-UNNAMED,\
+	--add-opens=java.base/java.lang.reflect=ALL-UNNAMED,\
+	--add-opens=java.base/java.net=ALL-UNNAMED,\
+	--add-opens=java.base/java.security=ALL-UNNAMED,\
+	--add-opens=java.base/java.text=ALL-UNNAMED,\
+	--add-opens=java.base/java.util=ALL-UNNAMED,\
+	--add-opens=java.desktop/java.awt.font=ALL-UNNAMED,\
+	--add-opens=java.naming/javax.naming.spi=ALL-UNNAMED,\
+	--add-opens=java.rmi/sun.rmi.transport.tcp=ALL-UNNAMED
 
 #
 # done
@@ -224,7 +223,6 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.model.thing.runtime;version='[3.0.0,3.0.1)',\
 	org.openhab.core.model.thing;version='[3.0.0,3.0.1)',\
 	org.openhab.core.persistence;version='[3.0.0,3.0.1)',\
-	org.openhab.core.scheduler;version='[3.0.0,3.0.1)',\
 	org.openhab.core.semantics;version='[3.0.0,3.0.1)',\
 	org.openhab.core.storage.json;version='[3.0.0,3.0.1)',\
 	org.openhab.core.thing;version='[3.0.0,3.0.1)',\
