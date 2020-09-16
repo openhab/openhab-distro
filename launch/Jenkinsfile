@@ -95,7 +95,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
 
                     sh "mvn unleash:perform -Dworkflow=unleash.phase1.workflow " + mvnOptions
 
-                    sh "mvn spotless:apply"
+                    sh "mvn com.diffplug.spotless:spotless-maven-plugin:apply"
 
                     //Build and publish artifacts
                     sh "mvn deploy " + mvnReleaseOptions
@@ -121,7 +121,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
 
                         sh "mvn unleash:perform -Dworkflow=unleash.phase3.workflow " + mvnOptions
 
-                        sh "mvn spotless:apply"
+                        sh "mvn com.diffplug.spotless:spotless-maven-plugin:apply"
 
                         sh "mvn deploy " + mvnSnapshotOptions
                     }
