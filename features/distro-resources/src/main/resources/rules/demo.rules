@@ -104,8 +104,8 @@ when
     Time cron "0 0 0 * * ?" or
     System started
 then
-    val max = Weather_Temperature.maximumSince(now.withTimeAtStartOfDay)
-    val min = Weather_Temperature.minimumSince(now.withTimeAtStartOfDay)
+    val max = Weather_Temperature.maximumSince(now.with(LocalTime.MIDNIGHT))
+    val min = Weather_Temperature.minimumSince(now.with(LocalTime.MIDNIGHT))
     if (max !== null && min !== null) {
         postUpdate(Weather_Temp_Max, max.state)
         postUpdate(Weather_Temp_Min, min.state)
