@@ -42,6 +42,9 @@ ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_tem
 ALERT;Mail Binding: The option 'TLS' of configuration parameter 'security' has been renamed to 'STARTTLS' and thus needs to be changed in existing configurations.
 ALERT;Satel Binding: New rule action 'readEvent' for reading records from the event log has been added. All channels of 'event-log' thing are now obsolete and will be removed in the future. See documentation for further information.
 
+[2.5.9]
+ALERT;Velbus Binding: The channel names of the following modules have been renamed from "CHx" to "input:CHx": VMB2PN, VMB6IN, VMB6PN, VMB7IN, VMB8IR, VMB8PB, VMB8PBU, VMBGP1, VMBGP2, VMBGP4, VMBGP4PIR, VMBGPO, VMBGPOD, VMBPIRC, VMBPIRM and VMBPIRO.
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
