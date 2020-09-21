@@ -1,4 +1,4 @@
-# openHAB 2 Distribution
+# openHAB Distribution
 
 [![Build Status](https://img.shields.io/jenkins/build/https/ci.openhab.org/openHAB-Distribution.svg)](https://ci.openhab.org/job/openHAB-Distribution/)
 [![EPL-2.0](https://img.shields.io/badge/license-EPL%202-green.svg)](https://opensource.org/licenses/EPL-2.0)
@@ -12,17 +12,11 @@ It is designed to be absolutely vendor-neutral as well as hardware/protocol-agno
 
 For further Information please refer to our homepage [www.openhab.org](https://www.openhab.org). 
 
-## openHAB 2
-
-openHAB 2 is the successor of [openHAB 1](https://github.com/openhab/openhab/wiki).
-It is an open-source solution.
-It is fully written in Java and uses [Apache Karaf](https://karaf.apache.org/) together with [Eclipse Equinox](https://www.eclipse.org/equinox/) as an OSGi runtime and bundles this with [Jetty](https://www.eclipse.org/jetty/) as an HTTP server.
-
-For the latest snapshot builds, please see to our [Jenkins job](https://ci.openhab.org/job/openHAB-Distribution/).
+For the latest snapshot builds, please see to our [Jenkins job](https://ci.openhab.org/job/openHAB3-Distribution/).
 
 ## Getting Started
 
-Please refer to [our tutorials](https://www.openhab.org/docs/tutorial/) on how to get started with openHAB 2.
+Please refer to [our tutorials](https://www.openhab.org/docs/tutorial/) on how to get started with openHAB.
 
 ## Community: How to Get Involved
 
@@ -31,6 +25,6 @@ Read more in the [how to contribute](CONTRIBUTING.md) guide.
 
 If you are a developer and want to jump right into the sources and execute openHAB from within an IDE, please have a look at the [IDE setup](https://www.openhab.org/docs/developer/#setup-the-development-environment) procedures.
 
-You can also learn [how openHAB 2 bindings are developed](https://www.openhab.org/docs/developer/bindings/).
+You can also learn [how openHAB bindings are developed](https://www.openhab.org/docs/developer/bindings/).
 
 In case of problems or questions, please join our vibrant [openHAB community](https://community.openhab.org/).
