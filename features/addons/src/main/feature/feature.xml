@@ -20,12 +20,10 @@
     </feature>
      -->
 
-    <!-- TODO: This is disabled until a working zwave binding is available on the zwave repo master branch
     <feature name="openhab-binding-zwave" description="Z-Wave Binding" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>openhab-transport-serial</feature>
         <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zwave/${project.version}</bundle>
     </feature>
-     -->
 
 </features>

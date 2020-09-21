@@ -12,7 +12,7 @@
 	<packaging>feature</packaging>
 
 	<name>openHAB Add-ons</name>
-	<description>These are 2.x add-ons in separate repositories (which do not have their own Karaf feature defined).</description>
+	<description>These are add-ons in separate repositories (which do not have their own Karaf feature defined).</description>
 
 	<build>
 		<plugins>
