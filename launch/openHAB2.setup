@@ -2425,7 +2425,7 @@
     <stream
         name="2.5.x"/>
     <stream
-        name="master"
+        name="main"
         label="3.0"/>
   </project>
   <project name="4_zigbee"
