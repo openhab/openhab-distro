@@ -52,7 +52,7 @@
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
         <ohc.version>3.0.0-SNAPSHOT</ohc.version>
-        <oh2.version>3.0.0-SNAPSHOT</oh2.version>
+        <oha.version>3.0.0-SNAPSHOT</oha.version>
 
         <jackson.version>1.9.13</jackson.version>
 

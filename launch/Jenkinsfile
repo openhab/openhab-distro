@@ -6,7 +6,7 @@ It also includes all required SCM operations.
 try {
     library identifier: 'openhab@master', retriever: modernSCM([$class: 'GitSCMSource', id: 'be5932e8-b631-4947-b26a-8dfa1802f1af', remote: env.GIT_BASE_URL + '/infrastructure'])
     
-    currentBuild.displayName = OH2_RELEASE_VERSION + ' (#' + env.BUILD_NUMBER + ')'
+    currentBuild.displayName = OH_RELEASE_VERSION + ' (#' + env.BUILD_NUMBER + ')'
     
     if(env.SANDBOX?.toBoolean() && !env.SKIP_SANDBOX_RESET?.toBoolean() && env.ALT_RELEASE_REPO_ID?.length() > 0) {
         node {
@@ -16,7 +16,7 @@ try {
     
     node {
         deleteDir()
-        releaseOpenHab2Component('openhab-core', false)
+        releaseComponent('openhab-core', false, "master")
     }
     
     // checkpoint "openHAB Core released"
@@ -24,17 +24,17 @@ try {
     
     node {
         deleteDir()
-        releaseOpenHab2Component('openhab-addons', true)
-        releaseOpenHab2Component('org.openhab.binding.zwave', true)
-        releaseOpenHab2Component('org.openhab.binding.zigbee', true)
-        releaseOpenHab2Component('openhab-webui', true)
+        releaseComponent('openhab-addons', true, env.OH_BRANCH)
+        releaseComponent('org.openhab.binding.zwave', true, "master")
+        releaseComponent('org.openhab.binding.zigbee', true, "master")
+        releaseComponent('openhab-webui', true, "master")
     }
     
     // checkpoint "openHAB Add-Ons released"
     
     node {
         deleteDir()
-        releaseOpenHab2Component('openhab-distro', true)
+        releaseComponent('openhab-distro', true, "master")
     }
 }
 catch(Exception e) {
@@ -47,9 +47,9 @@ if("FAILURE".equals(currentBuild.previousBuild?.result)) {
 }
 
 
-def releaseOpenHab2Component(componentName, updateParent) {
-    def branch = env.OH2_BRANCH ?: 'master'
-    releaseOpenHabComponent(componentName, branch, env.OH2_RELEASE_VERSION, env.OH2_NEXT_VERSION, updateParent, true)
+def releaseComponent(componentName, updateParent, repoBranch) {
+    def branch = repoBranch ?: 'main'
+    releaseOpenHabComponent(componentName, branch, env.OH_RELEASE_VERSION, env.OH_NEXT_VERSION, updateParent, true)
 }
 
 def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, updateParent, updateProperties) {
@@ -59,7 +59,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
     resetOpenhabFork(gitBaseUrl, componentName, releaseVersion)
 
     withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIALS_ID, passwordVariable: 'githubPassword', usernameVariable: 'githubUser')]) {
-        withMaven(jdk: 'Oracle JDK 1.8 (latest)', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
+        withMaven(jdk: 'OpenJDK 11', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
             dir(componentName) {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/' + branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: branch], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false], [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: gitRepoUrl ]]])
@@ -68,7 +68,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                 def mvnSnapshotOptions = ""
                 def mvnOptionsMap = [:]
                 
-                mvnOptionsMap["build"] = '-DreleaseArgs=skipTests=true,skipChecks=true -DskipChecks=true -DskipTests=true -DgenerateBackupPoms=false' //
+                mvnOptionsMap["build"] = '-DreleaseArgs=skipTests=true,skipChecks=true,spotless.check.skip=true -DskipChecks=true -DskipTests=true -DgenerateBackupPoms=false -Dspotless.check.skip=true' //
                 mvnOptionsMap["unleash"] = "-Dunleash.releaseVersion=${releaseVersion} -Dunleash.developmentVersion=${nextVersion}-SNAPSHOT -Dunleash.scmUsername="+ githubUser + " -Dunleash.scmPassword=" + githubPassword
                 if(isMilestoneBuild) {
                     mvnOptionsMap["type"] = "-Dmilestone"
@@ -94,11 +94,11 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
 
                     //Set release versions
                     if(updateProperties) {
-                        sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
-                        sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_RELEASE_VERSION +" " + mvnOptions
+                        sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH_RELEASE_VERSION +" " + mvnOptions
+                        sh "mvn versions:set-property -Dproperty=oha.version -DnewVersion="+ env.OH_RELEASE_VERSION +" " + mvnOptions
                     }
                     if(updateParent) {
-                        sh "mvn versions:update-parent -DparentVersion=[" + env.OH2_RELEASE_VERSION +"] " + mvnOptions
+                        sh "mvn versions:update-parent -DparentVersion=[" + env.OH_RELEASE_VERSION +"] " + mvnOptions
                     }
 
                     sh "mvn unleash:perform -Dworkflow=unleash.phase1.workflow " + mvnOptions
@@ -131,12 +131,12 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                     //Set next development versions
                     if(!releaseVersion.startsWith(nextVersion)) {
                         if(updateParent) {
-                            sh "mvn versions:update-parent -DallowSnapshots=true -DparentVersion=[" + env.OH2_NEXT_VERSION +"-SNAPSHOT] " + mvnOptions
+                            sh "mvn versions:update-parent -DallowSnapshots=true -DparentVersion=[" + env.OH_NEXT_VERSION +"-SNAPSHOT] " + mvnOptions
                         }
                         if(updateProperties) {
-                            sh "mvn versions:set-property -Dproperty=oh2.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
-                            sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH2_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
-                            sh "mvn versions:set-property -Dproperty=repo.version -DnewVersion="+ env.OH2_NEXT_VERSION.replace('[0-9]$', 'x ') + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=ohc.version -DnewVersion="+ env.OH_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=oha.version -DnewVersion="+ env.OH_NEXT_VERSION +"-SNAPSHOT " + mvnOptions
+                            sh "mvn versions:set-property -Dproperty=repo.version -DnewVersion="+ env.OH_NEXT_VERSION.replace('[0-9]$', 'x ') + mvnOptions
                         }
 
                         sh "mvn unleash:perform -Dworkflow=unleash.phase3.workflow " + mvnOptions
