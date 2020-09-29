@@ -2357,7 +2357,7 @@
       <requirement
           name="bjmi.m2e.sourcelookup.feature.feature.group"/>
       <repository
-          url="https://dl.bintray.com/bndtools/bndtools/latest/"/>
+          url="https://bndtools.jfrog.io/bndtools/update-latest/"/>
       <repository
           url="https://bjmi.github.io/update-site/"/>
     </setupTask>
