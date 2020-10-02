@@ -92,11 +92,11 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform"
-          value="1.8"/>
+          value="11"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance"
-          value="1.8"/>
+          value="11"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.assertIdentifier"
@@ -160,7 +160,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source"
-          value="1.8"/>
+          value="11"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.taskCaseSensitive"
@@ -2296,15 +2296,28 @@
       <setupTask
           xsi:type="setup:ResourceCreationTask"
           excludedTriggers="STARTUP MANUAL"
-          content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;section name=&quot;Workbench&quot;>&#xD;&#xA;&#x9;&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>&#xD;&#xA;&#x9;&lt;/section>&#xD;&#xA;&lt;/section>&#xD;&#xA;"
           targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml"
-          encoding="UTF-8"/>
+          encoding="UTF-8">
+        <content>
+          &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+          &lt;section name=&quot;Workbench&quot;>
+          	&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
+          		&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
+          		&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
+          		&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
+          		&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
+          		&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
+          	&lt;/section>
+          &lt;/section>
+
+        </content>
+      </setupTask>
     </setupTask>
   </setupTask>
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-1.8"
-      location="${jre.location-1.8}"/>
+      version="JavaSE-11"
+      location="${jre.location-11}"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       id="eclipse.ini.memory.start"
@@ -2364,9 +2377,44 @@
     <setupTask
         xsi:type="setup:ResourceCreationTask"
         id="lifecycle-mapping"
-        content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;lifecycleMappingMetadata>&#xA;  &lt;pluginExecutions>&#xA;    &lt;pluginExecution>&#xA;      &lt;pluginExecutionFilter>&#xA;        &lt;groupId>org.codehaus.mojo&lt;/groupId>&#xA;        &lt;artifactId>build-helper-maven-plugin&lt;/artifactId>&#xA;        &lt;versionRange>1.8&lt;/versionRange>&#xA;        &lt;goals>&#xA;          &lt;goal>add-source&lt;/goal>&#xA;          &lt;goal>add-test-source&lt;/goal>&#xA;        &lt;/goals>&#xA;      &lt;/pluginExecutionFilter>&#xA;      &lt;action>&#xA;        &lt;ignore />&#xA;      &lt;/action>&#xA;    &lt;/pluginExecution>&#xA;    &lt;pluginExecution>&#xA;      &lt;pluginExecutionFilter>&#xA;        &lt;groupId>com.diffplug.spotless&lt;/groupId>&#xA;        &lt;artifactId>spotless-maven-plugin&lt;/artifactId>&#xA;        &lt;versionRange>1.24.3&lt;/versionRange>&#xA;        &lt;goals>&#xA;          &lt;goal>check&lt;/goal>&#xA;        &lt;/goals>&#xA;      &lt;/pluginExecutionFilter>&#xA;      &lt;action>&#xA;        &lt;ignore />&#xA;      &lt;/action>&#xA;    &lt;/pluginExecution>&#xA;  &lt;/pluginExecutions>&#xA;&lt;/lifecycleMappingMetadata>&#xA;"
         targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml"
-        encoding="UTF-8"/>
+        encoding="UTF-8">
+      <content>
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+        &lt;lifecycleMappingMetadata>
+          &lt;pluginExecutions>
+            &lt;pluginExecution>
+              &lt;pluginExecutionFilter>
+                &lt;groupId>org.codehaus.mojo&lt;/groupId>
+                &lt;artifactId>build-helper-maven-plugin&lt;/artifactId>
+                &lt;versionRange>1.8&lt;/versionRange>
+                &lt;goals>
+                  &lt;goal>add-source&lt;/goal>
+                  &lt;goal>add-test-source&lt;/goal>
+                &lt;/goals>
+              &lt;/pluginExecutionFilter>
+              &lt;action>
+                &lt;ignore />
+              &lt;/action>
+            &lt;/pluginExecution>
+            &lt;pluginExecution>
+              &lt;pluginExecutionFilter>
+                &lt;groupId>com.diffplug.spotless&lt;/groupId>
+                &lt;artifactId>spotless-maven-plugin&lt;/artifactId>
+                &lt;versionRange>1.24.3&lt;/versionRange>
+                &lt;goals>
+                  &lt;goal>check&lt;/goal>
+                &lt;/goals>
+              &lt;/pluginExecutionFilter>
+              &lt;action>
+                &lt;ignore />
+              &lt;/action>
+            &lt;/pluginExecution>
+          &lt;/pluginExecutions>
+        &lt;/lifecycleMappingMetadata>
+
+      </content>
+    </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.openhab-distro"
@@ -2406,10 +2454,10 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
-        name="2.5.x"/>
-    <stream
         name="master"
         label="3.0"/>
+    <stream
+        name="2.5.x"/>
   </project>
   <project name="2_addons2"
       label="openHAB Add-ons">
@@ -2437,10 +2485,10 @@
       </workingSet>
     </setupTask>
     <stream
-        name="2.5.x"/>
-    <stream
         name="main"
         label="3.0"/>
+    <stream
+        name="2.5.x"/>
   </project>
   <project name="4_zigbee"
       label="openHAB ZigBee Binding">
@@ -2468,10 +2516,10 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
-        name="2.5.x"/>
-    <stream
         name="master"
         label="3.0"/>
+    <stream
+        name="2.5.x"/>
   </project>
   <project name="5_zwave"
       label="openHAB Z-Wave Binding">
@@ -2498,10 +2546,10 @@
           rootFolder="${git.clone.zwavebinding.location}"/>
     </setupTask>
     <stream
-        name="2.5.x"/>
-    <stream
         name="master"
         label="3.0"/>
+    <stream
+        name="2.5.x"/>
   </project>
   <project name="6_bacnet"
       label="openHAB BACNet Binding">
