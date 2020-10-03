@@ -29,6 +29,13 @@
             <type>xml</type>
         </dependency>
         <dependency>
+            <groupId>org.openhab.addons.features.karaf</groupId>
+            <artifactId>openhab-binding-zigbee</artifactId>
+            <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
             <groupId>org.openhab.ui.features</groupId>
             <artifactId>org.openhab.ui.features</artifactId>
             <version>${project.version}</version>
