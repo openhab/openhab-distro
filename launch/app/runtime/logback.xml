@@ -39,5 +39,7 @@
   </root>
 
   <logger name="org.openhab.core" level="INFO" />
+  <logger name="org.openhab.core" level="DEBUG" />
+
 
 </configuration>
