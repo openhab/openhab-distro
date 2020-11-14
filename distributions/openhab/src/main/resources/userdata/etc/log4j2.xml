@@ -58,14 +58,18 @@
 		<Logger level="ERROR" name="smarthome.event.ItemStateEvent"/>
 		<Logger level="ERROR" name="smarthome.event.ItemAddedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.ItemRemovedEvent"/>
+		<Logger level="ERROR" name="smarthome.event.ItemChannelLinkAddedEvent"/>
+		<Logger level="ERROR" name="smarthome.event.ItemChannelLinkRemovedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.ThingStatusInfoEvent"/>
 		<Logger level="ERROR" name="smarthome.event.ThingAddedEvent"/>
+		<Logger level="ERROR" name="smarthome.event.ThingUpdatedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.ThingRemovedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.InboxUpdatedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.RuleStatusInfoEvent"/>
 		<Logger level="ERROR" name="smarthome.event.RuleAddedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.RuleRemovedEvent"/>
 		<Logger level="ERROR" name="smarthome.event.StartlevelEvent"/>
+		<Logger level="ERROR" name="smarthome.event.AddonEvent"/>
 
 		<Logger additivity="false" level="INFO" name="smarthome.event">
 			<AppenderRef ref="EVENT"/>
