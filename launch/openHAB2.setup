@@ -2371,6 +2371,8 @@
           name="bjmi.m2e.sourcelookup.feature.feature.group"/>
       <requirement
           name="org.lastnpe.m2e.feature.feature.group"/>
+      <requirement
+          name="com.ianbrandt.tools.m2e.mdp.feature.feature.group"/>
       <repository
           url="https://bndtools.jfrog.io/bndtools/update-latest/"/>
       <repository
