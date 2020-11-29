@@ -382,12 +382,14 @@ if "%KARAF_PROFILER%" == "" goto :RUN
 :EXECUTE_DEBUG
     if "%JAVA_DEBUG_OPTS%" == "" set JAVA_DEBUG_OPTS=%DEFAULT_JAVA_DEBUG_OPTS%
     set JAVA_OPTS=%JAVA_DEBUG_OPTS% %JAVA_OPTS%
+    set DEBUG=true
     shift
     goto :RUN_LOOP
 
 :EXECUTE_DEBUGS
     if "%JAVA_DEBUG_OPTS%" == "" set JAVA_DEBUG_OPTS=%DEFAULT_JAVA_DEBUGS_OPTS%
     set JAVA_OPTS=%JAVA_DEBUG_OPTS% %JAVA_OPTS%
+    set DEBUG=true
     shift
     goto :RUN_LOOP
 
@@ -395,6 +397,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
     SET ARGS=%1 %2 %3 %4 %5 %6 %7 %8
     rem Execute the Java Virtual Machine
     cd "%KARAF_BASE%"
+
+    if not "%DEBUG%" == "true" set JAVA_OPTS=%JAVA_NON_DEBUG_OPTS% %JAVA_OPTS%
 
     rem When users want to update the lib version of, they just need to create
     rem a lib.next directory and on the new restart, it will replace the current lib directory.
