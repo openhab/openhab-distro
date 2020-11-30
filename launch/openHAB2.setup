@@ -2378,6 +2378,8 @@
       <repository
           url="https://bjmi.github.io/update-site/"/>
       <repository
+          url="https://ianbrandt.github.io/m2e-maven-dependency-plugin/"/>
+      <repository
           url="https://www.lastnpe.org/eclipse-external-annotations-m2e-plugin-p2-site/"/>
     </setupTask>
     <setupTask
