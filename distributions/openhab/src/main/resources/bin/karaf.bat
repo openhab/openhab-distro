@@ -382,14 +382,18 @@ if "%KARAF_PROFILER%" == "" goto :RUN
 :EXECUTE_DEBUG
     if "%JAVA_DEBUG_OPTS%" == "" set JAVA_DEBUG_OPTS=%DEFAULT_JAVA_DEBUG_OPTS%
     set JAVA_OPTS=%JAVA_DEBUG_OPTS% %JAVA_OPTS%
+    rem START openHAB customization
     set DEBUG=true
+    rem END openHAB customization
     shift
     goto :RUN_LOOP
 
 :EXECUTE_DEBUGS
     if "%JAVA_DEBUG_OPTS%" == "" set JAVA_DEBUG_OPTS=%DEFAULT_JAVA_DEBUGS_OPTS%
     set JAVA_OPTS=%JAVA_DEBUG_OPTS% %JAVA_OPTS%
+    rem START openHAB customization
     set DEBUG=true
+    rem END openHAB customization
     shift
     goto :RUN_LOOP
 
@@ -398,7 +402,9 @@ if "%KARAF_PROFILER%" == "" goto :RUN
     rem Execute the Java Virtual Machine
     cd "%KARAF_BASE%"
 
+    rem START openHAB customization
     if not "%DEBUG%" == "true" set JAVA_OPTS=%JAVA_NON_DEBUG_OPTS% %JAVA_OPTS%
+    rem END openHAB customization
 
     rem When users want to update the lib version of, they just need to create
     rem a lib.next directory and on the new restart, it will replace the current lib directory.
