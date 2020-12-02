@@ -134,10 +134,11 @@ set JAVA_OPTS=%JAVA_OPTS% ^
 
 :: set jvm options
 set EXTRA_JAVA_OPTS=-XX:+UseG1GC ^
-  -XX:-UsePerfData ^
   -Djava.awt.headless=true ^
   -Dfile.encoding=UTF-8 ^
   %EXTRA_JAVA_OPTS%
+  
+set JAVA_NON_DEBUG_OPTS=-XX:-UsePerfData
 
 :: set JAVA_HOME if not set yet
 rem Setup the Java Virtual Machine

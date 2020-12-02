@@ -117,7 +117,7 @@ export JAVA_OPTS="${JAVA_OPTS}
 # set JVM options
 #
 ARCH=`uname -m`
-EXTRA_JAVA_OPTS_COMMON="-Djava.awt.headless=true -XX:-UsePerfData"
+EXTRA_JAVA_OPTS_COMMON="-Djava.awt.headless=true"
 EXTRA_JAVA_OPTS_ARCH=""
 case "$ARCH" in
     *arm*) ;;
@@ -125,6 +125,7 @@ case "$ARCH" in
         *) EXTRA_JAVA_OPTS_ARCH="-XX:+UseG1GC" ;;
 esac
 export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTRA_JAVA_OPTS}"
+export JAVA_NON_DEBUG_OPTS="-XX:-UsePerfData"
 
 
 # The functions below are modified from the Karaf inc script to set JAVA_HOME to a default value.
