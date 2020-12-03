@@ -166,6 +166,13 @@ runCommand() {
     ;;
     'MOVE')
       echo "  Moving:   From $param1 to $param2"
+      fileDir=$(dirname "$param2")
+      # Create directory with same ownership as file
+      if [ ! -d fileDir ]; then
+        mkdir -p "$fileDir"
+        prevUserGroup=$(ls -ld "$param1" | awk '{print $3 ":" $4}')
+        chown -R "$prevUserGroup" "$fileDir"
+      fi
       mv "$param1" "$param2"
     ;;
     'REPLACE')
