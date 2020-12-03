@@ -1,6 +1,15 @@
 #!/bin/sh
 
 # taken from postinst script
+
+getVersionNumber(){
+    firstPart="$(echo "$1" | awk -F'.' '{print $1}')"
+    secondPart="$(echo "$1" | awk -F'.' '{print $2}')"
+    thirdPart="$(echo "$1" | awk -F'.' '{print $3}')"
+    thirdPart="${thirdPart%%-*}"
+    echo $((firstPart*10000+secondPart*100+thirdPart))
+}
+
 runCommand() {
     string="$1"
 
@@ -42,6 +51,57 @@ runCommand() {
     'NOTE')  printf '  \033[32mNote:\033[m     %s\n' "$param1";;
     'ALERT') printf '  \033[31mWarning:\033[m  %s\n' "$param1";;
     esac
+}
+
+migrate_files() {
+  if [ "$(echo "$BackupVersion" | cut -d'.' -f1)" = "2" ] && [ "${ohPkgName}" = "openhab" ]; then
+    # migrate config to OH3 (namespace change)
+    # copy of code taken from postinst script
+    Section="POST"
+    VersionMessage="Migrating OH2 config to OH3"
+    InSection=false
+    InNewVersion=false
+    oldVersionNumber=$(getVersionNumber "$oldVersion")
+    if [ -r "${OPENHAB_RUNTIME}/update.lst" ]; then
+      ## Read the file line by line.
+      while IFS= read -r Line; do
+        case $Line in
+        '')
+          continue
+        ;;
+        ## Flag to run the relevant [[section]] only.
+        "[[$Section]]")
+          InSection=true
+        ;;
+        ## Stop reading the file if another [[section]] starts.
+        "[["*"]]")
+          if $InSection; then
+            break
+          fi
+        ;;
+        ## Detect the [version] and execute the line if relevant.
+        '['3'.'*'.'*']')
+          if $InSection; then
+            LineVersion="$(echo "$Line" | awk -F'[][]' '{print $2}')"
+            LineVersionNumber=$(getVersionNumber "$LineVersion")
+            if [ "$oldVersionNumber" -lt "$LineVersionNumber" ]; then
+              InNewVersion=true
+              echo ""
+              printf "$VersionMessage $LineVersion:\n"
+            else
+              InNewVersion=false
+            fi
+          fi
+        ;;
+        *)
+          if $InSection && $InNewVersion; then
+            runCommand "$Line"
+          fi
+        ;;
+        esac    
+      done < "${OPENHAB_RUNTIME}/update.lst"
+    fi
+  fi
 }
 
 setup(){
@@ -177,55 +237,6 @@ case "$answer" in
     ;;
 esac
 
-if [ "$(echo "$BackupVersion" | cut -d'.' -f1)" = "2" ] && [ "${ohPkgName}" = "openhab" ]; then
-  # migrate config to OH3 (namespace change)
-  # copy of code taken from postinst script
-  Section="POST"
-  VersionMessage="Migrating OH2 config to OH3"
-  InSection=false
-  InNewVersion=false
-  oldVersionNumber=$(getVersionNumber "$oldVersion")
-  if [ -r "${OPENHAB_RUNTIME}/update.lst" ]; then
-    ## Read the file line by line.
-    while IFS= read -r Line; do
-      case $Line in
-      '')
-        continue
-      ;;
-      ## Flag to run the relevant [[section]] only.
-      "[[$Section]]")
-        InSection=true
-      ;;
-      ## Stop reading the file if another [[section]] starts.
-      "[["*"]]")
-        if $InSection; then
-          break
-        fi
-      ;;
-      ## Detect the [version] and execute the line if relevant.
-      '['3'.'*'.'*']')
-        if $InSection; then
-          LineVersion="$(echo "$Line" | awk -F'[][]' '{print $2}')"
-          LineVersionNumber=$(getVersionNumber "$LineVersion")
-          if [ "$oldVersionNumber" -lt "$LineVersionNumber" ]; then
-            InNewVersion=true
-            echo ""
-            printf "$VersionMessage $LineVersion:\n"
-          else
-            InNewVersion=false
-          fi
-        fi
-      ;;
-      *)
-        if $InSection && $InNewVersion; then
-          runCommand "$Line"
-        fi
-      ;;
-      esac    
-    done < "${OPENHAB_RUNTIME}/update.lst"
-  fi
-fi
-
 ## Move old configuration
 rm -rf /tmp/${ohPkgName}/old
 mkdir -p /tmp/${ohPkgName}/old
@@ -284,6 +295,10 @@ chown -R "$currentUser:$currentGroup" "$OPENHAB_CONF" || {
   echo "WARNING: Failed to change conf folder permissions to $currentUser:$currentGroup" >&2
 }
 
+## Migrate OH2 to OH3
+migrate_files
+
+## Cleanup
 echo "Deleting temporary files..."
 rm -rf /tmp/${ohPkgName}
 echo "Backup successfully restored!"
