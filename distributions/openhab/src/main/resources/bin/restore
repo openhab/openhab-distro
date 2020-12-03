@@ -1,5 +1,49 @@
 #!/bin/sh
 
+# taken from postinst script
+runCommand() {
+    string="$1"
+
+    string="$(echo "$string" | sed "s:\$OPENHAB_USERDATA:${OPENHAB_USERDATA:?}:g")"
+    string="$(echo "$string" | sed "s:\$OPENHAB_CONF:${OPENHAB_CONF:?}:g")"
+    string="$(echo "$string" | sed "s:\$OPENHAB_HOME:${OPENHAB_HOME:?}:g")"
+
+    command="$(echo "$string" | awk -F';' '{print $1}')"
+    param1="$(echo "$string" | awk -F';' '{print $2}')"
+    param2="$(echo "$string" | awk -F';' '{print $3}')"
+    param3="$(echo "$string" | awk -F';' '{print $4}')"
+
+    case $command in
+      'DELETE')
+      if [ -f "$param1" ]; then
+        echo "  Deleting File: $param1"
+        rm -f "$param1"
+      fi
+    ;;
+    'DELETEDIR')
+      if [ -d "$param1" ]; then
+        echo "  Deleting Directory: $param1"
+        rm -rf "$param1"
+      fi
+    ;;
+    'MOVE')
+      if [ -f "$param1" ]; then
+        echo "  Moving:   From $param1 to $param2"
+        mv "$param1" "$param2"
+      fi
+    ;;
+    'REPLACE')
+      # Avoid error if file does not exist
+      if [ -f "$param3" ]; then
+        echo "  Replacing: String $param1 to $param2 in file $param3"
+        sed -i "s:$param1:$param2:g" "$param3"
+      fi
+    ;;
+    'NOTE')  printf '  \033[32mNote:\033[m     %s\n' "$param1";;
+    'ALERT') printf '  \033[31mWarning:\033[m  %s\n' "$param1";;
+    esac
+}
+
 setup(){
   if [ -z "$1" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "Usage: restore filename"
@@ -10,6 +54,13 @@ setup(){
     echo "the openHAB 'backup' script."
     echo ""
     exit 0
+  fi
+
+  # change file locations to read defaults from based on installed version
+  # according to dpkg only either "openhab" or "openhab2" packages are installed
+  ohPkgName=openhab2
+  if [ "$(dpkg -s 'openhab' 2> /dev/null | grep Status | cut -d' ' -f2)" = "install" ]; then
+    ohPkgName=openhab
   fi
 
   ## Ask to run as root to prevent us from running sudo in this script.
@@ -24,7 +75,7 @@ setup(){
   }
 
   ## Check to see if processes are running before restoring
-  if [ ! -z "$(pgrep -f "openhab2.*java")" ]; then
+  if [ ! -z "$(pgrep -f "${ohPkgName}.*java")" ]; then
     echo "openHAB is running! Please stop the process before restoring." >&2
     exit 1
   fi
@@ -32,10 +83,10 @@ setup(){
   WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
 
   ## Set path variables
-  if [ -r /etc/profile.d/openhab2.sh ]; then
-    . /etc/profile.d/openhab2.sh
-  elif [ -r /etc/default/openhab2 ]; then
-    . /etc/default/openhab2
+  if [ -r /etc/profile.d/${ohPkgName}.sh ]; then
+    . /etc/profile.d/${ohPkgName}.sh
+  elif [ -r /etc/default/${ohPkgName} ]; then
+    . /etc/default/${ohPkgName}
   fi
   if [ -z "$OPENHAB_CONF" ];       then OPENHAB_CONF="$WorkingDir/conf"; fi
   if [ -z "$OPENHAB_USERDATA" ];   then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
@@ -56,7 +107,7 @@ setup(){
   CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
 
   ## Store anything in temporary folders
-  TempDir="/tmp/openhab2/restore"
+  TempDir="/tmp/${ohPkgName}/restore"
   ## Clear older stuff if it exists
   rm -rf "${TempDir:?}"
   echo "Making Temporary Directory"
@@ -66,11 +117,11 @@ setup(){
   }
 }
 
-echo "                                          "
-echo "##########################################"
-echo "       openHAB 2.x.x restore script       "
-echo "##########################################"
-echo "                                          "
+echo "                                           "
+echo "###########################################"
+echo "       openHAB config restore script       "
+echo "###########################################"
+echo "                                           "
 
 InputFile="$1"
 
@@ -121,23 +172,67 @@ case "$answer" in
     ;;
   *)
     echo "Cancelling restore..."
-    rm -rf /tmp/openhab2
+    rm -rf /tmp/${ohPkgName}
     exit 0
     ;;
 esac
 
+if [ "$(echo "$BackupVersion" | cut -d'.' -f1)" = "2" ] && [ "${ohPkgName}" = "openhab" ]; then
+  # migrate config to OH3 (namespace change)
+  # copy of code taken from postinst script
+  if [ -r "${OPENHAB_RUNTIME}/update.lst" ]; then
+    ## Read the file line by line.
+    while IFS= read -r Line; do
+      case $Line in
+      '')
+        continue
+      ;;
+      ## Flag to run the relevant [[section]] only.
+      "[[POST]]")
+        InSection=true
+      ;;
+      ## Stop reading the file if another [[section]] starts.
+      "[["*"]]")
+        if $InSection; then
+          break
+        fi
+      ;;
+      ## Detect the [version] and execute the line if relevant.
+      '['3'.'*'.'*']')
+        if $InSection; then
+          LineVersion="$(echo "$Line" | awk -F'[][]' '{print $2}')"
+          LineVersionNumber=$(getVersionNumber "$LineVersion")
+          if [ "$oldVersionNumber" -lt "$LineVersionNumber" ]; then
+            InNewVersion=true
+            echo ""
+            printf "$VersionMessage $LineVersion:\n"
+          else
+            InNewVersion=false
+          fi
+        fi
+      ;;
+      *)
+        if $InSection && $InNewVersion; then
+          runCommand "$Line"
+        fi
+      ;;
+      esac    
+    done < "${OPENHAB_RUNTIME}/update.lst"
+  fi
+fi
+
 ## Move old configuration
-rm -rf /tmp/openhab/old
-mkdir -p /tmp/openhab/old
+rm -rf /tmp/${ohPkgName}/old
+mkdir -p /tmp/${ohPkgName}/old
 echo "Moving system files in userdata to temporary folder"
 if [ -d "$OPENHAB_USERDATA/backups" ]; then
-  mv "$OPENHAB_USERDATA/backups" /tmp/openhab/old || {
+  mv "$OPENHAB_USERDATA/backups" /tmp/${ohPkgName}/old || {
     echo "Could not move backup folder to temporary folder..." >&2
     exit 1
   }
 fi
 if [ -d "${OPENHAB_USERDATA:?}/etc" ]; then
-  mv "${OPENHAB_USERDATA:?}/etc" /tmp/openhab/old || {
+  mv "${OPENHAB_USERDATA:?}/etc" /tmp/${ohPkgName}/old || {
     echo "Could not move etc folder to temporary folder" >&2
     exit 1
   }
@@ -147,14 +242,14 @@ echo "Deleting old userdata folder..."
 rm -rf "${OPENHAB_USERDATA:?}/"*
 
 echo "Restoring system files in userdata..."
-if [ -d /tmp/openhab/old/backups ]; then
-  mv /tmp/openhab/old/backups "${OPENHAB_USERDATA:?}/" || {
+if [ -d /tmp/${ohPkgName}/old/backups ]; then
+  mv /tmp/${ohPkgName}/old/backups "${OPENHAB_USERDATA:?}/" || {
     echo "Unable to move other backup files back..."
     exit 1
   }
 fi
-if [ -d /tmp/openhab/old/etc ]; then
-  mv /tmp/openhab/old/etc "${OPENHAB_USERDATA:?}/" || {
+if [ -d /tmp/${ohPkgName}/old/etc ]; then
+  mv /tmp/${ohPkgName}/old/etc "${OPENHAB_USERDATA:?}/" || {
     echo "Unable to move system files back..."
     exit 1
   }
@@ -185,6 +280,6 @@ chown -R "$currentUser:$currentGroup" "$OPENHAB_CONF" || {
 }
 
 echo "Deleting temporary files..."
-rm -rf /tmp/openhab2
+rm -rf /tmp/${ohPkgName}
 echo "Backup successfully restored!"
 echo ""
