@@ -180,6 +180,11 @@ esac
 if [ "$(echo "$BackupVersion" | cut -d'.' -f1)" = "2" ] && [ "${ohPkgName}" = "openhab" ]; then
   # migrate config to OH3 (namespace change)
   # copy of code taken from postinst script
+  Section="POST"
+  VersionMessage="Migrating OH2 config to OH3"
+  InSection=false
+  InNewVersion=false
+  oldVersionNumber=$(getVersionNumber "$oldVersion")
   if [ -r "${OPENHAB_RUNTIME}/update.lst" ]; then
     ## Read the file line by line.
     while IFS= read -r Line; do
@@ -188,7 +193,7 @@ if [ "$(echo "$BackupVersion" | cut -d'.' -f1)" = "2" ] && [ "${ohPkgName}" = "o
         continue
       ;;
       ## Flag to run the relevant [[section]] only.
-      "[[POST]]")
+      "[[$Section]]")
         InSection=true
       ;;
       ## Stop reading the file if another [[section]] starts.
