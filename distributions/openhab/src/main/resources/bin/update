@@ -175,6 +175,13 @@ runCommand() {
         sed -i'.bak' -e "s:$param1:$param2:g" "$param3"
       fi
     ;;
+    'REMOVE')
+      # Avoid error if file does not exist
+      if [ -f "$param2"  ]; then
+        echo "  Removing lines to contain $param1 from file $param2"
+        sed -i "/$param1/d" "$param2"
+      fi
+    ;;
     'NOTE')  printf '  \033[32mNote:\033[m     %s\n' "$param1";;
     'ALERT') printf '  \033[31mWarning:\033[m  %s\n' "$param1";;
     esac

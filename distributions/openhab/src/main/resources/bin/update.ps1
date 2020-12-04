@@ -224,6 +224,21 @@ Function Update-openHAB() {
             }
         }
 
+        # Removes line from a file
+        ElseIf ($parts[0] -eq "REMOVE") {
+            if ($parts.length -le 2) {
+                Write-Host -ForegroundColor Red "Badly formatted: $Line"
+            }
+            else {
+                try {
+                    Get-Content $parts[2] | select-string -pattern $parts[1] -notmatch | Set-Content $parts[2]
+                }
+                catch {
+                    Write-Host -ForegroundColor Yellow "Could not remove line to contain string $($parts[1]) from file $($parts[2])"
+                }
+            }
+        }
+
         # Shows a note (console message with a green label)
         ElseIf ($parts[0] -eq "NOTE") {
             if ($parts.length -le 1) {
