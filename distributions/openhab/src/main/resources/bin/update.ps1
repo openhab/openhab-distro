@@ -320,7 +320,7 @@ Function Update-openHAB() {
 
     # Write out startup message
     Write-Host ""
-    BoxMessage "openHAB 2.x.x update script" Magenta
+    BoxMessage "openHAB update script" Magenta
     Write-Host ""
     
     # Check for admin (commented out - don't think we need it)
@@ -407,8 +407,8 @@ Function Update-openHAB() {
     
     # If the OHVersion parameter was not specified,
     #    If the current version is snapshot  - make OHVersion the same snapshot
-    #    If the current version is stable    - make OHVersion the next minor upgrade (current version 2.3.0 would make our OHversion 2.4.0)
-    #    If the current version is milestone - make OHVersion the stable version (2.3.0.M6 becomes 2.3.0)
+    #    If the current version is stable    - make OHVersion the next minor upgrade (current version 3.0.0 would make our OHversion 3.1.0)
+    #    If the current version is milestone - make OHVersion the stable version (3.1.0.M6 becomes 3.1.0)
     if (-Not $OHVersion) {
         if ($parts.Length -eq 3) {
             if ($parts[2].EndsWith("-SNAPSHOT", "CurrentCultureIgnoreCase")) {
@@ -426,7 +426,7 @@ Function Update-openHAB() {
     
     # If snapshot was defined, add "-snapshot" to the OHVersion if not already present
     if ($Snapshot -eq $true) {
-        BoxMessage "-SNAPSHOT is deprecated - please put '-snapshot' in OHVersion instead (ex: 2.4.0-snapshot)" Magenta
+        BoxMessage "-SNAPSHOT is deprecated - please put '-snapshot' in OHVersion instead (ex: 3.1.0-snapshot)" Magenta
         if (-Not $OHVersion.EndsWith("-SNAPSHOT", "CurrentCultureIgnoreCase")) {
             $OHVersion = $OHVersion + "-SNAPSHOT"
         }
@@ -435,15 +435,15 @@ Function Update-openHAB() {
     # Split up the OHVersion to validate
     $parts = $OHVersion.Split(".")
 
-    # If only "2.3" - make "2.3.0"
+    # If only "x.y" - make "x.y.0"
     if ($parts.Length -eq 2) {
         $parts += "0"
     }
 
     # Valid versions: 
-    #    Stable:    "2.3.0"
-    #    Snapshot:  "2.3.0-SNAPSHOT"
-    #    Milestone: "2.3.0.M6"
+    #    Stable:    "3.x.y"
+    #    Snapshot:  "3.x.y-SNAPSHOT"
+    #    Milestone: "3.x.y.Mz"
     if (($parts.Length -lt 3) -or ($parts.Length -gt 4)) {
         exit PrintAndReturn "The specified OH version $OHVersion was not formatted correctly (d.d.d[.d])"
     }
