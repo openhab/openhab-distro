@@ -55,23 +55,23 @@
 
 		<Logger level="INFO" name="org.openhab"/>
 
-		<Logger level="ERROR" name="smarthome.event.ItemStateEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ItemAddedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ItemRemovedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ItemChannelLinkAddedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ItemChannelLinkRemovedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ThingStatusInfoEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ThingAddedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ThingUpdatedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.ThingRemovedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.InboxUpdatedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.RuleStatusInfoEvent"/>
-		<Logger level="ERROR" name="smarthome.event.RuleAddedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.RuleRemovedEvent"/>
-		<Logger level="ERROR" name="smarthome.event.StartlevelEvent"/>
-		<Logger level="ERROR" name="smarthome.event.AddonEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemStateEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemAddedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemRemovedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemChannelLinkAddedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemChannelLinkRemovedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ThingStatusInfoEvent"/>
+		<Logger level="ERROR" name="openhab.event.ThingAddedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ThingUpdatedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ThingRemovedEvent"/>
+		<Logger level="ERROR" name="openhab.event.InboxUpdatedEvent"/>
+		<Logger level="ERROR" name="openhab.event.RuleStatusInfoEvent"/>
+		<Logger level="ERROR" name="openhab.event.RuleAddedEvent"/>
+		<Logger level="ERROR" name="openhab.event.RuleRemovedEvent"/>
+		<Logger level="ERROR" name="openhab.event.StartlevelEvent"/>
+		<Logger level="ERROR" name="openhab.event.AddonEvent"/>
 
-		<Logger additivity="false" level="INFO" name="smarthome.event">
+		<Logger additivity="false" level="INFO" name="openhab.event">
 			<AppenderRef ref="EVENT"/>
 			<AppenderRef ref="OSGI"/>
 		</Logger>
