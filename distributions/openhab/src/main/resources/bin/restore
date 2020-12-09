@@ -24,7 +24,7 @@ setup(){
   }
 
   ## Check to see if processes are running before restoring
-  if [ ! -z "$(pgrep -f "openhab2.*java")" ]; then
+  if [ ! -z "$(pgrep -f "openhab.*java")" ]; then
     echo "openHAB is running! Please stop the process before restoring." >&2
     exit 1
   fi
@@ -32,10 +32,10 @@ setup(){
   WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
 
   ## Set path variables
-  if [ -r /etc/profile.d/openhab2.sh ]; then
-    . /etc/profile.d/openhab2.sh
-  elif [ -r /etc/default/openhab2 ]; then
-    . /etc/default/openhab2
+  if [ -r /etc/profile.d/openhab.sh ]; then
+    . /etc/profile.d/openhab.sh
+  elif [ -r /etc/default/openhab ]; then
+    . /etc/default/openhab
   fi
   if [ -z "$OPENHAB_CONF" ];       then OPENHAB_CONF="$WorkingDir/conf"; fi
   if [ -z "$OPENHAB_USERDATA" ];   then OPENHAB_USERDATA="$WorkingDir/userdata"; fi
@@ -56,7 +56,7 @@ setup(){
   CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
 
   ## Store anything in temporary folders
-  TempDir="/tmp/openhab2/restore"
+  TempDir="/tmp/openhab/restore"
   ## Clear older stuff if it exists
   rm -rf "${TempDir:?}"
   echo "Making Temporary Directory"
@@ -68,7 +68,7 @@ setup(){
 
 echo "                                          "
 echo "##########################################"
-echo "       openHAB 2.x.x restore script       "
+echo "          openHAB restore script          "
 echo "##########################################"
 echo "                                          "
 
@@ -121,7 +121,7 @@ case "$answer" in
     ;;
   *)
     echo "Cancelling restore..."
-    rm -rf /tmp/openhab2
+    rm -rf /tmp/openhab
     exit 0
     ;;
 esac
@@ -185,6 +185,6 @@ chown -R "$currentUser:$currentGroup" "$OPENHAB_CONF" || {
 }
 
 echo "Deleting temporary files..."
-rm -rf /tmp/openhab2
+rm -rf /tmp/openhab
 echo "Backup successfully restored!"
 echo ""

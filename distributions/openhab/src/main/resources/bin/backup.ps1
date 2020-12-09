@@ -19,8 +19,8 @@ Function Backup-openHAB {
     Backup an openHAB instance to a zip file
     Backup-openHAB
     .EXAMPLE
-    Backup the openHAB distribution in the C:\openHAB2 directory to c:\openHAB2-backup\backup.zip
-    Backup-openHAB -OHDirectory C:\openHAB2 -OHBackups c:\openHAB2-backup -FileName backup.zip
+    Backup the openHAB distribution in the C:\openHAB directory to c:\openHAB-backup\backup.zip
+    Backup-openHAB -OHDirectory C:\openHAB -OHBackups c:\openHAB-backup -FileName backup.zip
     #>
 
     [CmdletBinding()]
@@ -41,7 +41,7 @@ Function Backup-openHAB {
         Import-Module $PSScriptRoot\common.psm1 -Force
 
         Write-Host ""
-        BoxMessage "openHAB 2.x.x backup script" Magenta
+        BoxMessage "openHAB backup script" Magenta
         Write-Host ""
 
         # Check for admin (commented out - don't think we need it)
@@ -142,7 +142,7 @@ Function Backup-openHAB {
             }
 
             if ([string]::IsNullOrEmpty($FileName)) {
-                $FileName = "$OHBackups\openhab2-backup-$timestamp.zip"
+                $FileName = "$OHBackups\openhab-backup-$timestamp.zip"
             } else {
                 if (-NOT $FileName.EndsWith(".zip")) {
                     $FileName = $FileName + ".zip";
