@@ -1,6 +1,6 @@
 # openHAB Distribution
 
-[![Build Status](https://img.shields.io/jenkins/build/https/ci.openhab.org/openHAB-Distribution.svg)](https://ci.openhab.org/job/openHAB-Distribution/)
+[![Build Status](https://ci.openhab.org/job/openHAB3-Distribution/badge/icon)](https://ci.openhab.org/job/openHAB3-Distribution/)
 [![EPL-2.0](https://img.shields.io/badge/license-EPL%202-green.svg)](https://opensource.org/licenses/EPL-2.0)
 [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=28452711)](https://www.bountysource.com/teams/openhab/issues?tracker_ids=28452711)
 
