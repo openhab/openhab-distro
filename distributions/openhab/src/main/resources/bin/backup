@@ -43,10 +43,10 @@ setup(){
   }
 
   ## Set path variables
-  if [ -r /etc/profile.d/openhab2.sh ]; then
-    . /etc/profile.d/openhab2.sh
-  elif [ -r /etc/default/openhab2 ]; then
-    . /etc/default/openhab2
+  if [ -r /etc/profile.d/openhab.sh ]; then
+    . /etc/profile.d/openhab.sh
+  elif [ -r /etc/default/openhab ]; then
+    . /etc/default/openhab
   fi
 
   WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
@@ -73,7 +73,7 @@ setup(){
   ## Set the filename
   if [ -z "$1" ]; then
     echo "Using '$OPENHAB_BACKUPS' as backup folder..."
-    OutputFile="$OPENHAB_BACKUPS/openhab2-backup-$timestamp.zip"
+    OutputFile="$OPENHAB_BACKUPS/openhab-backup-$timestamp.zip"
   else
     getFullPath "$1"
   fi
@@ -95,9 +95,9 @@ setup(){
   ## Store anything in temporary folders
   # Check if we should use TempDir from env $OPENHAB_BACKUPS_TEMP
   if [ -n "${OPENHAB_BACKUPS_TEMP}" ]; then
-    TempDir="$OPENHAB_BACKUPS_TEMP"; 
-  else 
-    TempDir="/tmp/openhab2/backup" 
+    TempDir="$OPENHAB_BACKUPS_TEMP";
+  else
+    TempDir="/tmp/openhab/backup"
   fi
   echo "Making Temporary Directory if it is not already there"
   if [ ! -d "$TempDir" ]; then
@@ -114,7 +114,7 @@ setup(){
 
 echo "                                         "
 echo "#########################################"
-echo "       openHAB 2.x.x backup script       "
+echo "          openHAB backup script          "
 echo "#########################################"
 echo "                                         "
 

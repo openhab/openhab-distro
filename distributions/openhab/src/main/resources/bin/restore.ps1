@@ -19,8 +19,8 @@ Function Restore-openHAB {
     Restore an openHAB instance from the latest backup file
     Restore-openHAB
     .EXAMPLE
-    Restore the openHAB distribution in the C:\openHAB2 directory from c:\openHAB2-backup\backup.zip without any user interaction
-    Restore-openHAB -OHDirectory C:\openHAB2 -OHBackups c:\openHAB2-backup -FileName backup.zip -AutoConfirm $true
+    Restore the openHAB distribution in the C:\openHAB directory from c:\openHAB-backup\backup.zip without any user interaction
+    Restore-openHAB -OHDirectory C:\openHAB -OHBackups c:\openHAB-backup -FileName backup.zip -AutoConfirm $true
     #>
 
     [CmdletBinding()]
@@ -41,7 +41,7 @@ Function Restore-openHAB {
         Import-Module $PSScriptRoot\common.psm1 -Force
 
         Write-Host ""
-        BoxMessage "openHAB 2.x.x restore script" Magenta
+        BoxMessage "openHAB restore script" Magenta
         Write-Host ""
         
         try {
