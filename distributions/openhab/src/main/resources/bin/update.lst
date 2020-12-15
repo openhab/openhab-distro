@@ -118,3 +118,6 @@ DELETEDIR;$OPENHAB_USERDATA/habmin
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg	
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
 DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
+
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
