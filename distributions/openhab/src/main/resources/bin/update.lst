@@ -42,6 +42,10 @@ ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_tem
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 
+[3.0.0]
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
+
 [[POST]]
 [2.3.0]
 DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg
@@ -118,6 +122,3 @@ DELETEDIR;$OPENHAB_USERDATA/habmin
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg	
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
 DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
-
-DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
-DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
