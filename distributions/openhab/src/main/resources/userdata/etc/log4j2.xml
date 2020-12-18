@@ -10,6 +10,7 @@
 		<RollingFile fileName="${sys:openhab.logdir}/openhab.log" filePattern="${sys:openhab.logdir}/openhab.log.%i" name="LOGFILE">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
 			<Policies>
+				<OnStartupTriggeringPolicy/>
 				<SizeBasedTriggeringPolicy size="16 MB"/>
 			</Policies>
 		</RollingFile>
@@ -18,6 +19,7 @@
 		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/events.log" filePattern="${sys:openhab.logdir}/events.log.%i" name="EVENT">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
 			<Policies>
+				<OnStartupTriggeringPolicy/>
 				<SizeBasedTriggeringPolicy size="16 MB"/>
 			</Policies>
 		</RollingRandomAccessFile>
@@ -26,6 +28,7 @@
 		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/audit.log" filePattern="${sys:openhab.logdir}/audit.log.%i" name="AUDIT">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
 			<Policies>
+				<OnStartupTriggeringPolicy/>
 				<SizeBasedTriggeringPolicy size="8 MB"/>
 			</Policies>
 		</RollingRandomAccessFile>
