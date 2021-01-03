@@ -29,6 +29,10 @@ try {
         deleteDir()
         releaseOpenHab2Component('openhab-distro', true)
     }
+
+    if(!env.SANDBOX?.toBoolean()) {
+        build wait: false, job: 'openHAB-Docker', parameters: [string(name: 'OPENHAB_VERSION', value: "$OH2_RELEASE_VERSION")]
+    }
 }
 catch(Exception e) {
     notifyFailedOpenhabBuild()
