@@ -31,11 +31,19 @@ setup(){
     exit 0
   fi
 
-  ## Ask to run as root to prevent us from running sudo in this script.
-  if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run this script as root! (e.g. use sudo)" >&2
-    exit 1
+  if [ "$1" = "--web" ];then
+    isWeb='1'
+    OPENHAB_USERDATA="/var/lib/openhab"
+    shift
+  else
+    isWeb='0'
+    ## Ask to run as root to prevent us from running sudo in this script.
+    if [ "$(id -u)" -ne 0 ]; then
+     echo "Please run this script as root! (e.g. use sudo)" >&2
+     exit 1
+    fi
   fi
+
 
   command -v zip >/dev/null 2>&1 || {
     echo "'zip' program was not found, please install it first." >&2
@@ -49,6 +57,11 @@ setup(){
     . /etc/default/openhab
   fi
 
+if [ "$isWeb" = "1" ];then
+    OPENHAB_BACKUPS="$OPENHAB_USERDATA/backup_user"
+    OPENHAB_BACKUPS_TEMP="$OPENHAB_USERDATA/tmp/backup"
+fi
+
   WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
 
   if [ -z "$OPENHAB_CONF" ];  then OPENHAB_CONF="$WorkingDir/conf"; fi
@@ -56,28 +69,32 @@ setup(){
   if [ -z "$OPENHAB_BACKUPS" ]; then OPENHAB_BACKUPS="$WorkingDir/backups"; fi
   if [ -z "$OPENHAB_RUNTIME" ]; then OPENHAB_RUNTIME="$WorkingDir/runtime"; fi
 
-  echo "Using '$OPENHAB_CONF' as conf folder..."
-  echo "Using '$OPENHAB_USERDATA' as userdata folder..."
-  echo "Using '$OPENHAB_RUNTIME' as runtime folder..."
-
+  if [ "$isWeb" = "0" ];then
+    echo "Using '$OPENHAB_CONF' as conf folder..."
+    echo "Using '$OPENHAB_USERDATA' as userdata folder..."
+    echo "Using '$OPENHAB_RUNTIME' as runtime folder..."
+  fi
   fileList="$OPENHAB_RUNTIME/bin/userdata_sysfiles.lst"
 
   ## Parse arguments
   if [ "$1" = "--full" ]; then
-    echo "including cache"
+     [ "$isWeb" = "0" ] && echo "including cache"
     INCLUDE_CACHE="true"
     shift
   fi
 
   timestamp=$(date +"%y_%m_%d-%H_%M_%S")
   ## Set the filename
-  if [ -z "$1" ]; then
+  if [ "$isWeb" = "1" ];then
+    OutputFile="/etc/openhab/html/latest_backup.zip"
+    [ -e "$OutputFile" ] && rm $OutputFile
+  elif [ -z "$1" ];then
     echo "Using '$OPENHAB_BACKUPS' as backup folder..."
     OutputFile="$OPENHAB_BACKUPS/openhab-backup-$timestamp.zip"
   else
     getFullPath "$1"
   fi
-  echo "Writing to '${OutputFile}'..."
+  [ "$isWeb" = "0" ] && echo "Writing to '${OutputFile}'..."
 
   ## Check two of the standard openHAB folders to make sure we're backing up the right thing.
   if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
@@ -99,24 +116,26 @@ setup(){
   else
     TempDir="/tmp/openhab/backup"
   fi
-  echo "Making Temporary Directory if it is not already there"
+  [ "$isWeb" = "0" ] && echo "Making Temporary Directory if it is not already there"
   if [ ! -d "$TempDir" ]; then
     mkdir -p "$TempDir" || {
     echo "Failed to make temporary directory: $TempDir" >&2
     exit 1
     }
   fi
-  echo "Using $TempDir as TempDir"
+  [ "$isWeb" = "0" ] && echo "Using $TempDir as TempDir"
 
   ## Clear older stuff if it exists
   rm -rf "${TempDir:?}/"*
 }
 
-echo "                                         "
-echo "#########################################"
-echo "          openHAB backup script          "
-echo "#########################################"
-echo "                                         "
+if [ "$isWeb" = "0" ];then
+   echo "                                         "
+   echo "#########################################"
+   echo "          openHAB backup script          "
+   echo "#########################################"
+   echo "                                         "
+fi
 
 setup "$1" "$2"
 
@@ -129,7 +148,7 @@ setup "$1" "$2"
 } > "$TempDir/backup.properties"
 
 ## Copy userdata and conf folders
-echo "Copying configuration to temporary folder..."
+[ "$isWeb"  = "0" ] && echo "Copying configuration to temporary folder..."
 mkdir -p "$TempDir/userdata"
 if [ -z "$INCLUDE_CACHE" ]; then
   find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" -and -not -path '*/tmp' -and -not -path '*/cache' | xargs -I % cp -R % "$TempDir/userdata"
@@ -140,7 +159,7 @@ mkdir -p "$TempDir/conf"
 cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
 
 ## Remove non-transferable userdata files
-echo "Removing unnecessary files..."
+[ "$isWeb" = "0" ] && echo "Removing unnecessary files..."
 if [ -f "$fileList" ]; then
   while IFS= read -r fileName
   do
@@ -153,7 +172,7 @@ fi
 
 ## Create archive
 mkdir -p "$OPENHAB_BACKUPS"
-echo "Zipping folder..."
+[ "$isWeb"  = "0" ] && echo "Zipping folder..."
 
 ## Jump into directory before making zip
 ## Cleans file structure
@@ -164,8 +183,13 @@ echo "Zipping folder..."
   }
 ) || exit 1
 
-echo "Removing temporary files..."
+[ "$isWeb" = "0" ] && echo "Removing temporary files..."
 rm -rf $TempDir
 
-echo "Success! Backup made in $OutputFile"
-echo ""
+if [ "$isWeb" = "1" ];then
+  echo "Download http://$(cat /etc/hostname):$OPENHAB_HTTP_PORT/static/latest_backup.zip"
+else
+  echo "Success! Backup made in $OutputFile"
+  echo ""
+fi
+
