@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Configuration>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Configuration monitorInterval="10">
 
 	<Appenders>
 		<!-- Console appender not used by default (see Root logger AppenderRefs) -->
