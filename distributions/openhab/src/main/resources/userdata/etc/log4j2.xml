@@ -113,6 +113,10 @@
 		<!-- https://github.com/openhab/openhab-addons/issues/5530 -->
 		<Logger level="ERROR" name="javax.mail"/>
 
+		<!-- Filters disconnection warnings of the ChromeCast Java API, see -->
+		<!-- https://github.com/openhab/openhab-addons/issues/3770 -->
+		<Logger level="ERROR" name="su.litvak.chromecast.api.v2.Channel"/>
+
 		<!-- Added by Karaf to prevent debug logging loops, see -->
 		<!-- https://issues.apache.org/jira/browse/KARAF-5559 -->
 		<Logger level="WARN" name="org.apache.sshd"/>
