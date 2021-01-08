@@ -25,8 +25,8 @@ try {
     node {
         deleteDir()
         releaseComponent('openhab-addons', true, env.OH_BRANCH)
-        //releaseComponent('org.openhab.binding.zwave', true, env.OH_BRANCH)
-        //releaseComponent('org.openhab.binding.zigbee', true, env.OH_BRANCH)
+        releaseComponent('org.openhab.binding.zwave', true, env.OH_BRANCH)
+        releaseComponent('org.openhab.binding.zigbee', true, env.OH_BRANCH)
         releaseComponent('openhab-webui', true, env.OH_BRANCH)
     }
     
