@@ -46,6 +46,9 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 
+[3.1.0]
+ALERT;Xiaomi MiIo binding: With 3.1 release many channels have been converted from Number to a quanityType number. e.g. temperature channels have been changed from Number to Number:Temperature. You need to update your item definition to the new definitions. Please see the binding readme for the item details for your device.
+
 [[POST]]
 [2.3.0]
 DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg
