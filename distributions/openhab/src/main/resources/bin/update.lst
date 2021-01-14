@@ -47,7 +47,7 @@ DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 
 [3.1.0]
-ALERT;Xiaomi MiIo binding: With 3.1 release many channels have been converted from Number to a quanityType number. e.g. temperature channels have been changed from Number to Number:Temperature. You need to update your item definition to the new definitions. Please see the binding readme for the item details for your device.
+ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Number with dimension, e.g. temperature channels have been changed from Number to Number:Temperature. Please see the binding documentation for details.
 
 [[POST]]
 [2.3.0]
