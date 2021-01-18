@@ -2462,7 +2462,7 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
-        name="master"
+        name="main"
         label="3.0"/>
     <stream
         name="2.5.x"/>
@@ -2524,7 +2524,7 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
-        name="master"
+        name="main"
         label="3.0"/>
     <stream
         name="2.5.x"/>
@@ -2554,7 +2554,7 @@
           rootFolder="${git.clone.zwavebinding.location}"/>
     </setupTask>
     <stream
-        name="master"
+        name="main"
         label="3.0"/>
     <stream
         name="2.5.x"/>
@@ -2584,7 +2584,7 @@
           rootFolder="${git.clone.bacnetbinding.location}"/>
     </setupTask>
     <stream
-        name="master"
+        name="main"
         label=""/>
   </project>
   <project name="7_webui"
@@ -2614,7 +2614,7 @@
     <stream
         name="2.5.x"/>
     <stream
-        name="master"
+        name="main"
         label="3.0"/>
   </project>
   <project name="10_core"
@@ -2673,7 +2673,7 @@
         excludedTriggers="STARTUP"
         refresh="true"/>
     <stream
-        name="master"
+        name="main"
         label="3.0"/>
   </project>
   <logicalProjectContainer
