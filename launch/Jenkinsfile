@@ -16,7 +16,7 @@ try {
     
     node {
         deleteDir()
-        releaseComponent('openhab-core', false, "main")
+        releaseComponent('openhab-core', false, env.OH_BRANCH)
     }
     
     // checkpoint "openHAB Core released"
@@ -25,16 +25,16 @@ try {
     node {
         deleteDir()
         releaseComponent('openhab-addons', true, env.OH_BRANCH)
-        releaseComponent('org.openhab.binding.zwave', true, "main")
-        releaseComponent('org.openhab.binding.zigbee', true, "main")
-        releaseComponent('openhab-webui', true, "main")
+        releaseComponent('org.openhab.binding.zwave', true, env.OH_BRANCH)
+        releaseComponent('org.openhab.binding.zigbee', true, env.OH_BRANCH)
+        releaseComponent('openhab-webui', true, env.OH_BRANCH)
     }
     
     // checkpoint "openHAB Add-Ons released"
     
     node {
         deleteDir()
-        releaseComponent('openhab-distro', true, "main")
+        releaseComponent('openhab-distro', true, env.OH_BRANCH)
     }
 
     if(!env.SANDBOX?.toBoolean()) {
