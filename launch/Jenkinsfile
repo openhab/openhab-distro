@@ -4,7 +4,7 @@ It also includes all required SCM operations.
 */
 
 try {
-    library identifier: 'openhab@master', retriever: modernSCM([$class: 'GitSCMSource', id: 'be5932e8-b631-4947-b26a-8dfa1802f1af', remote: env.GIT_BASE_URL + '/infrastructure'])
+    library identifier: 'openhab@main', retriever: modernSCM([$class: 'GitSCMSource', id: 'be5932e8-b631-4947-b26a-8dfa1802f1af', remote: env.GIT_BASE_URL + '/infrastructure'])
     
     currentBuild.displayName = OH_RELEASE_VERSION + ' (#' + env.BUILD_NUMBER + ')'
     
