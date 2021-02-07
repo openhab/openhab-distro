@@ -441,6 +441,7 @@ if "%KARAF_PROFILER%" == "" goto :RUN
                 --add-opens java.base/java.io=ALL-UNNAMED ^
                 --add-opens java.base/java.lang.reflect=ALL-UNNAMED ^
                 --add-opens java.base/java.text=ALL-UNNAMED ^
+                --add-opens java.base/java.time=ALL-UNNAMED ^
                 --add-opens java.desktop/java.awt.font=ALL-UNNAMED ^
                 --add-exports=java.base/sun.net.www.protocol.http=ALL-UNNAMED ^
                 --add-exports=java.base/sun.net.www.protocol.https=ALL-UNNAMED ^
