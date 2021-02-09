@@ -2373,6 +2373,8 @@
           name="org.lastnpe.m2e.feature.feature.group"/>
       <requirement
           name="com.ianbrandt.tools.m2e.mdp.feature.feature.group"/>
+      <requirement
+          name="org.sonatype.m2e.buildhelper.feature.feature.group"/>
       <repository
           url="https://bndtools.jfrog.io/bndtools/update-latest/"/>
       <repository
@@ -2381,6 +2383,8 @@
           url="https://ianbrandt.github.io/m2e-maven-dependency-plugin/"/>
       <repository
           url="https://www.lastnpe.org/eclipse-external-annotations-m2e-plugin-p2-site/"/>
+      <repository
+          url="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-buildhelper/0.15.0/N/0.15.0.201207090124/"/>
     </setupTask>
     <setupTask
         xsi:type="setup:ResourceCreationTask"
@@ -2391,20 +2395,6 @@
         &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
         &lt;lifecycleMappingMetadata>
           &lt;pluginExecutions>
-            &lt;pluginExecution>
-              &lt;pluginExecutionFilter>
-                &lt;groupId>org.codehaus.mojo&lt;/groupId>
-                &lt;artifactId>build-helper-maven-plugin&lt;/artifactId>
-                &lt;versionRange>1.8&lt;/versionRange>
-                &lt;goals>
-                  &lt;goal>add-source&lt;/goal>
-                  &lt;goal>add-test-source&lt;/goal>
-                &lt;/goals>
-              &lt;/pluginExecutionFilter>
-              &lt;action>
-                &lt;ignore />
-              &lt;/action>
-            &lt;/pluginExecution>
             &lt;pluginExecution>
               &lt;pluginExecutionFilter>
                 &lt;groupId>com.diffplug.spotless&lt;/groupId>
