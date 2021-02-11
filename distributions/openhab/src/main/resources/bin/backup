@@ -1,4 +1,32 @@
 #!/bin/sh
+ 
+usage() {
+   echo "Usage: backup [--noninteractive] [--full] [filename]"
+   echo ""
+   echo "  e.g. ./backup                     << Makes a file with a timed filename"
+   echo "       ./backup myBackup.zip        << Makes a file called myBackup.zip"
+   echo "       ./backup --full              << Makes a full backup file with a timed filename"
+   echo "       ./backup --full myBackup.zip << Makes a full backup file called myBackup.zip"
+   echo "       ./backup --noninteractive    << Makes a backup file which is downloadable from"
+   echo "                                       http://<host_ip>:$OPENHAB_HTTP_PORT/static/$sWebFile"
+   echo "       ./backup --noninteractive myBackup.zip"
+   echo "                                    << Makes a backup file which is downloadable from"
+   echo "                                       http://<host_ip>:$OPENHAB_HTTP_PORT/static/myBackup.zip"
+   echo ""
+   echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
+   echo "from any machine to transfer your configuration across to another instance."
+   echo ""
+   echo "The noninteractive flag allows backups to be run from an OpenHAB GUI button,"
+   echo "that uses the Exec Binding, and a command like: openhab-cli backup --noninteractive"
+   echo ""
+   echo "A full backup must be done in interactive mode, and includes the tmp and cache directories"
+   echo "that are normally excluded."
+   echo ""
+   echo "Backup directory: '$OPENHAB_BACKUPS'"
+   echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
+   echo "Backup temporary directory: '$OPENHAB_BACKUPS_TEMP'"
+   echo "Set \$OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
+}
 
 getFullPath() {
   specDir="$(dirname "$1")"
@@ -10,31 +38,44 @@ getFullPath() {
   fi
 }
 
-setup(){
-  if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    echo "Usage: backup [--full] [filename]"
-    echo ""
-    echo "  e.g. ./backup                     << Makes a file with a timed filename"
-    echo "       ./backup myBackup.zip        << Makes a file called myBackup.zip"
-    echo "       ./backup --full              << Makes a full backup file with a timed filename"
-    echo "       ./backup --full myBackup.zip << Makes a full backup file called myBackup.zip"
-    echo ""
-    echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
-    echo "from any machine to transfer your configuration across to another instance."
-    echo ""
-    echo "A full backup includes the tmp and cache directories that are normally excluded."
-    echo ""
-    echo "Backup directory: '$OPENHAB_BACKUPS'"
-    echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
-    echo "Backup temporary directory: '$OPENHAB_BACKUPS_TEMP'"
-    echo "Set \$OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
-    exit 0
-  fi
+# Defaults
+bFull="0"
+bInteractive="1"
+sZipFile=""
+sWebFile="latest_backup.zip"
 
-  ## Ask to run as root to prevent us from running sudo in this script.
-  if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run this script as root! (e.g. use sudo)" >&2
-    exit 1
+setup(){
+  while [ "$1" != "" ]; do
+    case $1 in
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        --full)
+            bFull="1"
+            ;;
+        --noninteractive)
+            bInteractive="0"
+            ;;
+        *)
+            sZipFile="$1"
+            ;;
+    esac
+    shift
+  done
+
+  if [ $bInteractive = "0"  ];then
+    if [ "$bFull" = "1" ];then
+        echo "Full backup must be run interactively. Exiting." >&2
+        exit 1
+    fi
+    OPENHAB_USERDATA="/var/lib/openhab"
+  else
+    ## Ask to run as root to prevent us from running sudo in this script.
+    if [ "$(id -u)" -ne 0 ]; then
+     echo "Please run this script as root! (e.g. use sudo)" >&2
+     exit 1
+    fi
   fi
 
   command -v zip >/dev/null 2>&1 || {
@@ -49,6 +90,11 @@ setup(){
     . /etc/default/openhab
   fi
 
+  if [ "$bInteractive" = "0" ];then
+    OPENHAB_BACKUPS="$OPENHAB_USERDATA/backup_user"
+    OPENHAB_BACKUPS_TEMP="$OPENHAB_USERDATA/tmp/backup"
+  fi
+
   WorkingDir="$(cd "$(dirname "$0")" && cd ../.. && pwd -P)"
 
   if [ -z "$OPENHAB_CONF" ];  then OPENHAB_CONF="$WorkingDir/conf"; fi
@@ -56,28 +102,33 @@ setup(){
   if [ -z "$OPENHAB_BACKUPS" ]; then OPENHAB_BACKUPS="$WorkingDir/backups"; fi
   if [ -z "$OPENHAB_RUNTIME" ]; then OPENHAB_RUNTIME="$WorkingDir/runtime"; fi
 
-  echo "Using '$OPENHAB_CONF' as conf folder..."
-  echo "Using '$OPENHAB_USERDATA' as userdata folder..."
-  echo "Using '$OPENHAB_RUNTIME' as runtime folder..."
-
+  if [ "$bInteractive" = "1" ];then
+    echo "Using '$OPENHAB_CONF' as conf folder..."
+    echo "Using '$OPENHAB_USERDATA' as userdata folder..."
+    echo "Using '$OPENHAB_RUNTIME' as runtime folder..."
+  fi
   fileList="$OPENHAB_RUNTIME/bin/userdata_sysfiles.lst"
 
-  ## Parse arguments
-  if [ "$1" = "--full" ]; then
-    echo "including cache"
+  ##  Apply arguments
+  if [ "$bFull" = "1" ]; then
     INCLUDE_CACHE="true"
-    shift
+     [ "$bInteractive" = "1" ] && echo "including cache"
   fi
 
   timestamp=$(date +"%y_%m_%d-%H_%M_%S")
   ## Set the filename
-  if [ -z "$1" ]; then
-    echo "Using '$OPENHAB_BACKUPS' as backup folder..."
+  if [ "$bInteractive" = "0" ];then
+    [ -n "$sZipFile" ] && sWebFile=$sZipFile
+    OutputFile="/etc/openhab/html/$sWebFile"
+    [ -e "$OutputFile" ] && rm $OutputFile
+  elif [ -z "$sZipFile" ];then
+    [ "$bInteractive" = "1" ] && echo "Using '$OPENHAB_BACKUPS' as backup folder..."
     OutputFile="$OPENHAB_BACKUPS/openhab-backup-$timestamp.zip"
   else
-    getFullPath "$1"
+    getFullPath "$sZipFile"
   fi
-  echo "Writing to '${OutputFile}'..."
+
+  [ "$bInteractive" = "1" ] && echo "Writing to '${OutputFile}'..."
 
   ## Check two of the standard openHAB folders to make sure we're backing up the right thing.
   if [ ! -d "$OPENHAB_USERDATA" ] || [ ! -d "$OPENHAB_CONF" ]; then
@@ -99,26 +150,29 @@ setup(){
   else
     TempDir="/tmp/openhab/backup"
   fi
-  echo "Making Temporary Directory if it is not already there"
+  [ "$bInteractive" = "1" ] && echo "Making Temporary Directory if it is not already there"
   if [ ! -d "$TempDir" ]; then
     mkdir -p "$TempDir" || {
     echo "Failed to make temporary directory: $TempDir" >&2
     exit 1
     }
   fi
-  echo "Using $TempDir as TempDir"
+  [ "$bInteractive" = "1" ] && echo "Using $TempDir as TempDir"
 
   ## Clear older stuff if it exists
   rm -rf "${TempDir:?}/"*
 }
 
-echo "                                         "
-echo "#########################################"
-echo "          openHAB backup script          "
-echo "#########################################"
-echo "                                         "
+setup $@
 
-setup "$1" "$2"
+if [ "$bInteractive" = "1" ];then
+   echo "                                         "
+   echo "#########################################"
+   echo "          openHAB backup script          "
+   echo "#########################################"
+   echo "                                         "
+fi
+
 
 ## Set backup properties file.
 {
@@ -129,7 +183,7 @@ setup "$1" "$2"
 } > "$TempDir/backup.properties"
 
 ## Copy userdata and conf folders
-echo "Copying configuration to temporary folder..."
+[ "$bInteractive"  = "1" ] && echo "Copying configuration to temporary folder..."
 mkdir -p "$TempDir/userdata"
 if [ -z "$INCLUDE_CACHE" ]; then
   find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" -and -not -path '*/tmp' -and -not -path '*/cache' | xargs -I % cp -R % "$TempDir/userdata"
@@ -140,7 +194,7 @@ mkdir -p "$TempDir/conf"
 cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
 
 ## Remove non-transferable userdata files
-echo "Removing unnecessary files..."
+[ "$bInteractive" = "1" ] && echo "Removing unnecessary files..."
 if [ -f "$fileList" ]; then
   while IFS= read -r fileName
   do
@@ -153,7 +207,7 @@ fi
 
 ## Create archive
 mkdir -p "$OPENHAB_BACKUPS"
-echo "Zipping folder..."
+[ "$bInteractive"  = "1" ] && echo "Zipping folder..."
 
 ## Jump into directory before making zip
 ## Cleans file structure
@@ -164,8 +218,12 @@ echo "Zipping folder..."
   }
 ) || exit 1
 
-echo "Removing temporary files..."
+[ "$bInteractive" = "1" ] && echo "Removing temporary files..."
 rm -rf $TempDir
 
-echo "Success! Backup made in $OutputFile"
-echo ""
+if [ "$bInteractive" = "0" ];then
+  echo "http://$(cat /etc/hostname):$OPENHAB_HTTP_PORT/static/$sWebFile"
+else
+  echo "Success! Backup made in $OutputFile"
+  echo ""
+fi
