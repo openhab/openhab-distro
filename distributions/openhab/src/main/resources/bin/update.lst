@@ -122,3 +122,6 @@ DELETEDIR;$OPENHAB_USERDATA/habmin
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg	
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
 DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
+
+[3.1.0]
+ALERT;Keba: Introduced Units of Measurements and the channel 'pwmpilotcurrent' was replaced by 'maxpilotcurrentdutycyle'. Items must be adapted and the things must be recreated.
