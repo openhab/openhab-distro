@@ -40,6 +40,7 @@ ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_tem
 
 [3.1.0]
 ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Number with dimension, e.g. temperature channels have been changed from Number to Number:Temperature. Please see the binding documentation for details.
+ALERT;Keba Binding: Introduced Units of Measurements and the channel 'pwmpilotcurrent' was replaced by 'maxpilotcurrentdutycyle'. Items must be adapted and things created through the UI must be recreated.
 
 [[PRE]]
 [2.2.0]
