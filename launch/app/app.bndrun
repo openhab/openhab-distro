@@ -112,10 +112,6 @@ feature.openhab-model-runtime-all: \
 -runbundles: \
 	ch.qos.logback.classic;version='[1.2.3,1.2.4)',\
 	ch.qos.logback.core;version='[1.2.3,1.2.4)',\
-	com.fasterxml.jackson.core.jackson-annotations;version='[2.10.3,2.10.4)',\
-	com.fasterxml.jackson.core.jackson-core;version='[2.10.3,2.10.4)',\
-	com.fasterxml.jackson.core.jackson-databind;version='[2.10.3,2.10.4)',\
-	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.10.3,2.10.4)',\
 	com.google.gson;version='[2.8.2,2.8.3)',\
 	com.google.guava.failureaccess;version='[1.0.1,1.0.2)',\
 	com.google.guava;version='[27.1.0,27.1.1)',\
@@ -165,11 +161,9 @@ feature.openhab-model-runtime-all: \
 	org.osgi.service.metatype;version='[1.4.0,1.4.1)',\
 	org.osgi.util.function;version='[1.1.0,1.1.1)',\
 	org.osgi.util.promise;version='[1.1.0,1.1.1)',\
-	org.yaml.snakeyaml;version='[1.24.0,1.24.1)',\
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	tec.uom.lib.uom-lib-common;version='[1.0.3,1.0.4)',\
 	tec.uom.se;version='[1.0.10,1.0.11)',\
-	com.fasterxml.jackson.datatype.jackson-datatype-jsr310;version='[2.10.3,2.10.4)',\
 	io.swagger.core.v3.swagger-annotations;version='[2.1.0,2.1.1)',\
 	io.swagger.core.v3.swagger-core;version='[2.1.0,2.1.1)',\
 	io.swagger.core.v3.swagger-integration;version='[2.1.0,2.1.1)',\
@@ -257,4 +251,10 @@ feature.openhab-model-runtime-all: \
 	org.openhab.ui;version='[3.1.0,3.1.1)',\
 	org.openhab.ui.basic;version='[3.1.0,3.1.1)',\
 	org.openhab.ui.iconset.classic;version='[3.1.0,3.1.1)',\
-	xstream;version='[1.4.15,1.4.16)'
+	xstream;version='[1.4.15,1.4.16)',\
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.12.2,2.12.3)',\
+	com.fasterxml.jackson.core.jackson-core;version='[2.12.2,2.12.3)',\
+	com.fasterxml.jackson.core.jackson-databind;version='[2.12.2,2.12.3)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.12.2,2.12.3)',\
+	com.fasterxml.jackson.datatype.jackson-datatype-jsr310;version='[2.12.2,2.12.3)',\
+	org.yaml.snakeyaml;version='[1.27.0,1.27.1)'
