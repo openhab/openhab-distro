@@ -95,11 +95,11 @@ setup(){
     echo "You are already on openHAB $CurrentVersion" >&2
     exit 1
   elif [ -n "$milestoneVersion" ]; then
-    DownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab/$OHVersion/openhab-$OHVersion.zip"
-    AddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons/$OHVersion/openhab-addons-$OHVersion.kar"
+    DownloadLocation="https://www.openhab.org/download/milestones/org/openhab/distro/openhab/$OHVersion/openhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://www.openhab.org/download/milestones/org/openhab/distro/openhab-addons/$OHVersion/openhab-addons-$OHVersion.kar"
   else
-    DownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
-    AddonsDownloadLocation="https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
+    DownloadLocation="https://www.openhab.org/download/releases/org/openhab/distro/openhab/$OHVersion/openhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://www.openhab.org/download/releases/org/openhab/distro/openhab-addons/$OHVersion/openhab-addons-$OHVersion.kar"
   fi
 
   ## Set the temporary directories.

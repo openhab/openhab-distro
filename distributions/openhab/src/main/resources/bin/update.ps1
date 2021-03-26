@@ -495,12 +495,12 @@ Function Update-openHAB() {
         $AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersionName.kar"
     }
     elseif ($Milestone -ne "") {
-        $DownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab/$OHVersionName/openhab-$OHVersionName.zip"
-        $AddonsDownloadLocation="https://openhab.jfrog.io/openhab/libs-milestone-local/org/openhab/distro/openhab-addons/$OHVersionName/openhab-addons-$OHVersionName.kar"
+        $DownloadLocation="https://www.openhab.org/download/milestones/org/openhab/distro/openhab/$OHVersionName/openhab-$OHVersionName.zip"
+        $AddonsDownloadLocation="https://www.openhab.org/download/milestones/org/openhab/distro/openhab-addons/$OHVersionName/openhab-addons-$OHVersionName.kar"
     }
     else {
-        $DownloadLocation = "https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab%2F$OHVersion%2Fopenhab-$OHVersion.zip"
-        $AddonsDownloadLocation = "https://bintray.com/openhab/mvn/download_file?file_path=org%2Fopenhab%2Fdistro%2Fopenhab-addons%2F$OHVersion%2Fopenhab-addons-$OHVersion.kar"
+        $DownloadLocation = "https://www.openhab.org/download/releases/org/openhab/distro/openhab/$OHVersionName/openhab-$OHVersionName.zip"
+        $AddonsDownloadLocation = "https://www.openhab.org/download/releases/org/openhab/distro/openhab-addons/$OHVersionName/openhab-addons-$OHVersionName.kar"
     }
 
     # If we are not in SkipNew (or SkipNew and the temporary distribution file/folders have not been created yet):
