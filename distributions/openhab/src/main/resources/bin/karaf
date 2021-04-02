@@ -69,8 +69,10 @@ LOCAL_CLASSPATH=$CLASSPATH
 #
 # Sourcing environment settings for karaf similar to tomcats setenv
 #
-KARAF_SCRIPT="${PROGNAME}"
-export KARAF_SCRIPT
+if [ "x${KARAF_SCRIPT}" = "x" ]; then
+    KARAF_SCRIPT="${PROGNAME}"
+    export KARAF_SCRIPT
+fi
 if [ -f "${DIRNAME}/setenv" ]; then
   . "${DIRNAME}/setenv"
 fi
@@ -197,10 +199,6 @@ run() {
     nodebug=false
     while [ "${1}" != "" ]; do
         case "${1}" in
-            'clean')
-                rm -rf "${KARAF_DATA:?}"
-                shift
-                ;;
             'debug')
                 debug=true
                 shift
@@ -219,6 +217,10 @@ run() {
             'stop')
                 MAIN=org.apache.karaf.main.Stop
                 CHECK_ROOT_INSTANCE_RUNNING=false
+                # not needed when stopping
+                JAVA_OPTS=
+                KARAF_SYSTEM_OPTS=
+                KARAF_OPTS=
                 nodebug=true
                 shift
                 ;;
@@ -268,12 +270,9 @@ run() {
             fi
         fi
         JAVA_OPTS="${JAVA_DEBUG_OPTS} ${JAVA_OPTS}"
-
-### START openHAB customization
     else
         JAVA_OPTS="${JAVA_NON_DEBUG_OPTS} ${JAVA_OPTS}"
     fi
-### END openHAB customization
 
     while true; do
         # When users want to update the lib version of, they just need to create
@@ -302,8 +301,8 @@ run() {
                 ${KARAF_EXEC} "${JAVA}" ${JAVA_OPTS} \
                     --add-reads=java.xml=java.logging \
                     --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED \
-                    --patch-module "java.base=${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.locator-4.2.7.jar" \
-                    --patch-module "java.xml=${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.java.xml-4.2.7.jar" \
+                    --patch-module "java.base=${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.locator-4.3.1.jar" \
+                    --patch-module "java.xml=${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.java.xml-4.3.1.jar" \
                     --add-opens java.base/java.security=ALL-UNNAMED \
                     --add-opens java.base/java.net=ALL-UNNAMED \
                     --add-opens java.base/java.lang=ALL-UNNAMED \
@@ -315,11 +314,15 @@ run() {
                     --add-opens java.base/java.text=ALL-UNNAMED \
                     --add-opens java.base/java.time=ALL-UNNAMED \
                     --add-opens java.desktop/java.awt.font=ALL-UNNAMED \
+                    --add-exports=java.base/sun.net.www.protocol.file=ALL-UNNAMED \
+                    --add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED \
                     --add-exports=java.base/sun.net.www.protocol.http=ALL-UNNAMED \
                     --add-exports=java.base/sun.net.www.protocol.https=ALL-UNNAMED \
                     --add-exports=java.base/sun.net.www.protocol.jar=ALL-UNNAMED \
+                    --add-exports=java.base/sun.net.www.content.text=ALL-UNNAMED \
                     --add-exports=jdk.xml.dom/org.w3c.dom.html=ALL-UNNAMED \
                     --add-exports=jdk.naming.rmi/com.sun.jndi.url.rmi=ALL-UNNAMED \
+                    --add-exports java.security.sasl/com.sun.security.sasl=ALL-UNNAMED \
                     -Dkaraf.instances="${KARAF_DATA}/tmp/instances" \
                     -Dkaraf.home="${KARAF_HOME}" \
                     -Dkaraf.base="${KARAF_BASE}" \
