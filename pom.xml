@@ -17,8 +17,8 @@
 
     <licenses>
         <license>
-            <name>Eclipse Public License</name>
-            <url>http://www.eclipse.org/legal/epl-v10.html</url>
+            <name>Eclipse Public License 2.0</name>
+            <url>https://www.eclipse.org/legal/epl-2.0/</url>
         </license>
     </licenses>
 
@@ -54,20 +54,7 @@
         <ohc.version>3.1.0-SNAPSHOT</ohc.version>
         <oha.version>3.1.0-SNAPSHOT</oha.version>
 
-        <jackson.version>1.9.13</jackson.version>
-
-        <karaf.version>4.2.7</karaf.version>
-        <jetty.version>9.4.20.v20190813</jetty.version>
-
-        <!-- provided by Karaf -->
-        <dep.slf4j.api.groupId>org.slf4j</dep.slf4j.api.groupId>
-        <dep.slf4j.api.artifactId>slf4j-api</dep.slf4j.api.artifactId>
-        <dep.slf4j.api.version>1.7.12</dep.slf4j.api.version>
-
-        <dep.org.osgi.compendium.split.groupId>tmp.need.a.home</dep.org.osgi.compendium.split.groupId>
-        <dep.org.osgi.compendium.split.component.artifact>org.osgi.compendium.split.service.component</dep.org.osgi.compendium.split.component.artifact>
-        <dep.org.osgi.compendium.split.event.artifact>org.osgi.compendium.split.service.event</dep.org.osgi.compendium.split.event.artifact>
-        <dep.org.osgi.compendium.split.version>5.0.0</dep.org.osgi.compendium.split.version>
+        <karaf.version>4.3.1</karaf.version>
 
         <oh.java.version>11</oh.java.version>
         <maven.compiler.source>${oh.java.version}</maven.compiler.source>

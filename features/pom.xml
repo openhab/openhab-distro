@@ -16,7 +16,6 @@
 	<modules>
 		<module>distro</module>
 		<module>distro-kar</module>
-		<module>distro-resources</module>
 		<module>addons</module>
 	</modules>
 

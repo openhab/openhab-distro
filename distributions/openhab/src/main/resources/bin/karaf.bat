@@ -25,7 +25,10 @@ set PROGNAME=%~nx0%
 set ARGS=%*
 
 rem Sourcing environment settings for karaf similar to tomcats setenv
-SET KARAF_SCRIPT="karaf.bat"
+
+if "%KARAF_SCRIPT%" == "" (
+	SET KARAF_SCRIPT="karaf.bat"
+)
 if exist "%DIRNAME%setenv.bat" (
   call "%DIRNAME%setenv.bat"
 )
@@ -35,14 +38,6 @@ if not "%KARAF_TITLE%" == "" (
     title %KARAF_TITLE%
 ) else (
     title Karaf
-)
-
-rem Check/Set up some easily accessible MIN/MAX params for JVM mem usage
-if "%JAVA_MIN_MEM%" == "" (
-    set JAVA_MIN_MEM=128M
-)
-if "%JAVA_MAX_MEM%" == "" (
-    set JAVA_MAX_MEM=512M
 )
 
 goto BEGIN
@@ -96,7 +91,6 @@ if "%KARAF_ETC%" == "" (
 )
 
 set LOCAL_CLASSPATH=%CLASSPATH%
-set JAVA_MODE=-server
 
 set CLASSPATH=%LOCAL_CLASSPATH%;%KARAF_BASE%\conf
 set DEFAULT_JAVA_DEBUG_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
@@ -249,18 +243,9 @@ if not exist "%JAVA_HOME%\bin\server\jvm.dll" (
         echo WARNING: Running Karaf on a Java HotSpot Client VM because server-mode is not available.
         echo Install Java Developer Kit to fix this.
         echo For more details see http://java.sun.com/products/hotspot/whitepaper.html#client
-        set JAVA_MODE=-client
     )
 )
-set DEFAULT_JAVA_OPTS=%JAVA_MODE% -Xms%JAVA_MIN_MEM% -Xmx%JAVA_MAX_MEM% -Dcom.sun.management.jmxremote  -XX:+UnlockDiagnosticVMOptions -XX:+UnsyncloadClass
-
-rem Check some easily accessible MIN/MAX params for JVM mem usage
-if not "%JAVA_PERM_MEM%" == "" (
-    set DEFAULT_JAVA_OPTS=%DEFAULT_JAVA_OPTS% -XX:PermSize=%JAVA_PERM_MEM%
-)
-if not "%JAVA_MAX_PERM_MEM%" == "" (
-    set DEFAULT_JAVA_OPTS=%DEFAULT_JAVA_OPTS% -XX:MaxPermSize=%JAVA_MAX_PERM_MEM%
-)
+set DEFAULT_JAVA_OPTS=-XX:+UnlockDiagnosticVMOptions
 
 if "%JAVA_OPTS%" == "" set JAVA_OPTS=%DEFAULT_JAVA_OPTS%
 
@@ -330,7 +315,6 @@ if "%KARAF_PROFILER%" == "" goto :RUN
     if "%1" == "run" goto :EXECUTE_RUN
     if "%1" == "daemon" goto :EXECUTE_DAEMON
     if "%1" == "client" goto :EXECUTE_CLIENT
-    if "%1" == "clean" goto :EXECUTE_CLEAN
     if "%1" == "debug" goto :EXECUTE_DEBUG
     if "%1" == "debugs" goto :EXECUTE_DEBUGS
     goto :EXECUTE
@@ -338,6 +322,10 @@ if "%KARAF_PROFILER%" == "" goto :RUN
 :EXECUTE_STOP
     SET MAIN=org.apache.karaf.main.Stop
     SET CHECK_ROOT_INSTANCE_RUNNING=false
+    rem not needed when stopping
+    SET JAVA_OPTS=
+    SET KARAF_SYSTEM_OPTS=
+    SET KARAF_OPTS=
     shift
     goto :RUN_LOOP
 
@@ -374,26 +362,17 @@ if "%KARAF_PROFILER%" == "" goto :RUN
     shift
     goto :RUN_LOOP
 
-:EXECUTE_CLEAN
-    pushd "%KARAF_DATA%" && (rmdir /S /Q "%KARAF_DATA%" 2>nul & popd)
-    shift
-    goto :RUN_LOOP
-
 :EXECUTE_DEBUG
     if "%JAVA_DEBUG_OPTS%" == "" set JAVA_DEBUG_OPTS=%DEFAULT_JAVA_DEBUG_OPTS%
     set JAVA_OPTS=%JAVA_DEBUG_OPTS% %JAVA_OPTS%
-    rem START openHAB customization
     set DEBUG=true
-    rem END openHAB customization
     shift
     goto :RUN_LOOP
 
 :EXECUTE_DEBUGS
     if "%JAVA_DEBUG_OPTS%" == "" set JAVA_DEBUG_OPTS=%DEFAULT_JAVA_DEBUGS_OPTS%
     set JAVA_OPTS=%JAVA_DEBUG_OPTS% %JAVA_OPTS%
-    rem START openHAB customization
     set DEBUG=true
-    rem END openHAB customization
     shift
     goto :RUN_LOOP
 
@@ -402,9 +381,7 @@ if "%KARAF_PROFILER%" == "" goto :RUN
     rem Execute the Java Virtual Machine
     cd "%KARAF_BASE%"
 
-    rem START openHAB customization
     if not "%DEBUG%" == "true" set JAVA_OPTS=%JAVA_NON_DEBUG_OPTS% %JAVA_OPTS%
-    rem END openHAB customization
 
     rem When users want to update the lib version of, they just need to create
     rem a lib.next directory and on the new restart, it will replace the current lib directory.
@@ -430,8 +407,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
                 --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module "java.base=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.locator-4.2.7.jar" ^
-                --patch-module "java.xml=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.java.xml-4.2.7.jar" ^
+                --patch-module "java.base=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.locator-4.3.1.jar" ^
+                --patch-module "java.xml=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.java.xml-4.3.1.jar" ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^
@@ -441,12 +418,17 @@ if "%KARAF_PROFILER%" == "" goto :RUN
                 --add-opens java.base/java.io=ALL-UNNAMED ^
                 --add-opens java.base/java.lang.reflect=ALL-UNNAMED ^
                 --add-opens java.base/java.text=ALL-UNNAMED ^
+                --add-opens java.base/java.time=ALL-UNNAMED ^
                 --add-opens java.desktop/java.awt.font=ALL-UNNAMED ^
+                --add-exports=java.base/sun.net.www.protocol.file=ALL-UNNAMED ^
+                --add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED ^
                 --add-exports=java.base/sun.net.www.protocol.http=ALL-UNNAMED ^
                 --add-exports=java.base/sun.net.www.protocol.https=ALL-UNNAMED ^
                 --add-exports=java.base/sun.net.www.protocol.jar=ALL-UNNAMED ^
+                --add-exports=java.base/sun.net.www.content.text=ALL-UNNAMED ^
                 --add-exports=jdk.xml.dom/org.w3c.dom.html=ALL-UNNAMED ^
                 --add-exports=jdk.naming.rmi/com.sun.jndi.url.rmi=ALL-UNNAMED ^
+                --add-exports java.security.sasl/com.sun.security.sasl=ALL-UNNAMED ^
                 -classpath "%CLASSPATH%" ^
                 -Dkaraf.instances="%OPENHAB_USERDATA%\tmp\instances" ^
                 -Dkaraf.home="%KARAF_HOME%" ^

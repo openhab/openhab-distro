@@ -4,7 +4,7 @@ It also includes all required SCM operations.
 */
 
 try {
-    library identifier: 'openhab@master', retriever: modernSCM([$class: 'GitSCMSource', id: 'be5932e8-b631-4947-b26a-8dfa1802f1af', remote: env.GIT_BASE_URL + '/infrastructure'])
+    library identifier: 'openhab@main', retriever: modernSCM([$class: 'GitSCMSource', id: 'be5932e8-b631-4947-b26a-8dfa1802f1af', remote: env.GIT_BASE_URL + '/infrastructure'])
     
     currentBuild.displayName = OH_RELEASE_VERSION + ' (#' + env.BUILD_NUMBER + ')'
     
@@ -16,7 +16,7 @@ try {
     
     node {
         deleteDir()
-        releaseComponent('openhab-core', false, "master")
+        releaseComponent('openhab-core', false, env.OH_BRANCH)
     }
     
     // checkpoint "openHAB Core released"
@@ -25,16 +25,20 @@ try {
     node {
         deleteDir()
         releaseComponent('openhab-addons', true, env.OH_BRANCH)
-        releaseComponent('org.openhab.binding.zwave', true, "master")
-        releaseComponent('org.openhab.binding.zigbee', true, "master")
-        releaseComponent('openhab-webui', true, "master")
+        releaseComponent('org.openhab.binding.zwave', true, env.OH_BRANCH)
+        releaseComponent('org.openhab.binding.zigbee', true, env.OH_BRANCH)
+        releaseComponent('openhab-webui', true, env.OH_BRANCH)
     }
     
     // checkpoint "openHAB Add-Ons released"
     
     node {
         deleteDir()
-        releaseComponent('openhab-distro', true, "master")
+        releaseComponent('openhab-distro', true, env.OH_BRANCH)
+    }
+
+    if(!env.SANDBOX?.toBoolean()) {
+        build wait: false, job: 'openHAB-Docker', parameters: [string(name: 'OPENHAB_VERSION', value: "$OH_RELEASE_VERSION")]
     }
 }
 catch(Exception e) {

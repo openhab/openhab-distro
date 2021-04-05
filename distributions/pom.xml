@@ -15,6 +15,7 @@
 
   <modules>
     <module>openhab-addons</module>
+    <module>openhab-demo</module>
     <module>openhab</module>
     <module>openhab-verify</module>
   </modules>
