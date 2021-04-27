@@ -91,6 +91,10 @@ feature.openhab-model-runtime-all: \
 -runblacklist: \
 	bnd.identity;id='org.apache.aries.jpa.container',\
 	bnd.identity;id='org.openhab.core.test',\
+	bnd.identity;id='osgi.annotation',\
+	bnd.identity;id='osgi.cmpn',\
+	bnd.identity;id='osgi.core',\
+	bnd.identity;id='slf4j.api',\
 	bnd.identity;id='slf4j.simple'
 
 -runvm.java9plus: \
