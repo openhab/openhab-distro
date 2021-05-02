@@ -139,9 +139,9 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>openhab-bintray</id>
-            <name>Bintray Repository for openHAB</name>
-            <url>https://dl.bintray.com/openhab/mvn/</url>
+            <id>jfrog</id>
+            <name>Artifactory Repository for openHAB</name>
+            <url>https://openhab.jfrog.io/artifactory/libs-3rdparty-local</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
