@@ -2452,10 +2452,7 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
-        name="main"
-        label="3.0"/>
-    <stream
-        name="2.5.x"/>
+        name="main"/>
   </project>
   <project name="2_addons2"
       label="openHAB Add-ons">
@@ -2483,10 +2480,7 @@
       </workingSet>
     </setupTask>
     <stream
-        name="main"
-        label="3.0"/>
-    <stream
-        name="2.5.x"/>
+        name="main"/>
   </project>
   <project name="4_zigbee"
       label="openHAB ZigBee Binding">
@@ -2514,10 +2508,7 @@
           locateNestedProjects="true"/>
     </setupTask>
     <stream
-        name="main"
-        label="3.0"/>
-    <stream
-        name="2.5.x"/>
+        name="main"/>
   </project>
   <project name="5_zwave"
       label="openHAB Z-Wave Binding">
@@ -2544,10 +2535,7 @@
           rootFolder="${git.clone.zwavebinding.location}"/>
     </setupTask>
     <stream
-        name="main"
-        label="3.0"/>
-    <stream
-        name="2.5.x"/>
+        name="main"/>
   </project>
   <project name="6_bacnet"
       label="openHAB BACNet Binding">
@@ -2602,10 +2590,7 @@
           rootFolder="${git.clone.webui.location}"/>
     </setupTask>
     <stream
-        name="2.5.x"/>
-    <stream
-        name="main"
-        label="3.0"/>
+        name="main"/>
   </project>
   <project name="10_core"
       label="openHAB Core Framework">
@@ -2663,8 +2648,7 @@
         excludedTriggers="STARTUP"
         refresh="true"/>
     <stream
-        name="main"
-        label="3.0"/>
+        name="main"/>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"

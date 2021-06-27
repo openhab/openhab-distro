@@ -63,6 +63,7 @@
 		<Logger level="ERROR" name="openhab.event.ItemRemovedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemChannelLinkAddedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemChannelLinkRemovedEvent"/>
+		<Logger level="ERROR" name="openhab.event.ChannelDescriptionChangedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ThingStatusInfoEvent"/>
 		<Logger level="ERROR" name="openhab.event.ThingAddedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ThingUpdatedEvent"/>
