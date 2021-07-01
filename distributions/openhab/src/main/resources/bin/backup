@@ -28,6 +28,34 @@ usage() {
    echo "Set \$OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
 }
 
+usage() {
+   echo "Usage: backup [--noninteractive] [--full] [filename]"
+   echo ""
+   echo "  e.g. ./backup                     << Makes a file with a timed filename"
+   echo "       ./backup myBackup.zip        << Makes a file called myBackup.zip"
+   echo "       ./backup --full              << Makes a full backup file with a timed filename"
+   echo "       ./backup --full myBackup.zip << Makes a full backup file called myBackup.zip"
+   echo "       ./backup --noninteractive    << Makes a backup file which is downloadable from"
+   echo "                                       http://<host_ip>:$OPENHAB_HTTP_PORT/static/$sWebFile"
+   echo "       ./backup --noninteractive myBackup.zip"
+   echo "                                    << Makes a backup file which is downloadable from"
+   echo "                                       http://<host_ip>:$OPENHAB_HTTP_PORT/static/myBackup.zip"
+   echo ""
+   echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
+   echo "from any machine to transfer your configuration across to another instance."
+   echo ""
+   echo "The noninteractive flag allows backups to be run from an OpenHAB GUI button,"
+   echo "that uses the Exec Binding, and a command like: openhab-cli backup --noninteractive"
+   echo ""
+   echo "A full backup must be done in interactive mode, and includes the tmp and cache directories"
+   echo "that are normally excluded."
+   echo ""
+   echo "Backup directory: '$OPENHAB_BACKUPS'"
+   echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
+   echo "Backup temporary directory: '$OPENHAB_BACKUPS_TEMP'"
+   echo "Set \$OPENHAB_BACKUPS_TEMP to change the default backup temporary directory."
+}
+
 getFullPath() {
   specDir="$(dirname "$1")"
   if cd "$specDir" 2>/dev/null; then
