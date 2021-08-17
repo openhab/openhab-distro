@@ -391,7 +391,7 @@ if "%KARAF_PROFILER%" == "" goto :RUN
         MOVE /Y "%KARAF_HOME%\lib.next" "%KARAF_HOME%\lib"
 
         echo "Updating classpath..."
-        set CLASSPATH=%CLASSPATH_INITIAL%
+        set CLASSPATH="%CLASSPATH_INITIAL%"
         pushd "%KARAF_HOME%\lib\boot"
         for %%G in (*.jar) do call:APPEND_TO_CLASSPATH %%G
         popd
