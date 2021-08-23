@@ -43,6 +43,10 @@ ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Nu
 ALERT;Keba Binding: Introduced Units of Measurements and the channel 'pwmpilotcurrent' was replaced by 'maxpilotcurrentdutycyle'. Items must be adapted and things created through the UI must be recreated.
 ALERT;Nest Binding: The binding now also supports the SDM API. To keep using the WWN API, add the 'wwn_' prefix to Thing Types in files or recreate the WWN Nest Things using the UI with your current WWN account configuration parameters.
 
+[3.2.0]
+ALERT; RFXCOM Binding: Lighting4 default command ids are deprecated and will be removed in a future version. You must specify command ids in the thing configuration for Lighting4 devices.
+
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
