@@ -7,30 +7,33 @@
 		</Console>
 
 		<!-- Rolling file appender -->
-		<RollingFile fileName="${sys:openhab.logdir}/openhab.log" filePattern="${sys:openhab.logdir}/openhab.log.%i" name="LOGFILE">
+		<RollingFile fileName="${sys:openhab.logdir}/openhab.log" filePattern="${sys:openhab.logdir}/openhab.log.%i.gz" name="LOGFILE">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
 			<Policies>
 				<OnStartupTriggeringPolicy/>
 				<SizeBasedTriggeringPolicy size="16 MB"/>
 			</Policies>
+			<DefaultRolloverStrategy max="7"/>
 		</RollingFile>
 
 		<!-- Event log appender -->
-		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/events.log" filePattern="${sys:openhab.logdir}/events.log.%i" name="EVENT">
+		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/events.log" filePattern="${sys:openhab.logdir}/events.log.%i.gz" name="EVENT">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
 			<Policies>
 				<OnStartupTriggeringPolicy/>
 				<SizeBasedTriggeringPolicy size="16 MB"/>
 			</Policies>
+			<DefaultRolloverStrategy max="7"/>
 		</RollingRandomAccessFile>
 
 		<!-- Audit file appender -->
-		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/audit.log" filePattern="${sys:openhab.logdir}/audit.log.%i" name="AUDIT">
+		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/audit.log" filePattern="${sys:openhab.logdir}/audit.log.%i.gz" name="AUDIT">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
 			<Policies>
 				<OnStartupTriggeringPolicy/>
 				<SizeBasedTriggeringPolicy size="8 MB"/>
 			</Policies>
+			<DefaultRolloverStrategy max="7"/>
 		</RollingRandomAccessFile>
 
 		<!-- OSGi appender -->
