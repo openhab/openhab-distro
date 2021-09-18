@@ -407,8 +407,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
                 --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module "java.base=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.locator-4.3.2.jar" ^
-                --patch-module "java.xml=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.java.xml-4.3.2.jar" ^
+                --patch-module "java.base=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.locator-4.3.3.jar" ^
+                --patch-module "java.xml=%KARAF_HOME%/lib/endorsed/org.apache.karaf.specs.java.xml-4.3.3.jar" ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^
@@ -428,7 +428,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
                 --add-exports=java.base/sun.net.www.content.text=ALL-UNNAMED ^
                 --add-exports=jdk.xml.dom/org.w3c.dom.html=ALL-UNNAMED ^
                 --add-exports=jdk.naming.rmi/com.sun.jndi.url.rmi=ALL-UNNAMED ^
-                --add-exports java.security.sasl/com.sun.security.sasl=ALL-UNNAMED ^
+                --add-exports=java.rmi/sun.rmi.registry=ALL-UNNAMED ^
+                --add-exports=java.security.sasl/com.sun.security.sasl=ALL-UNNAMED ^
                 -classpath "%CLASSPATH%" ^
                 -Dkaraf.instances="%OPENHAB_USERDATA%\tmp\instances" ^
                 -Dkaraf.home="%KARAF_HOME%" ^
