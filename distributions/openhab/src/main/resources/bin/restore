@@ -1,16 +1,52 @@
 #!/bin/sh
 
+usage() {
+   echo "Usage: restore [--textconfig] [--uiconfig] filename"
+   echo ""
+   echo "  e.g. # Replaces everything with config from a file called myBackup.zip"
+   echo "       ./restore myBackup.zip"
+   echo
+   echo "       # Restores/adds only text configuration from a backup file"
+   echo "       ./restore --textconfig myBackup.zip"
+   echo
+   echo "       # Restores/adds text and UI configuration from a backup file"
+   echo "       ./restore --uiconfig --textconfig myBackup.zip"
+   echo
+   echo "Use this script to restore an openHAB configuration that was previously"
+   echo "made with the openHAB 'backup' script, or selected config parts only."
+   echo "Running without options will eradicate your current active config."
+   echo "Use of either --...config option will keep all of your configuration,"
+   echo "then add/overwrite text and/or UI configuration as per your specified" 
+   echo "option with any of the files contained in the backup file."
+   echo "Text configuration is all *.things, *.items, *.rules, *.scripts files"
+   echo "in the openHAB config directories ${OPENHAB_CONF}/*."
+   echo "User Interface config is all files in ${OPENHAB_USERDATA}/jsondb".
+   echo
+   echo "Backup directory: '$OPENHAB_BACKUPS'"
+   echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
+}
+
 setup(){
-  if [ -z "$1" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    echo "Usage: restore filename"
-    echo ""
-    echo "  e.g. ./restore myBackup.zip  << Restores config from myBackup.zip"
-    echo ""
-    echo "Use this script to restore an openHAB configuration that was previously made with"
-    echo "the openHAB 'backup' script."
-    echo ""
-    exit 0
-  fi
+  bText="0"
+  bUI="0"
+  while [ "$1" != "" ]; do
+    case $1 in
+      -h | --help)
+        usage
+        exit 0
+        ;;
+      --textconfig)
+        bText="1"
+        ;;
+      --uiconfig)
+        bUI="1"
+        ;;
+      *)
+        InputFile="$1"
+        ;;
+    esac
+    shift
+  done
 
   ## Ask to run as root to prevent us from running sudo in this script.
   if [ "$(id -u)" -ne 0 ]; then
@@ -24,7 +60,7 @@ setup(){
   }
 
   ## Check to see if processes are running before restoring
-  if [ ! -z "$(pgrep -f "openhab.*java")" ]; then
+  if [ "$bText" = "0" ] && [ "$bUI" = "0" ] && [ ! -z "$(pgrep -f "openhab.*java")" ]; then
     echo "openHAB is running! Please stop the process before restoring." >&2
     exit 1
   fi
@@ -50,7 +86,9 @@ setup(){
     exit 1
   fi
 
+  # shellcheck disable=SC2012
   currentUser=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $3}')
+  # shellcheck disable=SC2012
   currentGroup=$(ls -ld "$OPENHAB_USERDATA" | awk '{print $4}')
 
   CurrentVersion="$(awk '/openhab-distro/{print $3}' "$OPENHAB_USERDATA/etc/version.properties")"
@@ -72,9 +110,7 @@ echo "          openHAB restore script          "
 echo "##########################################"
 echo "                                          "
 
-InputFile="$1"
-
-setup "$InputFile"
+setup "$@"
 
 ## Extract zip file
 echo "Extracting zip file to temporary folder."
@@ -100,7 +136,7 @@ OHUser=${str#*=}
 str="$(awk '/group=/{print $1}' "$TempDir/backup.properties")"
 OHGroup=${str#*=}
 
-## Feeback to user
+## Feedback to user
 echo ""
 echo " Backup Information:"
 echo " -------------------"
@@ -111,8 +147,18 @@ echo "             from group | $OHGroup"
 echo ""
 echo "Your current configuration will become owned by $currentUser:$currentGroup."
 echo ""
+if [ "$bText" = "1" ]; then
+  echo "Text configuration will be restored."
+fi
+if [ "$bUI" = "1" ]; then
+  echo "User Interface (UI) configuration will be restored to ${OPENHAB_USERDATA}/jsondb."
+fi
 echo "Any existing files with the same name will be replaced."
-echo "Any file without a replacement will be deleted."
+if [ "$bText" = "1" ] || [ "$bUI" = "1" ]; then
+  echo "Any other files will be kept unchanged."
+else
+  echo "Any file without a replacement will be deleted."
+fi
 echo ""
 printf "Okay to Continue? [y/N]: "
 read -r answer
@@ -126,55 +172,72 @@ case "$answer" in
     ;;
 esac
 
-## Move old configuration
-rm -rf /tmp/openhab/old
-mkdir -p /tmp/openhab/old
-echo "Moving system files in userdata to temporary folder"
-if [ -d "$OPENHAB_USERDATA/backups" ]; then
-  mv "$OPENHAB_USERDATA/backups" /tmp/openhab/old || {
-    echo "Could not move backup folder to temporary folder..." >&2
-    exit 1
-  }
-fi
-if [ -d "${OPENHAB_USERDATA:?}/etc" ]; then
-  mv "${OPENHAB_USERDATA:?}/etc" /tmp/openhab/old || {
-    echo "Could not move etc folder to temporary folder" >&2
-    exit 1
-  }
-fi
+if [ "$bText" = "0" ] && [ "$bUI" = "0" ]; then
+  ## Move old configuration
+  rm -rf /tmp/openhab/old
+  mkdir -p /tmp/openhab/old
+  echo "Moving system files in userdata to temporary folder"
+  if [ -d "$OPENHAB_USERDATA/backups" ]; then
+    mv "$OPENHAB_USERDATA/backups" /tmp/openhab/old || {
+      echo "Could not move backup folder to temporary folder..." >&2
+      exit 1
+    }
+  fi
+  if [ -d "${OPENHAB_USERDATA:?}/etc" ]; then
+    mv "${OPENHAB_USERDATA:?}/etc" /tmp/openhab/old || {
+      echo "Could not move etc folder to temporary folder" >&2
+      exit 1
+    }
+  fi
 
-echo "Deleting old userdata folder..."
-rm -rf "${OPENHAB_USERDATA:?}/"*
+  echo "Deleting old userdata folder..."
+  rm -rf "${OPENHAB_USERDATA:?}/"*
 
-echo "Restoring system files in userdata..."
-if [ -d /tmp/openhab/old/backups ]; then
-  mv /tmp/openhab/old/backups "${OPENHAB_USERDATA:?}/" || {
-    echo "Unable to move other backup files back..."
-    exit 1
-  }
-fi
-if [ -d /tmp/openhab/old/etc ]; then
-  mv /tmp/openhab/old/etc "${OPENHAB_USERDATA:?}/" || {
-    echo "Unable to move system files back..."
-    exit 1
-  }
-fi
+  echo "Restoring system files in userdata..."
+  if [ -d /tmp/openhab/old/backups ]; then
+    mv /tmp/openhab/old/backups "${OPENHAB_USERDATA:?}/" || {
+      echo "Unable to move other backup files back..."
+      exit 1
+    }
+  fi
+  if [ -d /tmp/openhab/old/etc ]; then
+    mv /tmp/openhab/old/etc "${OPENHAB_USERDATA:?}/" || {
+      echo "Unable to move system files back..."
+      exit 1
+    }
+  fi
 
-echo "Deleting old conf folder..."
-rm -rf "${OPENHAB_CONF:?}/"*
+  echo "Deleting old conf folder..."
+  rm -rf "${OPENHAB_CONF:?}/"*
+fi
 
 ## Restore configuration
 echo "Restoring openHAB with backup configuration..."
-command cp -af "$TempDir/conf/"*     "${OPENHAB_CONF:?}/" || {
-  echo "Failed to copy $TempDir/conf/ to $OPENHAB_CONF/..." >&2
-  echo "Please check $TempDir and replace conf and userdata." >&2
-  exit 1
-}
-command cp -af "$TempDir/userdata/"* "${OPENHAB_USERDATA:?}/" || {
-  echo "Failed to copy $TempDir/userdata/ to $OPENHAB_USERDATA/..." >&2
-  echo "Please check $TempDir and replace userdata." >&2
-  exit 1
-}
+
+## on full restore (no option) and --textconfig
+if [ "$bUI" = "0" ]; then
+  command cp -af "$TempDir/conf/"*     "${OPENHAB_CONF:?}/" || {
+    echo "Failed to copy $TempDir/conf/ to $OPENHAB_CONF/..." >&2
+    echo "Please check $TempDir and replace conf and userdata." >&2
+    exit 1
+  }
+fi
+## on full restore (no option)
+if [ "$bText" = "0" ] && [ "$bUI" = "0" ]; then
+  command cp -af "$TempDir/userdata/"* "${OPENHAB_USERDATA:?}/" || {
+    echo "Failed to copy $TempDir/userdata/ to $OPENHAB_USERDATA/..." >&2
+    echo "Please check $TempDir and replace userdata." >&2
+    exit 1
+  }
+fi
+## on --uiconfig
+if [ "$bUI" = "1" ]; then
+  command cp -af "$TempDir/userdata/jsondb/"* "${OPENHAB_USERDATA:?}/jsondb/" || {
+    echo "Failed to copy $TempDir/userdata/jsondb/ to $OPENHAB_USERDATA/jsondb/..." >&2
+    echo "Please check $TempDir and replace userdata." >&2
+    exit 1
+  }
+fi
 
 ## Reset ownership
 chown -R "$currentUser:$currentGroup" "$OPENHAB_USERDATA" || {
