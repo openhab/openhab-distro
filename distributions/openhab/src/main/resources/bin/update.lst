@@ -134,3 +134,8 @@ DELETEDIR;$OPENHAB_USERDATA/habmin
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg	
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
 DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
+
+[3.2.0]
+MOVE;$OPENHAB_USERDATA/config/org/openhab/io/metrics/MetricsRestController.config;$OPENHAB_USERDATA/config/org/openhab/metrics.config
+REPLACE;org.openhab.io.metrics.MetricsRestController;org.openhab.metrics;$OPENHAB_USERDATA/config/org/openhab/metrics.config
+DELETEDIR;$OPENHAB_USERDATA/config/org/openhab/io/metrics
