@@ -51,6 +51,7 @@ feature.openhab-model-runtime-all: \
 	${feature.debug},\
 	${feature.openhab-base},\
 	${feature.openhab-model-runtime-all},\
+	bnd.identity;id='org.openhab.core.addon.marketplace',\
 	bnd.identity;id='org.openhab.core.automation',\
 	bnd.identity;id='org.openhab.core.automation.module.media',\
 	bnd.identity;id='org.openhab.core.automation.module.script',\
@@ -226,6 +227,7 @@ feature.openhab-model-runtime-all: \
 	uom-lib-common;version='[2.1.0,2.1.1)',\
 	xstream;version='[1.4.18,1.4.19)',\
 	org.openhab.core;version='[3.2.0,3.2.1)',\
+	org.openhab.core.addon.marketplace;version='[3.2.0,3.2.1)',\
 	org.openhab.core.audio;version='[3.2.0,3.2.1)',\
 	org.openhab.core.auth.jaas;version='[3.2.0,3.2.1)',\
 	org.openhab.core.automation;version='[3.2.0,3.2.1)',\
