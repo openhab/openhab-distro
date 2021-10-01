@@ -46,6 +46,7 @@ ALERT;Nest Binding: The binding now also supports the SDM API. To keep using the
 [3.2.0]
 ALERT; RFXCOM Binding: Lighting4 default command ids are deprecated and will be removed in a future version. You must specify command ids in the thing configuration for Lighting4 devices.
 ALERT; Homematic Binding: The DOUBLE_PRESSED trigger event was removed from the BUTTON channel. If needed, it can be replaced by a rule triggered by the SHORT_PRESSED event which employs a timer to check for double presses. 
+ALERT; IpCamera Binding: The URL's that serve the files have changed to now be on port 8080 and the serverPort config is no longer needed. Update any widget and rules if you have hard coded the URLs into them. 
 
 [[PRE]]
 [2.2.0]
