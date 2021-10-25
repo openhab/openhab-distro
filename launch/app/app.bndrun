@@ -65,7 +65,8 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.ui.basic',\
 	bnd.identity;id='org.openhab.ui.iconset.classic',\
 	bnd.identity;id='org.apache.aries.jax.rs.whiteboard',\
-	bnd.identity;id='org.ops4j.pax.web.pax-web-extender-whiteboard'
+	bnd.identity;id='org.ops4j.pax.web.pax-web-extender-whiteboard',\
+	bnd.identity;id='com.sun.xml.bind.jaxb-osgi'
 
 -runfw: org.eclipse.osgi
 
@@ -145,17 +146,17 @@ feature.openhab-model-runtime-all: \
 	org.antlr.runtime;version='[3.2.0,3.2.1)',\
 	org.apache.aries.component-dsl.component-dsl;version='[1.2.2,1.2.3)',\
 	org.apache.aries.javax.jax.rs-api;version='[1.0.1,1.0.2)',\
-	org.apache.aries.jax.rs.whiteboard;version='[2.0.0,2.0.1)',\
+	org.apache.aries.jax.rs.whiteboard;version='[2.0.1,2.0.2)',\
 	org.apache.aries.spifly.dynamic.bundle;version='[1.3.2,1.3.3)',\
 	org.apache.commons.commons-fileupload;version='[1.4.0,1.4.1)',\
 	org.apache.commons.io;version='[1.4.0,1.4.1)',\
 	org.apache.commons.lang3;version='[3.12.0,3.12.1)',\
-	org.apache.cxf.cxf-core;version='[3.4.3,3.4.4)',\
-	org.apache.cxf.cxf-rt-frontend-jaxrs;version='[3.4.3,3.4.4)',\
-	org.apache.cxf.cxf-rt-rs-client;version='[3.4.3,3.4.4)',\
-	org.apache.cxf.cxf-rt-rs-sse;version='[3.4.3,3.4.4)',\
-	org.apache.cxf.cxf-rt-security;version='[3.4.3,3.4.4)',\
-	org.apache.cxf.cxf-rt-transports-http;version='[3.4.3,3.4.4)',\
+	org.apache.cxf.cxf-core;version='[3.4.5,3.4.6)',\
+	org.apache.cxf.cxf-rt-frontend-jaxrs;version='[3.4.5,3.4.6)',\
+	org.apache.cxf.cxf-rt-rs-client;version='[3.4.5,3.4.6)',\
+	org.apache.cxf.cxf-rt-rs-sse;version='[3.4.5,3.4.6)',\
+	org.apache.cxf.cxf-rt-security;version='[3.4.5,3.4.6)',\
+	org.apache.cxf.cxf-rt-transports-http;version='[3.4.5,3.4.6)',\
 	org.apache.felix.configadmin;version='[1.9.22,1.9.23)',\
 	org.apache.felix.gogo.command;version='[1.1.2,1.1.3)',\
 	org.apache.felix.gogo.runtime;version='[1.1.4,1.1.5)',\
@@ -201,7 +202,6 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.xtext.xbase.lib;version='[2.25.0,2.25.1)',\
 	org.glassfish.hk2.external.aopalliance-repackaged;version='[2.4.0,2.4.1)',\
 	org.glassfish.hk2.external.javax.inject;version='[2.4.0,2.4.1)',\
-	org.glassfish.jaxb.runtime;version='[2.3.3,2.3.4)',\
 	org.objectweb.asm;version='[9.1.0,9.1.1)',\
 	org.objectweb.asm.commons;version='[9.0.0,9.0.1)',\
 	org.objectweb.asm.tree;version='[9.0.0,9.0.1)',\
