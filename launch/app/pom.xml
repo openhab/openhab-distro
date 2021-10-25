@@ -329,18 +329,6 @@
 
   <repositories>
     <repository>
-      <id>jcenter</id>
-      <name>JCenter Repository</name>
-      <url>https://jcenter.bintray.com/</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
       <id>openhab-artifactory-release</id>
       <name>JFrog Artifactory Repository</name>
       <url>https://openhab.jfrog.io/openhab/libs-release</url>
