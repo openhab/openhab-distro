@@ -492,7 +492,7 @@ Function Update-openHAB() {
     # Create the proper download URLs
     if ($Snapshot) {
         $DownloadLocation="https://ci.openhab.org/job/openHAB3-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersionName.zip"
-        $AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersionName.kar"
+        $AddonsDownloadLocation="https://ci.openhab.org/job/openHAB3-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersionName.kar"
     }
     elseif ($Milestone -ne "") {
         $DownloadLocation="https://www.openhab.org/download/milestones/org/openhab/distro/openhab/$OHVersionName/openhab-$OHVersionName.zip"
