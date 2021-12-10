@@ -130,7 +130,8 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dnashorn.args=--no-deprecation-warning ^
   -Dorg.ops4j.pax.web.listening.addresses=%HTTP_ADDRESS% ^
   -Dorg.osgi.service.http.port=%HTTP_PORT% ^
-  -Dorg.osgi.service.http.port.secure=%HTTPS_PORT%
+  -Dorg.osgi.service.http.port.secure=%HTTPS_PORT% ^
+  -Dlog4j2.formatMsgNoLookups=true
 
 :: set jvm options
 set EXTRA_JAVA_OPTS=-XX:+UseG1GC ^
