@@ -51,6 +51,9 @@
                 <include>system/**</include>
                 <include>bin/*.lst</include>
             </includes>
+            <excludes>
+                <exclude>system/org/ops4j/pax/logging/*/2.0.10/**</exclude>
+            </excludes>
             <!-- specifically fixes https://github.com/openhab/openhab-distro/issues/503 -->
             <fileMode>0644</fileMode>
         </fileSet>
