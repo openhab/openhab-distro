@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featuresProcessing xmlns="http://karaf.apache.org/xmlns/features-processing/v1.0.0">
+
+    <bundleReplacements>
+        <bundle originalUri="mvn:org.ops4j.pax.logging/pax-logging-api/[0,2.0.12)" replacement="mvn:org.ops4j.pax.logging/pax-logging-api/2.0.12" mode="maven" />
+        <bundle originalUri="mvn:org.ops4j.pax.logging/pax-logging-log4j2/[0,2.0.12)" replacement="mvn:org.ops4j.pax.logging/pax-logging-log4j2/2.0.12" mode="maven" />
+        <bundle originalUri="mvn:org.ops4j.pax.logging/pax-logging-logback/[0,2.0.12)" replacement="mvn:org.ops4j.pax.logging/pax-logging-logback/2.0.12" mode="maven" />
+    </bundleReplacements>
+
+</featuresProcessing>
