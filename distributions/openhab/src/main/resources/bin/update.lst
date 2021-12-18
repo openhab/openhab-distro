@@ -39,25 +39,25 @@ ALERT;Tesla Binding: The binding has been heavily refactored. It is required to 
 ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
 
 [3.1.0]
-ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Number with dimension, e.g. temperature channels have been changed from Number to Number:Temperature. Please see the binding documentation for details.
 ALERT;Hue Binding: The type of the channels 'switch', 'brightness', 'color' and 'color_temperature' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
 ALERT;Keba Binding: Introduced Units of Measurements and the channel 'pwmpilotcurrent' was replaced by 'maxpilotcurrentdutycyle'. Items must be adapted and things created through the UI must be recreated.
 ALERT;Nest Binding: The binding now also supports the SDM API. To keep using the WWN API, add the 'wwn_' prefix to Thing Types in files or recreate the WWN Nest Things using the UI with your current WWN account configuration parameters.
 ALERT;OpenUV Binding: The type of the channels 'UVMaxTime', 'OzoneTime' and 'UVTime' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Number with dimension, e.g. temperature channels have been changed from Number to Number:Temperature. Please see the binding documentation for details.
 
 [3.2.0]
-ALERT; Air Quality Binding: Full refactoring of things and channels. Please read the updated documentation and start with new things.
-ALERT; DanfossAirUnit Binding: The channel 'manual_fan_speed' has been deprecated and replaced by channel 'manual_fan_step'. Items should be relinked to the new channel.
-ALERT; EnOcean Binding: The RockerSwitch channels do not longer react if two buttons of a rocker switch are pressed simultaneously. If needed, the new channel RockerSwitchAction can be used instead.
-ALERT; Homematic Binding: The DOUBLE_PRESSED trigger event was removed from the BUTTON channel. If needed, it can be replaced by a rule triggered by the SHORT_PRESSED event which employs a timer to check for double presses. 
-ALERT; Hunter Douglas (Luxaflex) PowerView Binding: Channel groups have been introduced for the PowerView Hub thing. Scene channels should be relinked to the new channels for channel group 'Scenes'.
-ALERT; IpCamera Binding: The URLs that serve the files have changed to now be on port 8080 and the serverPort config is no longer needed. Update any widget and rules if you have hard coded the URLs into them. 
-ALERT; LG webOS Binding: The type of the channels 'power', 'mute', 'volume' and 'mediaPlayer' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
-ALERT; Miele Binding: The temperature channels have been converted from Number to Number:Temperature.
-ALERT; Miele Binding: The channels 'state', 'program' and 'phase' are improved with better and possibly localized texts. Rules should use the new channels 'rawState', 'rawProgram' and 'rawPhase' for reliability. Please see the binding documentation for details.
-ALERT; RFXCOM Binding: Lighting4 default command ids are deprecated and will be removed in a future version. You must specify command ids in the thing configuration for Lighting4 devices.
-ALERT; Sager Weathercaster Binding: The type of the channels 'pressure', 'temperature' and 'wind-angle' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
-ALERT; Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
+ALERT;Air Quality Binding: Full refactoring of things and channels. Please read the updated documentation and start with new things.
+ALERT;DanfossAirUnit Binding: The channel 'manual_fan_speed' has been deprecated and replaced by channel 'manual_fan_step'. Items should be relinked to the new channel.
+ALERT;EnOcean Binding: The RockerSwitch channels do not longer react if two buttons of a rocker switch are pressed simultaneously. If needed, the new channel RockerSwitchAction can be used instead.
+ALERT;Homematic Binding: The DOUBLE_PRESSED trigger event was removed from the BUTTON channel. If needed, it can be replaced by a rule triggered by the SHORT_PRESSED event which employs a timer to check for double presses. 
+ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Channel groups have been introduced for the PowerView Hub thing. Scene channels should be relinked to the new channels for channel group 'Scenes'.
+ALERT;IpCamera Binding: The URLs that serve the files have changed to now be on port 8080 and the serverPort config is no longer needed. Update any widget and rules if you have hard coded the URLs into them. 
+ALERT;LG webOS Binding: The type of the channels 'power', 'mute', 'volume' and 'mediaPlayer' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Miele Binding: The temperature channels have been converted from Number to Number:Temperature.
+ALERT;Miele Binding: The channels 'state', 'program' and 'phase' are improved with better and possibly localized texts. Rules should use the new channels 'rawState', 'rawProgram' and 'rawPhase' for reliability. Please see the binding documentation for details.
+ALERT;RFXCOM Binding: Lighting4 default command ids are deprecated and will be removed in a future version. You must specify command ids in the thing configuration for Lighting4 devices.
+ALERT;Sager Weathercaster Binding: The type of the channels 'pressure', 'temperature' and 'wind-angle' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
 
 [[PRE]]
 [2.2.0]
