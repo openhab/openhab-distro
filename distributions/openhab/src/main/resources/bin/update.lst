@@ -40,6 +40,7 @@ ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_tem
 
 [3.1.0]
 ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Number with dimension, e.g. temperature channels have been changed from Number to Number:Temperature. Please see the binding documentation for details.
+ALERT;Hue Binding: The type of the channels 'switch', 'brightness', 'color' and 'color_temperature' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
 ALERT;Keba Binding: Introduced Units of Measurements and the channel 'pwmpilotcurrent' was replaced by 'maxpilotcurrentdutycyle'. Items must be adapted and things created through the UI must be recreated.
 ALERT;Nest Binding: The binding now also supports the SDM API. To keep using the WWN API, add the 'wwn_' prefix to Thing Types in files or recreate the WWN Nest Things using the UI with your current WWN account configuration parameters.
 ALERT;OpenUV Binding: The type of the channels 'UVMaxTime', 'OzoneTime' and 'UVTime' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
