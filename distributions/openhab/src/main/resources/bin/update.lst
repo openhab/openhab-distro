@@ -52,6 +52,9 @@ ALERT; DanfossAirUnit Binding: The channel 'manual_fan_speed' has been deprecate
 ALERT; Hunter Douglas (Luxaflex) PowerView Binding: Channel groups have been introduced for the PowerView Hub thing. Scene channels should be relinked to the new channels for channel group 'Scenes'.
 ALERT; Miele Binding: The temperature channels have been converted from Number to Number:Temperature.
 ALERT; Miele Binding: The channels 'state', 'program' and 'phase' are improved with better and possibly localized texts. Rules should use the new channels 'rawState', 'rawProgram' and 'rawPhase' for reliability. Please see the binding documentation for details.
+ALERT; Air Quality Binding: Full refactoring of things and channels. Please read the updated documentation and start with new things.
+ALERT; LG webOS Binding: The type of the channels 'power', 'mute', 'volume' and 'mediaPlayer' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT; Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
 
 [[PRE]]
 [2.2.0]
