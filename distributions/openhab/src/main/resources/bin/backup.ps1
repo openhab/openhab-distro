@@ -119,7 +119,10 @@ Function Backup-openHAB {
 
             Write-Host -ForegroundColor Cyan "Copying userdata and conf folder contents to temp directory"
             try {
-                Copy-Item $OHUserData $TempDir -Recurse -ErrorAction Stop
+                if (-Not (Test-Path $TempDir\userdata)) {
+                    md -path  $TempDir\userdata
+                }
+                Copy-Item $OHUserData\* $TempDir\userdata -Exclude @("tmp","cache","backup") -Recurse -ErrorAction Stop
                 Copy-Item $OHConf $TempDir -Recurse -ErrorAction Stop
             }
             catch {
@@ -131,11 +134,6 @@ Function Backup-openHAB {
                 foreach ($sysFile in Get-Content "$OHRuntime\bin\userdata_sysfiles.lst") {
                     DeleteIfExists "$TempDir\userdata\etc\$sysFile"
                 }
-                DeleteIfExists "$TempDir\userdata\cache" $True
-                DeleteIfExists "$TempDir\userdata\tmp" $True
-
-                Write-Host -ForegroundColor Cyan "Removing backup folder from backup userdata if it exists"
-                DeleteIfExists "$TempDir\userdata\backups" $True
             }
             catch {
                 exit PrintAndReturn "Error removing unnecessary files from $TempDir - exiting" $_
