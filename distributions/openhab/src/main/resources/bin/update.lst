@@ -58,6 +58,7 @@ ALERT;Miele Binding: The channels 'state', 'program' and 'phase' are improved wi
 ALERT;RFXCOM Binding: Lighting4 default command ids are deprecated and will be removed in a future version. You must specify command ids in the thing configuration for Lighting4 devices.
 ALERT;Sager Weathercaster Binding: The type of the channels 'pressure', 'temperature' and 'wind-angle' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
 ALERT;Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
+ALERT; HaywardOmniLogic Binding: heaterState channel changed from number to string with state options.  Sensor thing removed.  Sensor channels now present in parent device (i.e. Body of Water flow, temp).  filterSpeed channel replaced with filterSpeedPercent and filterSpeedRpm.  pumpSpeed channel replaced with pumpSpeedPercent and pumpSpeedRpm.
 
 [[PRE]]
 [2.2.0]
