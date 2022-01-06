@@ -59,6 +59,9 @@ ALERT;RFXCOM Binding: Lighting4 default command ids are deprecated and will be r
 ALERT;Sager Weathercaster Binding: The type of the channels 'pressure', 'temperature' and 'wind-angle' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
 ALERT;Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
 
+[3.3.0]
+ALERT;TapoControl Binding: Things 'L510_series' and 'L530_series' moved to 'L510' and 'L530' cause changes by manufactuarer at HW-Rev2.0. You may need to remove and create again your things in case your things were previously created using UI. If you created them textual you have to update your config.
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
