@@ -116,7 +116,6 @@
                     <startupFeatures>
                         <feature>eventadmin</feature>
                     </startupFeatures>
-                    <featuresProcessing>${basedir}/processing.xml</featuresProcessing>
                     <bootFeatures>
                         <feature>jaas</feature>
                         <feature>shell</feature>
