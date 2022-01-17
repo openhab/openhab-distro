@@ -83,9 +83,6 @@
 			<AppenderRef ref="OSGI"/>
 		</Logger>
 
-		<!-- openHAB user based script logger configuration -->
-		<Logger level="TRACE" name="org.openhab.automation.script" />
-
 		<Logger level="ERROR" name="javax.jmdns"/>
 		<Logger level="ERROR" name="org.jupnp"/>
 
