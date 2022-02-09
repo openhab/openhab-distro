@@ -61,6 +61,7 @@ ALERT;Sager Weathercaster Binding: The type of the channels 'pressure', 'tempera
 ALERT;Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
 
 [3.3.0]
+ALERT;OmniLink Binding: The channel 'sysdate' has been renamed to 'system_date'.
 ALERT;TapoControl: L510_Series and L530_Series Things were renamed to L510 and L530 because of manufacturer changed naming with new HW-rev. You may need to remove and create again these things.
 
 [[PRE]]
@@ -147,7 +148,7 @@ DELETE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.link.ItemThingL
 DELETEDIR;$OPENHAB_USERDATA/config/org/eclipse/smarthome
 DELETEDIR;$OPENHAB_USERDATA/habmin
 
-DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg	
+DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg
 DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
 DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
 
