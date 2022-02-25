@@ -3,6 +3,7 @@
 
     <feature name="openhab-runtime-ui" description="openHAB UI" version="${project.version}">
         <feature>openhab-runtime-base</feature>
+        <feature>openhab-iconset-classic</feature>
         <feature>openhab-core-ui</feature>
         <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui/${project.version}</bundle>
     </feature>
