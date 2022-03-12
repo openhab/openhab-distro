@@ -2537,35 +2537,7 @@
     <stream
         name="main"/>
   </project>
-  <project name="6_bacnet"
-      label="openHAB BACNet Binding">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.bacnetbinding"
-        remoteURI="https://github.com/openhab/org.openhab.binding.bacnet.git"
-        pushURI="https://github.com/${github.user.id}/org.openhab.binding.bacnet.git">
-      <description>openHAB BACNet Binding</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="openHAB BACNet Binding"
-          id="">
-        <predicate
-            xsi:type="predicates:LocationPredicate"
-            pattern=".*/org.openhab.binding.bacnet"/>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.bacnetbinding.location}"/>
-    </setupTask>
-    <stream
-        name="main"
-        label=""/>
-  </project>
-  <project name="7_webui"
+  <project name="6_webui"
       label="openHAB Web UIs">
     <setupTask
         xsi:type="git:GitCloneTask"
