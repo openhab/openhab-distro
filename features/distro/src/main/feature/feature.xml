@@ -4,7 +4,9 @@
     <feature name="openhab-runtime-ui" description="openHAB UI" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <feature>openhab-core-ui</feature>
+        <feature>openhab-core-ui-icon</feature>
         <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui/${project.version}</bundle>
+        <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui.iconset.classic/${project.version}</bundle>
     </feature>
 
     <feature name="openhab-package-standard" description="openHAB Standard Package" version="${project.version}">
