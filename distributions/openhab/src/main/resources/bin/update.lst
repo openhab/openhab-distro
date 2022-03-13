@@ -61,10 +61,11 @@ ALERT;Sager Weathercaster Binding: The type of the channels 'pressure', 'tempera
 ALERT;Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
 
 [3.3.0]
-ALERT;RFXCOM Binding: The channel 'fanSpeed' of 'fan_lucci_dc' and 'fan_novy' has been renamed to 'fanSpeedControl', and 'fan_lucci_dc' has a new numeric channel 'fanSpeed'. You may need to remove and create your things again.
 ALERT;Daikin Binding: The channel 'specialmode-powerful' has been removed, and a r/w channel 'streamer' added. The channel 'specialmode' changed to read/write to control eco/powerful mode.
 ALERT;DanfossAirUnit Binding: The type of the channel 'humidity' was updated. You may need to remove and create your things again in case your things were previously created using UI and you want to use this channel.
 ALERT;OmniLink Binding: The channel 'sysdate' has been renamed to 'system_date'.
+ALERT;OpenthermGateway Binding: The 'otgw' Thing has been removed and split into a new 'openthermgateway' Bridge, and a new 'boiler' Thing. You will need to change your Thing and respective Item definitions.
+ALERT;RFXCOM Binding: The channel 'fanSpeed' of 'fan_lucci_dc' and 'fan_novy' has been renamed to 'fanSpeedControl', and 'fan_lucci_dc' has a new numeric channel 'fanSpeed'. You may need to remove and create your things again.
 ALERT;TapoControl: L510_Series and L530_Series Things were renamed to L510 and L530 because of manufacturer changed naming with new HW-rev. You may need to remove and create again these things.
 
 [[PRE]]
