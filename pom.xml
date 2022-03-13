@@ -86,9 +86,9 @@
                     <version>2.5.5</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.felix</groupId>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.10.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -98,7 +98,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.3.0</version>
                 </plugin>
         </plugins>
         </pluginManagement>
