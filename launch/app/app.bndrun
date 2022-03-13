@@ -91,6 +91,7 @@ feature.openhab-model-runtime-all: \
 	openhab.logdir=${.}/runtime/userdata/logs
 
 -runblacklist: \
+	bnd.identity;id='jakarta.ws.rs-api',\
 	bnd.identity;id='org.apache.aries.jpa.container',\
 	bnd.identity;id='org.openhab.core.test',\
 	bnd.identity;id='osgi.annotation',\
