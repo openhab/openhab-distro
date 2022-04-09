@@ -154,4 +154,16 @@
                 <Arg>org.eclipse.jetty.server.Request.maxFormContentSize</Arg>
                 <Arg>300000</Arg>
 	</Call>
+	<Call name="addBean">
+		<Arg>
+			<New id="keyStoreScanner" class="org.eclipse.jetty.util.ssl.KeyStoreScanner">
+				<Arg>
+					<Ref refid="sslContextFactory"/>
+				</Arg>
+				<Set name="scanInterval">
+					<Property name="jetty.sslContext.reload.scanInterval" default="15"/>
+				</Set>
+			</New>
+		</Arg>
+	</Call>
 </Configure>
