@@ -3,6 +3,7 @@
 .vscode
 .DS_Store
 *.iml
+.gradle
 maven-metadata-local.xml
 Californium.properties
 
