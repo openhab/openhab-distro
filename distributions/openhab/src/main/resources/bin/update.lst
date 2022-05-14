@@ -70,6 +70,8 @@ ALERT;Opentherm Gateway Binding: The 'otgw' Thing has been removed and split int
 ALERT;RFXCOM Binding: The channel 'fanSpeed' of 'fan_lucci_dc' and 'fan_novy' has been renamed to 'fanSpeedControl', and 'fan_lucci_dc' has a new numeric channel 'fanSpeed'. You may need to remove and create your things again.
 ALERT;TapoControl Binding: L510_Series and L530_Series Things were renamed to L510 and L530 because of manufacturer changed naming with new HW-rev. You may need to remove and create again these things.
 ALERT;Netatmo Binding: Things hierarchy and organization has changed as well as channel namings. You will need to remove and create again these things.
+ALERT;JS Scripting Automation: 'item.history.lastUpdate()' returns 'time.ZonedDateTime' instead of 'Date'
+ALERT;JS Scripting Automation: 'addItem(...)' and 'updateItem(...)' use new itemConfig as parameter and 'createItem(...)' was removed
 
 [[PRE]]
 [2.2.0]
