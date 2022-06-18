@@ -104,6 +104,10 @@
 		<!-- Filters warnings for events that could not be delivered to a disconnected client. -->
 		<Logger level="ERROR" name="org.apache.cxf.jaxrs.sse.SseEventSinkImpl"/>
 
+		<!-- Filters warnings from broken connections during startup -->
+		<!-- https://github.com/openhab/openhab-core/issues/2998 -->
+		<Logger level="ERROR" name="org.apache.cxf.phase.PhaseInterceptorChain"/>
+
 		<!-- Filters known issues of KarServiceImpl, see -->
 		<!-- https://github.com/openhab/openhab-distro/issues/519#issuecomment-351944506 -->
 		<!-- Can be removed once the issues are resolved in an upcoming version. -->
