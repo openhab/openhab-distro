@@ -99,11 +99,10 @@ goto :https_port_done
 
 :https_port_done
 
-:: set the Java debug port with a wildcard, so that it is bound to all interfaces
-:: (java/karaf otherwise only binds it to localhost)
+:: set Java debug port
 :check_debug_port
 IF NOT [%OPENHAB_JAVA_DEBUG_PORT%] == [] GOTO :debug_port_set
-set JAVA_DEBUG_PORT=*:5005
+set JAVA_DEBUG_PORT=5005
 goto :debug_port_done
 
 :debug_port_set
@@ -112,7 +111,7 @@ goto :debug_port_done
 
 :debug_port_done
 
-:: set java options
+:: set Java options
 set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.home=%OPENHAB_HOME% ^
   -Dopenhab.conf=%OPENHAB_CONF% ^
