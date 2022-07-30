@@ -9,11 +9,11 @@
 
 The open Home Automation Bus (openHAB) project aims at providing a universal integration platform for all things around home automation. It is a pure Java solution, fully based on OSGi.
 
-It is designed to be absolutely vendor-neutral as well as hardware/protocol-agnostic. openHAB brings together different bus systems, hardware devices and interface protocols by dedicated bindings. These bindings send and receive commands and status updates on the openHAB event bus. This concept allows designing user interfaces with a unique look&feel, but with the possibility to operate devices based on a big number of different technologies. Besides the user interfaces, it also brings the power of automation logics across different system boundaries.
+It is designed to be vendor-neutral as well as hardware/protocol-agnostic. openHAB brings together different bus systems, hardware devices, and interface protocols by dedicated bindings. These bindings send and receive commands and status updates on the openHAB event bus. This concept allows designing user interfaces with a unique look&feel, but with the possibility to operate devices based on a big number of different technologies. Besides the user interfaces, it also brings the power of automation logic across different system boundaries.
 
-For further Information please refer to our homepage [www.openhab.org](https://www.openhab.org). 
+For further information please refer to our homepage [www.openhab.org](https://www.openhab.org). 
 
-For the latest snapshot builds, please see to our [Jenkins job](https://ci.openhab.org/job/openHAB3-Distribution/).
+For the latest snapshot builds, please see our [Jenkins job](https://ci.openhab.org/job/openHAB3-Distribution/).
 
 ## Getting Started
 
