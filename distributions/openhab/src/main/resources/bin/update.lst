@@ -173,3 +173,4 @@ DELETE;$OPENHAB_USERDATA/config/org/openhab/mqttbroker.config
 
 [3.4.0]
 MOVE;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.TransformationConfiguration.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.Transformation.json
+ALERT;Konnected Binding: Things needs to be recreated because of the addition of Konnected Pro panel support
