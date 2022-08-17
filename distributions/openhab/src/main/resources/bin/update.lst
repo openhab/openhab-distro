@@ -75,6 +75,9 @@ ALERT;RFXCOM Binding: The channel 'fanSpeed' of 'fan_lucci_dc' and 'fan_novy' ha
 ALERT;TapoControl Binding: L510_Series and L530_Series Things were renamed to L510 and L530 because of manufacturer changed naming with new HW-rev. You may need to remove and create again these things.
 ALERT;WLED Binding: Binding now uses Bridge and Thing structure. Delete and add a new bridge, and at least 1 thing for each segment you require.
 
+[3.4.0]
+ALERT;Automower Binding: Due Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
