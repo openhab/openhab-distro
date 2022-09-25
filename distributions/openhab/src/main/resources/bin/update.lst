@@ -78,6 +78,7 @@ ALERT;WLED Binding: Binding now uses Bridge and Thing structure. Delete and add 
 [3.4.0]
 ALERT;Automower Binding: Due to Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
 ALERT;Konnected Binding: Things needs to be recreated because of added Konnected Pro panel support and manual configuration of things.
+ALERT;Miele@home Binding: The channel 'start' now contains date and time for start of scheduled program. Previously it was counting down duration until the program would start.
 ALERT;Velux Binding: On window things the semantic category of the position channel has been corrected from 'blinds' to 'window'. Window things with such channels that had been created via the UI will need to be deleted and re-created.
 
 [[PRE]]
