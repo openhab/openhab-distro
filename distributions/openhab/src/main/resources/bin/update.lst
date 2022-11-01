@@ -77,6 +77,7 @@ ALERT;WLED Binding: Binding now uses Bridge and Thing structure. Delete and add 
 
 [3.4.0]
 ALERT;Automower Binding: Due to Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
+ALERT;LG webOS Binding: The undocumented action "sendRCButton" was removed while it is possible to achieve the same action with "sendButton"; in case you were using "sendButton" with ENTER or DELETE as parameter, you should now use the new action "sendKeyboard".
 ALERT;Konnected Binding: Things needs to be recreated because of added Konnected Pro panel support and manual configuration of things.
 
 [[PRE]]
