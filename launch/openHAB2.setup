@@ -2354,21 +2354,11 @@
       <requirement
           name="org.eclipse.m2e.feature.feature.group"/>
       <requirement
-          name="org.eclipse.mylyn.java_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.hudson.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.git.feature.group"/>
-      <requirement
           name="org.eclipse.wst.jsdt.feature.feature.group"/>
       <requirement
           name="org.eclipse.wst.web_ui.feature.feature.group"/>
       <requirement
           name="bndtools.m2e.feature.feature.group"/>
-      <requirement
-          name="bjmi.m2e.sourcelookup.feature.feature.group"/>
       <requirement
           name="org.lastnpe.m2e.feature.feature.group"/>
       <requirement
@@ -2378,13 +2368,11 @@
       <repository
           url="https://bndtools.jfrog.io/bndtools/update-latest/"/>
       <repository
-          url="https://bjmi.github.io/update-site/"/>
+          url="https://github.com/tesla/m2eclipse-buildhelper/releases/download/latest/"/>
       <repository
           url="https://ianbrandt.github.io/m2e-maven-dependency-plugin/"/>
       <repository
-          url="https://www.lastnpe.org/eclipse-external-annotations-m2e-plugin-p2-site/"/>
-      <repository
-          url="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-buildhelper/0.15.0/N/0.15.0.201207090124/"/>
+          url="https://www.lastnpe.org/eclipse-external-annotations-m2e-plugin-p2-site/m2e_2/"/>
     </setupTask>
     <setupTask
         xsi:type="setup:ResourceCreationTask"
