@@ -2354,27 +2354,11 @@
       <requirement
           name="org.eclipse.m2e.feature.feature.group"/>
       <requirement
-          name="org.eclipse.mylyn.java_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.hudson.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.git.feature.group"/>
-      <requirement
-          name="org.eclipse.wst.jsdt.feature.feature.group"/>
-      <requirement
           name="org.eclipse.wst.web_ui.feature.feature.group"/>
       <requirement
           name="bndtools.m2e.feature.feature.group"/>
       <requirement
-          name="bjmi.m2e.sourcelookup.feature.feature.group"/>
-      <requirement
-          name="org.lastnpe.m2e.feature.feature.group"/>
-      <requirement
           name="com.ianbrandt.tools.m2e.mdp.feature.feature.group"/>
-      <requirement
-          name="org.sonatype.m2e.buildhelper.feature.feature.group"/>
       <repository
           url="https://bndtools.jfrog.io/bndtools/update-latest/"/>
       <repository
