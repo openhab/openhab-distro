@@ -76,6 +76,7 @@ ALERT;TapoControl Binding: L510_Series and L530_Series Things were renamed to L5
 ALERT;WLED Binding: Binding now uses Bridge and Thing structure. Delete and add a new bridge, and at least 1 thing for each segment you require.
 
 [3.4.0]
+ALERT;CORE: Default units have been added for all dimension. A state description defining the unit should be added to each item that uses a different unit.
 ALERT;Automower Binding: Due to Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
 ALERT;JS Scripting Automation: 'setTimeout' and 'setInterval' return a timerId (a positive integer value) as in standard JS instead of an openHAB Timer.
 ALERT;Konnected Binding: Things needs to be recreated because of added Konnected Pro panel support and manual configuration of things.
