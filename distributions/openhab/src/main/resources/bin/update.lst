@@ -84,6 +84,7 @@ ALERT;LG webOS Binding: The undocumented action "sendRCButton" was removed while
 ALERT;Miele@home Binding: The channel 'start' now contains date and time for start of scheduled program. Previously it was counting down duration until the program would start.
 ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelights. The brightness channels with the Number type now have the Dimmer type. This affects only nightlight and ambilight channels for some models.
 ALERT;Velux Binding: On window things the semantic category of the position channel has been corrected from 'blinds' to 'window'. Window things with such channels that had been created via the UI will need to be deleted and re-created.
+ALERT;Resol Binding: Item Type of solar controllers channels using time and weekday format changed from Date to String. Items need to be adjusted accoringly.
 
 [[PRE]]
 [2.2.0]
