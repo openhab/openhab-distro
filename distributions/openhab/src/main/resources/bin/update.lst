@@ -80,6 +80,7 @@ ALERT;CORE: Default units have been added for all dimensions. A state descriptio
 ALERT;Automower Binding: Due to Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
 ALERT;JavaScript Scripting Automation: 'setTimeout' and 'setInterval' return a timerId (a positive integer value) as in standard JS instead of an openHAB Timer.
 ALERT;JavaScript Scripting Automation: ItemHistory min/max between/since returns now a number instead of a string.
+ALERT;JRuby Scripting Automation: The default `RUBYLIB` directory has changed to OPENHAB_CONF/automation/ruby/lib. Either explicitly configure the add-on to use the previous value, or move any files to the new location.
 ALERT;Konnected Binding: Things needs to be recreated because of added Konnected Pro panel support and manual configuration of things.
 ALERT;LG webOS Binding: The undocumented action "sendRCButton" was removed while it is possible to achieve the same action with "sendButton"; in case you were using "sendButton" with ENTER or DELETE as parameter, you should now use the new action "sendKeyboard".
 ALERT;Miele@home Binding: The channel 'start' now contains date and time for start of scheduled program. Previously it was counting down duration until the program would start.
