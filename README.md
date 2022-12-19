@@ -1,7 +1,7 @@
 # openHAB Distribution
 
 [![GitHub Actions Build Status](https://github.com/openhab/openhab-distro/actions/workflows/ci-build.yml/badge.svg?branch=main)](https://github.com/openhab/openhab-distro/actions/workflows/ci-build.yml)
-[![Jenkins Build Status](https://ci.openhab.org/job/openHAB3-Distribution/badge/icon)](https://ci.openhab.org/job/openHAB3-Distribution/)
+[![Jenkins Build Status](https://ci.openhab.org/job/openHAB-Distribution/badge/icon)](https://ci.openhab.org/job/openHAB-Distribution/)
 [![EPL-2.0](https://img.shields.io/badge/license-EPL%202-green.svg)](https://opensource.org/licenses/EPL-2.0)
 [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=28452711)](https://www.bountysource.com/teams/openhab/issues?tracker_ids=28452711)
 
@@ -13,7 +13,7 @@ It is designed to be vendor-neutral as well as hardware/protocol-agnostic. openH
 
 For further information please refer to our homepage [www.openhab.org](https://www.openhab.org). 
 
-For the latest snapshot builds, please see our [Jenkins job](https://ci.openhab.org/job/openHAB3-Distribution/).
+For the latest snapshot builds, please see our [Jenkins job](https://ci.openhab.org/job/openHAB-Distribution/).
 
 ## Getting Started
 
