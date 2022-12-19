@@ -78,7 +78,6 @@ feature.openhab-model-runtime-all: \
 
 -runproperties: \
 	felix.cm.dir=${.}/runtime/userdata/config,\
-	nashorn.args=--no-deprecation-warning,\
 	org.osgi.framework.bootdelegation="sun.misc",\
 	org.osgi.service.http.port=8080,\
 	osgi.console=,\
