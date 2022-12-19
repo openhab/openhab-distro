@@ -56,7 +56,7 @@
 
         <karaf.version>4.3.7</karaf.version>
 
-        <oh.java.version>11</oh.java.version>
+        <oh.java.version>17</oh.java.version>
         <maven.compiler.source>${oh.java.version}</maven.compiler.source>
         <maven.compiler.target>${oh.java.version}</maven.compiler.target>
     </properties>
@@ -115,7 +115,7 @@
                     <configuration>
                       <rules>
                         <requireJavaVersion>
-                          <version>[11.0,18.0)</version>
+                          <version>[17.0,18.0)</version>
                         </requireJavaVersion>
                       </rules>
                     </configuration>
