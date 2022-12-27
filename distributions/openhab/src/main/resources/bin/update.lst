@@ -92,6 +92,9 @@ ALERT;Systeminfo Binding: The default state description for DataAmount channels 
 ALERT;Velux Binding: On window things the semantic category of the position channel has been corrected from 'blinds' to 'window'. Window things with such channels that had been created via the UI will need to be deleted and re-created.
 ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelights. The brightness channels with the Number type now have the Dimmer type. This affects only nightlight and ambilight channels for some models.
 
+[4.0.0]
+ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
