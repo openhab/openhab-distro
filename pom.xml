@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -9,7 +9,7 @@
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>3.4.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -31,7 +31,7 @@
 
     <issueManagement>
         <url>https://github.com/openhab/openhab-distro/issues</url>
-        <system>Github</system>
+        <system>GitHub</system>
     </issueManagement>
 
     <distributionManagement>
@@ -51,12 +51,12 @@
 
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
-        <ohc.version>3.4.0-SNAPSHOT</ohc.version>
-        <oha.version>3.4.0-SNAPSHOT</oha.version>
+        <ohc.version>4.0.0-SNAPSHOT</ohc.version>
+        <oha.version>4.0.0-SNAPSHOT</oha.version>
 
         <karaf.version>4.3.7</karaf.version>
 
-        <oh.java.version>11</oh.java.version>
+        <oh.java.version>17</oh.java.version>
         <maven.compiler.source>${oh.java.version}</maven.compiler.source>
         <maven.compiler.target>${oh.java.version}</maven.compiler.target>
     </properties>
@@ -115,7 +115,7 @@
                     <configuration>
                       <rules>
                         <requireJavaVersion>
-                          <version>[11.0,18.0)</version>
+                          <version>[17.0,18.0)</version>
                         </requireJavaVersion>
                       </rules>
                     </configuration>

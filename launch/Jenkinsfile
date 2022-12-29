@@ -63,7 +63,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
     resetOpenhabFork(gitBaseUrl, componentName, releaseVersion)
 
     withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIALS_ID, passwordVariable: 'githubPassword', usernameVariable: 'githubUser')]) {
-        withMaven(jdk: 'OpenJDK 11', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
+        withMaven(jdk: 'OpenJDK 17', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
             dir(componentName) {
                 deleteDir()
                 checkout([$class: 'GitSCM', branches: [[name: '*/' + branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'LocalBranch', localBranch: branch], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false], [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: gitRepoUrl ]]])

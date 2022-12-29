@@ -75,8 +75,28 @@ ALERT;RFXCOM Binding: The channel 'fanSpeed' of 'fan_lucci_dc' and 'fan_novy' ha
 ALERT;TapoControl Binding: L510_Series and L530_Series Things were renamed to L510 and L530 because of manufacturer changed naming with new HW-rev. You may need to remove and create again these things.
 ALERT;WLED Binding: Binding now uses Bridge and Thing structure. Delete and add a new bridge, and at least 1 thing for each segment you require.
 
+[3.4.0]
+ALERT;CORE: Default units have been added for all dimensions. A state description defining the unit should be added to each item that uses a different unit.
+ALERT;Automower Binding: Due to Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
+ALERT;JavaScript Scripting Automation: 'setTimeout' and 'setInterval' return a timerId (a positive integer value) as in standard JS instead of an openHAB Timer.
+ALERT;JavaScript Scripting Automation: ItemHistory min/max between/since returns now a number instead of a string.
+ALERT;JavaScript Scripting Automation: openHAB JavaScript library versions < 3.1.2 are not fully compatible anymore. If you have manually installed the JS library, please upgrade to a version >= 3.1.2.
+ALERT;JRuby Scripting Automation: The default `RUBYLIB` directory has changed to OPENHAB_CONF/automation/ruby/lib. Either explicitly configure the add-on to use the previous value, or move any files to the new location.
+ALERT;Konnected Binding: Things needs to be recreated because of added Konnected Pro panel support and manual configuration of things.
+ALERT;LG webOS Binding: The undocumented action "sendRCButton" was removed while it is possible to achieve the same action with "sendButton"; in case you were using "sendButton" with ENTER or DELETE as parameter, you should now use the new action "sendKeyboard".
+ALERT;Miele@home Binding: The channel 'start' now contains date and time for start of scheduled program. Previously it was counting down duration until the program would start.
+ALERT;Miele@home Binding: The channels 'duration', 'elapsed' and 'finish' are now Number:Time. You may need to remove and create your things again in case your things were previously created using UI and you want to use these channels. Linked items need to be recreated.
+ALERT;Resol Binding: Item Type of solar controllers channels using time and weekday format changed from Date to String. Items need to be adjusted accordingly.
+ALERT;Systeminfo Binding: Multiple Number channels now have a dimension added. You may need to remove and create your things again in case your things were previously created using UI and you want to use these channels. Linked items need to be recreated.
+ALERT;Systeminfo Binding: The default state description for DataAmount channels is now MiB. If you relied on MB, you may need to adjust.
+ALERT;Velux Binding: On window things the semantic category of the position channel has been corrected from 'blinds' to 'window'. Window things with such channels that had been created via the UI will need to be deleted and re-created.
+ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelights. The brightness channels with the Number type now have the Dimmer type. This affects only nightlight and ambilight channels for some models.
+
 [4.0.0]
-ALERT;Dark Sky: Due to EOL of their API, this add-on has been removed.
+ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
+ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
+ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
+ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Deprecated scene channels have been removed. Please use the scene channels introduced in 3.2 (in channel group 'scenes').
 
 [[PRE]]
 [2.2.0]
@@ -173,3 +193,6 @@ DELETEDIR;$OPENHAB_USERDATA/config/org/openhab/io/metrics
 
 [3.3.0]
 DELETE;$OPENHAB_USERDATA/config/org/openhab/mqttbroker.config
+
+[3.4.0]
+MOVE;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.TransformationConfiguration.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.Transformation.json

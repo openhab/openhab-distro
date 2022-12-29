@@ -89,8 +89,8 @@ setup(){
   milestoneVersion="$(echo "$OHVersion" | awk -F'.' '{print $4}')"
   ## Choose openhab.org for releases, jenkins for snapshots and artifactory for milestones or release candidates.
   if test "${OHVersion#*-SNAPSHOT}" != "$OHVersion"; then
-    DownloadLocation="https://ci.openhab.org/job/openHAB3-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
-    AddonsDownloadLocation="https://ci.openhab.org/job/openHAB3-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
+    DownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab/target/openhab-$OHVersion.zip"
+    AddonsDownloadLocation="https://ci.openhab.org/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-addons/target/openhab-addons-$OHVersion.kar"
   elif [ "$OHVersion" = "$CurrentVersion" ]; then
     echo "You are already on openHAB $CurrentVersion" >&2
     exit 1

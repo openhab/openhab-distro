@@ -106,7 +106,6 @@ export JAVA_OPTS="${JAVA_OPTS}
   -Djava.library.path=${OPENHAB_USERDATA}/tmp/lib
   -Djetty.host=${HTTP_ADDRESS}
   -Djetty.http.compliance=RFC2616
-  -Dnashorn.args=--no-deprecation-warning
   -Dorg.apache.cxf.osgi.http.transport.disable=true
   -Dorg.ops4j.pax.web.listening.addresses=${HTTP_ADDRESS}
   -Dorg.osgi.service.http.port=${HTTP_PORT}
