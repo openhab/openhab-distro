@@ -13,6 +13,7 @@
         <feature>openhab-runtime-base</feature>
         <config name="org.openhab.addons" append="true">
 			package = standard
+			automation = jsscripting
 			ui = basic,habpanel
 			persistence = rrd4j
         </config>
