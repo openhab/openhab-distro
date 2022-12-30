@@ -94,6 +94,7 @@ ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelight
 
 [4.0.0]
 ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
+ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
 ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
 ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Deprecated scene channels have been removed. Please use the scene channels introduced in 3.2 (in channel group 'scenes').
 
