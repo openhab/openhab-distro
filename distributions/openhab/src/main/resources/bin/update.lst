@@ -93,6 +93,7 @@ ALERT;Velux Binding: On window things the semantic category of the position chan
 ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelights. The brightness channels with the Number type now have the Dimmer type. This affects only nightlight and ambilight channels for some models.
 
 [4.0.0]
+ALERT;CORE: core.GenericEventTrigger and core.GenericEventCondition parameters have have changed. See https://www.openhab.org/docs/configuration/rules-ng.html#system-module-types.
 ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
 ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
 ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
