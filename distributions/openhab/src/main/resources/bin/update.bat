@@ -20,15 +20,15 @@ EXIT /B 0
 
 :printArgs
 ECHO Usage: update.bat {OHVersion}
-ECHO OHVersion (required) - The version you want to update (3.0, 3.1, etc)
+ECHO OHVersion (required) - The version you want to update (4.0, 4.1, etc)
 ECHO.
-ECHO Example to update to openHAB version 3.0.0 stable:
-ECHO    update.bat 3.0.0
+ECHO Example to update to openHAB version 4.0.0 stable:
+ECHO    update.bat 4.0.0
 ECHO.
-ECHO Example to update to openHAB version 3.0.0 snapshot:
-ECHO    update.bat 3.0.0-SNAPSHOT
+ECHO Example to update to openHAB version 4.0.0 snapshot:
+ECHO    update.bat 4.0.0-SNAPSHOT
 ECHO.
-ECHO Example to update to openHAB version 3.0.0 milestone 1:
-ECHO    update.bat 3.0.0-M1
+ECHO Example to update to openHAB version 4.0.0 milestone 1:
+ECHO    update.bat 4.0.0-M1
 ECHO.
 EXIT /B -1
