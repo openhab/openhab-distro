@@ -15,7 +15,7 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core',\
 	bnd.identity;id='org.openhab.core.audio',\
 	bnd.identity;id='org.openhab.core.auth.jaas',\
-	bnd.identity;id='org.openhab.core.binding.xml',\
+	bnd.identity;id='org.openhab.core.addon.xml',\
 	bnd.identity;id='org.openhab.core.config.core',\
 	bnd.identity;id='org.openhab.core.config.discovery',\
 	bnd.identity;id='org.openhab.core.config.dispatch',\
@@ -233,7 +233,6 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.automation.module.script;version='[4.0.0,4.0.1)',\
 	org.openhab.core.automation.module.script.rulesupport;version='[4.0.0,4.0.1)',\
 	org.openhab.core.automation.rest;version='[4.0.0,4.0.1)',\
-	org.openhab.core.binding.xml;version='[4.0.0,4.0.1)',\
 	org.openhab.core.config.core;version='[4.0.0,4.0.1)',\
 	org.openhab.core.config.discovery;version='[4.0.0,4.0.1)',\
 	org.openhab.core.config.dispatch;version='[4.0.0,4.0.1)',\
@@ -277,4 +276,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.voice;version='[4.0.0,4.0.1)',\
 	org.openhab.ui;version='[4.0.0,4.0.1)',\
 	org.openhab.ui.basic;version='[4.0.0,4.0.1)',\
-	org.openhab.ui.iconset.classic;version='[4.0.0,4.0.1)'
+	org.openhab.ui.iconset.classic;version='[4.0.0,4.0.1)',\
+	org.glassfish.jaxb.runtime;version='[2.3.4,2.3.5)',\
+	org.openhab.core.addon.xml;version='[4.0.0,4.0.1)',\
+	org.osgi.service.cm;version='[1.6.0,1.6.1)'
