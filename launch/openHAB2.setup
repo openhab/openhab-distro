@@ -92,11 +92,11 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform"
-          value="11"/>
+          value="17"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance"
-          value="11"/>
+          value="17"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.assertIdentifier"
@@ -160,7 +160,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source"
-          value="11"/>
+          value="17"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.taskCaseSensitive"
@@ -2316,8 +2316,8 @@
   </setupTask>
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-11"
-      location="${jre.location-11}"/>
+      version="JavaSE-17"
+      location="${jre.location-17}"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       id="eclipse.ini.memory.start"
