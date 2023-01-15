@@ -127,6 +127,7 @@ ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'en
 ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
 ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
 ALERT;Action Template Interpreter: removed from the distribution, functionality is covered by the Standard Interpreter.
+ALERT;MQTT EspMilightHub Binding: Colour bulbs no longer have a `level` channel. You may need to re-add your things for it to be removed. Link to the `colour` channel instead, even for `Dimmer` items.
 
 [[PRE]]
 [2.2.0]
