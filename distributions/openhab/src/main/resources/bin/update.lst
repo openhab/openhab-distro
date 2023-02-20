@@ -98,6 +98,8 @@ ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been
 ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
 ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
 ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Deprecated scene channels have been removed. Please use the scene channels introduced in 3.2 (in channel group 'scenes').
+ALERT;JavaScript: JavaScript engines have changed their MIME types: NashornJS is application/javascript:version=ECMAScript-5.1 and GraalJS is application/javascript. Please update your scripts to either make them compatible with GraalJS or change the MIME type to continue to use NashornJS. For Blockly migration, visit the Blockly documentation.
+ALERT;JavaScript NashornJS: NashornJS has been removed from core and isn't included by default. If you still need or want to use it, you can install it as an addon.
 ALERT;JavaScript Scripting Automation: The old "metadata" and "itemchannellink" APIs have been replaced by a new API with extended functionality on the "items" namespace.
 ALERT;JavaScript Scripting Automation: ItemHistory: historicState, maximumBetween, maximumSince, minimumBetween, minimumSince & previousState now return a HistoricItem instead of just the state. previousStateTimestamp has been removed, the timestamp is available on the HistoricItem.
 
