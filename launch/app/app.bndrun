@@ -12,30 +12,28 @@ feature.debug: \
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)'
 
 feature.openhab-base: \
-	bnd.identity;id='org.openhab.core',\
-	bnd.identity;id='org.openhab.core.audio',\
-	bnd.identity;id='org.openhab.core.auth.jaas',\
-	bnd.identity;id='org.openhab.core.addon.xml',\
-	bnd.identity;id='org.openhab.core.config.core',\
-	bnd.identity;id='org.openhab.core.config.discovery',\
-	bnd.identity;id='org.openhab.core.config.dispatch',\
-	bnd.identity;id='org.openhab.core.config.xml',\
-	bnd.identity;id='org.openhab.core.id',\
-	bnd.identity;id='org.openhab.core.io.console',\
-	bnd.identity;id='org.openhab.core.io.http',\
-	bnd.identity;id='org.openhab.core.io.http.auth',\
-	bnd.identity;id='org.openhab.core.io.monitor',\
-	bnd.identity;id='org.openhab.core.io.net',\
-	bnd.identity;id='org.openhab.core.io.rest',\
-	bnd.identity;id='org.openhab.core.io.rest.auth',\
-	bnd.identity;id='org.openhab.core.io.rest.core',\
-	bnd.identity;id='org.openhab.core.io.rest.sse',\
-	bnd.identity;id='org.openhab.core.semantics',\
-	bnd.identity;id='org.openhab.core.storage.json',\
-	bnd.identity;id='org.openhab.core.thing',\
-	bnd.identity;id='org.openhab.core.thing.xml',\
-	bnd.identity;id='org.openhab.core.transform',\
-	bnd.identity;id='org.openhab.core.voice'
+    bnd.identity;id='org.openhab.core',\
+    bnd.identity;id='org.openhab.core.audio',\
+    bnd.identity;id='org.openhab.core.auth.jaas',\
+    bnd.identity;id='org.openhab.core.addon',\
+    bnd.identity;id='org.openhab.core.config.core',\
+    bnd.identity;id='org.openhab.core.config.discovery',\
+    bnd.identity;id='org.openhab.core.config.dispatch',\
+    bnd.identity;id='org.openhab.core.id',\
+    bnd.identity;id='org.openhab.core.io.console',\
+    bnd.identity;id='org.openhab.core.io.http',\
+    bnd.identity;id='org.openhab.core.io.http.auth',\
+    bnd.identity;id='org.openhab.core.io.monitor',\
+    bnd.identity;id='org.openhab.core.io.net',\
+    bnd.identity;id='org.openhab.core.io.rest',\
+    bnd.identity;id='org.openhab.core.io.rest.auth',\
+    bnd.identity;id='org.openhab.core.io.rest.core',\
+    bnd.identity;id='org.openhab.core.io.rest.sse',\
+    bnd.identity;id='org.openhab.core.semantics',\
+    bnd.identity;id='org.openhab.core.storage.json',\
+    bnd.identity;id='org.openhab.core.thing',\
+    bnd.identity;id='org.openhab.core.transform',\
+    bnd.identity;id='org.openhab.core.voice'
 
 feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.core.model.item.runtime',\
@@ -65,7 +63,8 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.ui.basic',\
 	bnd.identity;id='org.openhab.ui.iconset.classic',\
 	bnd.identity;id='org.apache.aries.jax.rs.whiteboard',\
-	bnd.identity;id='org.ops4j.pax.web.pax-web-extender-whiteboard'
+	bnd.identity;id='org.ops4j.pax.web.pax-web-extender-whiteboard',\
+	bnd.identity;id='org.openhab.binding.netatmo'
 
 -runfw: org.eclipse.osgi
 
@@ -236,7 +235,6 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.config.core;version='[4.0.0,4.0.1)',\
 	org.openhab.core.config.discovery;version='[4.0.0,4.0.1)',\
 	org.openhab.core.config.dispatch;version='[4.0.0,4.0.1)',\
-	org.openhab.core.config.xml;version='[4.0.0,4.0.1)',\
 	org.openhab.core.ephemeris;version='[4.0.0,4.0.1)',\
 	org.openhab.core.id;version='[4.0.0,4.0.1)',\
 	org.openhab.core.io.console;version='[4.0.0,4.0.1)',\
@@ -269,7 +267,6 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.semantics;version='[4.0.0,4.0.1)',\
 	org.openhab.core.storage.json;version='[4.0.0,4.0.1)',\
 	org.openhab.core.thing;version='[4.0.0,4.0.1)',\
-	org.openhab.core.thing.xml;version='[4.0.0,4.0.1)',\
 	org.openhab.core.transform;version='[4.0.0,4.0.1)',\
 	org.openhab.core.ui;version='[4.0.0,4.0.1)',\
 	org.openhab.core.ui.icon;version='[4.0.0,4.0.1)',\
@@ -277,6 +274,8 @@ feature.openhab-model-runtime-all: \
 	org.openhab.ui;version='[4.0.0,4.0.1)',\
 	org.openhab.ui.basic;version='[4.0.0,4.0.1)',\
 	org.openhab.ui.iconset.classic;version='[4.0.0,4.0.1)',\
-	org.glassfish.jaxb.runtime;version='[2.3.4,2.3.5)',\
-	org.openhab.core.addon.xml;version='[4.0.0,4.0.1)',\
-	org.osgi.service.cm;version='[1.6.0,1.6.1)'
+	org.osgi.service.cm;version='[1.6.0,1.6.1)',\
+	com.sun.jna;version='[5.12.1,5.12.2)',\
+	io.methvin.directory-watcher;version='[0.17.1,0.17.2)',\
+	org.openhab.binding.netatmo;version='[4.0.0,4.0.1)',\
+	org.openhab.core.addon;version='[4.0.0,4.0.1)'
