@@ -1,0 +1,48 @@
+Bridge netatmo:account:home "_ Netatmo API" @ "internet" [
+   reconnectInterval= 600,
+   clientSecret= "OAheRiTWPD9x9nkCSiL4LbqRp303t8McyHFtQ",
+   clientId= "584ea8c8ac34a523ee8b47d3",
+   refreshToken= "51c55d041877596321000035|be174f6c005295fd98cf7d2045af6607",
+   webHookUrl= "https://www.lhopital.org:443",
+   webHookPostfix ="/"
+] {
+   home-coach              hc    "Netatmo Home-Coach"             @ "living"     [id="70:ee:50:81:78:f0"]
+
+   Bridge weather-station  ws    "Netatmo Station Météo"          @ "couloirRdc" [id="70:ee:50:00:c1:72"] {
+      indoor         sdb         "Netatmo Module Supp"            @ "bathroom"   [id="03:00:00:05:d1:62"]
+      rain           pluie       "Netatmo Pluviomètre"            @ "outside"    [id="05:00:00:03:3e:ee"]   
+      outdoor        exterieur   "Netatmo Module Extérieur"       @ "outside"    [id="02:00:00:00:bc:dc"]
+   }
+
+   Bridge home       security    "Netatmo Sécurité"               @ "house"      [id="60be3f90fcb4a02d086ea475"] {
+      Bridge welcome salon       "Netatmo Welcome"                @ "living"     [id="70:ee:50:1d:16:73"] {
+         siren       couloir     "Netatmo Sirène"                 @ "couloirRdc" [id="70:ee:50:62:e3:75"]
+         tag         porte       "Netatmo Tag Porte Entrée"       @ "dining"     [id="70:ee:50:60:f0:d3"]
+      }
+      presence       camgarage   "Netatmo Presence"               @ "allee"      [id="70:ee:50:56:27:00"]
+      doorbell       sonnette    "Netatmo Doorbell"               @ "portail"    [id="70:ee:50:78:f7:5a"]
+      smoke-detector smoke       "Netatmo Détecteur de Fumée"     @ "couloirRdc" [id="70:ee:50:54:28:f0"]
+
+      person         gael        "Gaël (Netatmo)"                 @ "world"      [id="0d0d4175-f00d-43d0-9b5a-65668f88bd6b"]  
+      person         elodie      "Elodie (Netatmo)"               @ "world"      [id="f7bc7b3f-9b11-49e8-a353-a5c5bd307322"]  
+      person         victoria    "Victoria (Netatmo)"             @ "world"      [id="28464e42-944f-4350-971f-c5cdbcbd2221"]  
+      person         eleonore    "Eléonore (Netatmo)"             @ "world"      [id="bf62a261-fc4a-4cf3-a31f-311f88972054"]  
+   }
+
+   Bridge home             heating  "Netatmo Chauffage"     @ "house"            [id="59959297b4809d1aff8b4726"] {
+      room           eleonore    "Netatmo Room Eléonore"          @ "eleonore"   [id="131395035"]
+      room           dining      "Netatmo Room Salle à Manger"    @ "dining"     [id="1652867895"]
+      room           office      "Netatmo Room Bureau"            @ "office"     [id="3549429788"]
+      room           parents     "Netatmo Room Parents"           @ "parents"    [id="408755629"]
+      room           kitchen     "Netatmo Room Cuisine"           @ "kitchen"    [id="4257114331"]
+      
+      Bridge   plug  relai "Netatmo Relai Chaudière"     @  "node0"              [id="70:ee:50:09:cc:98"] {
+         thermostat  salon       "Netatmo Thermostat"             @ "living"     [id="04:00:00:0a:17:b4"]
+         valve       bureau      "Netatmo Vanne Bureau"           @ "office"     [id="09:00:00:03:cd:bf"]
+         valve       cuisine     "Netatmo Vanne Cuisine"          @ "kitchen"    [id="09:00:00:06:7f:8e"]
+         valve       dining      "Netatmo Vanne Salle à Manger"   @ "dining"     [id="09:00:00:06:3c:74"]
+         valve       eleonore    "Netatmo Vanne Eléonore"         @ "eleonore"   [id="09:00:00:00:f3:a6"]
+         valve       parents     "Netatmo Vanne Parents"          @ "parents"    [id="09:00:00:03:fa:20"]
+      }      
+   }
+}
