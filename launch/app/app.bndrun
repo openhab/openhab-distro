@@ -49,6 +49,7 @@ feature.openhab-model-runtime-all: \
 	${feature.debug},\
 	${feature.openhab-base},\
 	${feature.openhab-model-runtime-all},\
+	bnd.identity;id='org.openhab.core.addon.eclipse',\
 	bnd.identity;id='org.openhab.core.addon.marketplace',\
 	bnd.identity;id='org.openhab.core.automation',\
 	bnd.identity;id='org.openhab.core.automation.module.media',\
@@ -126,8 +127,10 @@ feature.openhab-model-runtime-all: \
 	com.google.guava;version='[30.1.0,30.1.1)',\
 	com.google.guava.failureaccess;version='[1.0.1,1.0.2)',\
 	com.google.inject;version='[5.0.1,5.0.2)',\
+	com.sun.jna;version='[5.12.1,5.12.2)',\
 	com.sun.xml.bind.jaxb-osgi;version='[2.3.3,2.3.4)',\
 	io.github.classgraph;version='[4.8.149,4.8.150)',\
+	io.methvin.directory-watcher;version='[0.17.1,0.17.2)',\
 	io.swagger.core.v3.swagger-annotations;version='[2.1.9,2.1.10)',\
 	io.swagger.core.v3.swagger-core;version='[2.1.9,2.1.10)',\
 	io.swagger.core.v3.swagger-integration;version='[2.1.9,2.1.10)',\
@@ -223,6 +226,8 @@ feature.openhab-model-runtime-all: \
 	uom-lib-common;version='[2.1.0,2.1.1)',\
 	xstream;version='[1.4.19,1.4.20)',\
 	org.openhab.core;version='[4.0.0,4.0.1)',\
+	org.openhab.core.addon;version='[4.0.0,4.0.1)',\
+	org.openhab.core.addon.eclipse;version='[4.0.0,4.0.1)',\
 	org.openhab.core.addon.marketplace;version='[4.0.0,4.0.1)',\
 	org.openhab.core.audio;version='[4.0.0,4.0.1)',\
 	org.openhab.core.auth.jaas;version='[4.0.0,4.0.1)',\
@@ -272,8 +277,4 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.voice;version='[4.0.0,4.0.1)',\
 	org.openhab.ui;version='[4.0.0,4.0.1)',\
 	org.openhab.ui.basic;version='[4.0.0,4.0.1)',\
-	org.openhab.ui.iconset.classic;version='[4.0.0,4.0.1)',\
-	org.osgi.service.cm;version='[1.6.0,1.6.1)',\
-	com.sun.jna;version='[5.12.1,5.12.2)',\
-	io.methvin.directory-watcher;version='[0.17.1,0.17.2)',\
-	org.openhab.core.addon;version='[4.0.0,4.0.1)'
+	org.openhab.ui.iconset.classic;version='[4.0.0,4.0.1)'
