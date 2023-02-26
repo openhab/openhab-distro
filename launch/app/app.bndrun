@@ -63,8 +63,7 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.ui.basic',\
 	bnd.identity;id='org.openhab.ui.iconset.classic',\
 	bnd.identity;id='org.apache.aries.jax.rs.whiteboard',\
-	bnd.identity;id='org.ops4j.pax.web.pax-web-extender-whiteboard',\
-	bnd.identity;id='org.openhab.binding.netatmo'
+	bnd.identity;id='org.ops4j.pax.web.pax-web-extender-whiteboard'
 
 -runfw: org.eclipse.osgi
 
@@ -277,5 +276,4 @@ feature.openhab-model-runtime-all: \
 	org.osgi.service.cm;version='[1.6.0,1.6.1)',\
 	com.sun.jna;version='[5.12.1,5.12.2)',\
 	io.methvin.directory-watcher;version='[0.17.1,0.17.2)',\
-	org.openhab.binding.netatmo;version='[4.0.0,4.0.1)',\
 	org.openhab.core.addon;version='[4.0.0,4.0.1)'
