@@ -13,6 +13,7 @@ feature.debug: \
 
 feature.openhab-base: \
 <<<<<<< Upstream, based on branch 'main' of https://github.com/openhab/openhab-distro.git
+<<<<<<< Upstream, based on branch 'main' of https://github.com/openhab/openhab-distro.git
 	bnd.identity;id='org.openhab.core',\
 	bnd.identity;id='org.openhab.core.audio',\
 	bnd.identity;id='org.openhab.core.auth.jaas',\
@@ -59,6 +60,30 @@ feature.openhab-base: \
     bnd.identity;id='org.openhab.core.transform',\
     bnd.identity;id='org.openhab.core.voice'
 >>>>>>> 09dd73a Removing .xml bundles. Solves issue #3399 (wrongly opened in openhab/core)
+=======
+	bnd.identity;id='org.openhab.core',\
+	bnd.identity;id='org.openhab.core.audio',\
+	bnd.identity;id='org.openhab.core.auth.jaas',\
+	bnd.identity;id='org.openhab.core.addon',\
+	bnd.identity;id='org.openhab.core.config.core',\
+	bnd.identity;id='org.openhab.core.config.discovery',\
+	bnd.identity;id='org.openhab.core.config.dispatch',\
+	bnd.identity;id='org.openhab.core.id',\
+	bnd.identity;id='org.openhab.core.io.console',\
+	bnd.identity;id='org.openhab.core.io.http',\
+	bnd.identity;id='org.openhab.core.io.http.auth',\
+	bnd.identity;id='org.openhab.core.io.monitor',\
+	bnd.identity;id='org.openhab.core.io.net',\
+	bnd.identity;id='org.openhab.core.io.rest',\
+	bnd.identity;id='org.openhab.core.io.rest.auth',\
+	bnd.identity;id='org.openhab.core.io.rest.core',\
+	bnd.identity;id='org.openhab.core.io.rest.sse',\
+	bnd.identity;id='org.openhab.core.semantics',\
+	bnd.identity;id='org.openhab.core.storage.json',\
+	bnd.identity;id='org.openhab.core.thing',\
+	bnd.identity;id='org.openhab.core.transform',\
+	bnd.identity;id='org.openhab.core.voice'
+>>>>>>> 50ce4a0 Restoring tabs
 
 feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.core.model.item.runtime',\
