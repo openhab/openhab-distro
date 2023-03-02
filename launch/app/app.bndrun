@@ -49,6 +49,7 @@ feature.openhab-model-runtime-all: \
 	${feature.debug},\
 	${feature.openhab-base},\
 	${feature.openhab-model-runtime-all},\
+	bnd.identity;id='org.openhab.core.addon.eclipse',\
 	bnd.identity;id='org.openhab.core.addon.marketplace',\
 	bnd.identity;id='org.openhab.core.automation',\
 	bnd.identity;id='org.openhab.core.automation.module.media',\
@@ -227,6 +228,7 @@ feature.openhab-model-runtime-all: \
 	xstream;version='[1.4.19,1.4.20)',\
 	org.openhab.core;version='[4.0.0,4.0.1)',\
 	org.openhab.core.addon;version='[4.0.0,4.0.1)',\
+	org.openhab.core.addon.eclipse;version='[4.0.0,4.0.1)',\
 	org.openhab.core.addon.marketplace;version='[4.0.0,4.0.1)',\
 	org.openhab.core.audio;version='[4.0.0,4.0.1)',\
 	org.openhab.core.auth.jaas;version='[4.0.0,4.0.1)',\
