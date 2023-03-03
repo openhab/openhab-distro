@@ -61,6 +61,11 @@
 		<Arg>
 			<New id="GzipHandler" class="org.eclipse.jetty.server.handler.gzip.GzipHandler">
 				<Set name="minGzipSize">1024</Set>
+				<Set name="includedPaths">
+					<Array type="java.lang.String">
+						<Item>/rest/*</Item>
+					</Array>
+				</Set>
 			</New>
 		</Arg>
 	</Call>
