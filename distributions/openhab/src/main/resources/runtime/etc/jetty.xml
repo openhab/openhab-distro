@@ -66,10 +66,11 @@
 						<Item>/rest/*</Item>
 					</Array>
 				</Set>
-				<Set name="excludedPaths">
+				<Set name="includedMimeTypes">
 					<Array type="java.lang.String">
-						<Item>/rest/events/*</Item>
-						<Item>/rest/sitemaps/events/*</Item>
+						<Item>application/json</Item>
+						<Item>text/html</Item>
+						<Item>text/plain</Item>
 					</Array>
 				</Set>
 			</New>
