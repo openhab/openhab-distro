@@ -66,6 +66,12 @@
 						<Item>/rest/*</Item>
 					</Array>
 				</Set>
+				<Set name="excludedPaths">
+					<Array type="java.lang.String">
+						<Item>/rest/events/*</Item>
+						<Item>/rest/sitemaps/events/*</Item>
+					</Array>
+				</Set>
 			</New>
 		</Arg>
 	</Call>
