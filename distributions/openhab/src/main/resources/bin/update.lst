@@ -102,6 +102,7 @@ ALERT;JavaScript: JavaScript engines have changed their MIME types: NashornJS is
 ALERT;JavaScript NashornJS: NashornJS has been removed from core and isn't included by default. If you still need or want to use it, you can install it as an addon.
 ALERT;JavaScript Scripting Automation: The old "metadata" and "itemchannellink" APIs have been replaced by a new API with extended functionality on the "items" namespace.
 ALERT;JavaScript Scripting Automation: ItemHistory: historicState, maximumBetween, maximumSince, minimumBetween, minimumSince & previousState now return a HistoricItem instead of just the state. previousStateTimestamp has been removed, the timestamp is available on the HistoricItem.
+ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
 
 [[PRE]]
 [2.2.0]
