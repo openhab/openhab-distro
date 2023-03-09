@@ -243,7 +243,7 @@ scanVersioningList() {
 
 echo "                                         "
 echo "#########################################"
-echo "       openHAB 3.x.x update script       "
+echo "        openHAB 4.x update script        "
 echo "#########################################"
 echo "                                         "
 
