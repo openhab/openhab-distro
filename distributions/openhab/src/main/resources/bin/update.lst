@@ -102,8 +102,8 @@ ALERT;JavaScript: JavaScript engines have changed their MIME types: NashornJS is
 ALERT;JavaScript NashornJS: NashornJS has been removed from core and isn't included by default. If you still need or want to use it, you can install it as an addon.
 ALERT;JavaScript Scripting Automation: The old "metadata" and "itemchannellink" APIs have been replaced by a new API with extended functionality on the "items" namespace.
 ALERT;JavaScript Scripting Automation: ItemHistory: historicState, maximumBetween, maximumSince, minimumBetween, minimumSince & previousState now return a HistoricItem instead of just the state. previousStateTimestamp has been removed, the timestamp is available on the HistoricItem.
-ALERT:Netatmo: due to API authorization process change scheduled on the 04/17/2023 - refresh Token is no more stored in configuration, thus can be removed from things config files. If it remains, it'll be ignored.
-ALERT;Netatmo: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files).
+ALERT:Netatmo: due to API authorization process change scheduled on the 2023/04/17 - refresh Token is no more stored in thing configuration, thus can be removed from things config files. If it remains, it'll be ignored.
+ALERT;Netatmo: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files -- see above).
 
 [[PRE]]
 [2.2.0]
