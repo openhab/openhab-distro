@@ -94,6 +94,7 @@ ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelight
 
 [4.0.0]
 ALERT;CORE: core.GenericEventTrigger and core.GenericEventCondition parameters have have changed. See https://www.openhab.org/docs/configuration/rules-ng.html#system-module-types.
+ALERT;CORE: Rules are now triggered by ItemStateUpdatedEvent instead of ItemStateEvent. If you use JSR223 scripting without helper libraries and expect a certain Java type, code changes might be needed.
 ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
 ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
 ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
