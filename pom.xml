@@ -9,7 +9,7 @@
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>3.4.3-SNAPSHOT</version>
+    <version>3.4.3</version>
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -26,7 +26,7 @@
         <connection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</connection>
         <developerConnection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</developerConnection>
         <url>https://github.com/openhab/openhab-distro</url>
-        <tag>HEAD</tag>
+        <tag>3.4.3</tag>
     </scm>
 
     <issueManagement>
@@ -51,8 +51,8 @@
 
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
-        <ohc.version>3.4.3-SNAPSHOT</ohc.version>
-        <oha.version>3.4.3-SNAPSHOT</oha.version>
+        <ohc.version>3.4.3</ohc.version>
+        <oha.version>3.4.3</oha.version>
 
         <karaf.version>4.3.7</karaf.version>
 
