@@ -110,6 +110,7 @@ ALERT;JavaScript Scripting Automation: ItemHistory: historicState, maximumBetwee
 ALERT;KNX Binding: Units of Measurements have been introduced, make sure you use correct units in the state description. Rules may need to be adapted. Several items changed from PercentType to QuantityType, i.e. raw values increase by a factor of 100.
 ALERT;Netatmo Binding: Due to API authorization process change scheduled on the 2023/04/17 - refresh Token is no more stored in thing configuration, thus can be removed from things config files. If it remains, it'll be ignored.
 ALERT;Netatmo Binding: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files -- see above).
+ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
 
 [[PRE]]
 [2.2.0]
