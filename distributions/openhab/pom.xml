@@ -88,7 +88,36 @@
                 </includes>
             </resource>
         </resources>
+
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>org.openhab.core.tools</groupId>
+                            <artifactId>upgradetool</artifactId>
+                            <version>${project.version}</version>
+                            <type>jar</type>
+                            <classifier>jar-with-dependencies</classifier>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/assembly/bin</outputDirectory>
+                            <destFileName>upgradetool.jar</destFileName>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
