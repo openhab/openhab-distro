@@ -799,6 +799,14 @@ Function Update-openHAB() {
             return PrintAndThrow "Could not replace the $AddonsFile" $_
         }
 
+        # Now run the upgrade tool to update the JSON database
+        Write-Host "Starting JSON database update..."
+        java -jar "$($PSScriptRoot)\runtime\bin\upgradetool.jar"
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "Update tool failed, please check the openHAB website (www.openhab.org) for manual update instructions."
+        exit 1
+        }
+        Write-Host "JSON database updated successfully."
 
         # Hop for joy - we did it!
         Write-Host -ForegroundColor Green "openHAB updated to version $OHVersionName!"
