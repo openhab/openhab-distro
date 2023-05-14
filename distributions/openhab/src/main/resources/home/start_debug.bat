@@ -2,4 +2,4 @@
 
 setlocal
 set DIRNAME=%~dp0%
-"%DIRNAME%start.bat" debug %*
+call "%DIRNAME%start.bat" debug %*
