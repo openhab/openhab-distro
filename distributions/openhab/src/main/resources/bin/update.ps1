@@ -801,7 +801,7 @@ Function Update-openHAB() {
 
         # Now run the upgrade tool to update the JSON database
         Write-Host "Starting JSON database update..."
-        java -jar "$($PSScriptRoot)\runtime\bin\upgradetool.jar"
+        java -jar "$OHRuntime\bin\upgradetool.jar"
         if ($LASTEXITCODE -ne 0) {
             Write-Error "Update tool failed, please check the openHAB website (www.openhab.org) for manual update instructions."
         exit 1
