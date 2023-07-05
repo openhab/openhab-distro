@@ -100,6 +100,7 @@ ALERT;CORE: SCRIPT transformation has been removed and replaced with language-sp
 ALERT;CORE: UoM has been refactored. Please consult https://www.openhab.org/docs/concepts/units-of-measurement.html and https://www.openhab.org/docs/installation/#upgrading BEFORE starting openHAB, otherwise your persisted data may be corrupted.
 ALERT;Airthings Binding: The channels `radon_st_avg` and `radon_lt_avg` are now of dimension `RadiationSpecificActivity` instead of `Density`. Please update your linked items accordingly.
 ALERT;Bosch Indego Binding: Due to changes in the cloud services, the authentication method has changed. Please follow the authorization flow described in the documentation. Furthermore, a bridge is now required and must be assigned to the `indego` thing. Configuration of username and password is no longer required/supported.
+ALERT;ComfoAir Binding: The channel `enthalpy#enthalpyTime` now represents the set time (in minutes) instead of the internal number value that is sent to the device (`minutes / 12`).
 ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
 ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
 ALERT;Generac MobileLink Binding: Due to an API change, existing Generator Things will need to be deleted and added again. Additionally, existing Items will need to be adjusted to reflect the updated Generator Thing channels.
