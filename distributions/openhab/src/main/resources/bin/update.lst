@@ -215,3 +215,15 @@ MOVE;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.TransformationConfigura
 REPLACE;,javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;javascript,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
