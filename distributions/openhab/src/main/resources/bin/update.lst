@@ -214,3 +214,20 @@ DELETE;$OPENHAB_USERDATA/config/org/openhab/mqttbroker.config
 
 [3.4.0]
 MOVE;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.TransformationConfiguration.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.Transformation.json
+
+[4.0.0]
+REPLACE;,javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;javascript,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
