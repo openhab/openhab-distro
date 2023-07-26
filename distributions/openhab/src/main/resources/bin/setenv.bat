@@ -121,6 +121,7 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.logdir=%OPENHAB_LOGDIR% ^
   -Dfelix.cm.dir=%OPENHAB_USERDATA%\config ^
   -Djava.library.path=%OPENHAB_USERDATA%\tmp\lib ^
+  -Djdk.util.zip.disableZip64ExtraFieldValidation=true ^
   -Djetty.host=%HTTP_ADDRESS% ^
   -Djetty.http.compliance=RFC2616 ^
   -Dnashorn.args=--no-deprecation-warning ^
