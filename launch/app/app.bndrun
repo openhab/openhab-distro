@@ -76,6 +76,7 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.apache.servicemix.specs.jaxb-api-2.3'
 
 -runproperties: \
+	jdk.util.zip.disableZip64ExtraFieldValidation=true,\
 	felix.cm.dir=${.}/runtime/userdata/config,\
 	org.osgi.framework.bootdelegation="sun.misc",\
 	org.osgi.service.http.port=8080,\
