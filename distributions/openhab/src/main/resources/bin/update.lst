@@ -107,7 +107,6 @@ ALERT;Generac MobileLink Binding: Due to an API change, existing Generator Thing
 ALERT;HomeKit: Add-on wide configuration of mappings for thermostat modes is no longer supported. Please use item-level configuration as described in the README.
 ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
 ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Deprecated scene channels have been removed. Please use the scene channels introduced in 3.2 (in channel group 'scenes').
-ALERT;iCalendar Binding: The `calendar` thing was reorganized and split up into `liveevent` and `tagexecutor`. You need to add a thing and link channels again for `liveevent`. Tags will be only executed if the tagexecutor is added to the `calendar` bridge.
 ALERT;JavaScript: JavaScript engines have changed their MIME types: NashornJS is application/javascript:version=ECMAScript-5.1 and GraalJS is application/javascript. Please update your scripts to either make them compatible with GraalJS or change the MIME type to continue to use NashornJS. For Blockly migration, visit the Blockly documentation.
 ALERT;JavaScript NashornJS: NashornJS has been removed from core and isn't included by default. If you still need or want to use it, you can install it as an addon.
 ALERT;JavaScript Scripting Automation: The old "metadata" and "itemchannellink" APIs have been replaced by a new API with extended functionality on the "items" namespace.
@@ -117,6 +116,9 @@ ALERT;LuftdatenInfo Binding: The binding was renamed to Sensor.Community Binding
 ALERT;Netatmo Binding: Due to API authorization process change scheduled on the 2023/04/17 - refresh Token is no more stored in thing configuration, thus can be removed from things config files. If it remains, it'll be ignored.
 ALERT;Netatmo Binding: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files -- see above).
 ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
+
+[4.1.0]
+ALERT;iCalendar Binding: The `calendar` thing was reorganized and split up into `liveevent` and `tagexecutor`. You need to add a thing and link channels again for `liveevent`. Tags will be only executed if the tagexecutor is added to the `calendar` bridge.
 
 [[PRE]]
 [2.2.0]
