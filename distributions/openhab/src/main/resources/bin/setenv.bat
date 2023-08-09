@@ -129,8 +129,7 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dorg.osgi.service.http.port.secure=%HTTPS_PORT%
 
 :: set jvm options
-set EXTRA_JAVA_OPTS=-XX:+UseG1GC ^
-  -Djava.awt.headless=true ^
+set EXTRA_JAVA_OPTS=-Djava.awt.headless=true ^
   -Dfile.encoding=UTF-8 ^
   %EXTRA_JAVA_OPTS%
   
