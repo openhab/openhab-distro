@@ -154,27 +154,6 @@
 
     <profiles>
         <profile>
-            <id>prepare-release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-versions-plugin</artifactId>
-                        <version>1.4.0</version>
-                        <executions>
-                            <execution>
-                                <id>update-version</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>set-version</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>snapshotbuild</id>
             <activation>
                 <property>
