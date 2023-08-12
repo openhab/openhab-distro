@@ -114,17 +114,10 @@ export JAVA_OPTS="${JAVA_OPTS}
 #
 # set JVM options
 #
-ARCH=`uname -m`
 EXTRA_JAVA_OPTS_COMMON="
   -Djava.awt.headless=true
   -Dfile.encoding=UTF-8"
-EXTRA_JAVA_OPTS_ARCH=""
-case "$ARCH" in
-    *arm*) ;;
-  *aarch*) ;;
-        *) EXTRA_JAVA_OPTS_ARCH="-XX:+UseG1GC" ;;
-esac
-export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS_ARCH} ${EXTRA_JAVA_OPTS}"
+export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS}"
 export JAVA_NON_DEBUG_OPTS="-XX:-UsePerfData"
 
 
