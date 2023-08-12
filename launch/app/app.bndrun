@@ -77,7 +77,6 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.glassfish.hk2.osgi-resource-locator'
 
 -runproperties: \
-	jdk.util.zip.disableZip64ExtraFieldValidation=true,\
 	felix.cm.dir=${.}/runtime/userdata/config,\
 	org.osgi.framework.bootdelegation="sun.misc",\
 	org.osgi.service.http.port=8080,\
@@ -100,7 +99,8 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='slf4j.api',\
 	bnd.identity;id='slf4j.simple'
 
--runvm.java9plus: \
+-runvm: \
+	-Djdk.util.zip.disableZip64ExtraFieldValidation=true,\
 	--add-opens=java.base/java.io=ALL-UNNAMED,\
 	--add-opens=java.base/java.lang=ALL-UNNAMED,\
 	--add-opens=java.base/java.lang.reflect=ALL-UNNAMED,\
