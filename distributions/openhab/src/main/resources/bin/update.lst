@@ -125,6 +125,9 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 
+[3.1.0]
+DEFAULT;$OPENHAB_USERDATA/etc/org.apache.karaf.log.cfg
+
 [3.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 
