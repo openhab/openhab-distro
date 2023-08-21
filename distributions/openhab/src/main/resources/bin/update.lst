@@ -117,6 +117,9 @@ ALERT;Netatmo Binding: Due to API authorization process change scheduled on the 
 ALERT;Netatmo Binding: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files -- see above).
 ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
 
+[4.1.0]
+ALERT;MyBMW Binding: Vehicle channels "charge-info" and "motion" removed, "charge-remaining", "last-fetched", "estimated-fuel-l-100km" and "estimated-fuel-mpg" added. Image options changed - now "VehicleStatus", "FrontView", "RearView", "FrontLeft" and "FrontRight" are available.
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
