@@ -133,11 +133,11 @@ feature.openhab-model-runtime-all: \
 	com.sun.xml.bind.jaxb-osgi;version='[2.3.3,2.3.4)',\
 	io.github.classgraph;version='[4.8.149,4.8.150)',\
 	io.methvin.directory-watcher;version='[0.17.1,0.17.2)',\
-	io.swagger.core.v3.swagger-annotations;version='[2.1.9,2.1.10)',\
-	io.swagger.core.v3.swagger-core;version='[2.1.9,2.1.10)',\
-	io.swagger.core.v3.swagger-integration;version='[2.1.9,2.1.10)',\
-	io.swagger.core.v3.swagger-jaxrs2;version='[2.1.9,2.1.10)',\
-	io.swagger.core.v3.swagger-models;version='[2.1.9,2.1.10)',\
+	io.swagger.core.v3.swagger-annotations;version='[2.2.15,2.2.16)',\
+	io.swagger.core.v3.swagger-core;version='[2.2.15,2.2.16)',\
+	io.swagger.core.v3.swagger-integration;version='[2.2.15,2.2.16)',\
+	io.swagger.core.v3.swagger-jaxrs2;version='[2.2.15,2.2.16)',\
+	io.swagger.core.v3.swagger-models;version='[2.2.15,2.2.16)',\
 	jakarta.inject.jakarta.inject-api;version='[2.0.0,2.0.1)',\
 	jakarta.validation.jakarta.validation-api;version='[2.0.2,2.0.3)',\
 	jakarta.xml.bind-api;version='[2.3.3,2.3.4)',\
