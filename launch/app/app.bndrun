@@ -92,6 +92,10 @@ feature.openhab-model-runtime-all: \
 -runblacklist: \
 	bnd.identity;id='jakarta.ws.rs-api',\
 	bnd.identity;id='org.apache.aries.jpa.container',\
+	bnd.identity;id='org.apache.karaf.kar.core',\
+	bnd.identity;id='org.openhab.core.addon.marketplace.karaf',\
+	bnd.identity;id='org.openhab.core.io.console.karaf',\
+	bnd.identity;id='org.openhab.core.karaf',\
 	bnd.identity;id='org.openhab.core.test',\
 	bnd.identity;id='osgi.annotation',\
 	bnd.identity;id='osgi.cmpn',\
