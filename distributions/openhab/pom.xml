@@ -29,6 +29,14 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>specs</artifactId>
+            <version>${karaf.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.openhab.distro</groupId>
             <artifactId>distro-kar</artifactId>
             <version>${project.version}</version>
