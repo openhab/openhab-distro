@@ -155,12 +155,12 @@ feature.openhab-model-runtime-all: \
 	org.apache.commons.commons-fileupload;version='[1.5.0,1.5.1)',\
 	org.apache.commons.commons-io;version='[2.13.0,2.13.1)',\
 	org.apache.commons.lang3;version='[3.12.0,3.12.1)',\
-	org.apache.cxf.cxf-core;version='[3.6.1,3.6.2)',\
-	org.apache.cxf.cxf-rt-frontend-jaxrs;version='[3.6.1,3.6.2)',\
-	org.apache.cxf.cxf-rt-rs-client;version='[3.6.1,3.6.2)',\
-	org.apache.cxf.cxf-rt-rs-sse;version='[3.6.1,3.6.2)',\
-	org.apache.cxf.cxf-rt-security;version='[3.6.1,3.6.2)',\
-	org.apache.cxf.cxf-rt-transports-http;version='[3.6.1,3.6.2)',\
+	org.apache.cxf.cxf-core;version='[3.6.2,3.6.3)',\
+	org.apache.cxf.cxf-rt-frontend-jaxrs;version='[3.6.2,3.6.3)',\
+	org.apache.cxf.cxf-rt-rs-client;version='[3.6.2,3.6.3)',\
+	org.apache.cxf.cxf-rt-rs-sse;version='[3.6.2,3.6.3)',\
+	org.apache.cxf.cxf-rt-security;version='[3.6.2,3.6.3)',\
+	org.apache.cxf.cxf-rt-transports-http;version='[3.6.2,3.6.3)',\
 	org.apache.felix.configadmin;version='[1.9.26,1.9.27)',\
 	org.apache.felix.gogo.command;version='[1.1.2,1.1.3)',\
 	org.apache.felix.gogo.runtime;version='[1.1.6,1.1.7)',\
@@ -172,7 +172,7 @@ feature.openhab-model-runtime-all: \
 	org.apache.felix.webconsole.plugins.ds;version='[2.2.0,2.2.1)',\
 	org.apache.servicemix.specs.activation-api-1.2.1;version='[1.2.1,1.2.2)',\
 	org.apache.servicemix.specs.annotation-api-1.3;version='[1.3.0,1.3.1)',\
-	org.apache.ws.xmlschema.core;version='[2.3.0,2.3.1)',\
+	org.apache.ws.xmlschema.core;version='[2.3.1,2.3.2)',\
 	org.apiguardian.api;version='[1.1.2,1.1.3)',\
 	org.bitbucket.b_c.jose4j;version='[0.9.3,0.9.4)',\
 	org.eclipse.emf.common;version='[2.24.0,2.24.1)',\
