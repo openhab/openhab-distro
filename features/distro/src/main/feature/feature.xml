@@ -9,4 +9,8 @@
         <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui.iconset.classic/${project.version}</bundle>
     </feature>
 
+    <feature name="openhab-addon-discovery" description="Discovery Information" version="${project.version}">
+        <configfile finalname="${openhab.userdata}/addons/openhab-addons.xml" override="false">mvn:org.openhab.addons.features.karaf/org.openhab.addons.features.karaf.openhab-addons-external/4.1.0-SNAPSHOT/xml/addons</configfile>
+    </feature>
+
 </features>
