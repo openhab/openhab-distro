@@ -118,6 +118,7 @@ ALERT;Netatmo Binding: New scope has been added for the introduction of the Carb
 ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
 
 [4.1.0]
+ALERT;Hayward OmniLogic Binding: Chlorinator Thing chlorError and status channels have been changed to type 'String'. Items linked to this channel will need to have their Type manually updated.
 ALERT;JavaScript Scripting Automation: The "useIncludedLibrary" configuration parameter has been renamed to "injectionCachingEnabled". In case you changed it, make sure to apply that change to the new parameter.
 ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for storing data, your database needs to be migrated as described in https://h2database.com/html/migration-to-v2.html. It is also required to add ';NON_KEYWORDS=VALUE' to your H2 JDBC URL. See also https://github.com/openhab/openhab-addons/pull/15726 for a Bash migration script.
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
