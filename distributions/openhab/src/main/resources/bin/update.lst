@@ -94,14 +94,34 @@ ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelight
 
 [4.0.0]
 ALERT;CORE: core.GenericEventTrigger and core.GenericEventCondition parameters have have changed. See https://www.openhab.org/docs/configuration/rules-ng.html#system-module-types.
+ALERT;CORE: Rules are now triggered by ItemStateUpdatedEvent instead of ItemStateEvent. If you use JSR223 scripting without helper libraries and expect a certain Java type, code changes might be needed.
+ALERT;CORE: The syntax for an item category/icon in a textual configuration file no longer accepts a value enclosed in quotes. So <temperature> is valid but not <"temperature">. Please update the definition of your items if necessary.
+ALERT;CORE: SCRIPT transformation has been removed and replaced with language-specific transformations: JS, RB, PY, DSL, GROOVY, etc. See https://www.openhab.org/docs/configuration/transformations.html#script-transformation
+ALERT;CORE: UoM has been refactored. Please consult https://www.openhab.org/docs/concepts/units-of-measurement.html and https://www.openhab.org/docs/installation/#upgrading BEFORE starting openHAB, otherwise your persisted data may be corrupted.
+ALERT;Airthings Binding: The channels `radon_st_avg` and `radon_lt_avg` are now of dimension `RadiationSpecificActivity` instead of `Density`. Please update your linked items accordingly.
+ALERT;Bosch Indego Binding: Due to changes in the cloud services, the authentication method has changed. Please follow the authorization flow described in the documentation. Furthermore, a bridge is now required and must be assigned to the `indego` thing. Configuration of username and password is no longer required/supported.
+ALERT;ComfoAir Binding: The channel `enthalpy#enthalpyTime` now represents the set time (in minutes) instead of the internal number value that is sent to the device (`minutes / 12`).
 ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
 ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
+ALERT;Generac MobileLink Binding: Due to an API change, existing Generator Things will need to be deleted and added again. Additionally, existing Items will need to be adjusted to reflect the updated Generator Thing channels.
+ALERT;HomeKit: Add-on wide configuration of mappings for thermostat modes is no longer supported. Please use item-level configuration as described in the README.
 ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
 ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Deprecated scene channels have been removed. Please use the scene channels introduced in 3.2 (in channel group 'scenes').
 ALERT;JavaScript: JavaScript engines have changed their MIME types: NashornJS is application/javascript:version=ECMAScript-5.1 and GraalJS is application/javascript. Please update your scripts to either make them compatible with GraalJS or change the MIME type to continue to use NashornJS. For Blockly migration, visit the Blockly documentation.
 ALERT;JavaScript NashornJS: NashornJS has been removed from core and isn't included by default. If you still need or want to use it, you can install it as an addon.
 ALERT;JavaScript Scripting Automation: The old "metadata" and "itemchannellink" APIs have been replaced by a new API with extended functionality on the "items" namespace.
 ALERT;JavaScript Scripting Automation: ItemHistory: historicState, maximumBetween, maximumSince, minimumBetween, minimumSince & previousState now return a HistoricItem instead of just the state. previousStateTimestamp has been removed, the timestamp is available on the HistoricItem.
+ALERT;KNX Binding: Units of Measurements have been introduced, make sure you use correct units in the state description. Rules may need to be adapted. Several items changed from PercentType to QuantityType, i.e. raw values increase by a factor of 100.
+ALERT;LuftdatenInfo Binding: The binding was renamed to Sensor.Community Binding to match the new naming of the service. Things need to be recreated.
+ALERT;Netatmo Binding: Due to API authorization process change scheduled on the 2023/04/17 - refresh Token is no more stored in thing configuration, thus can be removed from things config files. If it remains, it'll be ignored.
+ALERT;Netatmo Binding: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files -- see above).
+ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
+
+[4.1.0]
+ALERT;JavaScript Scripting Automation: The "useIncludedLibrary" configuration parameter has been renamed to "injectionCachingEnabled". In case you changed it, make sure to apply that change to the new parameter.
+ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for storing data, your database needs to be migrated as described in https://h2database.com/html/migration-to-v2.html. It is also required to add ';NON_KEYWORDS=VALUE' to your H2 JDBC URL. See also https://github.com/openhab/openhab-addons/pull/15726 for a Bash migration script.
+ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
+ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
 
 [4.1.0]
 ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
@@ -114,7 +134,13 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
 
+[3.1.0]
+DEFAULT;$OPENHAB_USERDATA/etc/org.apache.karaf.log.cfg
+
 [3.2.0]
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+
+[4.0.2]
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 
 [[POST]]
@@ -204,3 +230,20 @@ DELETE;$OPENHAB_USERDATA/config/org/openhab/mqttbroker.config
 
 [3.4.0]
 MOVE;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.TransformationConfiguration.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.Transformation.json
+
+[4.0.0]
+REPLACE;,javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;javascript,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config

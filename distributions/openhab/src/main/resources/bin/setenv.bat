@@ -120,6 +120,7 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dopenhab.logdir=%OPENHAB_LOGDIR% ^
   -Dfelix.cm.dir=%OPENHAB_USERDATA%\config ^
   -Djava.library.path=%OPENHAB_USERDATA%\tmp\lib ^
+  -Djdk.util.zip.disableZip64ExtraFieldValidation=true ^
   -Djetty.host=%HTTP_ADDRESS% ^
   -Djetty.http.compliance=RFC2616 ^
   -Dorg.apache.cxf.osgi.http.transport.disable=true ^
@@ -128,8 +129,7 @@ set JAVA_OPTS=%JAVA_OPTS% ^
   -Dorg.osgi.service.http.port.secure=%HTTPS_PORT%
 
 :: set jvm options
-set EXTRA_JAVA_OPTS=-XX:+UseG1GC ^
-  -Djava.awt.headless=true ^
+set EXTRA_JAVA_OPTS=-Djava.awt.headless=true ^
   -Dfile.encoding=UTF-8 ^
   %EXTRA_JAVA_OPTS%
   

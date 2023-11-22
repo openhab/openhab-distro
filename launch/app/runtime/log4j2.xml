@@ -65,6 +65,8 @@
 		<Logger level="${env:logger.misc3.level:-DEBUG}" name="${env:logger.misc3.name:-override.me}"/>
 
 		<Logger level="ERROR" name="openhab.event.ItemStateEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemStateUpdatedEvent"/>
+		<Logger level="ERROR" name="openhab.event.GroupStateUpdatedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemAddedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemRemovedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemChannelLinkAddedEvent"/>
@@ -103,6 +105,10 @@
 
 		<!-- Filters warnings for events that could not be delivered to a disconnected client. -->
 		<Logger level="ERROR" name="org.apache.cxf.jaxrs.sse.SseEventSinkImpl"/>
+
+		<!-- Filters warnings from broken connections during startup -->
+		<!-- https://github.com/openhab/openhab-core/issues/2998 -->
+		<Logger level="ERROR" name="org.apache.cxf.phase.PhaseInterceptorChain"/>
 
 		<!-- Filters known issues of javax.mail, see -->
 		<!-- https://github.com/openhab/openhab-addons/issues/5530 -->

@@ -51,6 +51,7 @@
 						<New class="org.eclipse.jetty.server.handler.ResourceHandler">
 							<Set name="resourceBase"><SystemProperty name="openhab.conf" />/html</Set>
 							<Set name="directoriesListed">false</Set>
+							<Set name="cacheControl">max-age=31536000</Set>
 						</New>
 					</Set>
 				</New>
@@ -64,6 +65,7 @@
 				<Set name="includedPaths">
 					<Array type="java.lang.String">
 						<Item>/rest/*</Item>
+						<Item>/static/*</Item>
 					</Array>
 				</Set>
 				<Set name="includedMimeTypes">
