@@ -214,6 +214,11 @@ for /f tokens^=2-5^ delims^=.-_+^" %%j in ('"%JAVA%" -fullversion 2^>^&1') do (
     if %%j==1 (set JAVA_VERSION=%%k) else (set JAVA_VERSION=%%j)
 )
 
+if %JAVA_VERSION% NEQ 17 (
+    call :warn "JVM must be version 17. JVM version %JAVA_VERSION% is unsupported (JAVA_HOME=%JAVA_HOME%)"
+    goto END
+)
+
 if %JAVA_VERSION% GTR 8 (
    pushd "%KARAF_HOME%\lib\jdk9plus"
        for %%G in (*.jar) do call:APPEND_TO_JDK9PLUS_CLASSPATH %%G
@@ -407,8 +412,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
                 --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.3.jar" ^
-                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.3.jar" ^
+                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.4.jar" ^
+                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.4.jar" ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^

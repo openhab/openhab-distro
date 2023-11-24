@@ -62,6 +62,8 @@
 		<Logger level="INFO" name="org.openhab"/>
 
 		<Logger level="ERROR" name="openhab.event.ItemStateEvent"/>
+		<Logger level="ERROR" name="openhab.event.ItemStateUpdatedEvent"/>
+		<Logger level="ERROR" name="openhab.event.GroupStateUpdatedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemAddedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemRemovedEvent"/>
 		<Logger level="ERROR" name="openhab.event.ItemChannelLinkAddedEvent"/>

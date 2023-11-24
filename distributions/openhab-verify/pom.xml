@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.openhab.distro</groupId>
         <artifactId>pom-distributions</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>openhab-verify</artifactId>
@@ -53,6 +53,7 @@
                             <descriptors>
                                 <descriptor>mvn:org.apache.karaf.features/framework/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/specs/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:${project.groupId}/addons/${project.version}/xml/features</descriptor>
                                 <descriptor>mvn:${project.groupId}/distro/${project.version}/xml/features</descriptor>
                             </descriptors>
