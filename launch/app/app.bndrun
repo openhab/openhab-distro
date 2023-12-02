@@ -60,6 +60,7 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.core.io.rest.sitemap',\
 	bnd.identity;id='org.openhab.core.io.rest.swagger',\
 	bnd.identity;id='org.openhab.core.io.rest.ui',\
+	bnd.identity;id='org.openhab.core.io.websocket',\
 	bnd.identity;id='org.openhab.ui',\
 	bnd.identity;id='org.openhab.ui.basic',\
 	bnd.identity;id='org.openhab.ui.iconset.classic',\
@@ -198,6 +199,8 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.jetty.websocket.api;version='[9.4.52,9.4.53)',\
 	org.eclipse.jetty.websocket.client;version='[9.4.52,9.4.53)',\
 	org.eclipse.jetty.websocket.common;version='[9.4.52,9.4.53)',\
+	org.eclipse.jetty.websocket.server;version='[9.4.52,9.4.53)',\
+	org.eclipse.jetty.websocket.servlet;version='[9.4.52,9.4.53)',\
 	org.eclipse.jetty.xml;version='[9.4.52,9.4.53)',\
 	org.eclipse.xtend.lib;version='[2.32.0,2.32.1)',\
 	org.eclipse.xtend.lib.macro;version='[2.32.0,2.32.1)',\
@@ -264,6 +267,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.io.rest.sse;version='[4.1.0,4.1.1)',\
 	org.openhab.core.io.rest.swagger;version='[4.1.0,4.1.1)',\
 	org.openhab.core.io.rest.ui;version='[4.1.0,4.1.1)',\
+	org.openhab.core.io.websocket;version='[4.1.0,4.1.1)',\
 	org.openhab.core.model.core;version='[4.1.0,4.1.1)',\
 	org.openhab.core.model.item;version='[4.1.0,4.1.1)',\
 	org.openhab.core.model.item.runtime;version='[4.1.0,4.1.1)',\
