@@ -170,6 +170,7 @@
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
                         <feature>openhab-runtime-ui</feature>
+                        <feature>openhab-addon-discovery</feature>
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
