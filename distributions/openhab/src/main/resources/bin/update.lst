@@ -247,3 +247,11 @@ REPLACE;imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;,darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;darksky,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+
+[4.1.0]
+REPLACE;actiontemplatehli,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;porcupineks,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
