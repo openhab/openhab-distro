@@ -118,15 +118,16 @@ ALERT;Netatmo Binding: New scope has been added for the introduction of the Carb
 ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
 
 [4.1.0]
+ALERT;Action Template Interpreter: removed from the distribution, functionality is covered by the Standard Interpreter.
 ALERT;Energi Data Service Binding: The channels 'net-tariff' and 'transmission-net-tariff' have been renamed to 'grid-tariff' and 'transmission-grid-tariff' respectively. Items should be relinked to the new channels.
 ALERT;Hue Binding: The auto update policy for API v2 light channels has been changed to avoid multiple state updates. For this to work, you may need to remove and create your things again in case your things were previously created using UI.
 ALERT;JavaScript Scripting Automation: The "useIncludedLibrary" configuration parameter has been renamed to "injectionCachingEnabled". In case you changed it, make sure to apply that change to the new parameter.
 ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for storing data, your database needs to be migrated as described in https://h2database.com/html/migration-to-v2.html. It is also required to add ';NON_KEYWORDS=VALUE' to your H2 JDBC URL. See also https://github.com/openhab/openhab-addons/pull/15726 for a Bash migration script.
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
 ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
-ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
+ALERT;MQTT EspMilightHub Binding: Colour bulbs no longer have a `level` channel. You may need to re-add your things for it to be removed. Link to the `colour` channel instead, even for `Dimmer` items.
 ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
-ALERT;Action Template Interpreter: removed from the distribution, functionality is covered by the Standard Interpreter.
+ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
 
 [[PRE]]
 [2.2.0]
