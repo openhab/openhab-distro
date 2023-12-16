@@ -125,6 +125,8 @@ ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for s
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
 ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
 ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
+ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
+ALERT;Action Template Interpreter: removed from the distribution, functionality is covered by the Standard Interpreter.
 
 [[PRE]]
 [2.2.0]
@@ -247,3 +249,11 @@ REPLACE;imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;,darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;darksky,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+
+[4.1.0]
+REPLACE;actiontemplatehli,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;porcupineks,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
