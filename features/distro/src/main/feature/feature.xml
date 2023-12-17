@@ -10,7 +10,7 @@
     </feature>
 
     <feature name="openhab-addon-discovery" description="Discovery Information" version="${project.version}">
-        <configfile finalname="${openhab.userdata}/addons/openhab-addons.xml" override="false">mvn:org.openhab.addons.features.karaf/org.openhab.addons.features.karaf.openhab-addons-external/${project.version}/xml/addons</configfile>
+        <configfile finalname="${openhab.userdata}/addons/openhab-addons.xml" override="true">mvn:org.openhab.addons.features.karaf/org.openhab.addons.features.karaf.openhab-addons-external/${project.version}/xml/addons</configfile>
     </feature>
 
 </features>
