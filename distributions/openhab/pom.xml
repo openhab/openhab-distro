@@ -123,6 +123,16 @@
                             <outputDirectory>${project.build.directory}/assembly/bin</outputDirectory>
                             <destFileName>upgradetool.jar</destFileName>
                         </artifactItem>
+                        <artifactItem>
+                            <groupId>org.openhab.addons.features.karaf</groupId>
+                            <artifactId>org.openhab.addons.features.karaf.openhab-addons-external</artifactId>
+                            <version>${project.version}</version>
+                            <type>xml</type>
+                            <classifier>addons</classifier>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/assembly/userdata/addons</outputDirectory>
+                            <destFileName>openhab-addons.xml</destFileName>
+                        </artifactItem>
                     </artifactItems>
                 </configuration>
             </plugin>
@@ -170,7 +180,6 @@
                         <feature>system</feature>
                         <feature>openhab-runtime-base</feature>
                         <feature>openhab-runtime-ui</feature>
-                        <feature>openhab-addon-discovery</feature>
                     </bootFeatures>
                     <archiveZip>false</archiveZip>
                     <archiveTarGz>false</archiveTarGz>
