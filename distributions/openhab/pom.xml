@@ -130,8 +130,8 @@
                             <type>xml</type>
                             <classifier>addons</classifier>
                             <overWrite>true</overWrite>
-                            <outputDirectory>${project.build.directory}/assembly/userdata/addons</outputDirectory>
-                            <destFileName>openhab-addons.xml</destFileName>
+                            <outputDirectory>${project.build.directory}/assembly/runtime/etc</outputDirectory>
+                            <destFileName>addons.xml</destFileName>
                         </artifactItem>
                     </artifactItems>
                 </configuration>

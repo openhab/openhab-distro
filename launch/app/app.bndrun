@@ -86,6 +86,7 @@ feature.openhab-model-runtime-all: \
 	org.apache.cxf.osgi.http.transport.disable=true,\
 	org.ops4j.pax.logging.DefaultServiceLog.level=ERROR,\
 	openhab.servicecfg=${.}/runtime/services.cfg,\
+    openhab.runtime=${.}/runtime/runtime,\
 	openhab.conf=${.}/runtime/conf,\
 	openhab.userdata=${.}/runtime/userdata,\
 	openhab.logdir=${.}/runtime/userdata/logs
