@@ -126,6 +126,7 @@ ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for s
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
 ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
 ALERT;MQTT EspMilightHub Binding: Colour bulbs no longer have a `level` channel. You may need to re-add your things for it to be removed. Link to the `colour` channel instead, even for `Dimmer` items.
+ALERT;MyBMW Binding: Vehicle channels "charge-info" and "motion" removed, "charge-remaining", "last-fetched", "estimated-fuel-l-100km" and "estimated-fuel-mpg" added. Image options changed - now "VehicleStatus", "FrontView", "RearView", "FrontLeft" and "FrontRight" are available.
 ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
 ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
 
