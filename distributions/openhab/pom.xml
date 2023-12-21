@@ -29,6 +29,14 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>specs</artifactId>
+            <version>${karaf.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.openhab.distro</groupId>
             <artifactId>distro-kar</artifactId>
             <version>${project.version}</version>
@@ -59,7 +67,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.5.0</version>
+                    <version>3.1.0</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.openhab.util</groupId>
@@ -93,7 +101,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>copy</id>
@@ -115,13 +123,23 @@
                             <outputDirectory>${project.build.directory}/assembly/bin</outputDirectory>
                             <destFileName>upgradetool.jar</destFileName>
                         </artifactItem>
+                        <artifactItem>
+                            <groupId>org.openhab.addons.features.karaf</groupId>
+                            <artifactId>org.openhab.addons.features.karaf.openhab-addons-external</artifactId>
+                            <version>${project.version}</version>
+                            <type>xml</type>
+                            <classifier>addons</classifier>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/assembly/runtime/etc</outputDirectory>
+                            <destFileName>addons.xml</destFileName>
+                        </artifactItem>
                     </artifactItems>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.3.1</version>
                 <configuration>
                   <escapeString>\</escapeString>
                 </configuration>

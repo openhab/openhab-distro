@@ -53,6 +53,7 @@
                             <descriptors>
                                 <descriptor>mvn:org.apache.karaf.features/framework/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/specs/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:${project.groupId}/addons/${project.version}/xml/features</descriptor>
                                 <descriptor>mvn:${project.groupId}/distro/${project.version}/xml/features</descriptor>
                             </descriptors>
