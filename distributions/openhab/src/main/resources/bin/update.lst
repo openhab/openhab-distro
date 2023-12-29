@@ -123,7 +123,7 @@ ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for s
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
 ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
 
-[4.1.0]
+[4.2.0]
 ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
 
 [[PRE]]
