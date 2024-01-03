@@ -130,6 +130,9 @@ ALERT;MyBMW Binding: Vehicle channels "charge-info" and "motion" removed, "charg
 ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
 ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
 
+[4.2.0]
+ALERT;AndroidTV Binding: The thing configuration of 'port' has been renamed and split to 'googletvPort' and 'shieldtvPort'
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
