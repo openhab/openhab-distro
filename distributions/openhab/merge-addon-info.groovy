@@ -21,8 +21,8 @@ def xmlDir = baseDir.resolveSibling("target/addon-xml")
 // Read the addons.xml containing the addon info of openhab-addons
 def addonsXmlPath = xmlDir.resolve("addons.xml")
 println "Reading: ${addonsXmlPath}"
-def addonsXml = Files.readString(addonsXmlPath)
-def header = addonsXml.substring(0, addonsXml.indexOf("-->") + 4)
+def addonsXml = String.join(System.lineSeparator(), Files.readAllLines(addonsXmlPath))
+def header = addonsXml.substring(0, addonsXml.indexOf("-->") + 3 + System.lineSeparator().length())
 def addonInfoList = new XmlParser().parseText(addonsXml)
 
 // Read and append the addon info in addon.xml of other repositories
@@ -35,11 +35,11 @@ Files.walk(xmlDir).forEach(path -> {
 })
 
 // Write the combined addon info to addons.xml
-assemblyXmlPath = baseDir.resolveSibling("target/assembly/runtime/etc/addons.xml")
+def assemblyXmlPath = baseDir.resolveSibling("target/assembly/runtime/etc/addons.xml")
 println "Writing: ${assemblyXmlPath} (${addonInfoList.addons.'*'.size()} add-ons)"
 
-PrintWriter pw = new PrintWriter(Files.newOutputStream(assemblyXmlPath));
+def pw = new PrintWriter(Files.newOutputStream(assemblyXmlPath))
 pw.append(header)
-XmlNodePrinter nodePrinter = new XmlNodePrinter(pw, "\t");
-nodePrinter.setPreserveWhitespace(true);
-nodePrinter.print(addonInfoList);
+def np = new XmlNodePrinter(pw, "\t")
+np.setPreserveWhitespace(true)
+np.print(addonInfoList)
