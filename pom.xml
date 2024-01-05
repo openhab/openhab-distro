@@ -59,6 +59,12 @@
         <oh.java.version>17</oh.java.version>
         <maven.compiler.source>${oh.java.version}</maven.compiler.source>
         <maven.compiler.target>${oh.java.version}</maven.compiler.target>
+
+        <sat.version>0.15.0</sat.version>
+        <spotless.version>2.38.0</spotless.version>
+        <!-- Eclipse Java formatter version 4.26+ does not check test files -->
+        <spotless.eclipse.version>4.25</spotless.eclipse.version>
+        <spotless.eclipse.wtp.version>4.21.0</spotless.eclipse.wtp.version>
     </properties>
 
     <modules>
@@ -105,6 +111,112 @@
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.4.0</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>4.2</version>
+                    <configuration>
+                        <basedir>${basedir}</basedir>
+                        <quiet>false</quiet>
+                        <failIfMissing>true</failIfMissing>
+                        <strictCheck>true</strictCheck>
+                        <aggregate>true</aggregate>
+                        <mapping>
+                            <groovy>JAVADOC_STYLE</groovy>
+                            <java>JAVADOC_STYLE</java>
+                            <xml>xml-header-style</xml>
+                        </mapping>
+                        <useDefaultExcludes>true</useDefaultExcludes>
+                        <properties>
+                            <year>2024</year>
+                        </properties>
+                        <encoding>UTF-8</encoding>
+                        <licenseSets>
+                            <licenseSet>
+                                <header>licenses/epl-2.0/header.txt</header>
+                                <headerDefinitions>
+                                    <headerDefinition>licenses/epl-2.0/xml-header-style.xml</headerDefinition>
+                                </headerDefinitions>
+                                <includes>
+                                    <include>**/distributions/**/*.groovy</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>target/**</exclude>
+                                    <exclude>**/pom.xml</exclude>
+                                </excludes>
+                            </licenseSet>
+                        </licenseSets>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <configuration>
+                        <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
+                        <createBackupFile>false</createBackupFile>
+                        <keepBlankLines>true</keepBlankLines>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>sortpom-verify</id>
+                            <goals>
+                                <goal>verify</goal>
+                            </goals>
+                            <phase>verify</phase>
+                            <configuration>
+                                <verifyFail>Stop</verifyFail>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${spotless.version}</version>
+                    <configuration>
+                        <formats>
+                            <format>
+                                <!-- pom.xml -->
+                                <includes>
+                                    <include>pom.xml</include>
+                                </includes>
+                                <eclipseWtp>
+                                    <type>XML</type>
+                                    <files>
+                                        <file>openhab_wst_pom_file.prefs</file>
+                                    </files>
+                                    <version>${spotless.eclipse.wtp.version}</version>
+                                </eclipseWtp>
+                                <trimTrailingWhitespace/>
+                                <endWithNewline/>
+                            </format>
+                        </formats>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.openhab.tools</groupId>
+                            <artifactId>openhab-codestyle</artifactId>
+                            <version>${sat.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>codestyle_check</id>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <phase>initialize</phase>
+                        </execution>
+                    </executions>
+                </plugin>
         </plugins>
         </pluginManagement>
         <plugins>
@@ -138,6 +250,14 @@
                     </goals>
                   </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.ekryd.sortpom</groupId>
+                <artifactId>sortpom-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
