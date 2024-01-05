@@ -38,7 +38,7 @@ Files.walk(xmlDir).forEach(path -> {
 def assemblyXmlPath = baseDir.resolveSibling("target/assembly/runtime/etc/addons.xml")
 println "Writing: ${assemblyXmlPath} (${addonInfoList.addons.'*'.size()} add-ons)"
 
-def pw = new PrintWriter(Files.newOutputStream(assemblyXmlPath))
+def pw = new PrintWriter(Files.newBufferedWriter(assemblyXmlPath))
 pw.append(header)
 def np = new XmlNodePrinter(pw, "\t")
 np.setPreserveWhitespace(true)
