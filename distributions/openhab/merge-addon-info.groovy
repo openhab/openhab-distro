@@ -23,7 +23,7 @@ def addonsXmlPath = xmlDir.resolve("addons.xml")
 println "Reading: ${addonsXmlPath}"
 def addonsXml = String.join("\n", Files.readAllLines(addonsXmlPath))
 def header = addonsXml.substring(0, addonsXml.indexOf("-->") + 4)
-def addonInfoList = new XmlParser().parseText(addonsXml)
+def addonInfoList = new XmlParser().parse(Files.newBufferedReader(addonsXmlPath))
 
 // Read and append the addon info in addon.xml of other repositories
 Files.walk(xmlDir).forEach(path -> {
