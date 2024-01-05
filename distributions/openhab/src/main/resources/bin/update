@@ -321,6 +321,7 @@ done < "$TempDir/filelist.lst"
 echo "Clearing cache..."
 rm -rf "${OPENHAB_USERDATA:?}/cache"
 rm -rf "${OPENHAB_USERDATA:?}/tmp"
+rm -rf "${OPENHAB_USERDATA:?}/marketplace"
 
 ## Unzip the downloaded folder into openHAB's directory WITHOUT replacing any existing files.
 echo "Updating openHAB..."

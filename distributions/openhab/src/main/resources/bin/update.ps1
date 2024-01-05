@@ -743,6 +743,13 @@ Function Update-openHAB() {
             return PrintAndThrow "Could not delete the $OHUserData\tmp directory" $_
         }
 
+        try {
+            Write-Host -ForegroundColor Cyan "Removing $OHUserData\marketplace"
+            DeleteIfExists "$OHUserData\marketplace" $True
+        } catch {
+            return PrintAndThrow "Could not delete the $OHUserData\marketplace directory" $_
+        }
+
         ############## STEP 4 - copy files from temporary to distribution WITHOUT replacement
         Write-Host -ForegroundColor Cyan "Copying $TempDistribution to $OHDirectory without overwriting existing ones"
         try {
