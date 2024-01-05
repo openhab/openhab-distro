@@ -21,8 +21,8 @@ def xmlDir = baseDir.resolveSibling("target/addon-xml")
 // Read the addons.xml containing the addon info of openhab-addons
 def addonsXmlPath = xmlDir.resolve("addons.xml")
 println "Reading: ${addonsXmlPath}"
-def addonsXml = String.join(System.lineSeparator(), Files.readAllLines(addonsXmlPath))
-def header = addonsXml.substring(0, addonsXml.indexOf("-->") + 3 + System.lineSeparator().length())
+def addonsXml = String.join("\n", Files.readAllLines(addonsXmlPath))
+def header = addonsXml.substring(0, addonsXml.indexOf("-->") + 4)
 def addonInfoList = new XmlParser().parseText(addonsXml)
 
 // Read and append the addon info in addon.xml of other repositories
