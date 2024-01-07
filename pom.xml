@@ -9,7 +9,7 @@
 
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom</artifactId>
-    <version>4.1.1-SNAPSHOT</version>
+    <version>4.1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>openHAB Distribution</name>
@@ -51,8 +51,8 @@
 
         <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>        
 
-        <ohc.version>4.1.0-SNAPSHOT</ohc.version>
-        <oha.version>4.1.0-SNAPSHOT</oha.version>
+        <ohc.version>4.1.2-SNAPSHOT</ohc.version>
+        <oha.version>4.1.2-SNAPSHOT</oha.version>
 
         <karaf.version>4.4.4</karaf.version>
 
