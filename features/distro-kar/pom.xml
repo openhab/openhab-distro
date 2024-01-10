@@ -1,63 +1,65 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.openhab.distro</groupId>
-        <artifactId>pom-features</artifactId>
-        <version>4.2.0-SNAPSHOT</version>
-    </parent>
+  <parent>
+    <groupId>org.openhab.distro</groupId>
+    <artifactId>pom-features</artifactId>
+    <version>4.2.0-SNAPSHOT</version>
+  </parent>
 
-    <artifactId>distro-kar</artifactId>
-    <packaging>kar</packaging>
+  <artifactId>distro-kar</artifactId>
+  <packaging>kar</packaging>
 
-    <name>openHAB Distro Feature KAR</name>
-    <description>openHAB Distro Feature KAR</description>
+  <name>openHAB Distro Feature KAR</name>
+  <description>openHAB Distro Feature KAR</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>distro</artifactId>
-            <version>${project.version}</version>
-            <classifier>features</classifier>
-            <type>xml</type>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>distro</artifactId>
+      <version>${project.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+  </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>karaf-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <startLevel>80</startLevel>
-                    <enableGeneration>true</enableGeneration>
-                    <aggregateFeatures>true</aggregateFeatures>
-                    <!--  <resolver>(obr)</resolver> -->
-                    <checkDependencyChange>true</checkDependencyChange>
-                    <failOnDependencyChange>false</failOnDependencyChange>
-                    <logDependencyChanges>true</logDependencyChanges>
-                    <overwriteChangedDependencies>true</overwriteChangedDependencies>
-                    <ignoreDependencyFlag>true</ignoreDependencyFlag>
-                    <archive>
-                        <index>true</index>
-                        <manifestEntries>
-                            <Karaf-Feature-Start>false</Karaf-Feature-Start>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-features-file</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>features-generate-descriptor</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <startLevel>80</startLevel>
+          <enableGeneration>true</enableGeneration>
+          <aggregateFeatures>true</aggregateFeatures>
+          <!-- <resolver>(obr)</resolver> -->
+          <checkDependencyChange>true</checkDependencyChange>
+          <failOnDependencyChange>false</failOnDependencyChange>
+          <logDependencyChanges>true</logDependencyChanges>
+          <overwriteChangedDependencies>true</overwriteChangedDependencies>
+          <ignoreDependencyFlag>true</ignoreDependencyFlag>
+          <archive>
+            <index>true</index>
+            <manifestEntries>
+              <Karaf-Feature-Start>false</Karaf-Feature-Start>
+            </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-features-file</id>
+            <goals>
+              <goal>features-generate-descriptor</goal>
+            </goals>
+            <phase>generate-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
