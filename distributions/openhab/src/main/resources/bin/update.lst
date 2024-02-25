@@ -132,8 +132,6 @@ ALERT;Twitter Binding has become X. All related references to Twitter and Tweets
 
 [4.2.0]
 ALERT;AndroidTV Binding: The thing configuration of 'port' has been renamed and split to 'googletvPort' and 'shieldtvPort'
-
-[4.2.0]
 ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
 
 [[PRE]]
