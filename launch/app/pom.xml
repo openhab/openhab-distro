@@ -15,8 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <oh.java.version>17</oh.java.version>
-    <maven.compiler.source>${oh.java.version}</maven.compiler.source>
-    <maven.compiler.target>${oh.java.version}</maven.compiler.target>
+    <maven.compiler.release>${oh.java.version}</maven.compiler.release>
     <bnd.version>7.0.0</bnd.version>
   </properties>
 
@@ -382,6 +381,13 @@
           </plugins>
         </pluginManagement>
       </build>
+    </profile>
+    <profile>
+      <id>j21</id>
+      <properties>
+        <oh.java.version>21</oh.java.version>
+        <maven.compiler.release>${oh.java.version}</maven.compiler.release>
+      </properties>
     </profile>
   </profiles>
 
