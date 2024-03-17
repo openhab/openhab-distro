@@ -1,6 +1,5 @@
 # openHAB Distribution
 
-
 [![GitHub Actions Build Status](https://github.com/openhab/openhab-distro/actions/workflows/ci-build.yml/badge.svg?branch=main)](https://github.com/openhab/openhab-distro/actions/workflows/ci-build.yml)
 [![Jenkins Build Status](https://ci.openhab.org/job/openHAB-Distribution/badge/icon)](https://ci.openhab.org/job/openHAB-Distribution/)
 [![EPL-2.0](https://img.shields.io/badge/license-EPL%202-green.svg)](https://opensource.org/licenses/EPL-2.0)
