@@ -322,8 +322,7 @@
       </activation>
       <properties>
         <oh.java.version>17</oh.java.version>
-        <maven.compiler.source>${oh.java.version}</maven.compiler.source>
-        <maven.compiler.target>${oh.java.version}</maven.compiler.target>
+        <maven.compiler.release>${oh.java.version}</maven.compiler.release>
       </properties>
     </profile>
     <profile>
@@ -333,8 +332,7 @@
       </activation>
       <properties>
         <oh.java.version>21</oh.java.version>
-        <maven.compiler.source>${oh.java.version}</maven.compiler.source>
-        <maven.compiler.target>${oh.java.version}</maven.compiler.target>
+        <maven.compiler.release>${oh.java.version}</maven.compiler.release>
       </properties>
     </profile>
   </profiles>
