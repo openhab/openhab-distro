@@ -132,8 +132,8 @@ ALERT;Twitter Binding has become X. All related references to Twitter and Tweets
 
 [4.2.0]
 ALERT;AndroidTV Binding: The thing configuration of 'port' has been renamed and split to 'googletvPort' and 'shieldtvPort'
-ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
 ALERT;evcc Binding: Update to evcc API version 0.123.1 results in several new or updated channels. Existing Items will need to be adjusted.
+ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
 
 [[PRE]]
 [2.2.0]
