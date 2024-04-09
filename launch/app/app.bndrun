@@ -138,8 +138,8 @@ feature.openhab-model-runtime-all: \
 	com.google.inject;version='[7.0.0,7.0.1)',\
 	com.sun.jna;version='[5.14.0,5.14.1)',\
 	com.sun.xml.bind.jaxb-osgi;version='[2.3.8,2.3.9)',\
-	de.focus_shift.jollyday-core;version='[0.23.2,0.23.3)',\
-	de.focus_shift.jollyday-jackson;version='[0.23.2,0.23.3)',\
+	de.focus_shift.jollyday-core;version='[0.27.0,0.27.1)',\
+	de.focus_shift.jollyday-jackson;version='[0.27.0,0.27.1)',\
 	io.github.classgraph.classgraph;version='[4.8.165,4.8.166)',\
 	io.methvin.directory-watcher;version='[0.18.0,0.18.1)',\
 	io.swagger.core.v3.swagger-annotations;version='[2.2.15,2.2.16)',\
@@ -225,7 +225,7 @@ feature.openhab-model-runtime-all: \
 	org.ops4j.pax.web.pax-web-jetty;version='[8.0.24,8.0.25)',\
 	org.ops4j.pax.web.pax-web-runtime;version='[8.0.24,8.0.25)',\
 	org.ops4j.pax.web.pax-web-spi;version='[8.0.24,8.0.25)',\
-	org.ops4j.pax.web.pax-web-tomcat-common;version='[8.0.24,8.0.25)'\,
+	org.ops4j.pax.web.pax-web-tomcat-common;version='[8.0.24,8.0.25)',\
 	org.osgi.service.component;version='[1.5.0,1.5.1)',\
 	org.osgi.service.component.annotations;version='[1.5.0,1.5.1)',\
 	org.osgi.service.event;version='[1.4.1,1.4.2)',\
