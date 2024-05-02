@@ -136,7 +136,7 @@ ALERT;evcc Binding: Update to evcc API version 0.123.1 results in several new or
 ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
 ALERT;Jython Scripting: Default python lib path changed from "/automation/lib/python" to "/automation/jython/lib" and default python script path changed from "automation/jsr223" to "automation/jython". Just move your python scripts and libraries to new locations. The path "automation/jsr223" is still working, because it is used as a deprecated path for all automation add-ons.
 ALERT;OpenWeatherMap Binding: One Call API version 2.5 is to be shut down in June 2024. Read the binding's documentation for the migration process.
-
+ALERT;Persistence Extensions: "historicState" and evolutionRate" have been deprecated and replaced by "persistedState" and "evolutionRateSince". They will be removed in a future version. Methods may now return QuantityType instead of DecimalType. See documentation for details.
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
