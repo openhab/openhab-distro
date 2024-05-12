@@ -140,6 +140,8 @@ ALERT;JavaScript Scripting Automation: Deprecated methods 'actions.ScriptExecuti
 ALERT;Jython Scripting: Default python lib path changed from "/automation/lib/python" to "/automation/jython/lib" and default python script path changed from "automation/jsr223" to "automation/jython". Just move your python scripts and libraries to new locations. The path "automation/jsr223" is still working, because it is used as a deprecated path for all automation add-ons.
 ALERT;OpenWeatherMap Binding: One Call API version 2.5 is to be shut down in June 2024. Read the binding's documentation for the migration process.
 ALERT;Persistence Extensions: "historicState" and evolutionRate" have been deprecated and replaced by "persistedState" and "evolutionRateSince". They will be removed in a future version. Methods may now return QuantityType instead of DecimalType. See documentation for details.
+ALERT;SMA Energy Meter: The Thing configuration has changed and now also requires the parameter "serialNumber". 
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
