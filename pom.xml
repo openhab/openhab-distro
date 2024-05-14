@@ -64,10 +64,9 @@
     <karaf.version>4.4.5</karaf.version>
 
     <oh.java.version>17</oh.java.version>
-    <maven.compiler.source>${oh.java.version}</maven.compiler.source>
-    <maven.compiler.target>${oh.java.version}</maven.compiler.target>
+    <maven.compiler.release>${oh.java.version}</maven.compiler.release>
 
-    <sat.version>0.15.0</sat.version>
+    <sat.version>0.16.0</sat.version>
     <spotless.version>2.38.0</spotless.version>
     <!-- Eclipse Java formatter version 4.26+ does not check test files -->
     <spotless.eclipse.version>4.25</spotless.eclipse.version>
@@ -111,7 +110,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.11.0</version>
+          <version>3.13.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -249,7 +248,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>[17.0,18.0)</version>
+                  <version>[17.0,18.0),[21.0,22.0)</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
@@ -317,6 +316,13 @@
         <build.number>Milestone Build</build.number>
         <online.repo>${oh.repo.releaseBaseUrl}/libs-milestone</online.repo>
         <pax.url.suffix></pax.url.suffix>
+      </properties>
+    </profile>
+    <profile>
+      <id>j21</id>
+      <properties>
+        <oh.java.version>21</oh.java.version>
+        <maven.compiler.release>${oh.java.version}</maven.compiler.release>
       </properties>
     </profile>
   </profiles>
