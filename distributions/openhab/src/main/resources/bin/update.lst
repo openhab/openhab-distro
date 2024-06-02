@@ -142,6 +142,7 @@ ALERT;Jython Scripting: Default python lib path changed from "/automation/lib/py
 ALERT;OpenWeatherMap Binding: One Call API version 2.5 is to be shut down in June 2024. Read the binding's documentation for the migration process.
 ALERT;Persistence Extensions: "historicState" and evolutionRate" have been deprecated and replaced by "persistedState" and "evolutionRateSince". They will be removed in a future version. Methods may now return QuantityType instead of DecimalType. In Rules DSL, if you wish to do calculations without units, you may have to cast the results of the method to DecimalType explicitly. See documentation for details.
 ALERT;SMA Energy Meter: The Thing configuration has changed and now also requires the parameter "serialNumber". 
+ALERT;MercedesMe Binding: Public API from Mercedes was switched off. Now binding is using Smartphone API. Bridges and things cannot be reused and needs to be recreated with the updated binding.
 
 [[PRE]]
 [2.2.0]
