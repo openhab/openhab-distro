@@ -125,6 +125,7 @@ ALERT;JavaScript Scripting Automation: The "useIncludedLibrary" configuration pa
 ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for storing data, your database needs to be migrated as described in https://h2database.com/html/migration-to-v2.html. It is also required to add ';NON_KEYWORDS=VALUE' to your H2 JDBC URL. See also https://github.com/openhab/openhab-addons/pull/15726 for a Bash migration script.
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
 ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
+ALERT;MQTT Binding: The STOP command for Rollershutter channels now defaults to null. If you want to send an explicit stop command to a rollershutter, you need to explicitly configure the command string to send.
 ALERT;MQTT EspMilightHub Binding: Colour bulbs no longer have a `level` channel. You may need to re-add your things for it to be removed. Link to the `colour` channel instead, even for `Dimmer` items.
 ALERT;MyBMW Binding: Vehicle channels "charge-info" and "motion" removed, "charge-remaining", "last-fetched", "estimated-fuel-l-100km" and "estimated-fuel-mpg" added. Image options changed - now "VehicleStatus", "FrontView", "RearView", "FrontLeft" and "FrontRight" are available.
 ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
