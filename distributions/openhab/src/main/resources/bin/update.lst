@@ -274,3 +274,6 @@ REPLACE;actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;,porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;porcupineks,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+
+[4.2.0]
+DELETE;$OPENHAB_USERDATA/logs/audit.log

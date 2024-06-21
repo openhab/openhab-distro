@@ -26,16 +26,6 @@
 			<DefaultRolloverStrategy max="7"/>
 		</RollingRandomAccessFile>
 
-		<!-- Audit file appender -->
-		<RollingRandomAccessFile fileName="${sys:openhab.logdir}/audit.log" filePattern="${sys:openhab.logdir}/audit.log.%i.gz" name="AUDIT">
-			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
-			<Policies>
-				<OnStartupTriggeringPolicy/>
-				<SizeBasedTriggeringPolicy size="8 MB"/>
-			</Policies>
-			<DefaultRolloverStrategy max="7"/>
-		</RollingRandomAccessFile>
-
 		<!-- OSGi appender -->
 		<PaxOsgi filter="*" name="OSGI"/>
 	</Appenders>
@@ -50,11 +40,6 @@
 		<!-- Karaf Shell logger -->
 		<Logger level="OFF" name="org.apache.karaf.shell.support">
 			<AppenderRef ref="STDOUT"/>
-		</Logger>
-
-		<!-- Security audit logger -->
-		<Logger additivity="false" level="INFO" name="org.apache.karaf.jaas.modules.audit">
-			<AppenderRef ref="AUDIT"/>
 		</Logger>
 
 		<!-- openHAB specific logger configuration -->
