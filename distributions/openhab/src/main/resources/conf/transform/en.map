@@ -1,4 +1,4 @@
 CLOSED=closed
 OPEN=open
-NULL=unknown
- 
+NULL=undefined
+UNDEF=unknown
