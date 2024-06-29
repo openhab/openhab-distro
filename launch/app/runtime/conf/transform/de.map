@@ -1,4 +1,5 @@
 CLOSED=zu
 OPEN=offen
 undefined=undefiniert
--=-
+NULL=undefiniert
+UNDEF=unbekannt
