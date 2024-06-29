@@ -125,6 +125,7 @@ ALERT;JavaScript Scripting Automation: The "useIncludedLibrary" configuration pa
 ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for storing data, your database needs to be migrated as described in https://h2database.com/html/migration-to-v2.html. It is also required to add ';NON_KEYWORDS=VALUE' to your H2 JDBC URL. See also https://github.com/openhab/openhab-addons/pull/15726 for a Bash migration script.
 ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
 ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
+ALERT;MQTT Binding: The STOP command for Rollershutter channels now defaults to null. If you want to send an explicit stop command to a rollershutter, you need to explicitly configure the command string to send.
 ALERT;MQTT EspMilightHub Binding: Colour bulbs no longer have a `level` channel. You may need to re-add your things for it to be removed. Link to the `colour` channel instead, even for `Dimmer` items.
 ALERT;MyBMW Binding: Vehicle channels "charge-info" and "motion" removed, "charge-remaining", "last-fetched", "estimated-fuel-l-100km" and "estimated-fuel-mpg" added. Image options changed - now "VehicleStatus", "FrontView", "RearView", "FrontLeft" and "FrontRight" are available.
 ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
@@ -139,8 +140,9 @@ ALERT;JavaScript Scripting Automation: The 'Item' suffix has been removed from I
 ALERT;JavaScript Scripting Automation: The 'Item.history' API has been replaced by 'Item.persistence', which mostly provides the same functionality, but some return types changed and 'historicState' has been renamed to 'persistedState'. Blockly users should search for '.history' using the developer sidebar and re-save all scripts that contain this search query.
 ALERT;JavaScript Scripting Automation: Deprecated methods 'actions.ScriptExecution.createTimerWithArgument' (use 'createTimer'), 'cache.get', 'cache.put', 'cache.remove' & 'cache.exists' (use the private or shared cache) and fields 'state' (use 'receivedState') & 'receivedTrigger' (use 'receivedEvent') have been removed from the event object.
 ALERT;Jython Scripting: Default python lib path changed from "/automation/lib/python" to "/automation/jython/lib" and default python script path changed from "automation/jsr223" to "automation/jython". Just move your python scripts and libraries to new locations. The path "automation/jsr223" is still working, because it is used as a deprecated path for all automation add-ons.
+ALERT;MercedesMe Binding: Public API from Mercedes was switched off. Now binding is using Smartphone API. Bridges and things cannot be reused and needs to be recreated with the updated binding.
 ALERT;OpenWeatherMap Binding: One Call API version 2.5 is to be shut down in June 2024. Read the binding's documentation for the migration process.
-ALERT;Persistence Extensions: "historicState" and evolutionRate" have been deprecated and replaced by "persistedState" and "evolutionRateSince". They will be removed in a future version. Methods may now return QuantityType instead of DecimalType. See documentation for details.
+ALERT;Persistence Extensions: "historicState" and evolutionRate" have been deprecated and replaced by "persistedState" and "evolutionRateSince". They will be removed in a future version. Methods may now return QuantityType instead of DecimalType. In Rules DSL, if you wish to do calculations without units, you may have to cast the results of the method to DecimalType explicitly. See documentation for details.
 ALERT;SMA Energy Meter: The Thing configuration has changed and now also requires the parameter "serialNumber".
 ALERT;Transformations: NULL and UNDEF item states are now passed to any defined transformation.
 ALERT;Transformations-MAP: "-" entry defined in a MAP file is no more used by sitemap UIs when the item state is NULL or UNDEF. You can now define "NULL" and "UNDEF" entries to map these 2 particular states or rely as before on the definition of a default mapping to map anything that has no entry in your file including NULL and UNDEF.
@@ -274,3 +276,6 @@ REPLACE;actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;,porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;porcupineks,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+
+[4.2.0]
+DELETE;$OPENHAB_USERDATA/logs/audit.log
