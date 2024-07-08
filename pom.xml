@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -11,7 +9,7 @@
 
   <groupId>org.openhab.distro</groupId>
   <artifactId>pom</artifactId>
-  <version>4.2.0-SNAPSHOT</version>
+  <version>4.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>openHAB Distribution</name>
@@ -58,8 +56,8 @@
 
     <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>
 
-    <ohc.version>4.2.0-SNAPSHOT</ohc.version>
-    <oha.version>4.2.0-SNAPSHOT</oha.version>
+    <ohc.version>4.3.0-SNAPSHOT</ohc.version>
+    <oha.version>4.3.0-SNAPSHOT</oha.version>
 
     <karaf.version>4.4.6</karaf.version>
 
@@ -211,8 +209,8 @@
                   </files>
                   <version>${spotless.eclipse.wtp.version}</version>
                 </eclipseWtp>
-                <trimTrailingWhitespace></trimTrailingWhitespace>
-                <endWithNewline></endWithNewline>
+                <trimTrailingWhitespace/>
+                <endWithNewline/>
               </format>
             </formats>
           </configuration>
@@ -305,7 +303,7 @@
       <properties>
         <build.number>Release Build</build.number>
         <online.repo>${oh.repo.releaseBaseUrl}/libs-release</online.repo>
-        <pax.url.suffix></pax.url.suffix>
+        <pax.url.suffix/>
       </properties>
     </profile>
     <profile>
@@ -318,7 +316,7 @@
       <properties>
         <build.number>Milestone Build</build.number>
         <online.repo>${oh.repo.releaseBaseUrl}/libs-milestone</online.repo>
-        <pax.url.suffix></pax.url.suffix>
+        <pax.url.suffix/>
       </properties>
     </profile>
     <profile>
