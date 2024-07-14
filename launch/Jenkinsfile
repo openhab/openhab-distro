@@ -35,6 +35,10 @@ try {
     node {
         deleteDir()
         releaseComponent('openhab-distro', true, env.OH_BRANCH)
+
+        def releaseVersion = env.OH_RELEASE_VERSION
+        def distributions = 'openhab-distro/distributions'
+        archiveArtifacts artifacts: "${distributions}/openhab/target/openhab-${releaseVersion}.*, ${distributions}/openhab-addons/target/openhab-addons-${releaseVersion}.kar, ${distributions}/openhab-demo/target/openhab-demo-${releaseVersion}.*"
     }
 
     if(!env.SANDBOX?.toBoolean()) {
