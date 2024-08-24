@@ -283,3 +283,6 @@ REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 
 [4.2.0]
 DELETE;$OPENHAB_USERDATA/logs/audit.log
+
+[4.3.0]
+ALERT;ElectroluxAir binding: The binding has been removed since the Electrolux Delta API has been discontinued.
