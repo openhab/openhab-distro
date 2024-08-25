@@ -148,9 +148,9 @@ ALERT;Transformations: NULL and UNDEF item states are now passed to any defined 
 ALERT;Transformations-MAP: "-" entry defined in a MAP file is no more used by sitemap UIs when the item state is NULL or UNDEF. You can now define "NULL" and "UNDEF" entries to map these 2 particular states or rely as before on the definition of a default mapping to map anything that has no entry in your file including NULL and UNDEF.
 
 [4.3.0]
+ALERT;ElectroluxAir binding: The binding has been removed since the Electrolux Delta API has been discontinued.
 ALERT;JavaScript Automation: The isJsInstanceOfJavaType method of the utils namespace has been removed. Use JavaScript's instanceof operator instead.
 ALERT;Pentair Binding: EasyTouch thing has been renamed to more generic Controller and all channels have been organized into groups. You will need to reconfigure your setup to the new thing structure.
-ALERT;ElectroluxAir binding: The binding has been removed since the Electrolux Delta API has been discontinued.
 
 [[PRE]]
 [2.2.0]
