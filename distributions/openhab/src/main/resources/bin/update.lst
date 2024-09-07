@@ -148,6 +148,7 @@ ALERT;Transformations: NULL and UNDEF item states are now passed to any defined 
 ALERT;Transformations-MAP: "-" entry defined in a MAP file is no more used by sitemap UIs when the item state is NULL or UNDEF. You can now define "NULL" and "UNDEF" entries to map these 2 particular states or rely as before on the definition of a default mapping to map anything that has no entry in your file including NULL and UNDEF.
 
 [4.3.0]
+ALERT;CORE: The sendFrequency parameter for Slider and Colorpicker sitemap elements has been removed.
 ALERT;ElectroluxAir Binding: The binding has been removed since the Electrolux Delta API has been discontinued.
 ALERT;JavaScript Automation: The isJsInstanceOfJavaType method of the utils namespace has been removed. Use JavaScript's instanceof operator instead.
 ALERT;MQTT Binding: Newly discovered Home Assistant things will use simplified thing type and channel IDs. Delete and re-create your things to opt in to the new style. In subsequent a openHAB release, existing things will also convert to the new style.
