@@ -150,6 +150,7 @@ ALERT;Transformations-MAP: "-" entry defined in a MAP file is no more used by si
 [4.3.0]
 ALERT;ElectroluxAir Binding: The binding has been removed since the Electrolux Delta API has been discontinued.
 ALERT;JavaScript Automation: The isJsInstanceOfJavaType method of the utils namespace has been removed. Use JavaScript's instanceof operator instead.
+ALERT;MQTT Binding: Newly discovered Home Assistant things will use simplified thing type and channel IDs. Delete and re-create your things to opt in to the new style. In subsequent a openHAB release, existing things will also convert to the new style.
 ALERT;Pentair Binding: EasyTouch thing has been renamed to more generic Controller and all channels have been organized into groups. You will need to reconfigure your setup to the new thing structure.
 
 [[PRE]]
