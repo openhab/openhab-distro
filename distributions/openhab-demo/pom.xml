@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom-distributions</artifactId>
-    <version>4.2.3-SNAPSHOT</version>
+    <version>4.2.3</version>
   </parent>
 
   <artifactId>openhab-demo</artifactId>
