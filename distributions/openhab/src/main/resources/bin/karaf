@@ -157,12 +157,10 @@ init() {
     # Determine the JVM vendor
     detectJVM
 
-    # Determine the JVM version and check that it is version 17
+    # Determine the JVM version and check that it is version 21
     checkJvmVersion
-    if [ "${VERSION}" -ne "17" ]; then
-        if [ "${VERSION}" -ne "21" ]; then
-            die "JVM must be version 17 or 21. JVM version ${VERSION} is unsupported (JAVA_HOME=$JAVA_HOME)"
-        fi
+    if [ "${VERSION}" -ne "21" ]; then
+        die "JVM must be version 21. JVM version ${VERSION} is unsupported (JAVA_HOME=$JAVA_HOME)"
     fi
 
     # Check if a root instance is already running

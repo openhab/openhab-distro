@@ -138,7 +138,7 @@ locateJava() {
     fi
 
     if [ "x${JAVA_HOME}" = "x" ] && [ "${darwin}" = "true" ]; then
-        JAVA_HOME="$(/usr/libexec/java_home -v 11)"
+        JAVA_HOME="$(/usr/libexec/java_home -v 21)"
     fi
     if [ "x${JAVA}" = "x" ] && [ -r /etc/gentoo-release ] ; then
         JAVA_HOME=$(java-config --jre-home)
