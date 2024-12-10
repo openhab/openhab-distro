@@ -63,7 +63,7 @@
 
     <karaf.version>4.4.6</karaf.version>
 
-    <oh.java.version>17</oh.java.version>
+    <oh.java.version>21</oh.java.version>
     <maven.compiler.release>${oh.java.version}</maven.compiler.release>
 
     <sat.version>0.16.0</sat.version>
@@ -251,7 +251,7 @@
                   <version>3.6.3</version>
                 </requireMavenVersion>
                 <requireJavaVersion>
-                  <version>[17.0,18.0),[21.0,22.0)</version>
+                  <version>[21.0,22.0)</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
