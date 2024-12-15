@@ -110,7 +110,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
 
                         sh "mvn unleash:perform -Dworkflow=unleash.phase1.workflow " + mvnOptions
                     }
-                    withMaven(jdk: 'OpenJDK 17', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
+                    withMaven(jdk: 'OpenJDK 21', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
                         sh "mvn deploy " + mvnReleaseOptions
                     }
                     withMaven(jdk: 'OpenJDK 11', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
@@ -137,7 +137,7 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
 
                             sh "mvn unleash:perform -Dworkflow=unleash.phase3.workflow " + mvnOptions
                         }
-                        withMaven(jdk: 'OpenJDK 17', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
+                        withMaven(jdk: 'OpenJDK 21', maven: 'maven (latest)', mavenOpts: '-Xms512m -Xmx2048m', mavenLocalRepo: '.repository', globalMavenSettingsConfig: env.MAVEN_GLOBAL_SETTINGS, options: [artifactsPublisher(disabled: true)]) {
                             sh "mvn deploy " + mvnSnapshotOptions
                         }
                     }
