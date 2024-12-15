@@ -321,13 +321,6 @@
         <pax.url.suffix/>
       </properties>
     </profile>
-    <profile>
-      <id>j21</id>
-      <properties>
-        <oh.java.version>21</oh.java.version>
-        <maven.compiler.release>${oh.java.version}</maven.compiler.release>
-      </properties>
-    </profile>
   </profiles>
 
 </project>
