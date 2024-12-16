@@ -242,7 +242,6 @@ feature.openhab-model-runtime-all: \
 	tech.units.indriya;version='[2.2.0,2.2.1)',\
 	uom-lib-common;version='[2.2.0,2.2.1)',\
 	xstream;version='[1.4.21,1.4.22)',\
-	org.openhab.base-fixes;version='[1.0.0,1.0.1)',\
 	org.openhab.core;version='[5.0.0,5.0.1)',\
 	org.openhab.core.addon;version='[5.0.0,5.0.1)',\
 	org.openhab.core.addon.eclipse;version='[5.0.0,5.0.1)',\
