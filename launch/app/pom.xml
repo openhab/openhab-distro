@@ -186,6 +186,17 @@
           </executions>
         </plugin>
 
+        <!-- Allow running openHAB demo app from a Maven/bnd task -->
+        <plugin>
+          <groupId>biz.aQute.bnd</groupId>
+          <artifactId>bnd-run-maven-plugin</artifactId>
+          <version>${bnd.version}</version>
+          <configuration>
+            <includeDependencyManagement>true</includeDependencyManagement>
+            <bndrun>app.bndrun</bndrun>
+          </configuration>
+        </plugin>
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
@@ -301,6 +312,10 @@
     </pluginManagement>
 
     <plugins>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-run-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>biz.aQute.bnd</groupId>
         <artifactId>bnd-maven-plugin</artifactId>
