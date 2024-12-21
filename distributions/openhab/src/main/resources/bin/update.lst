@@ -150,6 +150,7 @@ ALERT;Transformations-MAP: "-" entry defined in a MAP file is no more used by si
 [4.3.0]
 ALERT;CORE: The sendFrequency parameter for Slider and Colorpicker sitemap elements has been removed.
 ALERT;CORE: The DateTimeType methods toZone(zone), toLocaleZone() and getZonedDateTime() have been deprecated. They will be removed in a future version. In DSL rules, please use getZonedDateTime(ZoneId) as replacement for getZonedDateTime(), for example getZonedDateTime(ZoneId.systemDefault()) to use system time-zone.
+ALERT;Main UI: The background property has been removed from the oh-clock-card widget. Set background through the style config instead. 
 ALERT;ElectroluxAir Binding: The binding has been removed since the Electrolux Delta API has been discontinued.
 ALERT;JavaScript Automation: The isJsInstanceOfJavaType method of the utils namespace has been removed. Use JavaScript's instanceof operator instead.
 ALERT;MeteoAlerte Binding: The underlying API stopped delivering data in May 2023. Binding has been removed and is now replaced by Météo France Binding based on a new API.
