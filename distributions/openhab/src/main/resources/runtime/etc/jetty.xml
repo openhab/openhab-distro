@@ -79,10 +79,10 @@
 		</Arg>
 	</Call>
 
-	<New id="http2Config" class="org.eclipse.jetty.server.HttpConfiguration">
+	<New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
 		<Set name="secureScheme">https</Set>
 		<Set name="securePort">
-			<Property name="org.osgi.service.http2.port.secure" default="8443" />
+			<Property name="org.osgi.service.http.port.secure" default="8443" />
 		</Set>
 		<Set name="outputBufferSize">32768</Set>
 		<Set name="requestHeaderSize">8192</Set>
@@ -153,7 +153,7 @@
 						<Item>
 							<New class="org.eclipse.jetty.http2.server.HTTP2ServerConnectionFactory">
 								<Arg name="config">
-									<Ref refid="http2Config" />
+									<Ref refid="httpConfig" />
 								</Arg>
 							</New>
 						</Item>
