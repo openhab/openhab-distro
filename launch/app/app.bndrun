@@ -186,7 +186,6 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.equinox.event;version='[1.6.200,1.6.201)',\
 	org.eclipse.equinox.metatype;version='[1.4.500,1.4.501)',\
 	org.eclipse.jetty.alpn.client;version='[9.4.54,9.4.55)',\
-	org.eclipse.jetty.alpn.server;version='[9.4.54,9.4.55)',\
 	org.eclipse.jetty.client;version='[9.4.54,9.4.55)',\
 	org.eclipse.jetty.http;version='[9.4.54,9.4.55)',\
 	org.eclipse.jetty.http2.client;version='[9.4.54,9.4.55)',\
