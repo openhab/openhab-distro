@@ -139,14 +139,19 @@
 					<Array type="org.eclipse.jetty.server.ConnectionFactory">
 						<Item>
 							<New class="org.eclipse.jetty.server.SslConnectionFactory">
-								<Arg name="next">http/1.1</Arg>
 								<Arg name="sslContextFactory">
 									<Ref refid="sslContextFactory" />
 								</Arg>
+								<Arg name="next">alpn</Arg>
 							</New>
 						</Item>
 						<Item>
-							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
+							<New class="org.eclipse.jetty.alpn.server.ALPNServerConnectionFactory">
+								<Arg>h2</Arg>
+							</New>
+						</Item>
+						<Item>
+							<New class="org.eclipse.jetty.http2.server.HTTP2ServerConnectionFactory">
 								<Arg name="config">
 									<Ref refid="httpConfig" />
 								</Arg>
