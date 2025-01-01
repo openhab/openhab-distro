@@ -271,6 +271,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.io.rest.sitemap;version='[5.0.0,5.0.1)',\
 	org.openhab.core.io.rest.sse;version='[5.0.0,5.0.1)',\
 	org.openhab.core.io.rest.swagger;version='[5.0.0,5.0.1)',\
+	org.openhab.core.io.rest.transform;version='[5.0.0,5.0.1)',\
 	org.openhab.core.io.rest.ui;version='[5.0.0,5.0.1)',\
 	org.openhab.core.io.websocket;version='[5.0.0,5.0.1)',\
 	org.openhab.core.model.core;version='[5.0.0,5.0.1)',\
