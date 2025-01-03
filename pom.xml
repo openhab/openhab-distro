@@ -100,7 +100,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.4.1</version>
+          <version>3.5.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -115,7 +115,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.3</version>
           <configuration>
             <!-- Workaround for build errors when using feature packaging and enableGeneration=true -->
             <!-- with the karaf-maven-plugin, see: https://issues.apache.org/jira/browse/KARAF-7734 -->
@@ -125,12 +125,12 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.6.0</version>
         </plugin>
         <plugin>
           <groupId>com.mycila</groupId>
           <artifactId>license-maven-plugin</artifactId>
-          <version>4.3</version>
+          <version>4.6</version>
           <configuration>
             <basedir>${basedir}</basedir>
             <quiet>false</quiet>
@@ -174,7 +174,7 @@
         <plugin>
           <groupId>com.github.ekryd.sortpom</groupId>
           <artifactId>sortpom-maven-plugin</artifactId>
-          <version>3.4.1</version>
+          <version>4.0.0</version>
           <configuration>
             <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
             <createBackupFile>false</createBackupFile>
