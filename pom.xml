@@ -138,8 +138,6 @@
             <strictCheck>true</strictCheck>
             <aggregate>true</aggregate>
             <mapping>
-              <groovy>JAVADOC_STYLE</groovy>
-              <java>JAVADOC_STYLE</java>
               <xml>xml-header-style</xml>
             </mapping>
             <useDefaultExcludes>true</useDefaultExcludes>
