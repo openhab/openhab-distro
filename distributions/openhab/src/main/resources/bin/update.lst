@@ -160,7 +160,7 @@ ALERT;MQTT Binding (Home Assistant): Legacy schema vacuums are no longer support
 ALERT;Pentair Binding: EasyTouch thing has been renamed to more generic Controller and all channels have been organized into groups. You will need to reconfigure your setup to the new thing structure.
 
 [5.0.0]
-ALERT;Guntamatic Binding: The Binding now uses channel groups and the dynamic status channels now have an index prefix to allow multiple channels with the same description. Existing Items will need to be adjusted.Deleted
+ALERT;Guntamatic Binding: The Binding now uses channel groups and the dynamic status channels now have an index prefix to allow multiple channels with the same description. Existing Items will need to be adjusted.
 ALERT;MQTT Binding (Home Assistant): Thing types and channel IDs for things created prior to 4.3.0 have been significantly restructured and simplified. Items will need to be re-linked. Delete and re-create your Things to also have a simplified Thing Type ID in your Thing IDs.
 
 [[PRE]]
