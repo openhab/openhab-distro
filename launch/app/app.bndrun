@@ -139,8 +139,8 @@ feature.openhab-model-runtime-all: \
 	com.google.inject;version='[7.0.0,7.0.1)',\
 	com.sun.jna;version='[5.14.0,5.14.1)',\
 	com.sun.xml.bind.jaxb-osgi;version='[2.3.8,2.3.9)',\
-	de.focus_shift.jollyday-core;version='[0.35.1,0.35.2)',\
-	de.focus_shift.jollyday-jackson;version='[0.35.1,0.35.2)',\
+	de.focus_shift.jollyday-core;version='[1.4.0,1.4.1)',\
+	de.focus_shift.jollyday-jackson;version='[1.4.0,1.4.1)',\
 	io.github.classgraph.classgraph;version='[4.8.174,4.8.175)',\
 	io.methvin.directory-watcher;version='[0.18.0,0.18.1)',\
 	io.swagger.core.v3.swagger-annotations;version='[2.2.15,2.2.16)',\
