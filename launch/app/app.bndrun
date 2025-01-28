@@ -126,7 +126,6 @@ feature.openhab-model-runtime-all: \
 -runbundles: \
 	org.ops4j.pax.logging.pax-logging-api;version='[2.2.8,2.2.9)',\
 	org.ops4j.pax.logging.pax-logging-log4j2;version='[2.2.8,2.2.9)',\
-	com.fasterxml.jackson.annotation;version='[2.18.2,2.18.3)',\
 	com.fasterxml.jackson.core.jackson-annotations;version='[2.18.2,2.18.3)',\
 	com.fasterxml.jackson.core.jackson-core;version='[2.18.2,2.18.3)',\
 	com.fasterxml.jackson.core.jackson-databind;version='[2.18.2,2.18.3)',\
