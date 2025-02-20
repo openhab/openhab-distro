@@ -297,3 +297,6 @@ REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
 
 [4.2.0]
 DELETE;$OPENHAB_USERDATA/logs/audit.log
+
+[5.0.0]
+ALERT;Juicenet Binding:Binding has been removed due to removal of public API. Suggested alternative is to use https://github.com/JuiceRescue/juicepassproxy with the mqtt.homeasssistent binding.
