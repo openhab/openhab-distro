@@ -148,7 +148,8 @@ feature.openhab-model-runtime-all: \
 	io.swagger.core.v3.swagger-integration;version='[2.2.28,2.2.29)',\
 	io.swagger.core.v3.swagger-jaxrs2;version='[2.2.28,2.2.29)',\
 	io.swagger.core.v3.swagger-models;version='[2.2.28,2.2.29)',\
-	jakarta.inject.jakarta.inject-api;version='[2.0.0,2.0.1)',\
+	jakarta.annotation-api;version='[2.1.1,2.1.2)',\
+	jakarta.inject.jakarta.inject-api;version='[2.0.1,2.0.2)',\
 	jakarta.validation.jakarta.validation-api;version='[2.0.2,2.0.3)',\
 	jakarta.xml.bind-api;version='[2.3.3,2.3.4)',\
 	javax.measure.unit-api;version='[2.2.0,2.2.1)',\
@@ -158,7 +159,7 @@ feature.openhab-model-runtime-all: \
 	org.apache.aries.jax.rs.whiteboard;version='[2.0.2,2.0.3)',\
 	org.apache.aries.spifly.dynamic.bundle;version='[1.3.7,1.3.8)',\
 	org.apache.commons.commons-fileupload;version='[1.5.0,1.5.1)',\
-	org.apache.commons.commons-io;version='[2.17.0,2.17.1)',\
+	org.apache.commons.commons-io;version='[2.18.0,2.18.1)',\
 	org.apache.commons.lang3;version='[3.17.0,3.17.1)',\
 	org.apache.cxf.cxf-core;version='[3.6.5,3.6.6)',\
 	org.apache.cxf.cxf-rt-frontend-jaxrs;version='[3.6.5,3.6.6)',\
@@ -178,8 +179,7 @@ feature.openhab-model-runtime-all: \
 	org.apache.servicemix.specs.activation-api-1.2.1;version='[1.2.1,1.2.2)',\
 	org.apache.servicemix.specs.annotation-api-1.3;version='[1.3.0,1.3.1)',\
 	org.apache.ws.xmlschema.core;version='[2.3.1,2.3.2)',\
-	org.apiguardian.api;version='[1.1.2,1.1.3)',\
-	org.bitbucket.b_c.jose4j;version='[0.9.5,0.9.6)',\
+	org.bitbucket.b_c.jose4j;version='[0.9.6,0.9.7)',\
 	org.eclipse.emf.common;version='[2.24.0,2.24.1)',\
 	org.eclipse.emf.ecore;version='[2.26.0,2.26.1)',\
 	org.eclipse.emf.ecore.xmi;version='[2.16.0,2.16.1)',\
@@ -213,9 +213,8 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.xtext.util;version='[2.37.0,2.37.1)',\
 	org.eclipse.xtext.xbase;version='[2.37.0,2.37.1)',\
 	org.eclipse.xtext.xbase.lib;version='[2.37.0,2.37.1)',\
-	org.glassfish.hk2.external.aopalliance-repackaged;version='[2.4.0,2.4.1)',\
-	org.glassfish.hk2.external.javax.inject;version='[2.4.0,2.4.1)',\
-	org.glassfish.hk2.osgi-resource-locator;version='[1.0.3,1.0.4)',\
+	org.glassfish.hk2.external.aopalliance-repackaged;version='[3.1.1,3.1.2)',\
+	org.glassfish.hk2.osgi-resource-locator;version='[3.0.0,3.0.1)',\
 	org.objectweb.asm;version='[9.7.1,9.7.2)',\
 	org.objectweb.asm.commons;version='[9.6.0,9.6.1)',\
 	org.objectweb.asm.tree;version='[9.6.0,9.6.1)',\
@@ -237,10 +236,10 @@ feature.openhab-model-runtime-all: \
 	org.osgi.util.promise;version='[1.3.0,1.3.1)',\
 	org.threeten.extra;version='[1.8.0,1.8.1)',\
 	org.yaml.snakeyaml;version='[2.3.0,2.3.1)',\
-	si-units;version='[2.1.0,2.1.1)',\
-	si.uom.si-quantity;version='[2.1.0,2.1.1)',\
+	si-units;version='[2.2.0,2.2.1)',\
+	si.uom.si-quantity;version='[2.2.0,2.2.1)',\
 	stax2-api;version='[4.2.2,4.2.3)',\
-	tech.units.indriya;version='[2.2.0,2.2.1)',\
+	tech.units.indriya;version='[2.2.2,2.2.3)',\
 	uom-lib-common;version='[2.2.0,2.2.1)',\
 	xstream;version='[1.4.21,1.4.22)',\
 	org.openhab.core;version='[5.0.0,5.0.1)',\
