@@ -160,11 +160,20 @@
 						</Item>
 						<Item>
 							<New class="org.eclipse.jetty.alpn.server.ALPNServerConnectionFactory">
-								<Arg>h2</Arg>
+								<Arg>h2,http/1.1</Arg>
 							</New>
 						</Item>
+						<!-- HTTP/2 over TLS -->
 						<Item>
 							<New class="org.eclipse.jetty.http2.server.HTTP2ServerConnectionFactory">
+								<Arg name="config">
+									<Ref refid="httpConfig" />
+								</Arg>
+							</New>
+						</Item>
+						<!-- WebSockets (HTTP/1.1) -->
+						<Item>
+							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
 								<Arg name="config">
 									<Ref refid="httpConfig" />
 								</Arg>
