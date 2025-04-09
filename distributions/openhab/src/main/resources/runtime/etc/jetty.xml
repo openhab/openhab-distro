@@ -11,9 +11,9 @@
 
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
 
-	<!-- =========================================================== -->
+	<!-- =========================================================================================================== -->
 	<!-- Set handler Collection Structure -->
-	<!-- =========================================================== -->
+	<!-- =========================================================================================================== -->
 
 	<Get name="handler">
 		<Call name="addHandler">
@@ -98,14 +98,20 @@
 		</Call>
 	</New>
 
-	<!-- =========================================================== -->
+	<!-- =========================================================================================================== -->
 	<!-- extra options -->
-	<!-- =========================================================== -->
+	<!-- =========================================================================================================== -->
 	<Set name="stopAtShutdown">true</Set>
 	<Set name="stopTimeout">1000</Set>
 	<Set name="dumpAfterStart">false</Set>
 	<Set name="dumpBeforeStop">false</Set>
 
+	<!-- =========================================================================================================== -->
+	<!-- Configure the SSL parameters of the server -->
+	<!-- -->
+	<!-- JavaDoc of o.e.j.u.s.SslContextFactory.Server can be found at: -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/util/ssl/SslContextFactory.Server.html -->
+	<!-- =========================================================================================================== -->
 	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory$Server">
 		<Set name="KeyStorePath"><SystemProperty name="jetty.keystore.path" default="/etc/myKeystore" /></Set>
 		<Set name="KeyStorePassword"><SystemProperty name="jetty.ssl.password" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
@@ -118,17 +124,24 @@
 	</New>
 
 
-	<!-- =========================================================== -->
+	<!-- =========================================================================================================== -->
 	<!-- Add a HTTPS Connector. -->
 	<!-- Configure an o.e.j.server.ServerConnector with connection -->
 	<!-- factories for TLS (aka SSL) and HTTP to provide HTTPS. -->
 	<!-- All accepted TLS connections are wired to a HTTP connection. -->
 	<!-- -->
-	<!-- Consult the javadoc of o.e.j.server.ServerConnector, -->
-	<!-- o.e.j.server.SslConnectionFactory and -->
-	<!-- o.e.j.server.HttpConnectionFactory for all configuration -->
-	<!-- that may be set here. -->
-	<!-- =========================================================== -->
+	<!-- Consult the JavaDoc of o.e.j.server.ServerConnector at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/ServerConnector.html, -->
+	<!-- o.e.j.server.SslConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/SslConnectionFactory.html, -->
+	<!-- o.e.j.a.s.ALPNServerConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/alpn/server/ALPNServerConnectionFactory.html, -->
+	<!-- o.e.j.h2.s.HTTP2ServerConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/http2/server/HTTP2ServerConnectionFactory.html and -->
+	<!-- o.e.j.s.HttpConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/HttpConnectionFactory.html -->
+	<!-- for all configuration that may be set here. -->
+	<!-- =========================================================================================================== -->
 	<Call name="addConnector">
 		<Arg>
 			<New class="org.eclipse.jetty.server.ServerConnector" id="sslConnectorId">
@@ -147,11 +160,20 @@
 						</Item>
 						<Item>
 							<New class="org.eclipse.jetty.alpn.server.ALPNServerConnectionFactory">
-								<Arg>h2</Arg>
+								<Arg>h2,http/1.1</Arg>
 							</New>
 						</Item>
+						<!-- HTTP/2 over TLS -->
 						<Item>
 							<New class="org.eclipse.jetty.http2.server.HTTP2ServerConnectionFactory">
+								<Arg name="config">
+									<Ref refid="httpConfig" />
+								</Arg>
+							</New>
+						</Item>
+						<!-- WebSockets (HTTP/1.1) -->
+						<Item>
+							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
 								<Arg name="config">
 									<Ref refid="httpConfig" />
 								</Arg>
