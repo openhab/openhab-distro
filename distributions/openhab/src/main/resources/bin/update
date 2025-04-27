@@ -358,6 +358,7 @@ chown -R "$FileOwner:$FileGroup" "$WorkingDir"
 ## Start the upgrade tool
 echo "Starting JSON database update..."
 export OPENHAB_USERDATA="$OPENHAB_USERDATA"
+export OPENHAB_CONF="$OPENHAB_CONF"
 java -jar "$WorkingDir/runtime/bin/upgradetool.jar" || {
   echo "Update tool failed, please check the openHAB website (www.openhab.org) for manual update instructions." >&2
   exit 1
