@@ -161,6 +161,7 @@ ALERT;Pentair Binding: EasyTouch thing has been renamed to more generic Controll
 
 [5.0.0]
 ALERT;CORE: Persistence alias functionality has been improved, allowing defining aliases across strategies and filter criteria for a persistence service. Previous persistence configurations using aliases need to be reconfigured.
+ALERT;CORE: Persistence default strategies are removed and not applied automatically anymore. Managed persistence configurations are updated automatically. If you have a file based configuration, you may need to update your configuration.
 ALERT;Automower Binding: Implementation of complete automower API causes several channels to be removed, changed or added. New channels will need to be linked, existing items need to be adjusted.
 ALERT;Guntamatic Binding: The Binding now uses channel groups and the dynamic status channels now have an index prefix to allow multiple channels with the same description. Existing Items will need to be adjusted.
 ALERT;Juicenet Binding: The Binding has been removed due to removal of public API. Suggested alternative is to use https://github.com/JuiceRescue/juicepassproxy with the mqtt.homeasssistent binding.
