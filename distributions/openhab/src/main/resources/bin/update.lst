@@ -168,6 +168,7 @@ ALERT;MQTT Binding (Home Assistant): Thing types and channel IDs for things crea
 ALERT;MQTT Binding (Home Assistant): All scene components on a device are now exposed as a single String channel, with the scene name or object ID as its value. Existing Items and rules will need to be re-worked.
 ALERT;MQTT Binding (Home Assistant): Devices that use custom payloads or states now have that abstracted, so users should only use the default payloads. Rules and UIs may need to be updated for some devices.
 ALERT;Jython Automation: Transformation service name is renamed from "PY" to "JYTHONPY". "PY" is now used for transformations of the new Python Automation add-on.
+ALERT;Linky Binding : The linky binding was refactored to add new functionnalities. You will now need a bridge device to make the linky binding works. See Readme.md to get more detailled instructions on upgrade.
 
 [[PRE]]
 [2.2.0]
