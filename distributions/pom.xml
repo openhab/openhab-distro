@@ -15,11 +15,25 @@
 
   <name>openHAB Distributions</name>
 
-  <modules>
-    <module>openhab-addons</module>
-    <module>openhab-demo</module>
-    <module>openhab</module>
-    <module>openhab-verify</module>
-  </modules>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <modules>
+        <module>openhab</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>openhab-addons</module>
+        <module>openhab-demo</module>
+        <module>openhab</module>
+        <module>openhab-verify</module>
+      </modules>
+    </profile>
+  </profiles>
 
 </project>
