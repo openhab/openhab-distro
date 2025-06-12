@@ -87,7 +87,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.5.1</version>
           <dependencies>
             <dependency>
               <groupId>org.openhab.util</groupId>
@@ -166,14 +166,14 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.gmaven</groupId>
-        <artifactId>groovy-maven-plugin</artifactId>
-        <version>2.1.1</version>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>4.2.0</version>
         <dependencies>
           <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>4.0.13</version>
+            <version>4.0.27</version>
             <type>pom</type>
           </dependency>
         </dependencies>
@@ -184,7 +184,9 @@
             </goals>
             <phase>process-resources</phase>
             <configuration>
-              <source>${project.basedir}/merge-addon-info.groovy</source>
+              <scripts>
+                <script>${project.basedir}/merge-addon-info.groovy</script>
+              </scripts>
             </configuration>
           </execution>
         </executions>
