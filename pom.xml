@@ -285,6 +285,14 @@
         <pax.url.suffix/>
       </properties>
     </profile>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <build.number>- development build -</build.number>
+        <online.repo>${oh.repo.releaseBaseUrl}/libs-snapshot</online.repo>
+        <pax.url.suffix>@snapshots</pax.url.suffix>
+      </properties>
+    </profile>
   </profiles>
 
 </project>
