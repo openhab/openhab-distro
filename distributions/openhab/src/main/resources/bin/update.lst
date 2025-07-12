@@ -171,6 +171,7 @@ ALERT;MQTT Binding (Home Assistant): All scene components on a device are now ex
 ALERT;MQTT Binding (Home Assistant): Devices that use custom payloads or states now have that abstracted, so users should only use the default payloads. Rules and UIs may need to be updated for some devices.
 ALERT;Teslascope Binding: The Teslascope binding was refactored in order to support discovery. You now need a bridge device for the Teslascope binding to work.
 ALERT;Semantic Tags: Some Point tags reclassified as Properties; list of Point / Property / Equipment tags increased (so custom tags may now be semantic); tag validation is stricter. You may see validation warnings in the log, Items moved to another place in the UI, or other unexpected behavior.
+ALERT;Shelly Binding: Thing type shellypro2-relay was renamed to shellypro2. Delete the existing thing and re-discover the device.
 
 [[PRE]]
 [2.2.0]
