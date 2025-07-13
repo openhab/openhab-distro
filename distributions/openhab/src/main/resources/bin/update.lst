@@ -161,6 +161,7 @@ ALERT;Pentair Binding: EasyTouch thing has been renamed to more generic Controll
 
 [5.0.0]
 ALERT;CORE: Persistence alias functionality has been improved, allowing defining aliases across strategies and filter criteria for a persistence service. Previous persistence configurations using aliases need to be reconfigured.
+ALERT;Semantic Tags: Some Point tags reclassified as Properties; list of Point / Property / Equipment tags increased (so custom tags may now be semantic); tag validation is stricter. You may see validation warnings in the log, Items moved to another place in the UI, or other unexpected behavior.
 ALERT;Automower Binding: Implementation of complete automower API causes several channels to be removed, changed or added. New channels will need to be linked, existing items need to be adjusted.
 ALERT;Guntamatic Binding: The Binding now uses channel groups and the dynamic status channels now have an index prefix to allow multiple channels with the same description. Existing Items will need to be adjusted.
 ALERT;Juicenet Binding: The Binding has been removed due to removal of public API. Suggested alternative is to use https://github.com/JuiceRescue/juicepassproxy with the mqtt.homeasssistent binding.
@@ -169,9 +170,9 @@ ALERT;Linky Binding : The Linky binding was refactored to add new functionalitie
 ALERT;MQTT Binding (Home Assistant): Thing types and channel IDs for things created prior to 4.3.0 have been significantly restructured and simplified. Items will need to be re-linked. Delete and re-create your Things to also have a simplified Thing Type ID in your Thing IDs.
 ALERT;MQTT Binding (Home Assistant): All scene components on a device are now exposed as a single String channel, with the scene name or object ID as its value. Existing Items and rules will need to be re-worked.
 ALERT;MQTT Binding (Home Assistant): Devices that use custom payloads or states now have that abstracted, so users should only use the default payloads. Rules and UIs may need to be updated for some devices.
-ALERT;Teslascope Binding: The Teslascope binding was refactored in order to support discovery. You now need a bridge device for the Teslascope binding to work.
-ALERT;Semantic Tags: Some Point tags reclassified as Properties; list of Point / Property / Equipment tags increased (so custom tags may now be semantic); tag validation is stricter. You may see validation warnings in the log, Items moved to another place in the UI, or other unexpected behavior.
 ALERT;Shelly Binding: Thing type shellypro2-relay was renamed to shellypro2. Delete the existing thing and re-discover the device.
+ALERT;Teslascope Binding: The Teslascope binding was refactored in order to support discovery. You now need a bridge device for the Teslascope binding to work.
+ALERT;Tibber Binding: All channels have been renamed and restructured into groups. All items will need to be relinked to the new channel IDs.
 
 [[PRE]]
 [2.2.0]
