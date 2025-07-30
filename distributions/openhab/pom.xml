@@ -211,6 +211,7 @@
         <groupId>org.apache.karaf.tooling</groupId>
         <artifactId>karaf-maven-plugin</artifactId>
         <configuration>
+          <javase>${oh.java.version}</javase>
           <installedFeatures>
             <feature>wrapper</feature>
             <feature>wrap</feature>
