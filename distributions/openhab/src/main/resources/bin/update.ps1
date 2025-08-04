@@ -796,7 +796,7 @@ Function Update-openHAB() {
 
         # If there's an existing addons file, we need to replace it with the correct version.
         try {
-            $AddonsFile = "$OHAddons\openhab-addons-$OHVersionName.kar"
+            $AddonsFile = "$OHAddons\openhab-addons-$CurrentVersion.kar"
             if (Test-Path -Path $AddonsFile) {
                 Write-Host "Found an openHAB addons file, replacing with new version"
                 DeleteIfExists $AddonsFile
