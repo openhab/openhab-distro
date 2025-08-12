@@ -384,6 +384,7 @@ Function Update-openHAB() {
 
     # Get current openHAB version
     $CurrentVersion = GetOpenHABVersion $OHUserData
+    $CurrentVersionName = $CurrentVersion
     if ($CurrentVersion -eq "") {
         exit PrintAndReturn "Can't get the current openhab version from $OHUserData\etc\version.properties"
     }
@@ -796,7 +797,7 @@ Function Update-openHAB() {
 
         # If there's an existing addons file, we need to replace it with the correct version.
         try {
-            $AddonsFile = "$OHAddons\openhab-addons-$CurrentVersion.kar"
+            $AddonsFile = "$OHAddons\openhab-addons-$CurrentVersionName.kar"
             if (Test-Path -Path $AddonsFile) {
                 Write-Host "Found an openHAB addons file, replacing with new version"
                 DeleteIfExists $AddonsFile
