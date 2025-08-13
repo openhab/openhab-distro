@@ -177,6 +177,7 @@ ALERT;Tibber Binding: All channels have been renamed and restructured into group
 [5.1.0]
 ALERT;Automower Binding: Implementation of Automower WebSocket API causes several channels to be removed, changed or added. New channels will need to be linked, existing items need to be adjusted.
 ALERT;Freebox Binding: The binding has been removed from the distribution. You should consider migrating to the FreeboxOS binding.
+ALERT;evcc Binding: The binding has been completely restructured to use a modular architecture based on bridges and things, replacing the previous monolithic device model. A new automatic discovery service has been introduced to detect available datapoints and populate the inbox accordingly. Due to the architectural overhaul, all existing channels have been removed. You will need to reconfigure your settings and recreate your items, as previous configurations are no longer compatible.
 
 [[PRE]]
 [2.2.0]
