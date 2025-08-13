@@ -176,6 +176,7 @@ ALERT;Tibber Binding: All channels have been renamed and restructured into group
 
 [5.1.0]
 ALERT;Automower Binding: Implementation of Automower WebSocket API causes several channels to be removed, changed or added. New channels will need to be linked, existing items need to be adjusted.
+ALERT;evcc Binding: Restructured to modular things with auto-discovery of datapoints. You must reconfigure settings, recreate Things, and adjust Items as previous configurations are incompatible.
 ALERT;Freebox Binding: The binding has been removed from the distribution. You should consider migrating to the FreeboxOS binding.
 
 [[PRE]]
