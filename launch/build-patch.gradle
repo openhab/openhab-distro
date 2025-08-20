@@ -92,7 +92,12 @@ task buildChangelog {
       category.repos.each { repo ->
 
         def curlURL = ""
-        def labelString = "%20label:%22backported%22%20-label:%22regression%22"
+        // Choose correct backport label depending on version (4.x uses 'backported4')
+        def labelName = "backported"
+        if (openHABPatch?.trim()?.startsWith("4.")) {
+          labelName = "backported4"
+        }
+        def labelString = "%20label:%22${labelName}%22%20-label:%22regression%22"
         def repoName = repo.name
         def addonName = repo.addonName
 
