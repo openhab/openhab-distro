@@ -1,0 +1,295 @@
+import groovy.json.*
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+
+task prepareDirs {
+  doLast {
+    mkdir 'build'
+  }
+}
+ 
+task buildChangelog {
+
+  dependsOn prepareDirs
+
+  doLast {
+    def outputText = ""
+    def stringsFile = new File("./build/changelog.md")
+
+    // Get parameters from system properties - fail if not provided
+    def openHABMilestone = project.findProperty('milestone')
+    def openHABPatch = project.findProperty('version')
+    def fromDate = project.findProperty('fromDate')
+    def toDate = project.findProperty('toDate')
+    
+    // Validate that all required parameters are provided
+    if (!openHABMilestone) {
+      throw new GradleException("Required property 'milestone' not provided. Use -Pmilestone=<value>")
+    }
+    if (!openHABPatch) {
+      throw new GradleException("Required property 'version' not provided. Use -Pversion=<value>")
+    }
+    if (!fromDate) {
+      throw new GradleException("Required property 'fromDate' not provided. Use -PfromDate=<value>")
+    }
+    
+    // Use current date if toDate is not provided
+    if (!toDate) {
+      def now = new Date()
+      toDate = now.format("yyyy-MM-dd'T'HH:mm:ss")
+    }
+    
+    def mergedString = "%20merged:${fromDate}..${toDate}"
+
+    def fullChangeList = []
+
+    def categories = [
+      [
+        "type" : "core",
+        "orgName" : "openhab",
+        "milestone" : "${openHABMilestone}",
+        "repos" : [
+          [
+            "name" : "openhab-core"
+          ]
+        ]
+      ],[
+        "type" : "uis",
+        "orgName" : "openhab",
+        "milestone" : "${openHABMilestone}",
+        "repos" : [
+          [
+            "name" : "openhab-webui",
+          ]
+        ]
+      ],[
+        "type" : "add-ons",
+        "orgName" : "openhab",
+        "milestone" : "${openHABMilestone}",
+        "repos" : [
+          [
+            "name" : "openhab-addons",
+          ],[
+            "name" : "org.openhab.binding.zigbee",
+            "addonName" : "Zigbee"
+          ],[
+            "name" : "org.openhab.binding.zwave",
+            "addonName" : "ZWave"
+          ]
+        ]
+      ]
+    ]
+
+
+    categories.each { category ->
+
+      def pullRequests
+      def milestone = category.milestone
+      def milestoneString = ""
+      if (milestone != "") {milestoneString = "%20milestone:%22${milestone}%22"}
+      def orgName = category.orgName
+
+      category.repos.each { repo ->
+
+        def curlURL = ""
+        // Choose correct backport label depending on version (4.x uses 'backported4')
+        def labelName = "backported"
+        if (openHABPatch?.trim()?.startsWith("4.")) {
+          labelName = "backported4"
+        }
+        def labelString = "%20label:%22${labelName}%22%20-label:%22regression%22"
+        def repoName = repo.name
+        def addonName = repo.addonName
+
+        def searchesLeft = 1
+        def pageNumber = 1
+        def pageString = ""
+
+        while (searchesLeft > 0) {
+          curlURL = "https://api.github.com/search/issues?q=repo:${orgName}/${repoName}%20is:pr${mergedString}${labelString}&per_page=100${pageString}"
+          print "Parsing: ${orgName}/${repoName} (Milestone ${milestone}, Page ${pageNumber}"
+
+          // Perform HTTP request using native Groovy/Java (no external exec)
+          String curlOutputText = ""
+          try {
+            def conn = new URL(curlURL).openConnection()
+            conn.setRequestProperty('User-Agent', 'openhab-release-bot')
+            conn.setRequestProperty('Accept', 'application/vnd.github+json')
+            def token = System.getenv('GITHUB_TOKEN')
+            if (token) {
+              conn.setRequestProperty('Authorization', "Bearer ${token}")
+              conn.setRequestProperty('X-GitHub-Api-Version', '2022-11-28')
+            }
+            conn.connectTimeout = 15000
+            conn.readTimeout = 60000
+            curlOutputText = conn.inputStream.getText('UTF-8')
+          } catch (Exception e) {
+            throw new GradleException("HTTP request to GitHub failed: ${e.message}")
+          }
+
+          // Be nice to the API
+          Thread.sleep(2000)
+
+          def jsonSlurper = new JsonSlurper()
+          def searchResults = jsonSlurper.parseText(curlOutputText)
+
+          searchResults.items.each{pullRequest ->
+            def pullTitle = pullRequest.title
+            def pullNumber = pullRequest.number
+            def pullURL = pullRequest.html_url
+            def pullDate = pullRequest.closed_at
+            def pullCategory = category.type
+            def pullAddon = ""
+            def docsURL = ""
+            def pullType = ""
+            def addonType = ""
+
+            // Assign the addon name
+            Pattern pattern = Pattern.compile("\\[(.*?)\\](.*)")
+            Matcher matcher = pattern.matcher(pullTitle)
+
+            if (matcher.find()) {
+              pullAddon = matcher.group(1)
+              pullTitle = matcher.group(2).trim()
+            } else if (repo.addonName) {
+              pullAddon = repo.addonName
+            } else {
+              pullAddon = "misc"
+            }
+
+            if (repoName == "openhab-core" || repoName == "openhab-distro") {
+              pullAddon = "Core"
+            }
+
+            // Normalize UI add-on names for Web UI repo
+            if (repoName == "openhab-webui") {
+              if (pullAddon?.equalsIgnoreCase("basicui")) {
+                pullAddon = "Basic UI"
+              } else if (pullAddon?.equalsIgnoreCase("habpanel")) {
+                pullAddon = "HABPanel"
+              } else if (pullAddon?.equalsIgnoreCase("habot")) {
+                pullAddon = "HABot"
+              } else if (pullAddon?.equalsIgnoreCase("cometvisu")) {
+                pullAddon = "CometVisu"
+              } else if (pullAddon?.equalsIgnoreCase("iconset")) {
+                pullAddon = "Classic Iconset"
+              } else {
+                pullAddon = "Main UI"
+              }
+            }
+
+            // Assign the pull request type (bug, enhancment etc)
+            pullRequest.labels.each { label ->
+              switch(label.name.toLowerCase())
+              {
+               case "bug":
+                  pullType="bug"
+                  break
+                case "enhancement":
+                  pullType="enhancement"
+                  break
+              }
+            }
+
+            if (repoName == "openhab-core" && (pullType == "bug" || pullType == "enhancement" || pullType == "feature")) {
+              if ((pullAddon?.equalsIgnoreCase("Misc")) || (pullAddon.toLowerCase() == "core")) {
+                pullCategory = "core"
+                pullAddon = "Core"
+              } else {
+                pullCategory = "Add-ons"
+              }
+            }
+
+            // Add PR to full changelog list
+            if (pullType != "") {
+            fullChangeList << [
+              "category" : "${pullCategory}",
+              "type" : "${pullType}",
+              "addon" : "${pullAddon}",
+              "description" : "${pullTitle}",
+              "number" : "${pullNumber}",
+              "url" : "${pullURL}",
+              "docs" : "${docsURL}",
+              "class" : "${addonType}"
+            ]
+            }
+          }
+
+          // If there's more pages to go, search these too
+          if (pageString == "") {
+            def resultsFound = searchResults.total_count
+            println ", Pull Requests Found: ${resultsFound})"
+            if (resultsFound > 100) {
+              searchesLeft = Math.ceil(resultsFound/100)
+            }
+          } else {
+            println ")"
+          }
+          searchesLeft = searchesLeft - 1
+          pageNumber = pageNumber + 1
+          pageString = "&page=${pageNumber}"
+        }
+      }
+    }
+
+    outputText = outputText + "\nThis patch release contains the following bug fixes:\n"
+
+    ["Core", "Add-ons", "UIs"].each {categoryName ->
+
+      if (categoryName == "Core") {
+        outputText = outputText + "\n### Runtime\n\n"
+        outputText = outputText + "| Type | Issue | Change |\n"
+        outputText = outputText + "|-|-|-|\n"
+      } else if (categoryName == "UIs") {
+        outputText = outputText + "\n### User Interfaces\n\n"
+        outputText = outputText + "| UI | Type | Issue | Change |\n"
+        outputText = outputText + "|-|-|-|-|\n"
+      } else {
+        outputText = outputText + "\n### ${categoryName}\n\n"
+        outputText = outputText + "| Add-on | Type | Issue | Change |\n"
+        outputText = outputText + "|-|-|-|-|\n"
+      }
+      def sortedList = fullChangeList.findAll{it.type != "new"}.findAll{it.category == "${categoryName.toLowerCase()}"}.sort{it.type}.reverse().sort{it.addon.toLowerCase()}
+
+      def previousType = ""
+      def previousAddon = ""
+      sortedList.each {
+        def addonText = ""
+        def typeText = ""
+
+        if (it.addon.toLowerCase() != previousAddon) {
+          addonText = "**" + "${it.addon}" + "**"
+          previousType = ""
+          if (categoryName == "Core") {
+            outputText = outputText + "| | | |\n"
+          } else {
+            outputText = outputText + "| | | | |\n"
+          }
+        }
+        if (it.type != previousType) {
+          switch (it.type){
+            case "bug":
+              typeText = "Bug Fixes"
+              break
+            case "enhancement":
+              typeText = "Enhancements"
+              break
+            case "feature":
+              typeText = "New Feature"
+              break
+          }
+          typeText = "*" + "${typeText}" + "*"
+        }
+
+        if (categoryName == "Core") {
+          outputText = outputText + "| ${typeText} | [${it.number}](${it.url}) | ${it.description} |\n"
+        } else {
+          outputText = outputText + "| ${addonText} | ${typeText} | [${it.number}](${it.url}) | ${it.description} |\n"
+        }
+        previousAddon = it.addon.toLowerCase()
+        previousType = it.type
+      }
+    }
+    stringsFile.text = outputText
+  }
+}
