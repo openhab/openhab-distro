@@ -55,7 +55,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # Download assets to upload with the release
 
       - name: Download openHAB distribution (ZIP)
         run: |
