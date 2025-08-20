@@ -186,7 +186,7 @@ task buildChangelog {
               }
             }
 
-            if (((repoName == "openhab-core")) && ((pullType == "bug") || (pullType == "enhancement") || (pullType == "feature"))) {
+            if (repoName == "openhab-core" && (pullType == "bug" || pullType == "enhancement" || pullType == "feature")) {
               if ((pullAddon == "Misc") || (pullAddon.toLowerCase() == "core")) {
                 pullCategory = "core"
                 pullAddon = "Core"
