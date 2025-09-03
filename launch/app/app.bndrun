@@ -140,7 +140,7 @@ feature.openhab-model-runtime-all: \
 	com.sun.jna;version='[5.17.0,5.17.1)',\
 	com.sun.xml.bind.jaxb-osgi;version='[2.3.9,2.3.10)',\
 	io.github.classgraph.classgraph;version='[4.8.180,4.8.181)',\
-	io.methvin.directory-watcher;version='[0.18.0,0.18.1)',\
+	io.methvin.directory-watcher;version='[0.19.1,0.19.2)',\
 	io.swagger.core.v3.swagger-annotations;version='[2.2.35,2.2.36)',\
 	io.swagger.core.v3.swagger-core;version='[2.2.35,2.2.36)',\
 	io.swagger.core.v3.swagger-integration;version='[2.2.35,2.2.36)',\
@@ -182,8 +182,8 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.emf.ecore;version='[2.36.0,2.36.1)',\
 	org.eclipse.emf.ecore.xmi;version='[2.37.0,2.37.1)',\
 	org.eclipse.equinox.common;version='[3.19.0,3.19.1)',\
-	org.eclipse.equinox.event;version='[1.6.200,1.6.201)',\
-	org.eclipse.equinox.metatype;version='[1.4.500,1.4.501)',\
+	org.eclipse.equinox.event;version='[1.6.300,1.6.301)',\
+	org.eclipse.equinox.metatype;version='[1.6.400,1.6.401)',\
 	org.eclipse.jetty.alpn.client;version='[9.4.57,9.4.58)',\
 	org.eclipse.jetty.client;version='[9.4.57,9.4.58)',\
 	org.eclipse.jetty.http;version='[9.4.57,9.4.58)',\
@@ -224,7 +224,7 @@ feature.openhab-model-runtime-all: \
 	org.ops4j.pax.web.pax-web-runtime;version='[8.0.33,8.0.34)',\
 	org.ops4j.pax.web.pax-web-spi;version='[8.0.33,8.0.34)',\
 	org.ops4j.pax.web.pax-web-tomcat-common;version='[8.0.33,8.0.34)',\
-	org.osgi.service.cm;version='[1.6.0,1.6.1)',\
+	org.osgi.service.cm;version='[1.6.1,1.6.2)',\
 	org.osgi.service.component;version='[1.5.1,1.5.2)',\
 	org.osgi.service.component.annotations;version='[1.5.1,1.5.2)',\
 	org.osgi.service.event;version='[1.4.1,1.4.2)',\
