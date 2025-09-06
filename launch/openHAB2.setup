@@ -2352,13 +2352,12 @@
       <requirement
           name="org.eclipse.m2e.logback.feature.feature.group"/>
       <requirement
-          name="org.eclipse.m2e.feature.feature.group"/>
-      <requirement
           name="org.eclipse.wst.jsdt.feature.feature.group"/>
       <requirement
           name="org.eclipse.wst.web_ui.feature.feature.group"/>
       <requirement
-          name="bndtools.m2e.feature.feature.group"/>
+          name="bndtools.m2e.feature.feature.group"
+		  versionRange="[7.0.0,7.1.0)"/>
       <requirement
           name="org.lastnpe.m2e.feature.feature.group"/>
       <requirement
