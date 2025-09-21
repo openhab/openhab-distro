@@ -245,7 +245,15 @@ task buildChangelog {
       }
     }
 
-    outputText = outputText + "\nThis patch release contains the following bug fixes:\n"
+    // Choose output text based on whether this is a milestone or patch release
+    if (isMilestoneRelease) {
+      // Extract the major.minor version (a.b) from milestone version (a.b.c.Mx)
+      def baseVersion = openHABVersion.replaceAll(/\.M\d+$/, '') // Remove .Mx suffix
+      def majorMinorVersion = baseVersion.replaceAll(/\.\d+$/, '') // Remove patch version to get major.minor
+      outputText = outputText + "\nThis is a monthly milestone build for the upcoming openHAB ${majorMinorVersion} release, which brings many fixes and improvements.\n"
+    } else {
+      outputText = outputText + "\nThis patch release contains the following bug fixes:\n"
+    }
 
     ["Core", "Add-ons", "UIs"].each {categoryName ->
 
