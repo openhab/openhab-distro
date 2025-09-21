@@ -18,7 +18,7 @@ task buildChangelog {
 
     // Get parameters from system properties - fail if not provided
     def openHABMilestone = project.findProperty('milestone')
-    def openHABPatch = project.findProperty('version')
+    def openHABVersion = project.findProperty('version')
     def fromDate = project.findProperty('fromDate')
     def toDate = project.findProperty('toDate')
     
@@ -26,7 +26,7 @@ task buildChangelog {
     if (!openHABMilestone) {
       throw new GradleException("Required property 'milestone' not provided. Use -Pmilestone=<value>")
     }
-    if (!openHABPatch) {
+    if (!openHABVersion) {
       throw new GradleException("Required property 'version' not provided. Use -Pversion=<value>")
     }
     if (!fromDate) {
@@ -92,14 +92,27 @@ task buildChangelog {
       category.repos.each { repo ->
 
         def curlURL = ""
-        // Choose correct backport label depending on version (4.x uses 'backported4')
-        def labelName = "backported"
-        if (openHABPatch?.trim()?.startsWith("4.")) {
-          labelName = "backported4"
-        }
-        def labelString = "%20label:%22${labelName}%22%20-label:%22regression%22"
         def repoName = repo.name
         def addonName = repo.addonName
+        
+        // For milestone releases, don't use backported labels
+        // For patch releases, use appropriate backported label
+        def labelString = ""
+        
+        // Detect if this is a milestone release (version follows pattern a.b.c.Mx)
+        def isMilestoneRelease = openHABVersion?.matches(/\d+\.\d+\.\d+\.M\d+/)
+        
+        if (isMilestoneRelease) {
+          // Milestone release: no backported labels, only exclude regression
+          labelString = "%20-label:%22regression%22"
+        } else {
+          // Patch release: use backported labels
+          def labelName = "backported"
+          if (openHABVersion?.trim()?.startsWith("4.")) {
+            labelName = "backported4"
+          }
+          labelString = "%20label:%22${labelName}%22%20-label:%22regression%22"
+        }
 
         def searchesLeft = 1
         def pageNumber = 1
