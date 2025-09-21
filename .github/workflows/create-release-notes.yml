@@ -55,25 +55,33 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set artifact base URL
+        id: artifact_url
+        run: |
+          if [[ "${{ inputs.version }}" == *".M"* ]]; then
+            echo "base_url=https://openhab.jfrog.io/openhab/libs-milestone-local" >> $GITHUB_OUTPUT
+          else
+            echo "base_url=https://openhab.jfrog.io/artifactory/libs-release-local" >> $GITHUB_OUTPUT
+          fi
 
       - name: Download openHAB distribution (ZIP)
         run: |
           curl -fLsS --retry 3 --retry-delay 5 \
             -o openhab-${{ inputs.version }}.zip \
-            "https://openhab.jfrog.io/artifactory/libs-release-local/org/openhab/distro/openhab/${{ inputs.version }}/openhab-${{ inputs.version }}.zip"
+            "${{ steps.artifact_url.outputs.base_url }}/org/openhab/distro/openhab/${{ inputs.version }}/openhab-${{ inputs.version }}.zip"
 
       - name: Download openHAB distribution (TAR.GZ)
         run: |
           curl -fLsS --retry 3 --retry-delay 5 \
             -o openhab-${{ inputs.version }}.tar.gz \
-            "https://openhab.jfrog.io/artifactory/libs-release-local/org/openhab/distro/openhab/${{ inputs.version }}/openhab-${{ inputs.version }}.tar.gz"
+            "${{ steps.artifact_url.outputs.base_url }}/org/openhab/distro/openhab/${{ inputs.version }}/openhab-${{ inputs.version }}.tar.gz"
 
       - name: Download openHAB add-ons (KAR)
         run: |
           curl -fLsS --retry 3 --retry-delay 5 \
             -o openhab-addons-${{ inputs.version }}.kar \
-            "https://openhab.jfrog.io/artifactory/libs-release-local/org/openhab/distro/openhab-addons/${{ inputs.version }}/openhab-addons-${{ inputs.version }}.kar"
-
+            "${{ steps.artifact_url.outputs.base_url }}/org/openhab/distro/openhab-addons/${{ inputs.version }}/openhab-addons-${{ inputs.version }}.kar"
+            
       - name: Create GitHub Release and upload assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
