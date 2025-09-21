@@ -21,7 +21,7 @@ task buildChangelog {
     def openHABVersion = project.findProperty('version')
     def fromDate = project.findProperty('fromDate')
     def toDate = project.findProperty('toDate')
-    
+
     // Validate that all required parameters are provided
     if (!openHABMilestone) {
       throw new GradleException("Required property 'milestone' not provided. Use -Pmilestone=<value>")
@@ -38,6 +38,9 @@ task buildChangelog {
       def now = new Date()
       toDate = now.format("yyyy-MM-dd'T'HH:mm:ss")
     }
+    
+    // Detect if this is a milestone release (version follows pattern a.b.c.Mx)
+    def isMilestoneRelease = openHABVersion?.matches(/\d+\.\d+\.\d+\.M\d+/)
     
     def mergedString = "%20merged:${fromDate}..${toDate}"
 
@@ -99,10 +102,7 @@ task buildChangelog {
         // For milestone releases, don't use backported labels
         // For patch releases, use appropriate backported label
         def labelString = ""
-        
-        // Detect if this is a milestone release (version follows pattern a.b.c.Mx)
-        def isMilestoneRelease = openHABVersion?.matches(/\d+\.\d+\.\d+\.M\d+/)
-        
+                
         if (isMilestoneRelease) {
           // Milestone release: no backported labels, only exclude regression
           labelString = "%20-label:%22regression%22"
