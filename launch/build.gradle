@@ -50,7 +50,8 @@ task buildChangelog {
         "milestone" : "${openHABMilestone}",
         "repos" : [
           [
-            "name" : "openhab-core"
+            "name" : "openhab-core",
+            "name" : "openhab-distro"
           ]
         ]
       ],[
@@ -119,7 +120,7 @@ task buildChangelog {
         def pageString = ""
 
         while (searchesLeft > 0) {
-          curlURL = "https://api.github.com/search/issues?q=repo:${orgName}/${repoName}%20is:pr${mergedString}${labelString}&per_page=100${pageString}"
+          curlURL = "https://api.github.com/search/issues?q=repo:${orgName}/${repoName}%20is:pr${mergedString}${milestoneString}${labelString}&per_page=100${pageString}"
           print "Parsing: ${orgName}/${repoName} (Milestone ${milestone}, Page ${pageNumber}"
 
           // Perform HTTP request using native Groovy/Java (no external exec)
@@ -245,7 +246,15 @@ task buildChangelog {
       }
     }
 
-    outputText = outputText + "\nThis patch release contains the following bug fixes:\n"
+    // Choose output text based on whether this is a milestone or patch release
+    if (isMilestoneRelease) {
+      // Extract the major.minor version (a.b) from milestone version (a.b.c.Mx)
+      def baseVersion = openHABVersion.replaceAll(/\.M\d+$/, '') // Remove .Mx suffix
+      def majorMinorVersion = baseVersion.replaceAll(/\.\d+$/, '') // Remove patch version to get major.minor
+      outputText = outputText + "\nThis is a monthly milestone build for the upcoming openHAB ${majorMinorVersion} release, which brings many fixes and improvements.\n"
+    } else {
+      outputText = outputText + "\nThis patch release contains the following bug fixes:\n"
+    }
 
     ["Core", "Add-ons", "UIs"].each {categoryName ->
 
