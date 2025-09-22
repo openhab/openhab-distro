@@ -53,7 +53,8 @@ task buildChangelog {
         "milestone" : "${openHABMilestone}",
         "repos" : [
           [
-            "name" : "openhab-core",
+            "name" : "openhab-core"
+          ],[
             "name" : "openhab-distro"
           ]
         ]
