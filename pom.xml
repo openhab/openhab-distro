@@ -9,7 +9,7 @@
 
   <groupId>org.openhab.distro</groupId>
   <artifactId>pom</artifactId>
-  <version>5.0.2-SNAPSHOT</version>
+  <version>5.0.2</version>
   <packaging>pom</packaging>
 
   <name>openHAB Distribution</name>
@@ -30,7 +30,7 @@
   <scm>
     <connection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</connection>
     <developerConnection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</developerConnection>
-    <tag>5.0.0</tag>
+    <tag>5.0.2</tag>
     <url>https://github.com/openhab/openhab-distro</url>
   </scm>
 
@@ -56,8 +56,8 @@
 
     <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>
 
-    <ohc.version>5.0.2-SNAPSHOT</ohc.version>
-    <oha.version>5.0.2-SNAPSHOT</oha.version>
+    <ohc.version>5.0.2</ohc.version>
+    <oha.version>5.0.2</oha.version>
 
     <karaf.version>4.4.7</karaf.version>
 
