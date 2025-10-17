@@ -54,6 +54,7 @@ feature.openhab-model-runtime-all: \
 	bnd.identity;id='org.openhab.core.automation',\
 	bnd.identity;id='org.openhab.core.automation.module.media',\
 	bnd.identity;id='org.openhab.core.automation.module.script',\
+	bnd.identity;id='org.openhab.core.automation.module.script.providersupport',\
 	bnd.identity;id='org.openhab.core.automation.module.script.rulesupport',\
 	bnd.identity;id='org.openhab.core.automation.rest',\
 	bnd.identity;id='org.openhab.core.io.console.rfc147',\
@@ -249,6 +250,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.automation;version='[5.1.0,5.1.1)',\
 	org.openhab.core.automation.module.media;version='[5.1.0,5.1.1)',\
 	org.openhab.core.automation.module.script;version='[5.1.0,5.1.1)',\
+	org.openhab.core.automation.module.script.providersupport;version='[5.1.0,5.1.1)',\
 	org.openhab.core.automation.module.script.rulesupport;version='[5.1.0,5.1.1)',\
 	org.openhab.core.automation.rest;version='[5.1.0,5.1.1)',\
 	org.openhab.core.config.core;version='[5.1.0,5.1.1)',\
