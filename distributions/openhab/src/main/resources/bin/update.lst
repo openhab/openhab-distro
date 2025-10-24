@@ -181,6 +181,11 @@ ALERT;evcc Binding: Restructured to modular things with auto-discovery of datapo
 ALERT;Freebox Binding: The binding has been removed from the distribution. You should consider migrating to the FreeboxOS binding.
 ALERT;JavaScript Automation: The event object in UI-based environments has been aligned with the file-based event object. Properties are now pure JavaScript types and property names have changed. Blockly users need to resave their scripts.
 ALERT;JavaScript Automation: Automatic injection of the openHAB JavaScript library now allows for more fine-grained control. It is recommended to manually import required namespaces from the openhab library in file-based scripts and transformations and disable automatic injection for file-based scripts and transformations.
+ALERT;PythonScripting Automation: Python "openhab.Timer" removed. Can be replaced with default Threading or Timer implementation.
+ALERT;PythonScripting Automation: Changed parameter of "openhab.Registry.addItem"
+ALERT;PythonScripting Automation: Replace NotInitialisedException with NotFoundException in "openhab.Registry.getItem, "openhab.Registry.removeItem", "openhab.Registry.getThing", "openhab.Registry.getChannel"
+ALERT;PythonScripting Automation: Metadata API changed
+ALERT;PythonScripting Automation: "openhab.Registry.safeItemName" move to "openhab.Item.buildSafeName"
 
 [[PRE]]
 [2.2.0]
