@@ -183,8 +183,8 @@ ALERT;JavaScript Automation: The event object in UI-based environments has been 
 ALERT;JavaScript Automation: Automatic injection of the openHAB JavaScript library now allows for more fine-grained control. It is recommended to manually import required namespaces from the openhab library in file-based scripts and transformations and disable automatic injection for file-based scripts and transformations.
 ALERT;PythonScripting Automation: Python "openhab.Timer" removed. Can be replaced with default Threading or Timer implementation.
 ALERT;PythonScripting Automation: Changed parameter of "openhab.Registry.addItem"
-ALERT;PythonScripting Automation: Replace NotInitialisedException with NotFoundException in "openhab.Registry.getItem, "openhab.Registry.removeItem", "openhab.Registry.getThing", "openhab.Registry.getChannel"
-ALERT;PythonScripting Automation: Metadata API changed
+ALERT;PythonScripting Automation: Replace "NotInitialisedException" with "NotFoundException" in "openhab.Registry.getItem, "openhab.Registry.removeItem", "openhab.Registry.getThing", "openhab.Registry.getChannel"
+ALERT;PythonScripting Automation: "openhab.Registry.getItemMetadata", "openhab.Registry.setItemMetadata" and "openhab.Registry.removeItemMetadata" replaced by "<Item>.getMetadata().get", "<Item>.getMetadata().set" and "<Item>.getMetadata().remove"
 ALERT;PythonScripting Automation: "openhab.Registry.safeItemName" move to "openhab.Item.buildSafeName"
 
 [[PRE]]
