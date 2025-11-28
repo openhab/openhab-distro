@@ -188,6 +188,7 @@ ALERT;PythonScripting Automation: Changed parameter of "openhab.Registry.addItem
 ALERT;PythonScripting Automation: Replace "NotInitialisedException" with "NotFoundException" in "openhab.Registry.getItem, "openhab.Registry.removeItem", "openhab.Registry.getThing", "openhab.Registry.getChannel"
 ALERT;PythonScripting Automation: "openhab.Registry.getItemMetadata", "openhab.Registry.setItemMetadata" and "openhab.Registry.removeItemMetadata" replaced by "<Item>.getMetadata().get", "<Item>.getMetadata().set" and "<Item>.getMetadata().remove"
 ALERT;PythonScripting Automation: "openhab.Registry.safeItemName" move to "openhab.Item.buildSafeName"
+ALERT;SMHI Binding: Due to updates to SMHI's API, the channel ids have changed. Measures have been taken to ensure backwards compatibility, but to avoid future issues all items need to be relinked to the new channels.
 
 [[PRE]]
 [2.2.0]
