@@ -203,6 +203,35 @@ task buildChangelog {
                 case "enhancement":
                   pullType="enhancement"
                   break
+                case ~/^new(.+)/:
+                  if (repoName == "openhab-core") {
+                    pullType="feature"
+                    pullAddon="Core"
+                  } else {
+                    def addonTypeURL
+                    pullType = "new"
+                    addonType = Matcher.lastMatcher[0][1].trim().capitalize()
+                    if (addonType == "Contribution") { addonType = "Binding" }
+                    if (addonType == "Transform") { addonType = "Transformation" }
+                    if ((addonType != "Voice") && (addonType != "Persistence")) {
+                      addonTypeURL = (addonType + "s").toLowerCase()
+                    } else {
+                      addonTypeURL = addonType.toLowerCase()
+                    }
+                    docsURL = "https://next.openhab.org/addons/${addonTypeURL}/${pullAddon}/"
+
+                    def url = docsURL.toURL()
+                    Pattern htmlPattern = Pattern.compile(".*<title>(.*) - .* \\| openHAB<\\/title>")
+                    try {
+                      Matcher htmlMatcher = htmlPattern.matcher(url.text)
+                      if (htmlMatcher.find()) {
+                        pullAddon = htmlMatcher.group(1)
+                      }
+                    } catch (FileNotFoundException e) {
+                      println "  Warning: New contribution PR #${pullNumber} does not have a [name]..."
+                    }
+                  }
+                  break
               }
             }
 
@@ -252,7 +281,23 @@ task buildChangelog {
       // Extract the major.minor version (a.b) from milestone version (a.b.c.Mx)
       def baseVersion = openHABVersion.replaceAll(/\.M\d+$/, '') // Remove .Mx suffix
       def majorMinorVersion = baseVersion.replaceAll(/\.\d+$/, '') // Remove patch version to get major.minor
-      outputText = outputText + "\nThis is a monthly milestone build for the upcoming openHAB ${majorMinorVersion} release, which brings many fixes and improvements.\n"
+      outputText = outputText + "\nThis is a monthly milestone build for the upcoming openHAB ${majorMinorVersion} release, which brings many fixes and improvements.\n\n"
+
+      // check for new add-ons
+      def sortedList = fullChangeList.findAll{it.type == "new"}.sort{it.addon.toLowerCase()}
+
+      if (sortedList.size() > 0) {
+        outputText = outputText + "### New Add-ons\n\n"
+        outputText = outputText + "The following add-ons are newly introduced:\n\n"
+        outputText = outputText + "| Add-on | Type | Issue |\n"
+        outputText = outputText + "|-|-|-|\n"
+
+        sortedList.each {
+          outputText = outputText + "| [**${it.addon}**](${it.docs}) | ${it.class} | [#${it.number}](${it.url}) |\n"
+        }
+
+        outputText = outputText + "\nThe following improvements were made:\n"
+      }
     } else {
       outputText = outputText + "\nThis patch release contains the following bug fixes:\n"
     }
