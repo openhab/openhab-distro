@@ -182,6 +182,7 @@ ALERT;Folderwatcher Binding: A typo was corrected in the AzureBlob thing paramet
 ALERT;Freebox Binding: The binding has been removed from the distribution. You should consider migrating to the FreeboxOS binding.
 ALERT:Guntamatic Binding: Channel ID spelling errors (such as `079-interuption-0` and `080-interuption-1`) have been corrected. You may need to update items linked to these channels.
 ALERT;Home Assistant Binding: The binding has been split from the main MQTT binding, and will not be auto-installed. If you use this binding, it will need to be manually re-installed. You may also need to re-configure the binding if discovery settings have been customized.
+ALERT;Homie Binding: The binding has been split from the main MQTT binding, and will not be auto-installed. If you use this binding, it will need to be manually re-installed.
 ALERT;JavaScript Automation: The event object in UI-based environments has been aligned with the file-based event object. Properties are now pure JavaScript types and property names have changed. Blockly users need to resave their scripts.
 ALERT;JavaScript Automation: Automatic injection of the openHAB JavaScript library now allows for more fine-grained control. It is recommended to manually import required namespaces from the openhab library in file-based scripts and transformations and disable automatic injection for file-based scripts and transformations.
 ALERT;PythonScripting Automation: Python "openhab.Timer" removed. Can be replaced with default Threading or Timer implementation.
