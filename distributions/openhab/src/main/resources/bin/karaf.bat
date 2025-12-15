@@ -24,6 +24,11 @@ set DIRNAME=%~dp0%
 set PROGNAME=%~nx0%
 set ARGS=%*
 
+rem enabling workaround for utf8 tables, chcp 65001
+rem TODO: remove when upgrading from 4.4.9 to 4.4.10 or 4.5.0
+chcp 65001 > nul
+rem as this is within the setlocal section, the change will be reverted on exit
+
 rem Sourcing environment settings for karaf similar to tomcats setenv
 
 if "%KARAF_SCRIPT%" == "" (
