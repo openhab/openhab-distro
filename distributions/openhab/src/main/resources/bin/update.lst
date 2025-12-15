@@ -175,7 +175,7 @@ ALERT;Teslascope Binding: The Teslascope binding was refactored in order to supp
 ALERT;Tibber Binding: All channels have been renamed and restructured into groups. All items will need to be relinked to the new channel IDs.
 
 [5.1.0]
-ALERT;CORE: Persistence default strategies are removed and not applied automatically anymore. Managed persistence configurations are updated automatically. If you have a file based configuration, you may need to update your configuration.
+ALERT;CORE: Persistence default strategies are removed and not applied automatically anymore. Managed persistence configurations are updated automatically. If you have a file based configuration with an existing .persist file, you may have to update your configuration: remove "default" from Strategies and make sure all Items definitions have a strategy defined.
 ALERT;Allplay Binding: Due to limited usage and increasing maintenance issues, this binding has been removed.
 ALERT;Automower Binding: Restructured to modular things with auto-discovery of datapoints. New things and channels will need to be linked, existing items need to be adjusted.
 ALERT;evcc Binding: Restructured to modular things with auto-discovery of datapoints. You must reconfigure settings, recreate Things, and adjust Items as previous configurations are incompatible.
