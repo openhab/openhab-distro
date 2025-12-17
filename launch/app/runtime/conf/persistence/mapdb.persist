@@ -1,7 +1,7 @@
-// persistence strategies have a name and a definition and are referred to in the "Items" section
+// Persistence strategies have a name and a definition and are referred to in the "Items" section,
+// everyChange, everyUpdate, restoreOnStartup and forecast strategies are predefined.
 Strategies {
-	// if no strategy is specified for an item entry below, the default list will be used
-	default = everyChange, restoreOnStartup
+    everyHour: "0 0 * * * ?"
 }
 
 /* 
@@ -10,6 +10,8 @@ Strategies {
  * item (excl. the group item itself).
  */
 Items {
-	// log demo number on every change
-	DemoNumber;
+	// persist demoNumber on every change, restore on startup
+	DemoNumber: strategy = everyChange, restoreOnStartup
+	// persist demoString every hour
+	DemoString: strategy = everyHour
 }
