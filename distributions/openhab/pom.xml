@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom-distributions</artifactId>
-    <version>5.0.0-SNAPSHOT</version>
+    <version>5.1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>openhab</artifactId>
@@ -87,7 +87,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>3.5.1</version>
+          <version>3.6.2</version>
           <dependencies>
             <dependency>
               <groupId>org.openhab.util</groupId>
@@ -103,7 +103,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.9.0</version>
         <executions>
           <execution>
             <id>copy</id>
@@ -173,7 +173,7 @@
           <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>4.0.27</version>
+            <version>5.0.3</version>
             <type>pom</type>
           </dependency>
         </dependencies>
@@ -194,7 +194,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
+        <version>3.4.0</version>
         <configuration>
           <escapeString>\</escapeString>
         </configuration>
@@ -211,6 +211,7 @@
         <groupId>org.apache.karaf.tooling</groupId>
         <artifactId>karaf-maven-plugin</artifactId>
         <configuration>
+          <javase>${oh.java.version}</javase>
           <installedFeatures>
             <feature>wrapper</feature>
             <feature>wrap</feature>
