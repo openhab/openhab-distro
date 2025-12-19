@@ -39,8 +39,8 @@ task buildChangelog {
       toDate = now.format("yyyy-MM-dd'T'HH:mm:ss")
     }
     
-    // Detect if this is a milestone release (version follows pattern a.b.c.Mx)
-    def isMilestoneRelease = openHABVersion?.matches(/\d+\.\d+\.\d+\.M\d+/)
+    // Detect if this is a milestone release (version follows pattern a.b.c.Mx or a.b.c.RCx)
+    def isMilestoneRelease = openHABVersion?.matches(/\d+\.\d+\.\d+\.(M|RC)\d+/)
     
     def mergedString = "%20merged:${fromDate}..${toDate}"
 
@@ -278,10 +278,11 @@ task buildChangelog {
 
     // Choose output text based on whether this is a milestone or patch release
     if (isMilestoneRelease) {
-      // Extract the major.minor version (a.b) from milestone version (a.b.c.Mx)
-      def baseVersion = openHABVersion.replaceAll(/\.M\d+$/, '') // Remove .Mx suffix
+      // Extract the major.minor version from milestone or RC version
+      def baseVersion = openHABVersion.replaceAll(/\.(M|RC)\d+$/, '') // Remove .Mx or .RCx suffix
       def majorMinorVersion = baseVersion.replaceAll(/\.\d+$/, '') // Remove patch version to get major.minor
-      outputText = outputText + "\nThis is a monthly milestone build for the upcoming openHAB ${majorMinorVersion} release, which brings many fixes and improvements.\n\n"
+      def releaseType = openHABVersion?.matches(/\d+\.\d+\.\d+\.RC\d+/) ? "Release Candidate" : "monthly milestone"
+      outputText = outputText + "\nThis is a ${releaseType} build for the upcoming openHAB ${majorMinorVersion} release, which brings many fixes and improvements.\n\n"
 
       // check for new add-ons
       def sortedList = fullChangeList.findAll{it.type == "new"}.sort{it.addon.toLowerCase()}

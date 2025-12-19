@@ -58,7 +58,7 @@ jobs:
       - name: Set artifact base URL
         id: artifact_url
         run: |
-          if [[ "${{ inputs.version }}" == *".M"* ]]; then
+          if [[ "${{ inputs.version }}" == *".M"* ]] || [[ "${{ inputs.version }}" == *".RC"* ]]; then
             echo "base_url=https://openhab.jfrog.io/openhab/libs-milestone-local" >> $GITHUB_OUTPUT
           else
             echo "base_url=https://openhab.jfrog.io/artifactory/libs-release-local" >> $GITHUB_OUTPUT
