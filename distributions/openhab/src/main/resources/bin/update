@@ -363,6 +363,8 @@ java -jar "$WorkingDir/runtime/bin/upgradetool.jar" || {
   echo "Update tool failed, please check the openHAB website (www.openhab.org) for manual update instructions." >&2
   exit 1
 }
+# Apply file ownership for JSON database as upgradetool can create new files
+chown -R "$FileOwner:$FileGroup" "$OPENHAB_USERDATA/jsondb"
 echo "JSON database updated successfully."
 
 echo ""
