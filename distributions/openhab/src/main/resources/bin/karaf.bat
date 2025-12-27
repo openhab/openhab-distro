@@ -24,6 +24,11 @@ set DIRNAME=%~dp0%
 set PROGNAME=%~nx0%
 set ARGS=%*
 
+rem enabling workaround for utf8 tables, chcp 65001
+rem TODO: remove when upgrading from 4.4.9 to 4.4.10 or 4.5.0
+chcp 65001 > nul
+rem as this is within the setlocal section, the change will be reverted on exit
+
 rem Sourcing environment settings for karaf similar to tomcats setenv
 
 if "%KARAF_SCRIPT%" == "" (
@@ -412,8 +417,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
                 --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.8.jar" ^
-                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.8.jar" ^
+                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.9.jar" ^
+                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.9.jar" ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^
