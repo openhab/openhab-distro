@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -11,7 +9,7 @@
 
   <groupId>org.openhab.distro</groupId>
   <artifactId>pom</artifactId>
-  <version>5.1.1-SNAPSHOT</version>
+  <version>5.1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>openHAB Distribution</name>
@@ -58,8 +56,8 @@
 
     <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>
 
-    <ohc.version>5.1.0</ohc.version>
-    <oha.version>5.1.0</oha.version>
+    <ohc.version>5.1.2-SNAPSHOT</ohc.version>
+    <oha.version>5.1.2-SNAPSHOT</oha.version>
 
     <karaf.version>4.4.8</karaf.version>
 
