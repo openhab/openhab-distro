@@ -16,11 +16,14 @@ usage() {
    echo "Use this script to backup your openHAB configuration, you can use the 'restore' script"
    echo "from any machine to transfer your configuration across to another instance."
    echo ""
-   echo "The noninteractive flag allows backups to be run from an OpenHAB GUI button,"
+   echo "The noninteractive flag allows backups to be run from an openHAB GUI button,"
    echo "that uses the Exec Binding, and a command like: openhab-cli backup --noninteractive"
    echo ""
    echo "A full backup must be done in interactive mode, and includes the tmp and cache directories"
    echo "that are normally excluded."
+   echo ""
+   echo "Piper, Vosk & Whisper voice add-on directories are always excluded from backups."
+   echo "These directories contain big model files, which can be downloaded again."
    echo ""
    echo "Backup directory: '$OPENHAB_BACKUPS'"
    echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
@@ -185,10 +188,16 @@ fi
 ## Copy userdata and conf folders
 [ "$bInteractive"  = "1" ] && echo "Copying configuration to temporary folder..."
 mkdir -p "$TempDir/userdata"
+
+# shellcheck disable=SC2089
+DUMP_EXCLUDES="-not -name '*.hprof' -and -not -name 'hs_err_pid*'" # excludes Java heap dumps and crash dumps
+# shellcheck disable=SC2089
+VOICE_ADDON_EXCLUDES="-and -not -name '*/piper' -and -not -path '*/vosk' -and -not -path '*/whisper'" # excludes Piper, Vosk & Whisper directories due to containing big model files
+
 if [ -z "$INCLUDE_CACHE" ]; then
-  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" -and -not -path '*/tmp' -and -not -path '*/cache' | xargs -I % cp -R % "$TempDir/userdata"
+  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" -and -not -path '*/tmp' -and -not -path '*/cache' $DUMP_EXCLUDES $VOICE_ADDON_EXCLUDES | xargs -I % cp -R % "$TempDir/userdata"
 else
-  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" | xargs -I % cp -R % "$TempDir/userdata"
+  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" $DUMP_EXCLUDES $VOICE_ADDON_EXCLUDES | xargs -I % cp -R % "$TempDir/userdata"
 fi
 mkdir -p "$TempDir/conf"
 cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
@@ -201,7 +210,7 @@ if [ -f "$fileList" ]; then
     rm -rf "$TempDir/userdata/etc/$fileName"
   done < "$fileList"
 else
-  echo "System Filelist not found, exiting..."
+  echo "System filelist not found, exiting..."
   exit 1
 fi
 
