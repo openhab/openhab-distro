@@ -127,14 +127,14 @@ feature.openhab-model-runtime-all: \
 -runbundles: \
 	org.ops4j.pax.logging.pax-logging-api;version='[2.3.0,2.3.1)',\
 	org.ops4j.pax.logging.pax-logging-log4j2;version='[2.3.0,2.3.1)',\
-	com.fasterxml.jackson.core.jackson-annotations;version='[2.20.0,2.20.1)',\
-	com.fasterxml.jackson.core.jackson-core;version='[2.20.1,2.20.2)',\
-	com.fasterxml.jackson.core.jackson-databind;version='[2.20.1,2.20.2)',\
-	com.fasterxml.jackson.dataformat.jackson-dataformat-xml;version='[2.20.1,2.20.2)',\
-	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.20.1,2.20.2)',\
-	com.fasterxml.jackson.datatype.jackson-datatype-jsr310;version='[2.20.1,2.20.2)',\
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.21.0,2.21.1)',\
+	com.fasterxml.jackson.core.jackson-core;version='[2.21.0,2.21.1)',\
+	com.fasterxml.jackson.core.jackson-databind;version='[2.21.0,2.21.1)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-xml;version='[2.21.0,2.21.1)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.21.0,2.21.1)',\
+	com.fasterxml.jackson.datatype.jackson-datatype-jsr310;version='[2.21.0,2.21.1)',\
 	com.fasterxml.woodstox.woodstox-core;version='[6.6.2,6.6.3)',\
-	com.google.gson;version='[2.13.1,2.13.2)',\
+	com.google.gson;version='[2.13.2,2.13.3)',\
 	com.google.guava;version='[33.5.0,33.5.1)',\
 	com.google.guava.failureaccess;version='[1.0.3,1.0.4)',\
 	com.google.inject;version='[7.0.0,7.0.1)',\
@@ -142,11 +142,11 @@ feature.openhab-model-runtime-all: \
 	com.sun.xml.bind.jaxb-osgi;version='[2.3.9,2.3.10)',\
 	io.github.classgraph.classgraph;version='[4.8.184,4.8.185)',\
 	io.methvin.directory-watcher;version='[0.19.1,0.19.2)',\
-	io.swagger.core.v3.swagger-annotations;version='[2.2.35,2.2.36)',\
-	io.swagger.core.v3.swagger-core;version='[2.2.35,2.2.36)',\
-	io.swagger.core.v3.swagger-integration;version='[2.2.35,2.2.36)',\
-	io.swagger.core.v3.swagger-jaxrs2;version='[2.2.35,2.2.36)',\
-	io.swagger.core.v3.swagger-models;version='[2.2.35,2.2.36)',\
+	io.swagger.core.v3.swagger-annotations;version='[2.2.41,2.2.42)',\
+	io.swagger.core.v3.swagger-core;version='[2.2.41,2.2.42)',\
+	io.swagger.core.v3.swagger-integration;version='[2.2.41,2.2.42)',\
+	io.swagger.core.v3.swagger-jaxrs2;version='[2.2.41,2.2.42)',\
+	io.swagger.core.v3.swagger-models;version='[2.2.41,2.2.42)',\
 	jakarta.annotation-api;version='[2.1.1,2.1.2)',\
 	jakarta.inject.jakarta.inject-api;version='[2.0.1,2.0.2)',\
 	jakarta.validation.jakarta.validation-api;version='[2.0.2,2.0.3)',\
@@ -298,5 +298,5 @@ feature.openhab-model-runtime-all: \
 	org.openhab.ui;version='[5.2.0,5.2.1)',\
 	org.openhab.ui.basic;version='[5.2.0,5.2.1)',\
 	org.openhab.ui.iconset.classic;version='[5.2.0,5.2.1)',\
-	de.focus_shift.jollyday-core;version='[1.5.4,1.5.5)',\
-	de.focus_shift.jollyday-jackson;version='[1.5.4,1.5.5)'
+	de.focus_shift.jollyday-core;version='[1.8.1,1.8.2)',\
+	de.focus_shift.jollyday-jackson;version='[1.8.1,1.8.2)'
