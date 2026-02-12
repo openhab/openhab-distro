@@ -199,6 +199,8 @@ ALERT;SMHI Binding: Due to updates to SMHI's API, the channel ids have changed. 
 [5.2.0]
 ALERT;Corona Stats Binding: Due to EOL of the website, this add-on has been removed.
 ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to setup your default voice again and adjust your rules & scripts for the changed voice UIDs.
+ALERT;The following REST API endpoint has changed HTTP status code from 404 to 204 if no entries exist: "/actions/{thingUID}"
+ALERT;The following REST API endpoints have changed HTTP status code from 204 to 404 if no result is found: "/channel-types/{channelTypeUID}" and "/thing-types/{thingTypeUID}"
 
 [[PRE]]
 [2.2.0]
