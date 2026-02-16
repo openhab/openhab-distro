@@ -61,7 +61,7 @@
     <ohc.version>5.2.0-SNAPSHOT</ohc.version>
     <oha.version>5.2.0-SNAPSHOT</oha.version>
 
-    <karaf.version>4.4.9</karaf.version>
+    <karaf.version>4.4.10</karaf.version>
 
     <oh.java.version>21</oh.java.version>
     <maven.compiler.release>${oh.java.version}</maven.compiler.release>
