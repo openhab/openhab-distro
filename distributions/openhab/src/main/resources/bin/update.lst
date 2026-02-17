@@ -197,6 +197,8 @@ ALERT;Shelly Binding: Thing type shellyplushtg3 was renamed to shellyplusht. Del
 ALERT;SMHI Binding: Due to updates to SMHI's API, the channel ids have changed. Measures have been taken to ensure backwards compatibility, but to avoid future issues all items need to be relinked to the new channels.
 
 [5.2.0]
+ALERT;CORE: GET /actions/{thingUID} REST API endpoint has changed HTTP status code from 404 to 204 if no entries exist.
+ALERT;CORE: GET /channel-types/{channelTypeUID} and GET /thing-types/{thingTypeUID} REST API endpoints have changed HTTP status code from 204 to 404 if no result is found.
 ALERT;Corona Stats Binding: Due to EOL of the website, this add-on has been removed.
 ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to setup your default voice again and adjust your rules & scripts for the changed voice UIDs.
 
