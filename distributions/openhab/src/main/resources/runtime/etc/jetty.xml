@@ -64,15 +64,22 @@
 				<Set name="minGzipSize">1024</Set>
 				<Set name="includedPaths">
 					<Array type="java.lang.String">
+						<Item>/assets/*</Item>
+						<Item>/images/*</Item>
 						<Item>/rest/*</Item>
 						<Item>/static/*</Item>
 					</Array>
 				</Set>
 				<Set name="includedMimeTypes">
 					<Array type="java.lang.String">
+						<Item>application/javascript</Item>
 						<Item>application/json</Item>
+						<Item>image/svg+xml</Item>
+						<Item>text/css</Item>
 						<Item>text/html</Item>
+						<Item>text/javascript</Item>
 						<Item>text/plain</Item>
+						<Item>text/xml</Item>
 					</Array>
 				</Set>
 			</New>
