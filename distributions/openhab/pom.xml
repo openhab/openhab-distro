@@ -214,10 +214,10 @@
           <javase>${oh.java.version}</javase>
           <installedFeatures>
             <feature>wrapper</feature>
-            <feature>wrap</feature>
           </installedFeatures>
           <startupFeatures>
             <feature>eventadmin</feature>
+            <feature>wrap</feature>
           </startupFeatures>
           <bootFeatures>
             <feature>jaas</feature>
