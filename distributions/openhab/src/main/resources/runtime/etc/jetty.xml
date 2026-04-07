@@ -23,7 +23,7 @@
 					<Call name="addRule">
 						<Arg>
 							<New class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
-								<Set name="header">X-Forwarded-Proto</Set>
+								<Set name="headerName">X-Forwarded-Proto</Set>
 								<Set name="headerValue">https</Set> <!-- if this is unset, any value will match against the rule -->
 								<Set name="scheme">https</Set>
 							</New>
@@ -32,7 +32,7 @@
 					<Call name="addRule">
 						<Arg>
 							<New class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
-								<Set name="header">X-Forwarded-Proto</Set>
+								<Set name="headerName">X-Forwarded-Proto</Set>
 								<Set name="headerValue">http</Set> <!-- if this is unset, any value will match against the rule -->
 								<Set name="scheme">http</Set>
 							</New>
@@ -49,8 +49,8 @@
 					<Set name="contextPath">/static</Set>
 					<Set name="handler">
 						<New class="org.eclipse.jetty.server.handler.ResourceHandler">
-							<Set name="resourceBase"><SystemProperty name="openhab.conf" />/html</Set>
-							<Set name="directoriesListed">false</Set>
+							<Set name="baseResourceAsString"><SystemProperty name="openhab.conf" />/html</Set>
+							<Set name="dirAllowed">false</Set>
 							<Set name="cacheControl">max-age=31536000</Set>
 						</New>
 					</Set>
@@ -98,9 +98,14 @@
 		<Set name="sendDateHeader">false</Set>
 		<Set name="headerCacheSize">512</Set>
 
+		<!-- Unlike Jetty 9, Jetty 12 checks the requested host against the certificate even without SNI. Disable -->
+		<!-- this check, so HTTPS also works via IP addresses and host names not in the certificate. -->
 		<Call name="addCustomizer">
 			<Arg>
-				<New class="org.eclipse.jetty.server.SecureRequestCustomizer" />
+				<New class="org.eclipse.jetty.server.SecureRequestCustomizer">
+					<Set name="sniRequired">false</Set>
+					<Set name="sniHostCheck">false</Set>
+				</New>
 			</Arg>
 		</Call>
 	</New>
@@ -117,7 +122,7 @@
 	<!-- Configure the SSL parameters of the server -->
 	<!-- -->
 	<!-- JavaDoc of o.e.j.u.s.SslContextFactory.Server can be found at: -->
-	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/util/ssl/SslContextFactory.Server.html -->
+	<!-- https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/util/ssl/SslContextFactory.Server.html -->
 	<!-- =========================================================================================================== -->
 	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory$Server">
 		<Set name="KeyStorePath"><SystemProperty name="jetty.keystore.path" default="/etc/myKeystore" /></Set>
@@ -138,15 +143,15 @@
 	<!-- All accepted TLS connections are wired to a HTTP connection. -->
 	<!-- -->
 	<!-- Consult the JavaDoc of o.e.j.server.ServerConnector at -->
-	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/ServerConnector.html, -->
+	<!-- https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/server/ServerConnector.html, -->
 	<!-- o.e.j.server.SslConnectionFactory at -->
-	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/SslConnectionFactory.html, -->
+	<!-- https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/server/SslConnectionFactory.html, -->
 	<!-- o.e.j.a.s.ALPNServerConnectionFactory at -->
-	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/alpn/server/ALPNServerConnectionFactory.html, -->
+	<!-- https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/alpn/server/ALPNServerConnectionFactory.html, -->
 	<!-- o.e.j.h2.s.HTTP2ServerConnectionFactory at -->
-	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/http2/server/HTTP2ServerConnectionFactory.html and -->
+	<!-- https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/http2/server/HTTP2ServerConnectionFactory.html and -->
 	<!-- o.e.j.s.HttpConnectionFactory at -->
-	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/HttpConnectionFactory.html -->
+	<!-- https://javadoc.jetty.org/jetty-12.1/org/eclipse/jetty/server/HttpConnectionFactory.html -->
 	<!-- for all configuration that may be set here. -->
 	<!-- =========================================================================================================== -->
 	<Call name="addConnector">
