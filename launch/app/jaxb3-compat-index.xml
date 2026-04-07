@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<repository xmlns="http://www.osgi.org/xmlns/repository/v1.0.0" name="org.openhab.demo.app" increment="1785589692896">
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="license" value="http://www.eclipse.org/org/documents/edl-v10.php"/>
+      <attribute name="osgi.identity" value="jakarta.xml.bind-api"/>
+      <attribute name="documentation" value="https://www.eclipse.org"/>
+      <attribute name="description" value="Jakarta XML Binding API 3.0 Design Specification"/>
+      <attribute name="type" value="osgi.bundle"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <directive name="uses" value="jakarta.xml.bind.annotation.adapters,jakarta.xml.bind.attachment,javax.xml.namespace,javax.xml.stream,javax.xml.transform,javax.xml.validation,org.w3c.dom,org.xml.sax"/>
+      <attribute name="bundle-symbolic-name" value="jakarta.xml.bind-api"/>
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="1989870026,338397845,-1920427212,-808374276,776329996,597927996,-188311395,1816284,1236525377,64864098,2269793,1816456206,1695404316,814792785,-797911717,-548836626,-1652645679,962559760,137578097,1410803924,1689866715,-397449876,1123340462,615271281,-61951983,1605952727,-1273228838,-2116489144,-569689061,1505629994,782067000,668760842,1982344500,133971830,-1091152511,1227593353,873208789,1601562550,894184242,698853013" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <directive name="uses" value="jakarta.xml.bind,javax.xml.parsers,javax.xml.transform,javax.xml.transform.dom,org.w3c.dom"/>
+      <attribute name="bundle-symbolic-name" value="jakarta.xml.bind-api"/>
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.annotation"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="-191744056,-2091374577,-1778966573,1189696021,-1873562992,1602286520,-1955451993,-373266745,-336596551,-1851361179,-2032180703,-310588667,2105276323,-58314417,-1387340978,-57897243,-2024746546,-1038313970,-281571944,-1631399239,84623186,-136387615,-949540645,-281368267,1872872101,-131553724,84623388,253186816,-1720187564,1776440131,382559352,1883139026,-1752232223,-972147005,-811700141,-281114671,-123491398" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <attribute name="bundle-symbolic-name" value="jakarta.xml.bind-api"/>
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.annotation.adapters"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="-530373369,853008595,976430119,201740120,-2032180703,-950321604,604801463" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <directive name="uses" value="jakarta.activation"/>
+      <attribute name="bundle-symbolic-name" value="jakarta.xml.bind-api"/>
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.attachment"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="-803270818,-1626040841" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <directive name="uses" value="jakarta.xml.bind,jakarta.xml.bind.annotation.adapters,jakarta.xml.bind.attachment,javax.xml.stream,javax.xml.transform,javax.xml.validation,org.w3c.dom,org.xml.sax"/>
+      <attribute name="bundle-symbolic-name" value="jakarta.xml.bind-api"/>
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.helpers"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="661420893,-888088138,666256874,-397449876,367657265,-695659055,1553954711,151028545,-698155115" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <directive name="uses" value="jakarta.xml.bind,javax.xml.transform.sax"/>
+      <attribute name="bundle-symbolic-name" value="jakarta.xml.bind-api"/>
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.util"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="756042206,793962972,-397449876,420558860" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.bundle">
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.bundle" value="jakarta.xml.bind-api"/>
+    </capability>
+    <capability namespace="osgi.wiring.host">
+      <attribute name="bundle-version" value="3.0.0" type="Version"/>
+      <attribute name="osgi.wiring.host" value="jakarta.xml.bind-api"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="129000" type="Long"/>
+      <attribute name="mime" value="application/vnd.osgi.bundle"/>
+      <attribute name="url" value="file:/home/holgerf/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar"/>
+      <attribute name="osgi.content" value="0037AB1EBA33A969B36119C61A9F28313460A85EEA9B800470A70CB2227D35F4"/>
+    </capability>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(&amp;(osgi.wiring.package=jakarta.activation)(version&gt;=2.0.0)(!(version&gt;=3.0.0)))"/>
+      <attribute name="osgi.wiring.package" value="jakarta.activation"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(&amp;(osgi.wiring.package=jakarta.xml.bind)(version&gt;=3.0.0)(!(version&gt;=4.0.0)))"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(&amp;(osgi.wiring.package=jakarta.xml.bind.annotation)(version&gt;=3.0.0)(!(version&gt;=4.0.0)))"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.annotation"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(&amp;(osgi.wiring.package=jakarta.xml.bind.annotation.adapters)(version&gt;=3.0.0)(!(version&gt;=4.0.0)))"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.annotation.adapters"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(&amp;(osgi.wiring.package=jakarta.xml.bind.attachment)(version&gt;=3.0.0)(!(version&gt;=4.0.0)))"/>
+      <attribute name="osgi.wiring.package" value="jakarta.xml.bind.attachment"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.datatype)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.datatype"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.namespace)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.namespace"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.parsers)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.parsers"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.stream)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.stream"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.transform)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.transform"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.transform.dom)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.transform.dom"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.transform.sax)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.transform.sax"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.transform.stream)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.transform.stream"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=javax.xml.validation)"/>
+      <attribute name="osgi.wiring.package" value="javax.xml.validation"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=org.w3c.dom)"/>
+      <attribute name="osgi.wiring.package" value="org.w3c.dom"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=org.xml.sax)"/>
+      <attribute name="osgi.wiring.package" value="org.xml.sax"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=org.xml.sax.ext)"/>
+      <attribute name="osgi.wiring.package" value="org.xml.sax.ext"/>
+    </requirement>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(osgi.wiring.package=org.xml.sax.helpers)"/>
+      <attribute name="osgi.wiring.package" value="org.xml.sax.helpers"/>
+    </requirement>
+    <requirement namespace="bnd.multirelease">
+      <directive name="filter" value="(&amp;(bnd.multirelease=jakarta.xml.bind-api)(&amp;(version&gt;=3.0.0)(version&lt;=3.0.0)))"/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="osgi.identity" value="jakarta.xml.bind-api__8"/>
+      <attribute name="type" value="bnd.synthetic"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="bnd.multirelease">
+      <attribute name="bnd.multirelease" value="jakarta.xml.bind-api"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="0" type="Long"/>
+      <attribute name="mime" value="application/octetstream"/>
+      <attribute name="url" value="urn:osgi-bnd-mrj:jakarta.xml.bind-api:3.0.0:8"/>
+      <attribute name="osgi.content" value="D36ABA9FE92CF32D170F30E791D131DAE9AC4F4FD0A28748C6DF6F1D9CDC87DD"/>
+    </capability>
+    <requirement namespace="osgi.ee">
+      <directive name="filter" value="(&amp;(osgi.ee=JavaSE)(&amp;(version&gt;=1.8.0)(!(version&gt;=9.0.0))))"/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="osgi.identity" value="jakarta.xml.bind-api__9"/>
+      <attribute name="type" value="bnd.synthetic"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="bnd.multirelease">
+      <attribute name="bnd.multirelease" value="jakarta.xml.bind-api"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="0" type="Long"/>
+      <attribute name="mime" value="application/octetstream"/>
+      <attribute name="url" value="urn:osgi-bnd-mrj:jakarta.xml.bind-api:3.0.0:9"/>
+      <attribute name="osgi.content" value="33E181CE891FA1B1C6176825ACF899DA682ABE0BAD5BE26B47B56FC6EB545552"/>
+    </capability>
+    <requirement namespace="osgi.ee">
+      <directive name="filter" value="(&amp;(osgi.ee=JavaSE)(version&gt;=9.0.0))"/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="osgi.identity" value="jakarta.xml.bind-api__8"/>
+      <attribute name="type" value="bnd.synthetic"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="bnd.multirelease">
+      <attribute name="bnd.multirelease" value="jakarta.xml.bind-api"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="0" type="Long"/>
+      <attribute name="mime" value="application/octetstream"/>
+      <attribute name="url" value="urn:osgi-bnd-mrj:jakarta.xml.bind-api:3.0.0:8"/>
+      <attribute name="osgi.content" value="D36ABA9FE92CF32D170F30E791D131DAE9AC4F4FD0A28748C6DF6F1D9CDC87DD"/>
+    </capability>
+    <requirement namespace="osgi.ee">
+      <directive name="filter" value="(&amp;(osgi.ee=JavaSE)(&amp;(version&gt;=1.8.0)(!(version&gt;=9.0.0))))"/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="osgi.identity" value="jakarta.xml.bind-api__9"/>
+      <attribute name="type" value="bnd.synthetic"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="bnd.multirelease">
+      <attribute name="bnd.multirelease" value="jakarta.xml.bind-api"/>
+      <attribute name="version" value="3.0.0" type="Version"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="0" type="Long"/>
+      <attribute name="mime" value="application/octetstream"/>
+      <attribute name="url" value="urn:osgi-bnd-mrj:jakarta.xml.bind-api:3.0.0:9"/>
+      <attribute name="osgi.content" value="33E181CE891FA1B1C6176825ACF899DA682ABE0BAD5BE26B47B56FC6EB545552"/>
+    </capability>
+    <requirement namespace="osgi.ee">
+      <directive name="filter" value="(&amp;(osgi.ee=JavaSE)(version&gt;=9.0.0))"/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="license" value="http://www.eclipse.org/org/documents/edl-v10.php"/>
+      <attribute name="osgi.identity" value="com.sun.activation.jakarta.activation"/>
+      <attribute name="documentation" value="https://www.eclipse.org"/>
+      <attribute name="description" value="Jakarta Activation"/>
+      <attribute name="type" value="osgi.bundle"/>
+      <attribute name="version" value="2.0.0" type="Version"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <attribute name="bundle-symbolic-name" value="com.sun.activation.jakarta.activation"/>
+      <attribute name="bundle-version" value="2.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="jakarta.activation"/>
+      <attribute name="version" value="2.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="-1359889218,64058019,206291577,-1517362639,838515274,202913531,608817551,879465504,-2126306139,-1029031803,1462319168,1446596385,-1581448570,-796606708,-1327476306,-2052561703,-1641495510,1002652865,-1475195750,-1131237297,-1627952364,-896685802" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <attribute name="bundle-symbolic-name" value="com.sun.activation.jakarta.activation"/>
+      <attribute name="bundle-version" value="2.0.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="com.sun.activation.registries"/>
+      <attribute name="version" value="2.0.0" type="Version"/>
+      <attribute name="bnd.hashes" value="-773064349,-1883382773,478725815,1178464855,-324508996,1083548516,-1073400758" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.bundle">
+      <attribute name="bundle-version" value="2.0.0" type="Version"/>
+      <attribute name="osgi.wiring.bundle" value="com.sun.activation.jakarta.activation"/>
+    </capability>
+    <capability namespace="osgi.wiring.host">
+      <attribute name="bundle-version" value="2.0.0" type="Version"/>
+      <attribute name="osgi.wiring.host" value="com.sun.activation.jakarta.activation"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="62731" type="Long"/>
+      <attribute name="mime" value="application/vnd.osgi.bundle"/>
+      <attribute name="url" value="file:/home/holgerf/.m2/repository/com/sun/activation/jakarta.activation/2.0.0/jakarta.activation-2.0.0.jar"/>
+      <attribute name="osgi.content" value="DB9C7E30F4D61EC33FD47942C9B7CF6E094025E7D5D8E20DB73FCE5A912A4366"/>
+    </capability>
+    <requirement namespace="osgi.wiring.package">
+      <directive name="filter" value="(&amp;(osgi.wiring.package=com.sun.activation.registries)(version&gt;=2.0.0)(!(version&gt;=3.0.0)))"/>
+      <attribute name="osgi.wiring.package" value="com.sun.activation.registries"/>
+    </requirement>
+    <requirement namespace="osgi.ee">
+      <directive name="filter" value="(&amp;(osgi.ee=JavaSE)(version=1.8))"/>
+    </requirement>
+  </resource>
+</repository>
