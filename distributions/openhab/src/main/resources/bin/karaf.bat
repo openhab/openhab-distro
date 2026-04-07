@@ -111,6 +111,10 @@ set STOPPED_TARGET_LEVEL=0
 set RUNHIDDEN=wscript //nologo "%DIRNAME%runhidden.vbs"
 
 echo Starting server...
+
+rem Disable deleyed start for now as jline no longer prints warnings
+goto AFTER_CACHE_READY
+
 set KARAF_HOME=
 %RUNHIDDEN% "%DIRNAME%karaf.bat" "server"
 setlocal EnableDelayedExpansion
@@ -135,7 +139,7 @@ if !SECONDS_WAITED! GEQ 70 (
 )
 timeout /t 1 /nobreak >nul
 set /a SECONDS_WAITED=!SECONDS_WAITED!+1
-goto AWAIT_SERVER_STARTED
+goto :AWAIT_SERVER_STARTED
 
 :SERVER_STARTED
 endlocal
@@ -311,8 +315,10 @@ for /f tokens^=2-5^ delims^=.-_+^" %%j in ('"%JAVA%" -fullversion 2^>^&1') do (
 )
 
 if %JAVA_VERSION% NEQ 21 (
-    call :warn "JVM must be version 21. JVM version %JAVA_VERSION% is unsupported (JAVA_HOME=%JAVA_HOME%)"
-    goto END
+    if %JAVA_VERSION% NEQ 25 (
+        call :warn "JVM must be version 21 or 25. JVM version %JAVA_VERSION% is unsupported (JAVA_HOME=%JAVA_HOME%)"
+        goto END
+    )
 )
 
 if %JAVA_VERSION% GTR 8 (
@@ -507,9 +513,6 @@ if "%KARAF_PROFILER%" == "" goto :RUN
         if %JAVA_VERSION% GTR 8 (
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
-                --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.12.jar" ^
-                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.12.jar" ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^
@@ -533,6 +536,7 @@ if "%KARAF_PROFILER%" == "" goto :RUN
                 --add-exports=java.rmi/sun.rmi.registry=ALL-UNNAMED ^
                 --add-exports=java.security.sasl/com.sun.security.sasl=ALL-UNNAMED ^
                 --add-exports=java.naming/com.sun.jndi.ldap=ALL-UNNAMED ^
+                --enable-native-access=ALL-UNNAMED ^
                 -classpath "%CLASSPATH%" ^
                 -Dkaraf.instances="%OPENHAB_USERDATA%\tmp\instances" ^
                 -Dkaraf.home="%KARAF_HOME%" ^

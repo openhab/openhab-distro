@@ -88,13 +88,6 @@
 		<!-- Can be removed once the issues are resolved in an upcoming version. -->
 		<Logger level="OFF" name="org.eclipse.lsp4j"/>
 
-		<!-- Filters warnings for events that could not be delivered to a disconnected client. -->
-		<Logger level="ERROR" name="org.apache.cxf.jaxrs.sse.SseEventSinkImpl"/>
-
-		<!-- Filters warnings from broken connections during startup -->
-		<!-- https://github.com/openhab/openhab-core/issues/2998 -->
-		<Logger level="ERROR" name="org.apache.cxf.phase.PhaseInterceptorChain"/>
-
 		<!-- Filters known issues of KarServiceImpl, see -->
 		<!-- https://github.com/openhab/openhab-distro/issues/519#issuecomment-351944506 -->
 		<!-- Can be removed once the issues are resolved in an upcoming version. -->
@@ -111,6 +104,13 @@
 		<!-- Filters disconnection warnings of the ChromeCast Java API, see -->
 		<!-- https://github.com/openhab/openhab-addons/issues/3770 -->
 		<Logger level="ERROR" name="su.litvak.chromecast.api.v2.Channel"/>
+
+		<!-- Jersey warns once per REST resource registered through the Jakarta REST whiteboard (osgitech.rest); -->
+		<!-- the resources work, Jersey only ignores them as providers. -->
+		<Logger name="org.glassfish.jersey.internal.inject.Providers">
+			<RegexFilter regex=".*does not implement any provider interfaces applicable in the SERVER runtime.*"
+				onMatch="DENY" onMismatch="NEUTRAL"/>
+		</Logger>
 
 		<!-- Added by Karaf to prevent debug logging loops, see -->
 		<!-- https://issues.apache.org/jira/browse/KARAF-5559 -->
