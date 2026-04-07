@@ -82,41 +82,6 @@
         <!-- Required to make the maven-jar-plugin pick up the bnd generated manifest. Also avoid packaging empty Jars -->
         <!-- Moved... -->
 
-        <!-- Setup the indexer for running and testing -->
-        <plugin>
-          <groupId>biz.aQute.bnd</groupId>
-          <artifactId>bnd-indexer-maven-plugin</artifactId>
-          <version>${bnd.version}</version>
-          <configuration>
-            <localURLs>REQUIRED</localURLs>
-            <attach>false</attach>
-          </configuration>
-          <executions>
-            <execution>
-              <id>index</id>
-              <goals>
-                <goal>index</goal>
-              </goals>
-              <configuration>
-                <indexName>${project.artifactId}</indexName>
-              </configuration>
-            </execution>
-            <execution>
-              <id>test-index</id>
-              <goals>
-                <goal>index</goal>
-              </goals>
-              <configuration>
-                <indexName>${project.artifactId}</indexName>
-                <outputFile>${project.build.directory}/test-index.xml</outputFile>
-                <scopes>
-                  <scope>test</scope>
-                </scopes>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-
         <!-- Define the version of the resolver plugin we use -->
         <plugin>
           <groupId>biz.aQute.bnd</groupId>
