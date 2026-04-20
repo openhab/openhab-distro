@@ -189,15 +189,28 @@ fi
 [ "$bInteractive"  = "1" ] && echo "Copying configuration to temporary folder..."
 mkdir -p "$TempDir/userdata"
 
-# shellcheck disable=SC2089
-DUMP_EXCLUDES="-not -name '*.hprof' -and -not -name 'hs_err_pid*'" # excludes Java heap dumps and crash dumps
-# shellcheck disable=SC2089
-VOICE_ADDON_EXCLUDES="-and -not -name '*/piper' -and -not -path '*/vosk' -and -not -path '*/whisper'" # excludes Piper, Vosk & Whisper directories due to containing big model files
-
 if [ -z "$INCLUDE_CACHE" ]; then
-  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" -and -not -path '*/tmp' -and -not -path '*/cache' $DUMP_EXCLUDES $VOICE_ADDON_EXCLUDES | xargs -I % cp -R % "$TempDir/userdata"
+  # excludes: backup dir, tmp/cache dirs, Java heap/crash dumps, Piper/Vosk/Whisper model dirs
+  find "${OPENHAB_USERDATA:?}/"* -prune \
+      -not -path "${OPENHAB_BACKUPS:?}" \
+      -and -not -path '*/tmp' \
+      -and -not -path '*/cache' \
+      -and -not -name '*.hprof' \
+      -and -not -name 'hs_err_pid*' \
+      -and -not -path '*/piper' \
+      -and -not -path '*/vosk' \
+      -and -not -path '*/whisper' \
+    | xargs -I % cp -R % "$TempDir/userdata"
 else
-  find "${OPENHAB_USERDATA:?}/"* -prune -not -path "${OPENHAB_BACKUPS:?}" $DUMP_EXCLUDES $VOICE_ADDON_EXCLUDES | xargs -I % cp -R % "$TempDir/userdata"
+  # excludes: backup dir, Java heap/crash dumps, Piper/Vosk/Whisper model dirs
+  find "${OPENHAB_USERDATA:?}/"* -prune \
+      -not -path "${OPENHAB_BACKUPS:?}" \
+      -and -not -name '*.hprof' \
+      -and -not -name 'hs_err_pid*' \
+      -and -not -path '*/piper' \
+      -and -not -path '*/vosk' \
+      -and -not -path '*/whisper' \
+    | xargs -I % cp -R % "$TempDir/userdata"
 fi
 mkdir -p "$TempDir/conf"
 cp -a "${OPENHAB_CONF:?}/"*      "$TempDir/conf"
