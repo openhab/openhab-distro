@@ -20,10 +20,8 @@ usage() {
    echo "that uses the Exec Binding, and a command like: openhab-cli backup --noninteractive"
    echo ""
    echo "A full backup must be done in interactive mode, and includes the tmp and cache directories"
-   echo "that are normally excluded."
-   echo ""
-   echo "Piper, Vosk & Whisper voice add-on directories are always excluded from backups."
-   echo "These directories contain big model files, which can be downloaded again."
+   echo "that are normally excluded. It also includes the Piper, Vosk & Whisper voice add-on directories"
+   echo "that are normally excluded due to the model size."
    echo ""
    echo "Backup directory: '$OPENHAB_BACKUPS'"
    echo "Set \$OPENHAB_BACKUPS to change the default backup directory."
@@ -202,14 +200,11 @@ if [ -z "$INCLUDE_CACHE" ]; then
       -and -not -path '*/whisper' \
     | xargs -I % cp -R % "$TempDir/userdata"
 else
-  # excludes: backup dir, Java heap/crash dumps, Piper/Vosk/Whisper model dirs
+  # excludes: backup dir, Java heap/crash dumps
   find "${OPENHAB_USERDATA:?}/"* -prune \
       -not -path "${OPENHAB_BACKUPS:?}" \
       -and -not -name '*.hprof' \
       -and -not -name 'hs_err_pid*' \
-      -and -not -path '*/piper' \
-      -and -not -path '*/vosk' \
-      -and -not -path '*/whisper' \
     | xargs -I % cp -R % "$TempDir/userdata"
 fi
 mkdir -p "$TempDir/conf"
