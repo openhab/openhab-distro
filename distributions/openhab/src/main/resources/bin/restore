@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-   echo "Usage: restore [--textconfig] [--uiconfig] filename"
+   echo "Usage: restore [--noroot] [--textconfig] [--uiconfig] filename"
    echo ""
    echo "  e.g. # Replaces everything with config from a file called myBackup.zip"
    echo "       ./restore myBackup.zip"
@@ -27,6 +27,7 @@ usage() {
 }
 
 setup(){
+  bNoRoot="0"
   bText="0"
   bUI="0"
   while [ "$1" != "" ]; do
@@ -34,6 +35,9 @@ setup(){
       -h | --help)
         usage
         exit 0
+        ;;
+      --noroot)
+        bNoRoot="1"
         ;;
       --textconfig)
         bText="1"
@@ -49,7 +53,7 @@ setup(){
   done
 
   ## Ask to run as root to prevent us from running sudo in this script.
-  if [ "$(id -u)" -ne 0 ]; then
+  if [ $bNoRoot = "0" ] && [ "$(id -u)" -ne 0 ]; then
     echo "Please run this script as root! (e.g. use sudo)" >&2
     exit 1
   fi
