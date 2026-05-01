@@ -42,6 +42,21 @@
       <scope>runtime</scope>
     </dependency>
 
+    <!-- this is needed as long as we have dependencies to jackson 2, -->
+    <!-- the app does not resolve correctly without it -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <version>2.19.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>2.5</version>
+      <scope>runtime</scope>
+    </dependency>
+
 <!-- uncomment this and add the name of your binding that you want to work on
     <dependency>
       <groupId>org.openhab.addons.bundles</groupId>
