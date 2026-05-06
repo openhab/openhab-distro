@@ -1,7 +1,7 @@
 #!/bin/sh
- 
+
 usage() {
-   echo "Usage: backup [--noninteractive] [--full] [filename]"
+   echo "Usage: backup [--noninteractive] [--noroot] [--full] [filename]"
    echo ""
    echo "  e.g. ./backup                     << Makes a file with a timed filename"
    echo "       ./backup myBackup.zip        << Makes a file called myBackup.zip"
@@ -44,6 +44,7 @@ getFullPath() {
 # Defaults
 bFull="0"
 bInteractive="1"
+bNoRoot="0"
 sZipFile=""
 sWebFile="latest_backup.zip"
 
@@ -60,6 +61,9 @@ setup(){
         --noninteractive)
             bInteractive="0"
             ;;
+        --noroot)
+            bNoRoot="1"
+            ;;
         *)
             sZipFile="$1"
             ;;
@@ -67,7 +71,7 @@ setup(){
     shift
   done
 
-  if [ $bInteractive = "0"  ];then
+  if [ $bInteractive = "0" ];then
     if [ "$bFull" = "1" ];then
         echo "Full backup must be run interactively. Exiting." >&2
         exit 1
@@ -75,7 +79,7 @@ setup(){
     OPENHAB_USERDATA="/var/lib/openhab"
   else
     ## Ask to run as root to prevent us from running sudo in this script.
-    if [ "$(id -u)" -ne 0 ]; then
+    if [ $bNoRoot = "0" ] && [ "$(id -u)" -ne 0 ]; then
      echo "Please run this script as root! (e.g. use sudo)" >&2
      exit 1
     fi
