@@ -86,10 +86,10 @@ def releaseOpenHabComponent(componentName, branch, releaseVersion, nextVersion, 
                     mvnOptionsMap["sandbox"] = "-P sandbox"
                 }
                 if(env.ALT_RELEASE_REPO_ID?.length() > 0) {
-                    mvnReleaseOptions += "-DaltDeploymentRepository=" + env.ALT_RELEASE_REPO_ID + '::default::' + env.ALT_RELEASE_REPO_URL
+                    mvnReleaseOptions += "-DaltDeploymentRepository=" + env.ALT_RELEASE_REPO_ID + '::' + env.ALT_RELEASE_REPO_URL
                 }
                 if(env.ALT_SNAPSHOT_REPO_ID?.length() > 0) {
-                    mvnSnapshotOptions += "-DaltDeploymentRepository=" + env.ALT_SNAPSHOT_REPO_ID + '::default::' + env.ALT_SNAPSHOT_REPO_URL
+                    mvnSnapshotOptions += "-DaltDeploymentRepository=" + env.ALT_SNAPSHOT_REPO_ID + '::' + env.ALT_SNAPSHOT_REPO_URL
                 }
                 mvnOptionsMap["global"] = env.GLOBAL_MAVEN_CLI_OPTS + " " + env.MAVEN_EXTRA_OPTS
                 def mvnOptions = mvnOptionsMap.values().join(" ")
