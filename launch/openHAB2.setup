@@ -2372,6 +2372,10 @@
           url="https://ianbrandt.github.io/m2e-maven-dependency-plugin/"/>
       <repository
           url="https://www.lastnpe.org/eclipse-external-annotations-m2e-plugin-p2-site/m2e_2/"/>
+      <!-- workaround: lastnpe requires org.apache.commons.io which was renamed
+          to org.apache.commons.commons-io in Eclipse 2025-12 -->
+      <repository
+          url="https://download.eclipse.org/releases/2024-06/"/>
     </setupTask>
     <setupTask
         xsi:type="setup:ResourceCreationTask"
