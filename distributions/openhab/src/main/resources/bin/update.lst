@@ -202,6 +202,7 @@ ALERT;Main UI: oh-canvas-items now use 100% of the height their bounding box and
 ALERT;Main UI: oh-category-axis startOnSunday parameter has been removed. For chartType = week, the chart will either start on Sunday or on Monday depending on your locale. For chartType = isoWeek, the chart will always start on Monday. 
 ALERT;AirParif Binding: Due to API evolutions pollens related information have been removed. They are now provided by Atmo France Binding.
 ALERT;Corona Stats Binding: Due to EOL of the website, this add-on has been removed.
+ALERT;MongoDB Persistence: Support for database 3.6.x has been dropped. The add-on requires database version 4.0 or later.
 ALERT;MyBMW Binding: Due to BMW security changes, this add-on does not work anymore and has been removed.
 ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to setup your default voice again and adjust your rules & scripts for the changed voice UIDs.
 ALERT;Teleinfo Binding : This binding has been rewritten to support the D2L ERL dongle. As a result, channels and channel types have changed, so you may need to recreate your Things and update your configuration.
