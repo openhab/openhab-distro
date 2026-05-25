@@ -29,6 +29,7 @@ feature.openhab-base: \
 	bnd.identity;id='org.openhab.core.io.rest.auth',\
 	bnd.identity;id='org.openhab.core.io.rest.core',\
 	bnd.identity;id='org.openhab.core.io.rest.sse',\
+	bnd.identity;id='org.openhab.core.model.yaml',\
 	bnd.identity;id='org.openhab.core.semantics',\
 	bnd.identity;id='org.openhab.core.storage.json',\
 	bnd.identity;id='org.openhab.core.thing',\
@@ -287,6 +288,7 @@ feature.openhab-model-runtime-all: \
 	org.openhab.core.model.sitemap.runtime;version='[5.2.0,5.2.1)',\
 	org.openhab.core.model.thing;version='[5.2.0,5.2.1)',\
 	org.openhab.core.model.thing.runtime;version='[5.2.0,5.2.1)',\
+	org.openhab.core.model.yaml;version='[5.2.0,5.2.1)',\
 	org.openhab.core.persistence;version='[5.2.0,5.2.1)',\
 	org.openhab.core.semantics;version='[5.2.0,5.2.1)',\
 	org.openhab.core.storage.json;version='[5.2.0,5.2.1)',\
