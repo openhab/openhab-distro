@@ -85,6 +85,33 @@ if "%KARAF_DATA%" == "" (
     set "KARAF_DATA=%KARAF_BASE%\data"
 )
 
+set INIT_MARKER=%KARAF_DATA%\initialized
+set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
+echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False > "%TEMP%\runhidden.vbs"
+if not exist "%INIT_MARKER%" (
+    echo First openHAB run detected: Please wait about 20 seconds...
+    echo First openHAB run initialization done > "%INIT_MARKER%"
+
+    echo Starting Karaf server to initialize...
+    set KARAF_HOME=
+    %RUNHIDDEN% "%~dp0karaf.bat server"
+
+    echo Waiting for Karaf server to initialize...
+    timeout /t 10 /nobreak >nul
+
+    echo Stopping Karaf server...
+    set KARAF_HOME=
+    %RUNHIDDEN% "%~dp0karaf.bat stop"
+
+    echo Waiting for Karaf server to finish...
+    timeout /t 10 /nobreak >nul
+
+    echo Starting Karaf console...
+    set KARAF_HOME=
+    "%~dp0karaf.bat" console
+    exit /b %ERRORLEVEL%
+)
+
 if not "%KARAF_ETC%" == "" (
     if not exist "%KARAF_ETC%" (
         call :warn KARAF_ETC is not valid: "%KARAF_ETC%"
