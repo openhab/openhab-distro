@@ -145,6 +145,9 @@ init() {
     # Locate the Karaf data directory
     locateData
 
+    # Initialize on first run
+    firstRunBootstrap()
+
     # Locate the Karaf etc directory
     locateEtc
 
@@ -376,6 +379,24 @@ run() {
             fi
         fi
     done
+}
+
+firstRunBootstrap() {
+    INIT_MARKER="${KARAF_DATA}/initialized"
+    if [ ! -f "${INIT_MARKER}" ]; then
+        echo "Initializing the openHAB runtime..."
+        echo "openHAB initialized" > "${INIT_MARKER}"
+
+        echo "Awaiting Karaf server load (ca. 10s)..."
+        KARAF_HOME=""
+        "${DIRNAME}/karaf.sh" server &
+        sleep 10
+
+        echo "Awaiting Karaf server unload (ca. 10s)..."
+        KARAF_HOME=""
+        "${DIRNAME}/karaf.sh" stop &
+        sleep 10
+    fi
 }
 
 nothing() {
