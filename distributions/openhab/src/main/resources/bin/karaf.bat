@@ -85,68 +85,80 @@ if "%KARAF_DATA%" == "" (
     set "KARAF_DATA=%KARAF_BASE%\data"
 )
 
-set TEMP_DIR=%KARAF_DATA%\tmp
-set LOCK_DIR=%KARAF_DATA%\firstrun.lock
+set CACHE_DIR=%KARAF_DATA%\cache
+set LOCK_FILE=%KARAF_DATA%\openhab.firstrun.lock
 set STARTLEVEL_FILE=%KARAF_DATA%\openhab.startlevel.current
+set STARTED_TARGET_LEVEL=10
+set STOPPED_TARGET_LEVEL=0
 
-if not exist "%TEMP_DIR%" if "%~1" == "" goto FIRST_RUN_BOOTSTRAP
-if not exist "%TEMP_DIR%" if /I "%~1" == "console" goto FIRST_RUN_BOOTSTRAP
+if not exist "%CACHE_DIR%" if "%~1" == "" goto FIRST_RUN_BOOTSTRAP
+if not exist "%CACHE_DIR%" if /I "%~1" == "console" goto FIRST_RUN_BOOTSTRAP
 goto AFTER_FIRST_RUN_BOOTSTRAP
 
 :FIRST_RUN_BOOTSTRAP
-mkdir "%LOCK_DIR%" 2>nul
+if exist "%LOCK_FILE%" goto AFTER_FIRST_RUN_BOOTSTRAP
+> "%LOCK_FILE%" echo locked
 if errorlevel 1 goto AFTER_FIRST_RUN_BOOTSTRAP
 
 echo Initializing the openHAB runtime...
-> "%STARTLEVEL_FILE%" echo 0
+> "%STARTLEVEL_FILE%" echo %STOPPED_TARGET_LEVEL%
 
 set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
-echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False > "%TEMP%\runhidden.vbs"
+> "%TEMP%\runhidden.vbs" echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False
 
 echo Awaiting Karaf server load...
 set KARAF_HOME=
-%RUNHIDDEN% "\"%~dp0karaf.bat\" server"
-
+%RUNHIDDEN% """%~dp0karaf.bat"" server"
+setlocal EnableDelayedExpansion
 set SECONDS_WAITED=0
-:WAIT_FOR_STARTLEVEL
-if exist "%STARTLEVEL_FILE%" (
+
+:AWAIT_STARTED
+set LEVEL=
+2>nul (
     set /p LEVEL=<"%STARTLEVEL_FILE%"
-    if %LEVEL% GEQ 10 goto STARTLEVEL_REACHED
 )
-if %SECONDS_WAITED% GEQ 30 (
+if defined LEVEL (
+    if !LEVEL! GEQ %STARTED_TARGET_LEVEL% goto STARTED
+)
+if !SECONDS_WAITED! GEQ 30 (
     echo Wait timed out!
-    goto STOP_FIRST_RUN_SERVER
+    goto STARTED
 )
 timeout /t 1 /nobreak >nul
-set /a SECONDS_WAITED=%SECONDS_WAITED%+1
-goto WAIT_FOR_STARTLEVEL
+set /a SECONDS_WAITED=!SECONDS_WAITED!+1
+goto AWAIT_STARTED
 
-:STARTLEVEL_REACHED
+:STARTED
+endlocal
+
 echo Awaiting Karaf server unload...
-:STOP_FIRST_RUN_SERVER
 set KARAF_HOME=
-%RUNHIDDEN% "\"%~dp0karaf.bat\" stop"
-
+%RUNHIDDEN% """%~dp0karaf.bat"" stop"
+setlocal EnableDelayedExpansion
 set SECONDS_WAITED=0
-:WAIT_FOR_SERVER_STOP
-"%~dp0karaf.bat" status >nul 2>&1
-if errorlevel 1 goto FIRST_RUN_BOOTSTRAP_DONE
-if %SECONDS_WAITED% GEQ 30 (
+
+:AWAIT_STOPPED
+set LEVEL=
+2>nul (
+    set /p LEVEL=<"%STARTLEVEL_FILE%"
+)
+if defined LEVEL (
+    if !LEVEL! EQU %STOPPED_TARGET_LEVEL% goto STOPPED
+)
+if !SECONDS_WAITED! GEQ 30 (
     echo Wait timed out!
-    goto FIRST_RUN_BOOTSTRAP_DONE
+    goto STOPPED
 )
 timeout /t 1 /nobreak >nul
-set /a SECONDS_WAITED=%SECONDS_WAITED%+1
-goto WAIT_FOR_SERVER_STOP
+set /a SECONDS_WAITED=!SECONDS_WAITED!+1
+goto AWAIT_STOPPED
 
-:FIRST_RUN_BOOTSTRAP_DONE
-rmdir "%LOCK_DIR%" 2>nul
-
-if "%~1" == "" (
-    set KARAF_HOME=
-    "%~dp0karaf.bat" console
-    exit /b %ERRORLEVEL%
-)
+:STOPPED
+endLocal
+del "%LOCK_FILE%" 2>nul
+set KARAF_HOME=
+"%~dp0karaf.bat" console
+exit /b %ERRORLEVEL%
 
 :AFTER_FIRST_RUN_BOOTSTRAP
 
