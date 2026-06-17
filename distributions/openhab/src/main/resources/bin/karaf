@@ -145,9 +145,6 @@ init() {
     # Locate the Karaf data directory
     locateData
 
-    # Initialize on first run
-    firstRunBootstrap()
-
     # Locate the Karaf etc directory
     locateEtc
 
@@ -181,6 +178,9 @@ init() {
 }
 
 run() {
+    # Initialize on first run
+    firstRunBootstrap()
+
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
     if [ "x$CHECK_ROOT_INSTANCE_RUNNING" = "x" ]; then
@@ -382,20 +382,56 @@ run() {
 }
 
 firstRunBootstrap() {
-    INIT_MARKER="${KARAF_DATA}/initialized"
-    if [ ! -f "${INIT_MARKER}" ]; then
+    TEMP_DIR="${KARAF_DATA}/tmp"
+    LOCK_DIR="${KARAF_DATA}/firstrun.lock"
+    STARTLEVEL_FILE="${KARAF_DATA}/openhab.startlevel.current"
+
+    if { [ ! -d "${TEMP_DIR}" ] && { [ -z "$1" ] || [ "$1" = "console" ]; } && mkdir "${LOCK_DIR}" 2>/dev/null; }; then
         echo "Initializing the openHAB runtime..."
-        echo "openHAB initialized" > "${INIT_MARKER}"
 
-        echo "Awaiting Karaf server load (ca. 10s)..."
-        KARAF_HOME=""
-        "${DIRNAME}/karaf.sh" server &
-        sleep 10
+        trap 'rmdir "${LOCK_DIR}" 2>/dev/null' EXIT HUP INT TERM
+        printf '0\n' > "${STARTLEVEL_FILE}"
 
-        echo "Awaiting Karaf server unload (ca. 10s)..."
-        KARAF_HOME=""
-        "${DIRNAME}/karaf.sh" stop &
-        sleep 10
+        echo "Awaiting Karaf server load..."
+        "${DIRNAME}/karaf" server &
+
+        # wait for start level 10
+        SECONDS_WAITED=0
+        while true; do
+            if [ -f "${STARTLEVEL_FILE}" ]; then
+                LEVEL="$(cat "${STARTLEVEL_FILE}" 2>/dev/null)"
+                if [ "${LEVEL}" -ge 10 ]; then
+                    break
+                fi
+            fi
+            if [ "${SECONDS_WAITED}" -ge 30 ]; then
+                echo "Wait timed out!"
+                break
+            fi
+            sleep 1
+            SECONDS_WAITED=$((SECONDS_WAITED + 1))
+        done
+
+        echo "Awaiting Karaf server unload..."
+        "${DIRNAME}/karaf" stop &
+
+        # wait for server stop
+        SECONDS_WAITED=0
+        while true; do
+            "${DIRNAME}/karaf" status > /dev/null 2>&1
+            if [ "$?" -eq 1 ]; then
+                break
+            fi
+            if [ "${SECONDS_WAITED}" -ge 30 ]; then
+                echo "Wait timed out!"
+                break
+            fi
+            sleep 1
+            SECONDS_WAITED=$((SECONDS_WAITED + 1))
+        done
+
+        rmdir "${LOCK_DIR}" 2>/dev/null
+        trap - EXIT HUP INT TERM
     fi
 }
 

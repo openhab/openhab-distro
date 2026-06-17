@@ -85,28 +85,70 @@ if "%KARAF_DATA%" == "" (
     set "KARAF_DATA=%KARAF_BASE%\data"
 )
 
-set INIT_MARKER=%KARAF_DATA%\initialized
+set TEMP_DIR=%KARAF_DATA%\tmp
+set LOCK_DIR=%KARAF_DATA%\firstrun.lock
+set STARTLEVEL_FILE=%KARAF_DATA%\openhab.startlevel.current
+
+if not exist "%TEMP_DIR%" if "%~1" == "" goto FIRST_RUN_BOOTSTRAP
+if not exist "%TEMP_DIR%" if /I "%~1" == "console" goto FIRST_RUN_BOOTSTRAP
+goto AFTER_FIRST_RUN_BOOTSTRAP
+
+:FIRST_RUN_BOOTSTRAP
+mkdir "%LOCK_DIR%" 2>nul
+if errorlevel 1 goto AFTER_FIRST_RUN_BOOTSTRAP
+
+echo Initializing the openHAB runtime...
+> "%STARTLEVEL_FILE%" echo 0
+
 set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
 echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False > "%TEMP%\runhidden.vbs"
-if not exist "%INIT_MARKER%" (
-    echo Initializing the openHAB runtime...
-    echo openHAB initialized > "%INIT_MARKER%"
 
-    echo Awaiting Karaf server load ^(ca. 10s^)...
-    set KARAF_HOME=
-    %RUNHIDDEN% "%~dp0karaf.bat server"
-    timeout /t 10 /nobreak >nul
+echo Awaiting Karaf server load...
+set KARAF_HOME=
+%RUNHIDDEN% "\"%~dp0karaf.bat\" server"
 
-    echo Awaiting Karaf server unload ^(ca. 10s^)...
-    set KARAF_HOME=
-    %RUNHIDDEN% "%~dp0karaf.bat stop"
-    timeout /t 10 /nobreak >nul
+set SECONDS_WAITED=0
+:WAIT_FOR_STARTLEVEL
+if exist "%STARTLEVEL_FILE%" (
+    set /p LEVEL=<"%STARTLEVEL_FILE%"
+    if %LEVEL% GEQ 10 goto STARTLEVEL_REACHED
+)
+if %SECONDS_WAITED% GEQ 30 (
+    echo Wait timed out!
+    goto STOP_FIRST_RUN_SERVER
+)
+timeout /t 1 /nobreak >nul
+set /a SECONDS_WAITED=%SECONDS_WAITED%+1
+goto WAIT_FOR_STARTLEVEL
 
-    rem Loading Karaf console...
+:STARTLEVEL_REACHED
+echo Awaiting Karaf server unload...
+:STOP_FIRST_RUN_SERVER
+set KARAF_HOME=
+%RUNHIDDEN% "\"%~dp0karaf.bat\" stop"
+
+set SECONDS_WAITED=0
+:WAIT_FOR_SERVER_STOP
+"%~dp0karaf.bat" status >nul 2>&1
+if errorlevel 1 goto FIRST_RUN_BOOTSTRAP_DONE
+if %SECONDS_WAITED% GEQ 30 (
+    echo Wait timed out!
+    goto FIRST_RUN_BOOTSTRAP_DONE
+)
+timeout /t 1 /nobreak >nul
+set /a SECONDS_WAITED=%SECONDS_WAITED%+1
+goto WAIT_FOR_SERVER_STOP
+
+:FIRST_RUN_BOOTSTRAP_DONE
+rmdir "%LOCK_DIR%" 2>nul
+
+if "%~1" == "" (
     set KARAF_HOME=
     "%~dp0karaf.bat" console
     exit /b %ERRORLEVEL%
 )
+
+:AFTER_FIRST_RUN_BOOTSTRAP
 
 if not "%KARAF_ETC%" == "" (
     if not exist "%KARAF_ETC%" (
