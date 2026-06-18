@@ -388,7 +388,7 @@ firstRunBootstrap() {
     STARTED_TARGET_LEVEL=10
     STOPPED_TARGET_LEVEL=0
 
-    [ -d "${CACHE_DIR}" ] && return 0
+    [ -d "${CACHE_DIR}" ] && [ "$(ls -A "${CACHE_DIR}" 2>/dev/null)" ] && return 0
 
     case "$1" in
         ""|console) ;;

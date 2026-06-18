@@ -91,8 +91,10 @@ set STARTLEVEL_FILE=%KARAF_DATA%\start-level
 set STARTED_TARGET_LEVEL=10
 set STOPPED_TARGET_LEVEL=0
 
-if not exist "%CACHE_DIR%" if "%~1" == "" goto FIRST_RUN_BOOTSTRAP
-if not exist "%CACHE_DIR%" if /I "%~1" == "console" goto FIRST_RUN_BOOTSTRAP
+if exist "%CACHE_DIR%\*" (
+    if "%~1" == "" goto FIRST_RUN_BOOTSTRAP
+    if /I "%~1" == "console" goto FIRST_RUN_BOOTSTRAP
+)
 goto AFTER_FIRST_RUN_BOOTSTRAP
 
 :FIRST_RUN_BOOTSTRAP
