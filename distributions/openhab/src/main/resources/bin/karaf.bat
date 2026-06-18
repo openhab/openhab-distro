@@ -86,8 +86,8 @@ if "%KARAF_DATA%" == "" (
 )
 
 set CACHE_DIR=%KARAF_DATA%\cache
-set LOCK_FILE=%KARAF_DATA%\openhab.firstrun.lock
-set STARTLEVEL_FILE=%KARAF_DATA%\openhab.startlevel.current
+set LOCK_FILE=%KARAF_DATA%\init-lock
+set STARTLEVEL_FILE=%KARAF_DATA%\start-level
 set STARTED_TARGET_LEVEL=10
 set STOPPED_TARGET_LEVEL=0
 
@@ -114,11 +114,12 @@ set SECONDS_WAITED=0
 
 :AWAIT_STARTED
 set LEVEL=
-2>nul (
-    set /p LEVEL=<"%STARTLEVEL_FILE%"
-)
+2>nul set /p LEVEL=<"%STARTLEVEL_FILE%"
 if defined LEVEL (
-    if !LEVEL! GEQ %STARTED_TARGET_LEVEL% goto STARTED
+    set /a LEVEL_A=LEVEL >nul 2>&1
+    if not errorlevel 1 (
+        if !LEVEL_A! GEQ %STARTED_TARGET_LEVEL% goto STARTED
+    )
 )
 if !SECONDS_WAITED! GEQ 30 (
     echo Wait timed out!
@@ -139,11 +140,12 @@ set SECONDS_WAITED=0
 
 :AWAIT_STOPPED
 set LEVEL=
-2>nul (
-    set /p LEVEL=<"%STARTLEVEL_FILE%"
-)
+2>nul set /p LEVEL=<"%STARTLEVEL_FILE%"
 if defined LEVEL (
-    if !LEVEL! EQU %STOPPED_TARGET_LEVEL% goto STOPPED
+    set /a LEVEL_A=LEVEL >nul 2>&1
+    if not errorlevel 1 (
+        if !LEVEL_A! EQU %STOPPED_TARGET_LEVEL% goto STOPPED
+    )
 )
 if !SECONDS_WAITED! GEQ 30 (
     echo Wait timed out!
