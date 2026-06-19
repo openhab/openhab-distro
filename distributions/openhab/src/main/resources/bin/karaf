@@ -414,7 +414,7 @@ awaitOsgiCacheReady() {
         fi
         sleep 1
         SECONDS_WAITED=$((SECONDS_WAITED + 1))
-        if [ "${SECONDS_WAITED}" -ge 30 ]; then
+        if [ "${SECONDS_WAITED}" -ge 60 ]; then
             echo "Wait timed out!"
             break
         fi
