@@ -178,8 +178,8 @@ init() {
 }
 
 run() {
-    # Initialize on first run
-    firstRunBootstrap()
+    # refresh  OSGI cache if needed
+    awaitOsgiCacheReady()
 
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
@@ -381,29 +381,27 @@ run() {
     done
 }
 
-firstRunBootstrap() {
-    CACHE_DIR="$KARAF_DATA/cache"
-    LOCK_FILE="$KARAF_DATA/init-lock"
-    STARTLEVEL_FILE="$KARAF_DATA/start-level"
-    STARTED_TARGET_LEVEL=10
-    STOPPED_TARGET_LEVEL=0
-
-    [ -d "${CACHE_DIR}" ] && [ "$(ls -A "${CACHE_DIR}" 2>/dev/null)" ] && return 0
-
+awaitOsgiCacheReady() {
     case "$1" in
         ""|console) ;;
         *) return 0 ;;
     esac
 
-    [ -e "${LOCK_FILE}" ] && return 0
-    : > "${LOCK_FILE}" 2>/dev/null || return 0
+    OSGI_CACHE_FOLDER="$KARAF_DATA/cache/org.eclipse.osgi"
+    [ -d "${OSGI_CACHE_FOLDER}" ] && return 0
 
-    trap 'rm -f "${LOCK_FILE}" 2>/dev/null' EXIT HUP INT TERM
+    CACHE_REFRESH_LOCK="$KARAF_DATA/cache-refresh-lock"
+    [ -e "${CACHE_REFRESH_LOCK}" ] && return 0
+    : > "${CACHE_REFRESH_LOCK}" 2>/dev/null
+    trap 'rm -f "${CACHE_REFRESH_LOCK}" 2>/dev/null' EXIT HUP INT TERM
+    echo "Refreshing the cache..."
 
-    echo "Initializing the openHAB runtime..."
+    STARTLEVEL_FILE="$KARAF_DATA/openhab-start-level"
+    STARTED_TARGET_LEVEL=10
+    STOPPED_TARGET_LEVEL=0
     echo "${STOPPED_TARGET_LEVEL}" > "${STARTLEVEL_FILE}"
 
-    echo "Awaiting Karaf server load..."
+    echo "Awaiting server load..."
     KARAF_HOME="" "${REALNAME}" server >/dev/null 2>&1 &
 
     SECONDS_WAITED=0
@@ -422,7 +420,7 @@ firstRunBootstrap() {
         fi
     done
 
-    echo "Awaiting Karaf server unload..."
+    echo "Awaiting server unload..."
     KARAF_HOME="" "${REALNAME}" stop >/dev/null 2>&1
 
     SECONDS_WAITED=0
@@ -441,7 +439,7 @@ firstRunBootstrap() {
         fi
     done
 
-    rm -f "${LOCK_FILE}"
+    rm -f "${CACHE_REFRESH_LOCK}"
     trap - EXIT HUP INT TERM
     return 0
 }

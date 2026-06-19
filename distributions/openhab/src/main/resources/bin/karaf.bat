@@ -85,86 +85,84 @@ if "%KARAF_DATA%" == "" (
     set "KARAF_DATA=%KARAF_BASE%\data"
 )
 
-set CACHE_DIR=%KARAF_DATA%\cache
-set LOCK_FILE=%KARAF_DATA%\init-lock
-set STARTLEVEL_FILE=%KARAF_DATA%\start-level
+if "%~1"=="" goto AWAIT_CACHE_READY
+if /i "%~1"=="console" goto AWAIT_CACHE_READY
+goto AFTER_CACHE_READY
+
+:AWAIT_CACHE_READY
+set CACHE_FOLDER=%KARAF_DATA%\cache\org.eclipse.osgi
+if exist "%CACHE_FOLDER%\.*" goto AFTER_CACHE_READY
+
+set CACHE_REFRESH_LOCK=%KARAF_DATA%\cache-refresh-lock
+if exist "%CACHE_REFRESH_LOCK%" goto AFTER_CACHE_READY
+type nul > "%CACHE_REFRESH_LOCK%"
+echo Refreshing the cache...
+
+set STARTLEVEL_FILE=%KARAF_DATA%\openhab-start-level
 set STARTED_TARGET_LEVEL=10
 set STOPPED_TARGET_LEVEL=0
-
-if exist "%CACHE_DIR%\*" (
-    if "%~1" == "" goto FIRST_RUN_BOOTSTRAP
-    if /I "%~1" == "console" goto FIRST_RUN_BOOTSTRAP
-)
-goto AFTER_FIRST_RUN_BOOTSTRAP
-
-:FIRST_RUN_BOOTSTRAP
-if exist "%LOCK_FILE%" goto AFTER_FIRST_RUN_BOOTSTRAP
-> "%LOCK_FILE%" echo locked
-if errorlevel 1 goto AFTER_FIRST_RUN_BOOTSTRAP
-
-echo Initializing the openHAB runtime...
 > "%STARTLEVEL_FILE%" echo %STOPPED_TARGET_LEVEL%
 
 set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
 > "%TEMP%\runhidden.vbs" echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False
 
-echo Awaiting Karaf server load...
+echo Awaiting server load...
 set KARAF_HOME=
 %RUNHIDDEN% """%~dp0karaf.bat"" server"
 setlocal EnableDelayedExpansion
 set SECONDS_WAITED=0
 
-:AWAIT_STARTED
+:AWAIT_SERVER_STARTED
 set LEVEL=
 2>nul set /p LEVEL=<"%STARTLEVEL_FILE%"
 if defined LEVEL (
     set /a LEVEL_A=LEVEL >nul 2>&1
     if not errorlevel 1 (
-        if !LEVEL_A! GEQ %STARTED_TARGET_LEVEL% goto STARTED
+        if !LEVEL_A! GEQ %STARTED_TARGET_LEVEL% goto SERVER_STARTED
     )
 )
 if !SECONDS_WAITED! GEQ 30 (
     echo Wait timed out!
-    goto STARTED
+    goto SERVER_STARTED
 )
 timeout /t 1 /nobreak >nul
 set /a SECONDS_WAITED=!SECONDS_WAITED!+1
-goto AWAIT_STARTED
+goto AWAIT_SERVER_STARTED
 
-:STARTED
+:SERVER_STARTED
 endlocal
 
-echo Awaiting Karaf server unload...
+echo Awaiting server unload...
 set KARAF_HOME=
 %RUNHIDDEN% """%~dp0karaf.bat"" stop"
 setlocal EnableDelayedExpansion
 set SECONDS_WAITED=0
 
-:AWAIT_STOPPED
+:AWAIT_SERVER_STOPPED
 set LEVEL=
 2>nul set /p LEVEL=<"%STARTLEVEL_FILE%"
 if defined LEVEL (
     set /a LEVEL_A=LEVEL >nul 2>&1
     if not errorlevel 1 (
-        if !LEVEL_A! EQU %STOPPED_TARGET_LEVEL% goto STOPPED
+        if !LEVEL_A! EQU %STOPPED_TARGET_LEVEL% goto SERVER_STOPPED
     )
 )
 if !SECONDS_WAITED! GEQ 30 (
     echo Wait timed out!
-    goto STOPPED
+    goto SERVER_STOPPED
 )
 timeout /t 1 /nobreak >nul
 set /a SECONDS_WAITED=!SECONDS_WAITED!+1
-goto AWAIT_STOPPED
+goto AWAIT_SERVER_STOPPED
 
-:STOPPED
+:SERVER_STOPPED
 endLocal
-del "%LOCK_FILE%" 2>nul
+del "%CACHE_REFRESH_LOCK%" 2>nul
 set KARAF_HOME=
 "%~dp0karaf.bat" console
 exit /b %ERRORLEVEL%
 
-:AFTER_FIRST_RUN_BOOTSTRAP
+:AFTER_CACHE_READY
 
 if not "%KARAF_ETC%" == "" (
     if not exist "%KARAF_ETC%" (
