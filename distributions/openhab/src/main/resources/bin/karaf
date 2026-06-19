@@ -179,7 +179,7 @@ init() {
 
 run() {
     # refresh  OSGI cache if needed
-    awaitOsgiCacheReady()
+    awaitOsgiCacheReady
 
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
