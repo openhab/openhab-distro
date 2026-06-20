@@ -401,7 +401,7 @@ awaitOsgiCacheReady() {
     STOPPED_TARGET_LEVEL=0
     echo "${STOPPED_TARGET_LEVEL}" > "${STARTLEVEL_FILE}"
 
-    echo "Awaiting server load..."
+    echo "Starting server..."
     KARAF_HOME="" "${REALNAME}" server >/dev/null 2>&1 &
 
     SECONDS_WAITED=0
@@ -420,7 +420,7 @@ awaitOsgiCacheReady() {
         fi
     done
 
-    echo "Awaiting server unload..."
+    echo "Finalizing startup sequence..."
     KARAF_HOME="" "${REALNAME}" stop >/dev/null 2>&1
 
     SECONDS_WAITED=0
