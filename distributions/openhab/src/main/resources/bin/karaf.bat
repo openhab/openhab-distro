@@ -106,7 +106,7 @@ set STOPPED_TARGET_LEVEL=0
 set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
 > "%TEMP%\runhidden.vbs" echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False
 
-echo Awaiting server load...
+echo Starting server...
 set KARAF_HOME=
 %RUNHIDDEN% """%~dp0karaf.bat"" server"
 setlocal EnableDelayedExpansion
@@ -132,7 +132,7 @@ goto AWAIT_SERVER_STARTED
 :SERVER_STARTED
 endlocal
 
-echo Awaiting server unload...
+echo Finalizing startup sequence...
 set KARAF_HOME=
 %RUNHIDDEN% """%~dp0karaf.bat"" stop"
 setlocal EnableDelayedExpansion
