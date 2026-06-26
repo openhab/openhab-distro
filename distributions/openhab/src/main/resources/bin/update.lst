@@ -198,6 +198,7 @@ ALERT;Shelly Binding: Thing type shellyplushtg3 was renamed to shellyplusht. Del
 ALERT;SMHI Binding: Due to updates to SMHI's API, the channel ids have changed. Measures have been taken to ensure backwards compatibility, but to avoid future issues all items need to be relinked to the new channels.
 
 [5.2.0]
+ALERT;CORE: Persistence extensions with QuantityType as input now return results in the same unit or logically derived unit instead of the system unit. This may require changes to rules if you relied on the return values to be in the system unit.
 ALERT;Main UI: oh-canvas-items now use 100% of the height their bounding box and center vertically in that bounding box. While this fixes incorrect behaviour, it might change the appearance of your oh-canvas-layout pages. In that case, you need to adjust the bounding boxes through their resize handles.
 ALERT;Main UI: oh-category-axis startOnSunday parameter has been removed. For chartType = week, the chart will either start on Sunday or on Monday depending on your locale. For chartType = isoWeek, the chart will always start on Monday. 
 ALERT;AirParif Binding: Due to API evolutions pollens related information have been removed. They are now provided by Atmo France Binding.
