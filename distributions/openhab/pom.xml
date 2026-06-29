@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.openhab.distro</groupId>
     <artifactId>pom-distributions</artifactId>
-    <version>5.2.0-SNAPSHOT</version>
+    <version>6.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>openhab</artifactId>
@@ -92,7 +92,7 @@
             <dependency>
               <groupId>org.openhab.util</groupId>
               <artifactId>pax-web-patch</artifactId>
-              <version>1.0.0</version>
+              <version>1.0.1</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -214,10 +214,10 @@
           <javase>${oh.java.version}</javase>
           <installedFeatures>
             <feature>wrapper</feature>
-            <feature>wrap</feature>
           </installedFeatures>
           <startupFeatures>
             <feature>eventadmin</feature>
+            <feature>wrap</feature>
           </startupFeatures>
           <bootFeatures>
             <feature>jaas</feature>
