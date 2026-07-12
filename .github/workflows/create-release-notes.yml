@@ -31,7 +31,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -42,7 +42,7 @@ jobs:
           java-version: '17'
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Generate changelog
         run: |
@@ -102,3 +102,11 @@ jobs:
             "openhab-${{ inputs.version }}.tar.gz" \
             "openhab-addons-${{ inputs.version }}.kar" \
             --clobber
+
+      - name: Update Homebrew Formula version
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ secrets.HOMEBREW_REPO_ACCESS_TOKEN }}
+          repository: openhab/homebrew-openhab
+          event-type: update-version
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "version": "${{ inputs.version }}"}'

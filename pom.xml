@@ -11,7 +11,7 @@
 
   <groupId>org.openhab.distro</groupId>
   <artifactId>pom</artifactId>
-  <version>5.2.0-SNAPSHOT</version>
+  <version>5.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>openHAB Distribution</name>
@@ -58,10 +58,10 @@
 
     <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>
 
-    <ohc.version>5.2.0-SNAPSHOT</ohc.version>
-    <oha.version>5.2.0-SNAPSHOT</oha.version>
+    <ohc.version>5.3.0-SNAPSHOT</ohc.version>
+    <oha.version>5.3.0-SNAPSHOT</oha.version>
 
-    <karaf.version>4.4.9</karaf.version>
+    <karaf.version>4.4.11</karaf.version>
 
     <oh.java.version>21</oh.java.version>
     <maven.compiler.release>${oh.java.version}</maven.compiler.release>
@@ -94,14 +94,13 @@
         <plugin>
           <groupId>org.apache.karaf.tooling</groupId>
           <artifactId>karaf-maven-plugin</artifactId>
-          <!-- TODO replace fixed version 4.4.8 by ${karaf.tooling.version} one karaf#2219 is contained in future release -->
-          <version>4.4.8</version>
+          <version>${karaf.version}</version>
           <extensions>true</extensions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.6.2</version>
+          <version>3.6.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -120,6 +119,15 @@
           <configuration>
             <!-- Workaround for build errors when using feature packaging and enableGeneration=true -->
             <!-- with the karaf-maven-plugin, see: https://issues.apache.org/jira/browse/KARAF-7734 -->
+            <allowIncompleteProjects>true</allowIncompleteProjects>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.4</version>
+          <configuration>
+            <!-- Workaround for deploy errors for karaf packaging projects with attached artifacts only -->
             <allowIncompleteProjects>true</allowIncompleteProjects>
           </configuration>
         </plugin>

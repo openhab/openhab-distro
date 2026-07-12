@@ -178,6 +178,9 @@ init() {
 }
 
 run() {
+    # refresh  OSGI cache if needed
+    awaitOsgiCacheReady
+
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
     if [ "x$CHECK_ROOT_INSTANCE_RUNNING" = "x" ]; then
@@ -304,8 +307,8 @@ run() {
                 ${KARAF_EXEC} "${JAVA}" ${JAVA_OPTS} \
                     --add-reads=java.xml=java.logging \
                     --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED \
-                    --patch-module java.base="${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.locator-4.4.9.jar" \
-                    --patch-module java.xml="${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.java.xml-4.4.9.jar" \
+                    --patch-module java.base="${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.locator-4.4.11.jar" \
+                    --patch-module java.xml="${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.java.xml-4.4.11.jar" \
                     --add-opens java.base/java.security=ALL-UNNAMED \
                     --add-opens java.base/java.net=ALL-UNNAMED \
                     --add-opens java.base/java.lang=ALL-UNNAMED \
@@ -376,6 +379,69 @@ run() {
             fi
         fi
     done
+}
+
+awaitOsgiCacheReady() {
+    case "$1" in
+        ""|console) ;;
+        *) return 0 ;;
+    esac
+
+    OSGI_CACHE_FOLDER="$KARAF_DATA/cache/org.eclipse.osgi"
+    [ -d "${OSGI_CACHE_FOLDER}" ] && return 0
+
+    CACHE_REFRESH_LOCK="$KARAF_DATA/cache-refresh-lock"
+    [ -e "${CACHE_REFRESH_LOCK}" ] && return 0
+    : > "${CACHE_REFRESH_LOCK}" 2>/dev/null
+    trap 'rm -f "${CACHE_REFRESH_LOCK}" 2>/dev/null' EXIT HUP INT TERM
+    echo "Refreshing the cache..."
+
+    STARTLEVEL_FILE="$KARAF_DATA/openhab-start-level"
+    STARTED_TARGET_LEVEL=10
+    STOPPED_TARGET_LEVEL=0
+    echo "${STOPPED_TARGET_LEVEL}" > "${STARTLEVEL_FILE}"
+
+    echo "Starting server..."
+    KARAF_HOME="" "${REALNAME}" server >/dev/null 2>&1 &
+
+    SECONDS_WAITED=0
+    while :; do
+        if [ -f "${STARTLEVEL_FILE}" ]; then
+            LEVEL="$(cat "${STARTLEVEL_FILE}" 2>/dev/null)"
+            if [ -n "${LEVEL}" ] && [ "${LEVEL}" -ge "${STARTED_TARGET_LEVEL}" ]; then
+                break
+            fi
+        fi
+        sleep 1
+        SECONDS_WAITED=$((SECONDS_WAITED + 1))
+        if [ "${SECONDS_WAITED}" -ge 60 ]; then
+            echo "Wait timed out!"
+            break
+        fi
+    done
+
+    echo "Finalizing startup sequence..."
+    KARAF_HOME="" "${REALNAME}" stop >/dev/null 2>&1
+
+    SECONDS_WAITED=0
+    while :; do
+        if [ -f "${STARTLEVEL_FILE}" ]; then
+            LEVEL="$(cat "${STARTLEVEL_FILE}" 2>/dev/null)"
+            if [ -n "${LEVEL}" ] && [ "${LEVEL}" -eq "${STOPPED_TARGET_LEVEL}" ]; then
+                break
+            fi
+        fi
+        sleep 1
+        SECONDS_WAITED=$((SECONDS_WAITED + 1))
+        if [ "${SECONDS_WAITED}" -ge 30 ]; then
+            echo "Wait timed out!"
+            break
+        fi
+    done
+
+    rm -f "${CACHE_REFRESH_LOCK}"
+    trap - EXIT HUP INT TERM
+    return 0
 }
 
 nothing() {

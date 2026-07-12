@@ -24,8 +24,8 @@ set DIRNAME=%~dp0%
 set PROGNAME=%~nx0%
 set ARGS=%*
 
-rem enabling workaround for utf8 tables, chcp 65001
-rem TODO: remove when upgrading from 4.4.9 to 4.4.10 or 4.5.0
+rem cleanly display utf8 tables, chcp 65001
+rem this can be removed when fixed in jline
 chcp 65001 > nul
 rem as this is within the setlocal section, the change will be reverted on exit
 
@@ -84,6 +84,85 @@ if not "%KARAF_DATA%" == "" (
 if "%KARAF_DATA%" == "" (
     set "KARAF_DATA=%KARAF_BASE%\data"
 )
+
+if "%~1"=="" goto AWAIT_CACHE_READY
+if /i "%~1"=="console" goto AWAIT_CACHE_READY
+goto AFTER_CACHE_READY
+
+:AWAIT_CACHE_READY
+set CACHE_FOLDER=%KARAF_DATA%\cache\org.eclipse.osgi
+if exist "%CACHE_FOLDER%\.*" goto AFTER_CACHE_READY
+
+set CACHE_REFRESH_LOCK=%KARAF_DATA%\cache-refresh-lock
+if exist "%CACHE_REFRESH_LOCK%" goto AFTER_CACHE_READY
+type nul > "%CACHE_REFRESH_LOCK%"
+echo Refreshing the cache...
+
+set STARTLEVEL_FILE=%KARAF_DATA%\openhab-start-level
+set STARTED_TARGET_LEVEL=10
+set STOPPED_TARGET_LEVEL=0
+> "%STARTLEVEL_FILE%" echo %STOPPED_TARGET_LEVEL%
+
+set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
+> "%TEMP%\runhidden.vbs" echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False
+
+echo Starting server...
+set KARAF_HOME=
+%RUNHIDDEN% """%~dp0karaf.bat"" server"
+setlocal EnableDelayedExpansion
+set SECONDS_WAITED=0
+
+:AWAIT_SERVER_STARTED
+set LEVEL=
+2>nul set /p LEVEL=<"%STARTLEVEL_FILE%"
+if defined LEVEL (
+    set /a LEVEL_A=LEVEL >nul 2>&1
+    if not errorlevel 1 (
+        if !LEVEL_A! GEQ %STARTED_TARGET_LEVEL% goto SERVER_STARTED
+    )
+)
+if !SECONDS_WAITED! GEQ 30 (
+    echo Wait timed out!
+    goto SERVER_STARTED
+)
+timeout /t 1 /nobreak >nul
+set /a SECONDS_WAITED=!SECONDS_WAITED!+1
+goto AWAIT_SERVER_STARTED
+
+:SERVER_STARTED
+endlocal
+
+echo Finalizing startup sequence...
+set KARAF_HOME=
+%RUNHIDDEN% """%~dp0karaf.bat"" stop"
+setlocal EnableDelayedExpansion
+set SECONDS_WAITED=0
+
+:AWAIT_SERVER_STOPPED
+set LEVEL=
+2>nul set /p LEVEL=<"%STARTLEVEL_FILE%"
+if defined LEVEL (
+    set /a LEVEL_A=LEVEL >nul 2>&1
+    if not errorlevel 1 (
+        if !LEVEL_A! EQU %STOPPED_TARGET_LEVEL% goto SERVER_STOPPED
+    )
+)
+if !SECONDS_WAITED! GEQ 30 (
+    echo Wait timed out!
+    goto SERVER_STOPPED
+)
+timeout /t 1 /nobreak >nul
+set /a SECONDS_WAITED=!SECONDS_WAITED!+1
+goto AWAIT_SERVER_STOPPED
+
+:SERVER_STOPPED
+endLocal
+del "%CACHE_REFRESH_LOCK%" 2>nul
+set KARAF_HOME=
+"%~dp0karaf.bat" console
+exit /b %ERRORLEVEL%
+
+:AFTER_CACHE_READY
 
 if not "%KARAF_ETC%" == "" (
     if not exist "%KARAF_ETC%" (
@@ -417,8 +496,8 @@ if "%KARAF_PROFILER%" == "" goto :RUN
             "%JAVA%" %JAVA_OPTS% %OPTS% ^
                 --add-reads=java.xml=java.logging ^
                 --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED ^
-                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.9.jar" ^
-                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.9.jar" ^
+                --patch-module java.base="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.locator-4.4.11.jar" ^
+                --patch-module java.xml="%KARAF_HOME%\lib\endorsed\org.apache.karaf.specs.java.xml-4.4.11.jar" ^
                 --add-opens java.base/java.security=ALL-UNNAMED ^
                 --add-opens java.base/java.net=ALL-UNNAMED ^
                 --add-opens java.base/java.lang=ALL-UNNAMED ^

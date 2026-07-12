@@ -12,7 +12,7 @@ Set-StrictMode -Version Latest
     The version to upgrade to.
     .PARAMETER Snapshot
     DEPRECATED - Upgrade to a snapshot version ($true) or a release version ($false) (default: $false)
-    DEPRECATED - Please specify "-snapshot" in the OHVersion instead (ex: "3.0.0-SNAPSHOT")
+    DEPRECATED - Please specify "-snapshot" in the OHVersion instead (ex: "5.3.0-SNAPSHOT")
     .PARAMETER AutoConfirm
     Automatically confirm update (used for headless mode)
     .EXAMPLE
@@ -20,7 +20,7 @@ Set-StrictMode -Version Latest
     Update-openHAB
     .EXAMPLE
     Update the openHAB distribution in the C:\oh-snapshot directory to the next snapshot version
-    Update-openHAB -OHDirectory C:\oh-snapshot -OHVersion 3.0.0-SNAPSHOT
+    Update-openHAB -OHDirectory C:\oh-snapshot -OHVersion 5.3.0-SNAPSHOT
 #>
 
 ###########################################################################
@@ -408,8 +408,8 @@ Function Update-openHAB() {
     
     # If the OHVersion parameter was not specified,
     #    If the current version is snapshot  - make OHVersion the same snapshot
-    #    If the current version is stable    - make OHVersion the next minor upgrade (current version 3.0.0 would make our OHversion 3.1.0)
-    #    If the current version is milestone - make OHVersion the stable version (3.1.0.M6 becomes 3.1.0)
+    #    If the current version is stable    - make OHVersion the next minor upgrade (current version 5.1.0 would make our OHversion 5.2.0)
+    #    If the current version is milestone - make OHVersion the stable version (5.2.0.M6 becomes 5.2.0)
     if (-Not $OHVersion) {
         if ($parts.Length -eq 3) {
             if ($parts[2].EndsWith("-SNAPSHOT", "CurrentCultureIgnoreCase")) {
