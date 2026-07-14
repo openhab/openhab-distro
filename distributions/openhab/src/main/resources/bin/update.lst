@@ -210,6 +210,9 @@ ALERT;MyBMW Binding: Due to BMW security changes, this add-on does not work anym
 ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to setup your default voice again and adjust your rules & scripts for the changed voice UIDs.
 ALERT;Teleinfo Binding : This binding has been rewritten to support the D2L ERL dongle. As a result, channels and channel types have changed, so you may need to recreate your Things and update your configuration.
 
+[5.3.0]
+ALERT;Lutron Binding: Physical keypad button channels (keypad, ttkeypad, intlkeypad, palladiomkeypad, pico, grafikeyekeypad, vcrx and wci Things) are now trigger channels instead of Switch state channels. Linked Items no longer receive state updates; add a system:rawbutton-* profile to the link or trigger rules directly on the button channel events. Sending ON/OFF commands to these channels and the autorelease parameter are no longer supported.
+
 [[PRE]]
 [2.2.0]
 DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
