@@ -323,6 +323,16 @@
       </plugin>
       <plugin>
         <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-indexer-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>index</id>
+            <phase>prepare-package</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
         <artifactId>bnd-export-maven-plugin</artifactId>
         <configuration>
           <failOnChanges>false</failOnChanges>
