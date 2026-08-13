@@ -103,8 +103,12 @@ set STARTED_TARGET_LEVEL=10
 set STOPPED_TARGET_LEVEL=0
 > "%STARTLEVEL_FILE%" echo %STOPPED_TARGET_LEVEL%
 
-set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
-> "%TEMP%\runhidden.vbs" echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False
+set RUNHIDDEN=wscript //nologo "%DIRNAME%runhidden.vbs"
+
+if not exist "%DIRNAME%runhidden.vbs" (
+    call :warn Missing helper script: "%DIRNAME%runhidden.vbs"
+    goto END
+)
 
 echo Starting server...
 set KARAF_HOME=
