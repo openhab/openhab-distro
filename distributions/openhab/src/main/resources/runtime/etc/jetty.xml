@@ -23,7 +23,7 @@
 					<Call name="addRule">
 						<Arg>
 							<New class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
-								<Set name="header">X-Forwarded-Proto</Set>
+								<Set name="headerName">X-Forwarded-Proto</Set>
 								<Set name="headerValue">https</Set> <!-- if this is unset, any value will match against the rule -->
 								<Set name="scheme">https</Set>
 							</New>
@@ -32,7 +32,7 @@
 					<Call name="addRule">
 						<Arg>
 							<New class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
-								<Set name="header">X-Forwarded-Proto</Set>
+								<Set name="headerName">X-Forwarded-Proto</Set>
 								<Set name="headerValue">http</Set> <!-- if this is unset, any value will match against the rule -->
 								<Set name="scheme">http</Set>
 							</New>
@@ -49,8 +49,8 @@
 					<Set name="contextPath">/static</Set>
 					<Set name="handler">
 						<New class="org.eclipse.jetty.server.handler.ResourceHandler">
-							<Set name="resourceBase"><SystemProperty name="openhab.conf" />/html</Set>
-							<Set name="directoriesListed">false</Set>
+							<Set name="baseResourceAsString"><SystemProperty name="openhab.conf" />/html</Set>
+							<Set name="dirAllowed">false</Set>
 							<Set name="cacheControl">max-age=31536000</Set>
 						</New>
 					</Set>
@@ -100,7 +100,10 @@
 
 		<Call name="addCustomizer">
 			<Arg>
-				<New class="org.eclipse.jetty.server.SecureRequestCustomizer" />
+				<New class="org.eclipse.jetty.server.SecureRequestCustomizer">
+					<Set name="sniRequired">false</Set>
+					<Set name="sniHostCheck">false</Set>
+				</New>
 			</Arg>
 		</Call>
 	</New>
