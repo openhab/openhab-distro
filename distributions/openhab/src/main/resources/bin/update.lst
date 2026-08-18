@@ -214,7 +214,7 @@ ALERT;Teleinfo Binding : This binding has been rewritten to support the D2L ERL 
 
 [5.3.0]
 ALERT;Lutron Binding: Physical keypad button channels (keypad, ttkeypad, intlkeypad, palladiomkeypad, pico, grafikeyekeypad, vcrx and wci Things) are now trigger channels instead of Switch state channels. Linked Items no longer receive state updates; add a system:rawbutton-* profile to the link or trigger rules directly on the button channel events. Sending ON/OFF commands to these channels and the autorelease parameter are no longer supported.
-ALERT;Teslascope Binding: Apikey authentication is no longer supported, users must migrate to PAT (Personal Access Tokens)
+ALERT;Teslascope Binding: Apikey authentication is no longer supported. Please update your configuration to use a PAT (Personal Access Token).
 
 [[PRE]]
 [2.2.0]
