@@ -93,6 +93,11 @@ goto AFTER_CACHE_READY
 set CACHE_FOLDER=%KARAF_DATA%\cache\org.eclipse.osgi
 if exist "%CACHE_FOLDER%\.*" goto AFTER_CACHE_READY
 
+if not exist "%DIRNAME%runhidden.vbs" (
+    call :warn Missing helper script: "%DIRNAME%runhidden.vbs"
+    goto END
+)
+
 set CACHE_REFRESH_LOCK=%KARAF_DATA%\cache-refresh-lock
 if exist "%CACHE_REFRESH_LOCK%" goto AFTER_CACHE_READY
 type nul > "%CACHE_REFRESH_LOCK%"
@@ -103,12 +108,11 @@ set STARTED_TARGET_LEVEL=10
 set STOPPED_TARGET_LEVEL=0
 > "%STARTLEVEL_FILE%" echo %STOPPED_TARGET_LEVEL%
 
-set RUNHIDDEN=wscript //nologo "%TEMP%\runhidden.vbs"
-> "%TEMP%\runhidden.vbs" echo CreateObject("Wscript.Shell").Run WScript.Arguments(0), 0, False
+set RUNHIDDEN=wscript //nologo "%DIRNAME%runhidden.vbs"
 
 echo Starting server...
 set KARAF_HOME=
-%RUNHIDDEN% """%~dp0karaf.bat"" server"
+%RUNHIDDEN% "%DIRNAME%karaf.bat" "server"
 setlocal EnableDelayedExpansion
 set SECONDS_WAITED=0
 
@@ -134,7 +138,7 @@ endlocal
 
 echo Finalizing startup sequence...
 set KARAF_HOME=
-%RUNHIDDEN% """%~dp0karaf.bat"" stop"
+%RUNHIDDEN% "%DIRNAME%karaf.bat" "stop"
 setlocal EnableDelayedExpansion
 set SECONDS_WAITED=0
 
