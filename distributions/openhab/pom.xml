@@ -82,22 +82,6 @@
         </includes>
       </resource>
     </resources>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>3.6.3</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.openhab.util</groupId>
-              <artifactId>pax-web-patch</artifactId>
-              <version>1.0.0</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-      </plugins>
-    </pluginManagement>
 
     <plugins>
       <plugin>
@@ -173,7 +157,7 @@
           <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>5.0.8</version>
+            <version>5.1.0</version>
             <type>pom</type>
           </dependency>
         </dependencies>
@@ -240,25 +224,6 @@
           <archiveZip>false</archiveZip>
           <archiveTarGz>false</archiveTarGz>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <configuration>
-          <mainClass>org.openhab.patch.ClassPathUtilPatcher</mainClass>
-          <arguments>
-            <argument>${project.basedir}/target/assembly/system/org/ops4j/pax/web/pax-web-api</argument>
-          </arguments>
-          <includePluginDependencies>True</includePluginDependencies>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <phase>prepare-package</phase>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
