@@ -637,10 +637,16 @@ Function Update-openHAB() {
         Write-Host -ForegroundColor Cyan "Creating backup directories in $TempBackupDir"
         DeleteIfExists $TempBackupDir $True
 
-        Write-Host -ForegroundColor Cyan "Copying directory conf, userdata and runtime to $TempBackupDirConf"
-        Copy-Item -Path $OHConf, $OHUserData, $OHRuntime -Destination $TempBackupDir -Recurse -Force -ErrorAction Stop
+        Write-Host -ForegroundColor Cyan "Copying directory conf, userdata and runtime to $TempBackupDir"
+        New-Item -Path $TempBackupDir -Name "conf" -ItemType "Directory"
+		Copy-Item -Path $OHConf -Destination $TempBackupDirConf -Recurse -Force -ErrorAction Stop
+		New-Item -Path $TempBackupDir -Name "userdata" -ItemType "Directory"
+		Copy-Item -Path $OHUserData -Destination $TempBackupDirUserData -Recurse -Force -ErrorAction Stop
+		New-Item -Path $TempBackupDir -Name "runtime" -ItemType "Directory"
+		Copy-Item -Path $OHRuntime -Destination $TempBackupDirRuntime -Recurse -Force -ErrorAction Stop
 
         Write-Host -ForegroundColor Cyan "Copying files from $OHDirectory to $TempBackupDirHome"
+        New-Item -Path $TempBackupDir -Name "home" -ItemType "Directory"
         Get-ChildItem $OHDirectory -File -ErrorAction Stop | Copy-Item -Destination $TempBackupDirHome -Force -ErrorAction Stop
 
     } catch {
