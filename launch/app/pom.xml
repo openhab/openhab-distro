@@ -114,6 +114,20 @@
                 </scopes>
               </configuration>
             </execution>
+            <!-- Index the JAXB 3.0 API separately: swagger-core-jakarta has a mandatory import of
+              jakarta.xml.bind.annotation [3.0,4), while everything else uses 4.0, and Maven cannot have both
+              versions as a dependency of this module. -->
+            <execution>
+              <id>jaxb3-compat-index</id>
+              <goals>
+                <goal>local-index</goal>
+              </goals>
+              <configuration>
+                <indexName>jaxb3-compat</indexName>
+                <inputDir>${project.build.directory}/jaxb3-compat</inputDir>
+                <outputFile>${project.build.directory}/jaxb3-compat-index.xml</outputFile>
+              </configuration>
+            </execution>
           </executions>
         </plugin>
 
@@ -320,6 +334,43 @@
       <plugin>
         <groupId>biz.aQute.bnd</groupId>
         <artifactId>bnd-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-jaxb3-compat</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>jakarta.xml.bind</groupId>
+                  <artifactId>jakarta.xml.bind-api</artifactId>
+                  <version>3.0.0</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}/jaxb3-compat</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-indexer-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>index</id>
+            <phase>prepare-package</phase>
+          </execution>
+          <execution>
+            <id>jaxb3-compat-index</id>
+            <phase>prepare-package</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>biz.aQute.bnd</groupId>
