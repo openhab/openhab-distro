@@ -2,7 +2,7 @@
 
 -standalone: \
 	target/index.xml;name="self",\
-	jaxb3-compat-index.xml;name="jaxb3-compat"
+	target/jaxb3-compat-index.xml;name="jaxb3-compat"
 
 feature.logging: \
 	bnd.identity;id='org.ops4j.pax.logging.pax-logging-api',\
