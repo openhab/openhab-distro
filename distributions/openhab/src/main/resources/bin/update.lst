@@ -213,6 +213,8 @@ ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to set
 ALERT;Teleinfo Binding : This binding has been rewritten to support the D2L ERL dongle. As a result, channels and channel types have changed, so you may need to recreate your Things and update your configuration.
 
 [5.3.0]
+ALERT;ChatGPT Binding: apiUrl and modelUrl parameters of the account Thing have been replaced by baseUrl. Whilst backwards compatibility is kept, it is recommended to set baseUrl for all ChatGPT Things and remove apiUrl and modelUrl.
+ALERT;ChatGPT Binding: Every single account Thing now provides a HLI service with a ID of schema "chatgpt:<thing-id>", replacing the single HLI service with "chatgpt" ID. You may need to set your default HLI in the Voice settings again and update your rules and scripts.
 ALERT;Lutron Binding: Physical keypad button channels (keypad, ttkeypad, intlkeypad, palladiomkeypad, pico, grafikeyekeypad, vcrx and wci Things) are now trigger channels instead of Switch state channels. Linked Items no longer receive state updates; add a system:rawbutton-* profile to the link or trigger rules directly on the button channel events. Sending ON/OFF commands to these channels and the autorelease parameter are no longer supported.
 ALERT;Teslascope Binding: Apikey authentication is no longer supported. Please update your configuration to use a PAT (Personal Access Token).
 
