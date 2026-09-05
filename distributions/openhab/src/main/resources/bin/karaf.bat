@@ -125,7 +125,7 @@ if defined LEVEL (
         if !LEVEL_A! GEQ %STARTED_TARGET_LEVEL% goto SERVER_STARTED
     )
 )
-if !SECONDS_WAITED! GEQ 30 (
+if !SECONDS_WAITED! GEQ 70 (
     if not exist "%STARTLEVEL_FILE%" (
         echo Wait timed out! .. missing start-level file %STARTLEVEL_FILE%
         goto SERVER_STARTED
@@ -155,7 +155,7 @@ if defined LEVEL (
         if !LEVEL_A! EQU %STOPPED_TARGET_LEVEL% goto SERVER_STOPPED
     )
 )
-if !SECONDS_WAITED! GEQ 30 (
+if !SECONDS_WAITED! GEQ 70 (
     if not exist "%STARTLEVEL_FILE%" (
         echo Wait timed out! .. missing start-level file %STARTLEVEL_FILE%
         goto SERVER_STOPPED
