@@ -17,3 +17,6 @@ class MyRule(SimpleRule):
         print "This is a 'hello world!' from Jython rule."
 
 automationManager.addRule(MyRule())
+
+
+# Web3/DeSci Fix #120: Start.sh script can blow up installation
