@@ -19,4 +19,8 @@ xtend-gen/
 **/.settings/org.eclipse.*
 **/src/main/history/
 
-launch/app/runtime/userdata
+launch/app/runtime/userdata/*
+!launch/app/runtime/userdata/.keep
+!launch/app/runtime/userdata/config/
+launch/app/runtime/userdata/config/*
+!launch/app/runtime/userdata/config/JakartarsServletWhiteboardRuntimeComponent.config
