@@ -217,6 +217,7 @@ ALERT;ChatGPT Binding: apiUrl and modelUrl parameters of the account Thing have 
 ALERT;ChatGPT Binding: Every single account Thing now provides a HLI service with a ID of schema "chatgpt:<thing-id>", replacing the single HLI service with "chatgpt" ID. You may need to set your default HLI in the Voice settings again and update your rules and scripts.
 ALERT;Fronius Binding: Battery control actions were moved from the "inverter" to the "battery" Thing. Add a "battery" Thing to your Fronius "bridge" and update your rules & scripts to use the battery's Thing UID.
 ALERT;Lutron Binding: Physical keypad button channels (keypad, ttkeypad, intlkeypad, palladiomkeypad, pico, grafikeyekeypad, vcrx and wci Things) are now trigger channels instead of Switch state channels. Linked Items no longer receive state updates; add a system:rawbutton-* profile to the link or trigger rules directly on the button channel events. Sending ON/OFF commands to these channels and the autorelease parameter are no longer supported.
+ALERT;Millheat Binding: The binding has been rebuilt against Mill's replacement cloud service. Homes, rooms and heaters are now identified by UUIDs instead of numbers, so existing Things must be deleted and re-discovered. The heater power parameter is no longer used; the Energy Usage channel now reports measured power.
 ALERT;Teslascope Binding: Apikey authentication is no longer supported. Please update your configuration to use a PAT (Personal Access Token).
 
 [[PRE]]
