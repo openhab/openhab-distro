@@ -61,6 +61,47 @@
       <type>xml</type>
       <scope>runtime</scope>
     </dependency>
+    <!-- Java Sound API SPI Providers -->
+    <!-- FLAC Decoder & Encoder -->
+    <dependency>
+      <groupId>org.openhab.osgiify</groupId>
+      <artifactId>com.io7m.flannel.core</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- tritonus-shared (dep of both MP3 and OGG Vorbis Decoder) -->
+    <dependency>
+      <groupId>com.googlecode.soundlibs</groupId>
+      <artifactId>tritonus-share</artifactId>
+      <version>0.3.7.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- MP3 Decoder -->
+    <dependency>
+      <groupId>org.openhab.osgiify</groupId>
+      <artifactId>javazoom.jlayer</artifactId>
+      <version>1.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openhab.osgiify</groupId>
+      <artifactId>javazoom.mp3spi</artifactId>
+      <version>1.9.5.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- OGG Vorbis Decoder -->
+    <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jorbis</artifactId>
+      <version>0.0.17</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openhab.osgiify</groupId>
+      <artifactId>javazoom.vorbisspi</artifactId>
+      <version>1.0.3.3</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -118,6 +159,23 @@
                   <destFileName>addons.xml</destFileName>
                 </artifactItem>
               </artifactItems>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-audio-spi-libs</id>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <outputDirectory>${project.build.directory}/assembly/lib/boot</outputDirectory>
+              <includeArtifactIds>com.io7m.flannel.core,
+                tritonus-share,
+                javazoom.jlayer,
+                javazoom.mp3spi,
+                jorbis,
+                javazoom.vorbisspi</includeArtifactIds>
+              <excludeTransitive>true</excludeTransitive>
             </configuration>
           </execution>
           <execution>
