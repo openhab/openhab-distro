@@ -55,6 +55,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- Maven 3.10+ sets a default outputTimestamp, which makes bnd keep a literal SNAPSHOT qualifier instead of a
+      build timestamp. A single character disables reproducible builds and restores timestamped snapshot versions. -->
+    <project.build.outputTimestamp>-</project.build.outputTimestamp>
 
     <online.repo.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</online.repo.version>
 
