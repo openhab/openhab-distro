@@ -1,0 +1,133 @@
+Group gFF           "First Floor"   <firstfloor>    ["FirstFloor"]
+Group gGF           "Ground Floor"  <groundfloor>   ["GroundFloor"]
+Group gC            "Cellar"        <cellar>        ["Basement"]
+Group Garden        "Garden"        <garden>        ["Garden"]
+Group Weather       "Weather"       <sun>
+
+Group Status
+Group Shutters
+
+Group GF_Living     "Living Room"   <video>     (gGF)   ["LivingRoom"]
+Group GF_Kitchen    "Kitchen"       <kitchen>   (gGF)   ["Kitchen"]
+Group GF_Toilet     "Toilet"        <bath>      (gGF)   ["Bathroom"] { synonyms="Toilets,WC,Restroom" }
+Group GF_Corridor   "Corridor"      <corridor>  (gGF)   ["Corridor"]
+
+Group FF_Bath       "Bathroom"      <bath>      (gFF)   ["Bathroom"]
+Group FF_Office     "Office"        <office>    (gFF)   ["Room"] { synonyms="Study" }
+Group FF_Son        "Oliver's Room" <boy_1>     (gFF)   ["Bedroom"] { synonyms="Oli's Room" }
+Group FF_Daughter   "Amelia's Room" <girl_1>    (gFF)   ["Bedroom"] { synonyms="Amy's Room" }
+Group FF_Bed        "Bedroom"       <bedroom>   (gFF)   ["Bedroom"] { synonyms="Master Bedroom" }
+Group FF_Corridor   "Corridor"      <corridor>  (gFF)   ["Corridor"]
+
+/* active groups */
+Group:Switch:OR(ON, OFF)        Lights      "All Lights [(%d)]"
+Group:Switch:OR(ON, OFF)        Heating     "No. of Active Heatings [(%d)]"     <heating>
+Group:Number:AVG                Temperature "Avg. Room Temperature [%.1f °C]"   <temperature>   (Status)
+Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
+
+/* Lights */
+Dimmer Light_GF_Living_Table        "Table"         (GF_Living, Lights)     ["Light", "Lighting"]
+Switch Light_GF_Corridor_Ceiling    "Ceiling"       (GF_Corridor, Lights)   ["Light"]
+Switch Light_GF_Kitchen_Ceiling     "Ceiling"       (GF_Kitchen, Lights)    ["Light"]
+Switch Light_GF_Kitchen_Table       "Table"         (GF_Kitchen, Lights)    ["Light"]
+Switch Light_GF_Corridor_Wardrobe   "Wardrobe"      (GF_Corridor, Lights)   ["Light"]
+Switch Light_GF_Toilet_Ceiling      "Ceiling"       (GF_Toilet, Lights)     ["Light"]
+Switch Light_GF_Toilet_Mirror       "Mirror"        (GF_Toilet, Lights)     ["Light"]
+
+Switch Light_FF_Bath_Ceiling        "Ceiling"       (FF_Bath, Lights)       ["Light"]
+Switch Light_FF_Bath_Mirror         "Mirror"        (FF_Bath, Lights)       ["Light"]
+Switch Light_FF_Corridor_Ceiling    "Corridor"      (FF_Corridor, Lights)   ["Light"]
+Switch Light_FF_Office_Ceiling      "Ceiling"       (FF_Office, Lights)     ["Light"]
+Switch Light_FF_Son_Ceiling         "Ceiling"       (FF_Son, Lights)        ["Light"]
+Switch Light_FF_Daughter_Ceiling    "Ceiling"       (FF_Daughter, Lights)   ["Light"]
+Switch Light_FF_Bed_Ceiling         "Ceiling"       (FF_Bed, Lights)        ["Light"]
+
+Switch Light_C_Corridor_Ceiling     "Ceiling"       (gC, Lights)            ["Light"]
+Switch Light_C_Staircase            "Staircase"     (gC, Lights)            ["Light"]
+Switch Light_C_Washing_Ceiling      "Washing"       (gC, Lights)            ["Light"]
+Switch Light_C_Workshop             "Workshop"      (gC, Lights)            ["Light", "Lighting"]
+
+Switch Light_Garden_Garage          "Garage"        (Garden, Lights)        ["Light", "Lighting"]
+Switch Light_Garden_Terrace         "Terrace"       (Garden, Lights)        ["Light"]
+
+/* Heating */
+Switch Heating_GF_Corridor          "Corridor"      <heating>   (GF_Corridor, Heating)  ["HVAC"]
+Switch Heating_GF_Toilet            "Toilet"        <heating>   (GF_Toilet, Heating)    ["HVAC"]
+Switch Heating_GF_Living            "Livingroom"    <heating>   (GF_Living, Heating)    ["HVAC"]
+Switch Heating_GF_Kitchen           "Kitchen"       <heating>   (GF_Kitchen, Heating)   ["HVAC"]
+
+Switch Heating_FF_Bath              "Bath"          <heating>   (FF_Bath, Heating)      ["HVAC"]
+Switch Heating_FF_Office            "Office"        <heating>   (FF_Office, Heating)    ["HVAC"]
+Switch Heating_FF_Son               "Oliver's Room" <heating>   (FF_Son, Heating)       ["HVAC"]
+Switch Heating_FF_Daughter          "Amelia's Room" <heating>   (FF_Daughter, Heating)  ["HVAC"]
+Switch Heating_FF_Bed               "Bedroom"       <heating>   (FF_Bed, Heating)       ["HVAC"]
+
+/* Rollershutters */
+Rollershutter Shutter_GF_Toilet         "Toilet"        (GF_Toilet, Shutters)   ["Blinds"]
+Rollershutter Shutter_GF_Kitchen        "Kitchen"       (GF_Kitchen, Shutters)  ["Blinds"]
+Rollershutter Shutter_GF_Living         "Livingroom"    (GF_Living, Shutters)   ["Blinds"]
+
+Rollershutter Shutter_FF_Bed            "Bedroom"       (FF_Bed, Shutters)      ["Blinds"]
+Rollershutter Shutter_FF_Bath           "Bath"          (FF_Bath, Shutters)     ["Blinds"]
+Rollershutter Shutter_FF_Office_Window  "Office Window" (FF_Office, Shutters)   ["Blinds"]
+Rollershutter Shutter_FF_Office_Door    "Office Door"   (FF_Office, Shutters)   ["Blinds"]
+
+Switch Shutter_all
+
+/* Indoor Temperatures */
+Number Temperature_GF_Corridor  "Corridor [%.1f °C]"        <temperature>   (Temperature, GF_Corridor)  ["Temperature", "Measurement"]
+Number Temperature_GF_Toilet    "Toilet [%.1f °C]"          <temperature>   (Temperature, GF_Toilet)    ["Temperature", "Measurement"]
+Number Temperature_GF_Living    "Living Room [%.1f °C]"     <temperature>   (Temperature, GF_Living)    ["Temperature", "Measurement"]
+Number Temperature_GF_Kitchen   "Kitchen [%.1f °C]"         <temperature>   (Temperature, GF_Kitchen, Thermostat) ["Temperature", "Measurement", "CurrentTemperature"]
+Number Temperature_FF_Bath      "Bath [%.1f °C]"            <temperature>   (Temperature, FF_Bath)      ["Temperature", "Measurement"]
+Number Temperature_FF_Office    "Office [%.1f °C]"          <temperature>   (Temperature, FF_Office)    ["Temperature", "Measurement"]
+Number Temperature_FF_Son       "Oliver's Room [%.1f °C]"   <temperature>   (Temperature, FF_Son)       ["Temperature", "Measurement"]
+Number Temperature_FF_Daughter  "Amelia's Room [%.1f °C]"   <temperature>   (Temperature, FF_Daughter)  ["Temperature", "Measurement"]
+Number Temperature_FF_Bed       "Bedroom [%.1f °C]"         <temperature>   (Temperature, FF_Bed)       ["Temperature", "Measurement"]
+
+/* Windows */
+Contact Window_GF_Frontdoor     "Frontdoor [MAP(en.map):%s]"     <frontdoor>  (GF_Corridor, Windows)    ["FrontDoor"]
+Contact Window_GF_Kitchen       "Kitchen [MAP(en.map):%s]"                    (GF_Kitchen, Windows)     ["Window"]
+Contact Window_GF_Living        "Terrace door [MAP(en.map):%s]"  <door>       (GF_Living, Windows)      ["Door"]
+Contact Window_GF_Toilet        "Toilet [MAP(en.map):%s]"                     (GF_Toilet, Windows)      ["Window"]
+
+Contact Window_FF_Bath          "Bath [MAP(en.map):%s]"                       (FF_Bath, Windows)        ["Window"]
+Contact Window_FF_Bed           "Bedroom [MAP(en.map):%s]"                    (FF_Bed, Windows)         ["Window"]
+Contact Window_FF_Office_Window "Office Window [MAP(en.map):%s]"              (FF_Office, Windows)      ["Window"]
+Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"  <door>       (FF_Office, Windows)      ["Door"]
+
+Contact Garage_Door             "Garage Door [MAP(en.map):%s]"   <garagedoor> (Garden, Windows)         ["GarageDoor"]
+
+Group Weather_Chart
+Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart)
+Number Weather_Temp_Max         "Todays Maximum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
+Number Weather_Temp_Min         "Todays Minimum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
+Number Weather_Chart_Period     "Chart Period"
+DateTime Weather_LastUpdate     "Last Update [%1$ta %1$tR]"     <clock>
+Number:Angle Sun_Elevation      "Sun Elevation"                 <sun>       { channel = "astro:sun:home:position#elevation" }
+Number:Angle Sun_Azimuth        "Sun Azimuth"                   <sun>       { channel = "astro:sun:home:position#azimuth" }
+DateTime Sunrise_Time           "Sunrise [%1$tH:%1$tM]"         <sunrise>   { channel = "astro:sun:home:rise#start" }
+DateTime Sunset_Time            "Sunset [%1$tH:%1$tM]"          <sunset>    { channel = "astro:sun:home:set#start" }
+Number:Angle Moon_Elevation     "Moon Elevation"                <moon>      { channel = "astro:moon:home:position#elevation" }
+Number:Angle Moon_Azimuth       "Moon Azimuth"                  <moon>      { channel = "astro:moon:home:position#azimuth" }
+String Moon_Phase               "Moon Phase"                    <moon>      { channel = "astro:moon:home:phase#name" }
+
+/* Demo items */
+DateTime CurrentDate            "Date [%1$tA, %1$td.%1$tm.%1$tY]"   <calendar>  { channel="ntp:ntp:demo:dateTime" }
+Switch DemoSwitch               "Switch"
+Dimmer DimmedLight              "Dimmer [%d %%]"                    <slider>
+Color  RGBLight                 "RGB Light"                         <slider>
+Rollershutter DemoShutter       "Roller Shutter"
+Dimmer DemoBlinds               "Blinds [%d %%]"                    <rollershutter>
+Number Scene_General            "Scene"                             <sofa>
+Number Radio_Station            "Radio"                             <network>
+Dimmer Volume                   "Volume [%.1f %%]"
+Location DemoLocation           "Brandenburg Gate Berlin"
+Number Wifi_Level               "Wifi Level [%d/4]"                 <signal>        (FF_Office)
+String ImageURL                 "Image URL [%s]"
+
+Group Thermostat                "Thermostat"            <temperature>                    ["Thermostat"]
+Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["homekit:TargetTemperature", "Setpoint", "Temperature"] { habot="" [ control="knob", min=15, max=35, leftIcon="mdi-thermometer", leftInverted=true ] }
+String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:TargetHeatingCoolingMode", "Control"]
+
+// vim: syntax=Xtend

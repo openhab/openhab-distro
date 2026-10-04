@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+    <!-- these are add-ons in separate repositories (which do not have their own Karaf feature defined), so we include them here -->
+
+    <feature name="openhab-binding-zwave" description="Z-Wave Binding" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>openhab-transport-serial</feature>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.zwave/${project.version}</bundle>
+    </feature>
+
+</features>

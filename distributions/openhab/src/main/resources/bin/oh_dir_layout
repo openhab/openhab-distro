@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# DIRNAME is the directory of karaf, setenv, etc.
+(unset CDPATH) >/dev/null 2>&1 && unset CDPATH
+
+export OPENHAB_HOME=`cd "$DIRNAME/../.."; pwd`
+
+if [ -z ${OPENHAB_CONF} ]; then
+    export OPENHAB_CONF="${OPENHAB_HOME}/conf"
+fi
+
+if [ -z ${OPENHAB_RUNTIME} ]; then
+    export OPENHAB_RUNTIME="${OPENHAB_HOME}/runtime"
+fi
+
+if [ -z ${OPENHAB_USERDATA} ]; then
+    export OPENHAB_USERDATA="${OPENHAB_HOME}/userdata"
+fi
+
+if [ -z ${OPENHAB_LOGDIR} ]; then
+    export OPENHAB_LOGDIR="${OPENHAB_USERDATA}/logs"
+fi
+
+if [ -z ${OPENHAB_BACKUPS} ]; then
+    export OPENHAB_BACKUPS="${OPENHAB_HOME}/backups"
+fi
+
+
+# Make sure the tmp folder exists as Karaf requires it
+if [ ! -d "${OPENHAB_USERDATA}/tmp" ]; then
+    mkdir "${OPENHAB_USERDATA}/tmp"
+fi
+
+
+export KARAF_DATA="${OPENHAB_USERDATA}"
+export KARAF_BASE="${OPENHAB_USERDATA}"
+export KARAF_ETC="${OPENHAB_USERDATA}/etc"

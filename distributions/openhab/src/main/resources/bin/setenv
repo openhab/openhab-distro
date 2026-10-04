@@ -1,0 +1,166 @@
+#!/bin/sh
+#
+#    Licensed to the Apache Software Foundation (ASF) under one or more
+#    contributor license agreements.  See the NOTICE file distributed with
+#    this work for additional information regarding copyright ownership.
+#    The ASF licenses this file to You under the Apache License, Version 2.0
+#    (the "License"); you may not use this file except in compliance with
+#    the License.  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+#
+
+#
+# handle specific scripts; the SCRIPT_NAME is exactly the name of the Karaf
+# script: client, instance, shell, start, status, stop, karaf
+#
+# if [ "${KARAF_SCRIPT}" == "SCRIPT_NAME" ]; then
+#   Actions go here...
+# fi
+
+#
+# general settings which should be applied for all scripts go here; please keep
+# in mind that it is possible that scripts might be executed more than once, e.g.
+# in example of the start script where the start script is executed first and the
+# karaf script afterwards.
+#
+
+#
+# The following section shows the possible configuration options for the default 
+# karaf scripts
+#
+# export JAVA_HOME # Location of Java installation
+# export JAVA_OPTS # Generic JVM options, for instance, where you can pass the memory configuration
+# export JAVA_NON_DEBUG_OPTS # Additional non-debug JVM options
+# export EXTRA_JAVA_OPTS # Additional JVM options
+# export KARAF_HOME # Karaf home folder
+# export KARAF_DATA # Karaf data folder
+# export KARAF_BASE # Karaf base folder
+# export KARAF_ETC  # Karaf etc  folder
+# export KARAF_LOG  # Karaf log  folder
+# export KARAF_SYSTEM_OPTS # First citizen Karaf options
+# export KARAF_OPTS # Additional available Karaf options
+# export KARAF_DEBUG # Enable debug mode
+# export KARAF_REDIRECT # Enable/set the std/err redirection when using bin/start
+# export KARAF_NOROOT # Prevent execution as root if set to true
+
+#
+# Import openHAB directory layout
+#
+. "$DIRNAME/oh_dir_layout"
+
+#
+# Import Karaf shared functions
+#
+. "$DIRNAME/inc"
+
+#
+# set listen address for HTTP(S) server
+#
+if [ ! -z ${OPENHAB_HTTP_ADDRESS} ]; then
+    HTTP_ADDRESS=${OPENHAB_HTTP_ADDRESS}
+else
+    HTTP_ADDRESS=0.0.0.0
+fi
+
+#
+# set ports for HTTP(S) server
+#
+if [ ! -z ${OPENHAB_HTTP_PORT} ]; then
+    HTTP_PORT=${OPENHAB_HTTP_PORT}
+else
+    HTTP_PORT=8080
+fi
+
+if [ ! -z ${OPENHAB_HTTPS_PORT} ]; then
+    HTTPS_PORT=${OPENHAB_HTTPS_PORT}
+else
+    HTTPS_PORT=8443
+fi
+
+# set Java debug port
+if [ ! -z ${OPENHAB_JAVA_DEBUG_PORT} ]; then
+    JAVA_DEBUG_PORT=${OPENHAB_JAVA_DEBUG_PORT}
+else
+    JAVA_DEBUG_PORT="5005"
+fi
+
+#
+# set Java options
+#
+
+export JAVA_OPTS="${JAVA_OPTS}
+  -Dopenhab.home=${OPENHAB_HOME}
+  -Dopenhab.conf=${OPENHAB_CONF}
+  -Dopenhab.runtime=${OPENHAB_RUNTIME}
+  -Dopenhab.userdata=${OPENHAB_USERDATA}
+  -Dopenhab.logdir=${OPENHAB_LOGDIR}
+  -Dfelix.cm.dir=${OPENHAB_USERDATA}/config
+  -Djava.library.path=${OPENHAB_USERDATA}/tmp/lib
+  -Djdk.util.zip.disableZip64ExtraFieldValidation=true
+  -Djetty.host=${HTTP_ADDRESS}
+  -Djetty.http.compliance=RFC2616
+  -Dorg.apache.cxf.osgi.http.transport.disable=true
+  -Dorg.ops4j.pax.web.listening.addresses=${HTTP_ADDRESS}
+  -Dorg.osgi.service.http.port=${HTTP_PORT}
+  -Dorg.osgi.service.http.port.secure=${HTTPS_PORT}"
+
+#
+# set JVM options
+#
+EXTRA_JAVA_OPTS_COMMON="
+  -Djava.awt.headless=true
+  -Dfile.encoding=UTF-8"
+export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS}"
+export JAVA_NON_DEBUG_OPTS="-XX:-UsePerfData"
+
+
+# The functions below are modified from the Karaf inc script to set JAVA_HOME to a default value.
+# This avoids Karaf printing a warning message at startup.
+
+die() {
+  # echo and exit, && command true delays the exit for systemd logging (workaround).
+  echo "$*" && command true
+  exit 1
+}
+
+locateJava() {
+    # Setup the Java Virtual Machine
+    if ${cygwin} ; then
+        [ -n "${JAVA}" ] && JAVA=$(cygpath --unix "${JAVA}")
+        [ -n "${JAVA_HOME}" ] && JAVA_HOME=$(cygpath --unix "${JAVA_HOME}")
+    fi
+
+    if [ "x${JAVA_HOME}" = "x" ] && [ "${darwin}" = "true" ]; then
+        JAVA_HOME="$(/usr/libexec/java_home -v 21)"
+    fi
+    if [ "x${JAVA}" = "x" ] && [ -r /etc/gentoo-release ] ; then
+        JAVA_HOME=$(java-config --jre-home)
+    fi
+    if [ "x${JAVA}" = "x" ]; then
+        if [ "x${JAVA_HOME}" != "x" ]; then
+            if [ ! -d "${JAVA_HOME}" ]; then
+                die "JAVA_HOME is not valid: ${JAVA_HOME}"
+            fi
+            JAVA="${JAVA_HOME}/bin/java"
+        else
+            JAVA=$(command -v java)
+            if [ "x${JAVA}" = "x" ]; then
+                die "java command not found"
+            fi
+        fi
+    fi
+    if [ "x${JAVA_HOME}" = "x" ]; then
+        JAVA_HOME="$(dirname "$(dirname "$(pathCanonical "${JAVA}")")")"
+    fi
+}
+
+detectOS
+locateJava
+checkJvmVersion

@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '.github/**/*.md'
+  pull_request:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '.github/**/*.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [ '21' ]
+        os: [ 'ubuntu-24.04' ]
+    name: Build (Java ${{ matrix.java }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    # typical duration is ~6min, set twice the amount as limit (default is 6h)
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        if: github.head_ref == ''
+        uses: actions/checkout@v7
+
+      - name: Checkout merge
+        if: github.head_ref != ''
+        uses: actions/checkout@v7
+        with:
+          ref: refs/pull/${{github.event.pull_request.number}}/merge
+
+      - name: Set up Cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.m2/repository
+            !~/.m2/repository/org/openhab
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Set up Java ${{ matrix.java }}
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+
+      - name: Build
+        id: build
+        run: './.github/scripts/maven-build'
+        env:
+          MAVEN_OPTS: >-
+            -Xmx2g
+            -Dmaven.wagon.http.retryHandler.count=5
+            -Dmaven.wagon.httpconnectionManager.ttlSeconds=25
+            -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+
+      - name: Upload Build Log
+        if: ${{ always() && ((steps.build.outcome == 'success') || (steps.build.outcome == 'failure')) }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: build-log-java-${{ matrix.java }}-${{ matrix.os }}
+          path: build.log
+
+      # this will identify modifications to files under source control during the workflow run;
+      # untracked files will be included as well!
+      - name: Verify Changed Files
+        id: verify-changed-files
+        run: |
+          set -o pipefail
+          changed_files=$(echo -n "$(git diff --name-only HEAD && git ls-files --others --exclude-standard)"|tr '\n' ' ')
+          echo "changed_files=$changed_files" >> $GITHUB_OUTPUT
+
+      - name: Fail on Changed Files
+        if: steps.verify-changed-files.outputs.changed_files != ''
+        env:
+          CHANGED_FILES: ${{ steps.verify-changed-files.outputs.changed_files }}
+        run: |
+          echo "::error::Files have changed: $CHANGED_FILES"
+          exit 1

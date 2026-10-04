@@ -1,0 +1,359 @@
+[[MSG]]
+[2.2.0]
+NOTE;Logging configuration has changed. 'org.ops4j.pax.logging.cfg' has been backed up and restored to defaults!
+NOTE;*.rules files are now validated upon startup. Files with errors will from now on be logged and ignored by the runtime.
+
+[2.3.0]
+ALERT;Nest Binding: The 'camera' Thing Type now has channel groups. Add 'camera#' before the channel ID in the channel UID of existing camera channels. The 'time_to_target_mins' channel of the 'thermostat' Thing Type is renamed to 'time_to_target'
+ALERT;Oceanic Binding: The 'softener' Thing Type no longer exists and is replaced by the 'serial' and 'ethernet' Thing Types
+ALERT;Yamaha Receiver Binding: The configuration parameter names now use lower camel case convention. Change 'HOST' to 'host', 'PORT' to 'port' etc
+
+[2.4.0]
+ALERT;Astro Binding: The 'kilometer' and 'miles' channels have been replaced by a new 'distance' channel
+ALERT;Jeelink Binding: The 'currentWatt' and 'maxWatt' channels have been replaced with 'currentPower' and 'maxPower' channels
+ALERT;WeatherUnderground Binding: A bridge has been added on top of the current things, you need to add a bridge containing your api-key.
+ALERT;ZWave Binding: Major changes have been merged to support features such as security. All things must be deleted and re-added. Refer to https://community.openhab.org/t/zwave-binding-updates/51080 for further information.
+ALERT;Synop Binding is now using UoM. 'wind-speed-ms' and 'wind-speed-knots' channels have been replaced by a single 'wind-speed' channel.
+ALERT;Amazonechocontrol Binding: The account thing does not have settings anymore. You have to login at amazon once again through the proxy server http(s)://<YourOpenHAB>/amazonechocontrol
+ALERT;Milight Binding: The various available bulb types do not appear in the Paper UI Inbox anymore. The correct bulb need to be added manually. The bulb "zone" is now a configuration. Bulb Things need to be recreated to apply this change.
+ALERT;Hue emulation: The item to hue ID mapping is no longer stored in files, but in the openHAB storage service. You need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Google Home, etc).
+
+[2.5.0]
+ALERT;Azure IoT: Due to changes in the Azure API, this add-on is no longer working and has been removed.
+ALERT;DarkSky Binding: The item type of 'rain' and 'snow' channels have been changed to 'Number:Speed'.
+ALERT;EnOcean Binding: Channel 'receivingState' has been removed, because this was a string containing many information. For this, there are three new channels: 'rssi', 'repeatCount' and 'lastReceived'.
+ALERT;Homekit: Some tags have been renamed. Old names will not be supported in future versions. Please check documentation.
+ALERT;LGWebOS Binding: The binding parameter 'localIP' has been removed. The binding now uses system defaults for network communication. The thing type parameter 'deviceId' is no longer a parameter, but a property. Parameters 'host' and 'key' have been added.
+ALERT;Mail Action: The mail action has been replaced by a new mail binding.
+ALERT;MQTT Binding: Homie channel names may have changed if special characters are used for MQTT topic names.
+ALERT;OneWire Binding: Some thing types have changed and need to be updated in textual configurations. See documentation for further information.
+ALERT;OpenSprinkler Binding: The stationXX channels have been removed and replaced by a bridge/thing combination. See documentation for further information.
+ALERT;OpenSprinkler Binding: The Pi interface was removed, as it does not provide all of the features of the binding anymore. Please use the HTTP interface instead.
+ALERT;Pushbullet Action: The pushbullet action has been replaced by a new pushbullet binding.
+ALERT;REST Docs: This add-on is now part of the UIs. When previously installed using a UI, uninstall the REST Docs before updating and reinstall it after the update to prevent errors. When installing it using textual configuration, update 'services/addons.cfg' by removing 'restdocs' from 'misc' and add it to 'ui' instead.
+ALERT;senseBox Binding: The senseBox binding is now using Units of Measurements, and the channel name for Illuminance has changed. The Items must be reconfigured.
+ALERT;Somfytahoma Binding: The following channels have been renamed: 'cyclic_button_state' to 'cyclic_button', 'battery_status_state' to 'battery_status' and 'lighting_led_pod_mod_state' to 'lighting_led_pod_mode'.
+ALERT;Systeminfo Binding: The 'cpu#load' channel has been removed because the OSHI library no longer provides this information.
+ALERT;TP-Link Smart Home Binding: The energy and rssi channels are now using Units of Measurements. Items must be adapted and the things must be recreated.
+ALERT;Tesla Binding: The binding has been heavily refactored. It is required to delete old Tesla Things and set them up from scratch.
+ALERT;Vitotronic Binding: The following channels have been renamed: 'outsite_temp' to 'outside_temp', 'pelletburner:power' to 'pelletburner:powerlevel', 'party_temp' to 'party_temp_setpoint' and 'save_temp' to 'save_temp_setpoint'
+
+[3.1.0]
+ALERT;Hue Binding: The type of the channels 'switch', 'brightness', 'color' and 'color_temperature' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Keba Binding: Introduced Units of Measurements and the channel 'pwmpilotcurrent' was replaced by 'maxpilotcurrentdutycyle'. Items must be adapted and things created through the UI must be recreated.
+ALERT;Nest Binding: The binding now also supports the SDM API. To keep using the WWN API, add the 'wwn_' prefix to Thing Types in files or recreate the WWN Nest Things using the UI with your current WWN account configuration parameters.
+ALERT;OpenUV Binding: The type of the channels 'UVMaxTime', 'OzoneTime' and 'UVTime' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Xiaomi MiIo Binding: Many channels have been converted from Number to a Number with dimension, e.g. temperature channels have been changed from Number to Number:Temperature. Please see the binding documentation for details.
+
+[3.2.0]
+ALERT;Air Quality Binding: Full refactoring of things and channels. Please read the updated documentation and start with new things.
+ALERT;DanfossAirUnit Binding: The channel 'manual_fan_speed' has been deprecated and replaced by channel 'manual_fan_step'. Items should be relinked to the new channel.
+ALERT;EnOcean Binding: The RockerSwitch channels do not longer react if two buttons of a rocker switch are pressed simultaneously. If needed, the new channel RockerSwitchAction can be used instead.
+ALERT;Hayward OmniLogic Binding: heaterState channel changed from number to string with state options. Sensor thing removed. Sensor channels now present in parent device (i.e. Body of Water flow, temp). filterSpeed channel replaced with filterSpeedPercent and filterSpeedRpm. pumpSpeed channel replaced with pumpSpeedPercent and pumpSpeedRpm.
+ALERT;Homematic Binding: The DOUBLE_PRESSED trigger event was removed from the BUTTON channel. If needed, it can be replaced by a rule triggered by the SHORT_PRESSED event which employs a timer to check for double presses.
+ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Channel groups have been introduced for the PowerView Hub thing. Scene channels should be relinked to the new channels for channel group 'Scenes'.
+ALERT;IpCamera Binding: The URLs that serve the files have changed to now be on port 8080 and the serverPort config is no longer needed. Update any widget and rules if you have hard coded the URLs into them.
+ALERT;LG webOS Binding: The type of the channels 'power', 'mute', 'volume' and 'mediaPlayer' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Miele Binding: The temperature channels have been converted from Number to Number:Temperature.
+ALERT;Miele Binding: The channels 'state', 'program' and 'phase' are improved with better and possibly localized texts. Rules should use the new channels 'rawState', 'rawProgram' and 'rawPhase' for reliability. Please see the binding documentation for details.
+ALERT;RFXCOM Binding: Lighting4 default command ids are deprecated and will be removed in a future version. You must specify command ids in the thing configuration for Lighting4 devices.
+ALERT;Sager Weathercaster Binding: The type of the channels 'pressure', 'temperature' and 'wind-angle' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use one of these channels.
+ALERT;Sony Projector Binding: The type of the channel 'power' was updated. You may need to remove and create again your things in case your things were previously created using UI and you want to use this channel.
+
+[3.3.0]
+ALERT;BMW ConnectedDrive Binding: BMW replaced ConnectedDrive Smartphone App with MyBMW Application. Underlying API is now disabled and the Binding isn't working anymore. Switch to new introduced MyBMW Binding recommended.
+ALERT;Daikin Binding: The channel 'specialmode-powerful' has been removed, and a r/w channel 'streamer' added. The channel 'specialmode' changed to read/write to control eco/powerful mode.
+ALERT;DanfossAirUnit Binding: The type of the channel 'humidity' was updated. You may need to remove and create your things again in case your things were previously created using UI and you want to use this channel.
+ALERT;Helios Binding: Firmware versions older than v2.21 are no longer supported.
+ALERT;JS Scripting Automation: 'item.history.lastUpdate()' returns 'time.ZonedDateTime' instead of 'Date'
+ALERT;JS Scripting Automation: 'addItem(...)' and 'updateItem(...)' use new itemConfig as parameter and 'createItem(...)' was removed
+ALERT;MQTT Binding: Support for the MQTT System Broker has been removed. Replace 'mqtt:systemBroker' things with 'mqtt:broker' things.
+ALERT;Netatmo Binding: Things hierarchy and organization has changed as well as channel namings. You will need to remove and create again these things.
+ALERT;OmniLink Binding: The channel 'sysdate' has been renamed to 'system_date', and is now read only, to make these changes visible you may need to remove and recreate the `controller` thing. To synchronize the controller time there is now a new action synchronizeControllerTime that can be used with a time zone input (e.g. 'America/Denver').
+ALERT;Opentherm Gateway Binding: The 'otgw' Thing has been removed and split into a new 'openthermgateway' Bridge, and a new 'boiler' Thing. You will need to change your Thing and respective Item definitions.
+ALERT;RFXCOM Binding: The channel 'fanSpeed' of 'fan_lucci_dc' and 'fan_novy' has been renamed to 'fanSpeedControl', and 'fan_lucci_dc' has a new numeric channel 'fanSpeed'. You may need to remove and create your things again.
+ALERT;TapoControl Binding: L510_Series and L530_Series Things were renamed to L510 and L530 because of manufacturer changed naming with new HW-rev. You may need to remove and create again these things.
+ALERT;WLED Binding: Binding now uses Bridge and Thing structure. Delete and add a new bridge, and at least 1 thing for each segment you require.
+
+[3.4.0]
+ALERT;CORE: Default units have been added for all dimensions. A state description defining the unit should be added to each item that uses a different unit.
+ALERT;Automower Binding: Due to Husqvarna Authentication API change, bridge now requires application secret instead of username and password. Delete any existing bridge and re-add it, please make sure to update all automower things to use the newly added bridge.
+ALERT;JavaScript Scripting Automation: 'setTimeout' and 'setInterval' return a timerId (a positive integer value) as in standard JS instead of an openHAB Timer.
+ALERT;JavaScript Scripting Automation: ItemHistory min/max between/since returns now a number instead of a string.
+ALERT;JavaScript Scripting Automation: openHAB JavaScript library versions < 3.1.2 are not fully compatible anymore. If you have manually installed the JS library, please upgrade to a version >= 3.1.2.
+ALERT;JRuby Scripting Automation: The default `RUBYLIB` directory has changed to OPENHAB_CONF/automation/ruby/lib. Either explicitly configure the add-on to use the previous value, or move any files to the new location.
+ALERT;Konnected Binding: Things needs to be recreated because of added Konnected Pro panel support and manual configuration of things.
+ALERT;LG webOS Binding: The undocumented action "sendRCButton" was removed while it is possible to achieve the same action with "sendButton"; in case you were using "sendButton" with ENTER or DELETE as parameter, you should now use the new action "sendKeyboard".
+ALERT;Miele@home Binding: The channel 'start' now contains date and time for start of scheduled program. Previously it was counting down duration until the program would start.
+ALERT;Miele@home Binding: The channels 'duration', 'elapsed' and 'finish' are now Number:Time. You may need to remove and create your things again in case your things were previously created using UI and you want to use these channels. Linked items need to be recreated.
+ALERT;Resol Binding: Item Type of solar controllers channels using time and weekday format changed from Date to String. Items need to be adjusted accordingly.
+ALERT;Systeminfo Binding: Multiple Number channels now have a dimension added. You may need to remove and create your things again in case your things were previously created using UI and you want to use these channels. Linked items need to be recreated.
+ALERT;Systeminfo Binding: The default state description for DataAmount channels is now MiB. If you relied on MB, you may need to adjust.
+ALERT;Velux Binding: On window things the semantic category of the position channel has been corrected from 'blinds' to 'window'. Window things with such channels that had been created via the UI will need to be deleted and re-created.
+ALERT;Xiaomi Wifi devices (Mi IO) Binding: Channel Type change for some yeelights. The brightness channels with the Number type now have the Dimmer type. This affects only nightlight and ambilight channels for some models.
+
+[4.0.0]
+ALERT;CORE: core.GenericEventTrigger and core.GenericEventCondition parameters have have changed. See https://www.openhab.org/docs/configuration/rules-ng.html#system-module-types.
+ALERT;CORE: Rules are now triggered by ItemStateUpdatedEvent instead of ItemStateEvent. If you use JSR223 scripting without helper libraries and expect a certain Java type, code changes might be needed.
+ALERT;CORE: The syntax for an item category/icon in a textual configuration file no longer accepts a value enclosed in quotes. So <temperature> is valid but not <"temperature">. Please update the definition of your items if necessary.
+ALERT;CORE: SCRIPT transformation has been removed and replaced with language-specific transformations: JS, RB, PY, DSL, GROOVY, etc. See https://www.openhab.org/docs/configuration/transformations.html#script-transformation
+ALERT;CORE: UoM has been refactored. Please consult https://www.openhab.org/docs/concepts/units-of-measurement.html and https://www.openhab.org/docs/installation/#upgrading BEFORE starting openHAB, otherwise your persisted data may be corrupted.
+ALERT;Airthings Binding: The channels `radon_st_avg` and `radon_lt_avg` are now of dimension `RadiationSpecificActivity` instead of `Density`. Please update your linked items accordingly.
+ALERT;Bosch Indego Binding: Due to changes in the cloud services, the authentication method has changed. Please follow the authorization flow described in the documentation. Furthermore, a bridge is now required and must be assigned to the `indego` thing. Configuration of username and password is no longer required/supported.
+ALERT;ComfoAir Binding: The channel `enthalpy#enthalpyTime` now represents the set time (in minutes) instead of the internal number value that is sent to the device (`minutes / 12`).
+ALERT;DanfossAirUnit Binding: The deprecated channel 'manual_fan_speed' has been removed. Please use channel 'manual_fan_step' introduced in 3.2.
+ALERT;Dark Sky Binding: Due to EOL of their API, this add-on has been removed.
+ALERT;Generac MobileLink Binding: Due to an API change, existing Generator Things will need to be deleted and added again. Additionally, existing Items will need to be adjusted to reflect the updated Generator Thing channels.
+ALERT;HomeKit: Add-on wide configuration of mappings for thermostat modes is no longer supported. Please use item-level configuration as described in the README.
+ALERT;Hue emulation: The uniqueid value has been changed to resolve discovery issues with Alexa. You may need to rediscover "devices" in all services that use the hue emulation (Amazon Echo, Logitech Harmony, etc).
+ALERT;Hunter Douglas (Luxaflex) PowerView Binding: Deprecated scene channels have been removed. Please use the scene channels introduced in 3.2 (in channel group 'scenes').
+ALERT;JavaScript: JavaScript engines have changed their MIME types: NashornJS is application/javascript:version=ECMAScript-5.1 and GraalJS is application/javascript. Please update your scripts to either make them compatible with GraalJS or change the MIME type to continue to use NashornJS. For Blockly migration, visit the Blockly documentation.
+ALERT;JavaScript NashornJS: NashornJS has been removed from core and isn't included by default. If you still need or want to use it, you can install it as an addon.
+ALERT;JavaScript Scripting Automation: The old "metadata" and "itemchannellink" APIs have been replaced by a new API with extended functionality on the "items" namespace.
+ALERT;JavaScript Scripting Automation: ItemHistory: historicState, maximumBetween, maximumSince, minimumBetween, minimumSince & previousState now return a HistoricItem instead of just the state. previousStateTimestamp has been removed, the timestamp is available on the HistoricItem.
+ALERT;KNX Binding: Units of Measurements have been introduced, make sure you use correct units in the state description. Rules may need to be adapted. Several items changed from PercentType to QuantityType, i.e. raw values increase by a factor of 100.
+ALERT;LuftdatenInfo Binding: The binding was renamed to Sensor.Community Binding to match the new naming of the service. Things need to be recreated.
+ALERT;Netatmo Binding: Due to API authorization process change scheduled on the 2023/04/17 - refresh Token is no more stored in thing configuration, thus can be removed from things config files. If it remains, it'll be ignored.
+ALERT;Netatmo Binding: New scope has been added for the introduction of the Carbon Monoxide Alarm. Authorization process has to be replayed (and former refreshToken can be removed from things config files -- see above).
+ALERT;Windcentrale Binding: The binding has been reworked to support the new API that requires authentication. Delete old 'mill' Things, add an 'account' Bridge and add new 'windmill' Things using the 'account' as Bridge. The channel names now follow the naming conventions. Items must be adapted for these changes.
+
+[4.1.0]
+ALERT;Action Template Interpreter: removed from the distribution, functionality is covered by the Standard Interpreter.
+ALERT;Energi Data Service Binding: The channels 'net-tariff' and 'transmission-net-tariff' have been renamed to 'grid-tariff' and 'transmission-grid-tariff' respectively. Items should be relinked to the new channels.
+ALERT;Hue Binding: The auto update policy for API v2 light channels has been changed to avoid multiple state updates. For this to work, you may need to remove and create your things again in case your things were previously created using UI.
+ALERT;JavaScript Scripting Automation: The "useIncludedLibrary" configuration parameter has been renamed to "injectionCachingEnabled". In case you changed it, make sure to apply that change to the new parameter.
+ALERT;JDBC Persistence: The add-on now uses H2 database 2.2. If you use H2 for storing data, your database needs to be migrated as described in https://h2database.com/html/migration-to-v2.html. It is also required to add ';NON_KEYWORDS=VALUE' to your H2 JDBC URL. See also https://github.com/openhab/openhab-addons/pull/15726 for a Bash migration script.
+ALERT;LuxtronikHeatpump Binding: The channel 'controlSignalCirculatingPump' has been changed to type 'Number:Dimensionless'. Items linked to this channel will need to have their Type manually updated.
+ALERT;Miele@home Binding: The channel 'powerConsumption' has been renamed to 'energyConsumption'. Items should be relinked to the new channel.
+ALERT;MQTT Binding: The STOP command for Rollershutter channels now defaults to null. If you want to send an explicit stop command to a rollershutter, you need to explicitly configure the command string to send.
+ALERT;MQTT EspMilightHub Binding: Colour bulbs no longer have a `level` channel. You may need to re-add your things for it to be removed. Link to the `colour` channel instead, even for `Dimmer` items.
+ALERT;MyBMW Binding: Vehicle channels "charge-info" and "motion" removed, "charge-remaining", "last-fetched", "estimated-fuel-l-100km" and "estimated-fuel-mpg" added. Image options changed - now "VehicleStatus", "FrontView", "RearView", "FrontLeft" and "FrontRight" are available.
+ALERT;Porcupine Keyword Spotter: removed from the distribution, it was unmaintained.
+ALERT;Twitter Binding has become X. All related references to Twitter and Tweets have been replaced, please check your configuration (rules, actions, channels etc).
+
+[4.2.0]
+ALERT;AndroidTV Binding: The thing configuration of 'port' has been renamed and split to 'googletvPort' and 'shieldtvPort'
+ALERT;Energi Data Service Binding: Thing action calculatePrice now returns 'null' if price data is missing within the requested period. Rules may need to be adjusted.
+ALERT;evcc Binding: Update to evcc API version 0.123.1 results in several new or updated channels. Existing Items will need to be adjusted.
+ALERT;ISM8 Binding: Most channels have changed and are now using Units of Measurements. Items must be adapted and the things must be recreated.
+ALERT;JavaScript Scripting Automation: The 'Item' suffix has been removed from Item.type, i.e. 'SwitchItem' becomes 'Switch'.
+ALERT;JavaScript Scripting Automation: The 'Item.history' API has been replaced by 'Item.persistence', which mostly provides the same functionality, but some return types changed and 'historicState' has been renamed to 'persistedState'. Blockly users should search for '.history' using the developer sidebar and re-save all scripts that contain this search query.
+ALERT;JavaScript Scripting Automation: Deprecated methods 'actions.ScriptExecution.createTimerWithArgument' (use 'createTimer'), 'cache.get', 'cache.put', 'cache.remove' & 'cache.exists' (use the private or shared cache) and fields 'state' (use 'receivedState') & 'receivedTrigger' (use 'receivedEvent') have been removed from the event object.
+ALERT;Jython Scripting: Default python lib path changed from "/automation/lib/python" to "/automation/jython/lib" and default python script path changed from "automation/jsr223" to "automation/jython". Just move your python scripts and libraries to new locations. The path "automation/jsr223" is still working, because it is used as a deprecated path for all automation add-ons.
+ALERT;MercedesMe Binding: Public API from Mercedes was switched off. Now binding is using Smartphone API. Bridges and things cannot be reused and needs to be recreated with the updated binding.
+ALERT;OpenWeatherMap Binding: One Call API version 2.5 is to be shut down in June 2024. Read the binding's documentation for the migration process.
+ALERT;Persistence Extensions: "historicState" and evolutionRate" have been deprecated and replaced by "persistedState" and "evolutionRateSince". They will be removed in a future version. Methods may now return QuantityType instead of DecimalType. In Rules DSL, if you wish to do calculations without units, you may have to cast the results of the method to DecimalType explicitly. See documentation for details.
+ALERT;SMA Energy Meter: The Thing configuration has changed and now also requires the parameter "serialNumber".
+ALERT;Transformations: NULL and UNDEF item states are now passed to any defined transformation.
+ALERT;Transformations-MAP: "-" entry defined in a MAP file is no more used by sitemap UIs when the item state is NULL or UNDEF. You can now define "NULL" and "UNDEF" entries to map these 2 particular states or rely as before on the definition of a default mapping to map anything that has no entry in your file including NULL and UNDEF.
+
+[4.3.0]
+ALERT;CORE: The sendFrequency parameter for Slider and Colorpicker sitemap elements has been removed.
+ALERT;CORE: The DateTimeType methods toZone(zone), toLocaleZone() and getZonedDateTime() have been deprecated. They will be removed in a future version. In DSL rules, please use getZonedDateTime(ZoneId) as replacement for getZonedDateTime(), for example getZonedDateTime(ZoneId.systemDefault()) to use system time-zone.
+ALERT;Main UI: The background property has been removed from the oh-clock-card widget. Set background through the style config instead.
+ALERT;ElectroluxAir Binding: The binding has been removed since the Electrolux Delta API has been discontinued.
+ALERT;Insteon Binding: The legacy device thing channel types need to be updated in textual configurations. Please check the migration documentation for details.
+ALERT;JavaScript Automation: The isJsInstanceOfJavaType method of the utils namespace has been removed. Use JavaScript's instanceof operator instead.
+ALERT;MeteoAlerte Binding: The underlying API stopped delivering data in May 2023. Binding has been removed and is now replaced by Météo France Binding based on a new API.
+ALERT;MQTT Binding (Home Assistant): Thing types and channel IDs have been significantly restructured and simplified. Delete and re-create your things to opt in to the new style. In a subsequent openHAB release, existing things will also convert to the new style.
+ALERT;MQTT Binding (Home Assistant): Legacy schema vacuums are no longer supported.
+ALERT;Pentair Binding: EasyTouch thing has been renamed to more generic Controller and all channels have been organized into groups. You will need to reconfigure your setup to the new thing structure.
+
+[5.0.0]
+ALERT;CORE: Persistence alias functionality has been improved, allowing defining aliases across strategies and filter criteria for a persistence service. Previous persistence configurations using aliases need to be reconfigured.
+ALERT;Semantic Tags: Some Point tags reclassified as Properties; list of Point / Property / Equipment tags increased (so custom tags may now be semantic); tag validation is stricter. You may see validation warnings in the log, Items moved to another place in the UI, or other unexpected behavior.
+ALERT;Automower Binding: Implementation of complete automower API causes several channels to be removed, changed or added. New channels will need to be linked, existing items need to be adjusted.
+ALERT;Guntamatic Binding: The Binding now uses channel groups and the dynamic status channels now have an index prefix to allow multiple channels with the same description. Existing Items will need to be adjusted.
+ALERT;Juicenet Binding: The Binding has been removed due to removal of public API. Suggested alternative is to use https://github.com/JuiceRescue/juicepassproxy with the mqtt.homeasssistent binding.
+ALERT;Jython Automation: Transformation service name is renamed from "PY" to "JYTHONPY". "PY" is now used for transformations of the new Python Automation add-on.
+ALERT;Linky Binding : The Linky binding was refactored to add new functionalities. You now need a bridge device for the Linky binding to work. See Readme.md for detailed upgrade instructions.
+ALERT;MQTT Binding (Home Assistant): Thing types and channel IDs for things created prior to 4.3.0 have been significantly restructured and simplified. Items will need to be re-linked. Delete and re-create your Things to also have a simplified Thing Type ID in your Thing IDs.
+ALERT;MQTT Binding (Home Assistant): All scene components on a device are now exposed as a single String channel, with the scene name or object ID as its value. Existing Items and rules will need to be re-worked.
+ALERT;MQTT Binding (Home Assistant): Devices that use custom payloads or states now have that abstracted, so users should only use the default payloads. Rules and UIs may need to be updated for some devices.
+ALERT;Shelly Binding: Thing type shellypro2-relay was renamed to shellypro2. Delete the existing things and re-discover the devices.
+ALERT;Teslascope Binding: The Teslascope binding was refactored in order to support discovery. You now need a bridge device for the Teslascope binding to work.
+ALERT;Sitemap proxy: The proxy is now restricted to hosts listed in the new "allowedHosts" setting of the Sitemap configuration (empty by default). Add the hosts of the proxied content (e.g. cameras, external widgets) to keep it working
+ALERT;Trusted networks: The "X-Forwarded-For" header is no longer evaluated. Behind a reverse proxy, do not list the proxy address as a trusted network, as this would trust all of its clients
+ALERT;OAuth2 authorization: The redirect_uri must now match the origin of openHAB and PKCE (S256) is mandatory. Third-party OAuth2 clients not meeting this can no longer log in
+ALERT;IP Camera Binding: ONVIF events are only accepted from the camera IP or addresses in the "ipWhitelist". Add the sender address to the whitelist if events are received via NAT or a proxy
+ALERT;Tibber Binding: All channels have been renamed and restructured into groups. All items will need to be relinked to the new channel IDs.
+
+[5.1.0]
+ALERT;CORE: Persistence default strategies are removed and not applied automatically anymore. Managed persistence configurations are updated automatically. If you have a file based configuration with an existing .persist file, you may have to update your configuration: remove "default" from Strategies and make sure all Items definitions have a strategy defined.
+ALERT;AhaWasteCollection Binding: A typo was corrected in the lightweight channel id, you may need to correct your configuration.
+ALERT;Allplay Binding: Due to limited usage and increasing maintenance issues, this binding has been removed.
+ALERT;Automower Binding: Restructured to modular things with auto-discovery of datapoints. New things and channels will need to be linked, existing items need to be adjusted.
+ALERT;evcc Binding: Restructured to modular things with auto-discovery of datapoints. You must reconfigure settings, recreate Things, and adjust Items as previous configurations are incompatible.
+ALERT;Folderwatcher Binding: A typo was corrected in the AzureBlob thing parameter containerPath. You may need to reconfigure this parameter.
+ALERT;Freebox Binding: The binding has been removed from the distribution. You should consider migrating to the FreeboxOS binding.
+ALERT:Guntamatic Binding: Channel ID spelling errors (such as `079-interuption-0` and `080-interuption-1`) have been corrected. You may need to update items linked to these channels.
+ALERT;Home Assistant Binding: The binding has been split from the main MQTT binding, and will not be auto-installed. If you use this binding, it will need to be manually re-installed. You may also need to re-configure the binding if discovery settings have been customized.
+ALERT;Homie Binding: The binding has been split from the main MQTT binding, and will not be auto-installed. If you use this binding, it will need to be manually re-installed.
+ALERT;JavaScript Automation: The event object in UI-based environments has been aligned with the file-based event object. Properties are now pure JavaScript types and property names have changed. Blockly users need to resave their scripts.
+ALERT;JavaScript Automation: Automatic injection of the openHAB JavaScript library now allows for more fine-grained control. It is recommended to manually import required namespaces from the openhab library in file-based scripts and transformations and disable automatic injection for file-based scripts and transformations.
+ALERT;KNX Binding: Using secure tunnel or secure router with autodiscovered Gateway Things may cause configuration loss on restart. To recover: delete the IP Gateway Thing from the Inbox and restart. The Gateway will be rediscovered automatically. Note: Routers may appear as both tunneling and routing devices; choose the appropriate type from the Inbox. File-based configurations are not affected.
+ALERT;MyBMW Binding: Due to BMW security changes, this add-on does not work anymore and has been removed.
+ALERT;PythonScripting Automation: Python "openhab.Timer" removed. Can be replaced with default Threading or Timer implementation.
+ALERT;PythonScripting Automation: Changed parameter of "openhab.Registry.addItem"
+ALERT;PythonScripting Automation: Replace "NotInitialisedException" with "NotFoundException" in "openhab.Registry.getItem, "openhab.Registry.removeItem", "openhab.Registry.getThing", "openhab.Registry.getChannel"
+ALERT;PythonScripting Automation: "openhab.Registry.getItemMetadata", "openhab.Registry.setItemMetadata" and "openhab.Registry.removeItemMetadata" replaced by "<Item>.getMetadata().get", "<Item>.getMetadata().set" and "<Item>.getMetadata().remove"
+ALERT;PythonScripting Automation: "openhab.Registry.safeItemName" move to "openhab.Item.buildSafeName"
+ALERT;Shelly Binding: Thing type shellyplushtg3 was renamed to shellyplusht. Delete the existing things and re-discover the devices.
+ALERT;SMHI Binding: Due to updates to SMHI's API, the channel ids have changed. Measures have been taken to ensure backwards compatibility, but to avoid future issues all items need to be relinked to the new channels.
+
+[5.2.0]
+ALERT;CORE: GET /actions/{thingUID} REST API endpoint has changed HTTP status code from 404 to 204 if no entries exist.
+ALERT;CORE: GET /channel-types/{channelTypeUID} and GET /thing-types/{thingTypeUID} REST API endpoints have changed HTTP status code from 204 to 404 if no result is found.
+ALERT;CORE: Persistence extensions with QuantityType as input now return results in the item unit or logically derived unit instead of the system unit. This may require changes to rules if you relied on the return values to be in the system unit.
+ALERT;Main UI: oh-canvas-items now use 100% of the height their bounding box and center vertically in that bounding box. While this fixes incorrect behaviour, it might change the appearance of your oh-canvas-layout pages. In that case, you need to adjust the bounding boxes through their resize handles.
+ALERT;Main UI: oh-category-axis startOnSunday parameter has been removed. For chartType = week, the chart will either start on Sunday or on Monday depending on your locale. For chartType = isoWeek, the chart will always start on Monday. 
+ALERT;AirParif Binding: Due to API evolutions pollens related information have been removed. They are now provided by Atmo France Binding.
+ALERT;Corona Stats Binding: Due to EOL of the website, this add-on has been removed.
+ALERT;Matter Binding: Contact sensors have now a contact-statevalue (mapping to Contact items) instead of the previous booleanstate-statevalue (mapping to Switch items).
+ALERT;Xiaomi Wifi devices (Mi IO) Binding: Cloud login details have been depreciated at binding level. Add a new Cloud Connector Thing to to login with QR or userId.
+ALERT;MongoDB Persistence: Support for database 3.6.x has been dropped. The add-on requires database version 4.0 or later.
+ALERT;MyBMW Binding: Due to BMW security changes, this add-on does not work anymore and has been removed.
+ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to setup your default voice again and adjust your rules & scripts for the changed voice UIDs.
+ALERT;Teleinfo Binding : This binding has been rewritten to support the D2L ERL dongle. As a result, channels and channel types have changed, so you may need to recreate your Things and update your configuration.
+
+[5.3.0]
+ALERT;Bluelink Binding: Refresh tokens are no longer supported for the EU region, as new ones can no longer be obtained. Please update the account Thing to use your account email (username) and password.
+ALERT;ChatGPT Binding: apiUrl and modelUrl parameters of the account Thing have been replaced by baseUrl. Whilst backwards compatibility is kept, it is recommended to set baseUrl for all ChatGPT Things and remove apiUrl and modelUrl.
+ALERT;ChatGPT Binding: Every single account Thing now provides a HLI service with a ID of schema "chatgpt:<thing-id>", replacing the single HLI service with "chatgpt" ID. You may need to set your default HLI in the Voice settings again and update your rules and scripts.
+ALERT;Fronius Binding: Battery control actions were moved from the "inverter" to the "battery" Thing. Add a "battery" Thing to your Fronius "bridge" and update your rules & scripts to use the battery's Thing UID.
+ALERT;Lutron Binding: Physical keypad button channels (keypad, ttkeypad, intlkeypad, palladiomkeypad, pico, grafikeyekeypad, vcrx and wci Things) are now trigger channels instead of Switch state channels. Linked Items no longer receive state updates; add a system:rawbutton-* profile to the link or trigger rules directly on the button channel events. Sending ON/OFF commands to these channels and the autorelease parameter are no longer supported.
+ALERT;Millheat Binding: The binding has been rebuilt against Mill's replacement cloud service. Homes, rooms and heaters are now identified by UUIDs instead of numbers, so existing Things must be deleted and re-discovered. The heater power parameter is no longer used; the Energy Usage channel now reports measured power.
+ALERT;Teslascope Binding: Apikey authentication is no longer supported. Please update your configuration to use a PAT (Personal Access Token).
+
+[[PRE]]
+[2.2.0]
+DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
+
+[3.0.0]
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+DEFAULT;$OPENHAB_USERDATA/etc/org.ops4j.pax.logging.cfg
+
+[3.1.0]
+DEFAULT;$OPENHAB_USERDATA/etc/org.apache.karaf.log.cfg
+
+[3.2.0]
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+
+[4.0.2]
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+
+[[POST]]
+[2.3.0]
+DELETE;$OPENHAB_USERDATA/etc/org.openhab.addons.cfg
+DELETEDIR;$OPENHAB_USERDATA/kar
+
+[2.5.0]
+REPLACE;org.eclipse.smarthome.automation.dto.RuleDTO;org.openhab.core.automation.dto.RuleDTO;$OPENHAB_USERDATA/jsondb/automation_rules.json
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/core/i18nprovider.config;$OPENHAB_USERDATA/config/org/eclipse/smarthome/i18n.config
+REPLACE;org.eclipse.smarthome.core.i18nprovider;org.eclipse.smarthome.i18n;$OPENHAB_USERDATA/config/org/eclipse/smarthome/i18n.config
+
+[3.0.0]
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/i18n.config;$OPENHAB_USERDATA/config/org/openhab/i18n.config
+REPLACE;org.eclipse.smarthome.i18n;org.openhab.i18n;$OPENHAB_USERDATA/config/org/openhab/i18n.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/persistence.config;$OPENHAB_USERDATA/config/org/openhab/persistence.config
+REPLACE;org.eclipse.smarthome.persistence;org.openhab.persistence;$OPENHAB_USERDATA/config/org/openhab/persistence.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/audio.config;$OPENHAB_USERDATA/config/org/openhab/audio.config
+REPLACE;org.eclipse.smarthome.audio;org.openhab.audio;$OPENHAB_USERDATA/config/org/openhab/audio.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/voice.config;$OPENHAB_USERDATA/config/org/openhab/voice.config
+REPLACE;org.eclipse.smarthome.voice;org.openhab.voice;$OPENHAB_USERDATA/config/org/openhab/voice.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/inbox.config;$OPENHAB_USERDATA/config/org/openhab/inbox.config
+REPLACE;org.eclipse.smarthome.inbox;org.openhab.inbox;$OPENHAB_USERDATA/config/org/openhab/inbox.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/links.config;$OPENHAB_USERDATA/config/org/openhab/links.config
+REPLACE;org.eclipse.smarthome.links;org.openhab.links;$OPENHAB_USERDATA/config/org/openhab/links.config
+
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/folder.config;$OPENHAB_USERDATA/config/org/openhab/folder.config
+REPLACE;org.eclipse.smarthome.folder;org.openhab.folder;$OPENHAB_USERDATA/config/org/openhab/folder.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/cors.config;$OPENHAB_USERDATA/config/org/openhab/cors.config
+REPLACE;org.eclipse.smarthome.cors;org.openhab.cors;$OPENHAB_USERDATA/config/org/openhab/cors.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/threadpool.config;$OPENHAB_USERDATA/config/org/openhab/threadpool.config
+REPLACE;org.eclipse.smarthome.threadpool;org.openhab.threadpool;$OPENHAB_USERDATA/config/org/openhab/threadpool.config
+
+REPLACE;org.eclipse.smarthome;org.openhab;$OPENHAB_RUNTIME/services.cfg
+
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/autoupdate.config;$OPENHAB_USERDATA/config/org/openhab/autoupdate.config
+REPLACE;org.eclipse.smarthome.autoupdate;org.openhab.autoupdate;$OPENHAB_USERDATA/config/org/openhab/autoupdate.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/chart.config;$OPENHAB_USERDATA/config/org/openhab/chart.config
+REPLACE;org.eclipse.smarthome.chart;org.openhab.chart;$OPENHAB_USERDATA/config/org/openhab/chart.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/lsp.config;$OPENHAB_USERDATA/config/org/openhab/lsp.config
+REPLACE;org.eclipse.smarthome.lsp;org.openhab.lsp;$OPENHAB_USERDATA/config/org/openhab/lsp.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/network.config;$OPENHAB_USERDATA/config/org/openhab/network.config
+REPLACE;org.eclipse.smarthome.network;org.openhab.network;$OPENHAB_USERDATA/config/org/openhab/network.config
+MOVE;$OPENHAB_USERDATA/config/org/eclipse/smarthome/rulehli.config;$OPENHAB_USERDATA/config/org/openhab/rulehli.config
+REPLACE;org.eclipse.smarthome.rulehli;org.openhab.rulehli;$OPENHAB_USERDATA/config/org/openhab/rulehli.config
+
+REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/automation_rules.json
+REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/automation_rules.json
+
+MOVE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.config.discovery.DiscoveryResult.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.config.discovery.DiscoveryResult.json
+REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.config.discovery.DiscoveryResult.json
+REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.config.discovery.DiscoveryResult.json
+
+MOVE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.items.Item.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.items.Item.json
+REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.items.Item.json
+REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.items.Item.json
+
+MOVE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.items.Metadata.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.items.Metadata.json
+REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.items.Metadata.json
+REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.items.Metadata.json
+
+MOVE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.link.ItemChannelLink.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.link.ItemChannelLink.json
+REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.link.ItemChannelLink.json
+REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.link.ItemChannelLink.json
+
+MOVE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.Thing.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.Thing.json
+REPLACE;org.eclipse.smarthome.core;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.Thing.json
+REPLACE;org.eclipse.smarthome;org.openhab.core;$OPENHAB_USERDATA/jsondb/org.openhab.core.thing.Thing.json
+
+DELETE;$OPENHAB_USERDATA/config/org/openhab/classicui.config
+DELETE;$OPENHAB_USERDATA/jsondb/org.eclipse.smarthome.core.thing.link.ItemThingLink.json
+
+DELETEDIR;$OPENHAB_USERDATA/config/org/eclipse/smarthome
+DELETEDIR;$OPENHAB_USERDATA/habmin
+
+DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.connector.cfg
+DELETE;$OPENHAB_USERDATA/etc/com.eclipsesource.jaxrs.swagger.cfg
+DELETEDIR;$OPENHAB_USERDATA/config/com/eclipsesource
+
+[3.2.0]
+MOVE;$OPENHAB_USERDATA/config/org/openhab/io/metrics/MetricsRestController.config;$OPENHAB_USERDATA/config/org/openhab/metrics.config
+REPLACE;org.openhab.io.metrics.MetricsRestController;org.openhab.metrics;$OPENHAB_USERDATA/config/org/openhab/metrics.config
+DELETEDIR;$OPENHAB_USERDATA/config/org/openhab/io/metrics
+
+[3.3.0]
+DELETE;$OPENHAB_USERDATA/config/org/openhab/mqttbroker.config
+
+[3.4.0]
+MOVE;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.TransformationConfiguration.json;$OPENHAB_USERDATA/jsondb/org.openhab.core.transform.Transformation.json
+
+[4.0.0]
+REPLACE;,javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;javascript,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;javascript;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;cometvisu-php;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;innogysmarthome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;imperihome;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;darksky;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+
+[4.1.0]
+REPLACE;actiontemplatehli,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;actiontemplatehli;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;,porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;porcupineks,;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+REPLACE;porcupineks;;$OPENHAB_USERDATA/config/org/openhab/addons.config
+
+[4.2.0]
+DELETE;$OPENHAB_USERDATA/logs/audit.log

@@ -1,0 +1,78 @@
+sitemap demo label="Main Menu"
+{
+	Frame {
+		Group item=gFF label="First Floor" icon="firstfloor"
+		Group item=gGF label="Ground Floor" icon="groundfloor"
+		Group item=gC label="Cellar" icon="cellar"
+		Group item=Garden icon="garden"
+	}
+	Frame label="Weather" {
+		Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="NULL"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
+			Frame {
+				Text item=Weather_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+				Text item=Weather_Temp_Min valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+				Text item=Weather_LastUpdate visibility=[Weather_LastUpdate>30] valuecolor=[Weather_LastUpdate>120="orange", Weather_LastUpdate>300="red"]
+			}
+			Frame {
+				Switch item=Weather_Chart_Period label="Chart Period" icon="chart" mappings=[0="Hour", 1="Day", 2="Week"]
+				Chart item=Weather_Chart period=h refresh=600000 visibility=[Weather_Chart_Period==0, Weather_Chart_Period=="NULL"]
+				Chart item=Weather_Chart period=D refresh=3600000 visibility=[Weather_Chart_Period==1]
+				Chart item=Weather_Chart period=W refresh=3600000 visibility=[Weather_Chart_Period==2]
+			}
+		}
+		Text label="Astronomical Data" icon="sun" {
+			Text item=Sun_Elevation
+			Text item=Sun_Azimuth
+			Text item=Sunrise_Time
+			Text item=Sunset_Time
+			Text item=Moon_Elevation
+			Text item=Moon_Azimuth
+			Text item=Moon_Phase
+		}
+	}
+	Frame label="Demo" {
+		Text item=CurrentDate
+		Text label="Group Demo" icon="firstfloor" {
+			Switch item=Lights mappings=[OFF="All Off"]
+			Group item=Heating
+			Group item=Windows
+			Text item=Temperature
+		}
+		Text label="Widget Overview" icon="chart" {
+			Frame label="Binary Widgets" {
+				Switch item=DemoSwitch label="Toggle Switch"
+				Switch item=DemoSwitch label="Button Switch" mappings=[ON="On"]
+			}
+			Frame label="Discrete Widgets" {
+				Selection item=Scene_General label="Scene Selection" mappings=[0=off, 1=TV, 2=Dinner, 3=Reading]
+				Switch item=Scene_General label="Scene" mappings=[1=TV, 2=Dinner, 3=Reading]
+				Setpoint item=Temperature_Setpoint minValue=16 maxValue=28 step=0.5
+			}
+			Frame label="Percent-based Widgets" {
+				Slider item=DimmedLight switchSupport
+				Colorpicker item=RGBLight icon="slider"
+				Switch item=DemoShutter
+				Slider item=DemoBlinds
+			}
+			Frame label="Map/Location" {
+				Mapview item=DemoLocation icon=movecontrol height=10
+			}
+		}
+		Text label="Multimedia" icon="video" {
+			Frame label="Radio Control" {
+				Selection item=Radio_Station label="Radio" mappings=[0=off, 1=HR3, 2=SWR3]
+				Slider item=Volume icon="soundvolume"
+			}
+			Frame label="Multimedia Widgets" {
+				Image url="https://raw.github.com/wiki/openhab/openhab/images/features.png" label="openHAB" {
+					Text label="https://www.openHAB.org" icon="icon"
+				}
+				Video url="https://www.openhab.org/assets/smarthome.mp4"
+				Webview url="https://en.m.wikipedia.org/w/index.php?title=Main_Page" height=8
+				Image url="http://fpoimg.com/320x240?text=openHAB" item=ImageURL
+			}
+		}
+	}
+}
+
+// vim: syntax=Xtend

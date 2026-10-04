@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+    <feature name="openhab-runtime-ui" description="openHAB UI" version="${project.version}">
+        <feature>openhab-runtime-base</feature>
+        <feature>openhab-core-ui</feature>
+        <feature>openhab-core-ui-icon</feature>
+        <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui/${project.version}</bundle>
+        <bundle>mvn:org.openhab.ui.bundles/org.openhab.ui.iconset.classic/${project.version}</bundle>
+    </feature>
+
+</features>

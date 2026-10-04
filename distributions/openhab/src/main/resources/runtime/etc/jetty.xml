@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
+
+
+<!-- =============================================================== -->
+<!-- Configure the Jetty Server -->
+<!-- -->
+<!-- Documentation of this file format can be found at: -->
+<!-- http://wiki.eclipse.org/Jetty/Reference/jetty.xml_syntax -->
+<!-- =============================================================== -->
+
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+
+	<!-- =========================================================================================================== -->
+	<!-- Set handler Collection Structure -->
+	<!-- =========================================================================================================== -->
+
+	<Get name="handler">
+		<Call name="addHandler">
+			<Arg>
+				<New id="Rewrite" class="org.eclipse.jetty.rewrite.handler.RewriteHandler">
+					<!-- Add rule in order to take care of the X-Forwarded-Scheme header -->
+					<Call name="addRule">
+						<Arg>
+							<New class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
+								<Set name="header">X-Forwarded-Proto</Set>
+								<Set name="headerValue">https</Set> <!-- if this is unset, any value will match against the rule -->
+								<Set name="scheme">https</Set>
+							</New>
+						</Arg>
+					</Call>
+					<Call name="addRule">
+						<Arg>
+							<New class="org.eclipse.jetty.rewrite.handler.ForwardedSchemeHeaderRule">
+								<Set name="header">X-Forwarded-Proto</Set>
+								<Set name="headerValue">http</Set> <!-- if this is unset, any value will match against the rule -->
+								<Set name="scheme">http</Set>
+							</New>
+						</Arg>
+					</Call>
+				</New>
+			</Arg>
+		</Call>
+	</Get>
+	<Get name="handler">
+		<Call name="addHandler">
+			<Arg>
+				<New class="org.eclipse.jetty.server.handler.ContextHandler">
+					<Set name="contextPath">/static</Set>
+					<Set name="handler">
+						<New class="org.eclipse.jetty.server.handler.ResourceHandler">
+							<Set name="resourceBase"><SystemProperty name="openhab.conf" />/html</Set>
+							<Set name="directoriesListed">false</Set>
+							<Set name="cacheControl">max-age=31536000</Set>
+						</New>
+					</Set>
+				</New>
+			</Arg>
+		</Call>
+	</Get>
+	<Call name="insertHandler">
+		<Arg>
+			<New id="GzipHandler" class="org.eclipse.jetty.server.handler.gzip.GzipHandler">
+				<Set name="minGzipSize">1024</Set>
+				<Set name="includedPaths">
+					<Array type="java.lang.String">
+						<Item>/assets/*</Item>
+						<Item>/images/*</Item>
+						<Item>/rest/*</Item>
+						<Item>/static/*</Item>
+					</Array>
+				</Set>
+				<Set name="includedMimeTypes">
+					<Array type="java.lang.String">
+						<Item>application/javascript</Item>
+						<Item>application/json</Item>
+						<Item>image/svg+xml</Item>
+						<Item>text/css</Item>
+						<Item>text/html</Item>
+						<Item>text/javascript</Item>
+						<Item>text/plain</Item>
+						<Item>text/xml</Item>
+					</Array>
+				</Set>
+			</New>
+		</Arg>
+	</Call>
+
+	<New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+		<Set name="secureScheme">https</Set>
+		<Set name="securePort">
+			<Property name="org.osgi.service.http.port.secure" default="8443" />
+		</Set>
+		<Set name="outputBufferSize">32768</Set>
+		<Set name="requestHeaderSize">8192</Set>
+		<Set name="responseHeaderSize">8192</Set>
+		<Set name="sendServerVersion">true</Set>
+		<Set name="sendDateHeader">false</Set>
+		<Set name="headerCacheSize">512</Set>
+
+		<Call name="addCustomizer">
+			<Arg>
+				<New class="org.eclipse.jetty.server.SecureRequestCustomizer" />
+			</Arg>
+		</Call>
+	</New>
+
+	<!-- =========================================================================================================== -->
+	<!-- extra options -->
+	<!-- =========================================================================================================== -->
+	<Set name="stopAtShutdown">true</Set>
+	<Set name="stopTimeout">1000</Set>
+	<Set name="dumpAfterStart">false</Set>
+	<Set name="dumpBeforeStop">false</Set>
+
+	<!-- =========================================================================================================== -->
+	<!-- Configure the SSL parameters of the server -->
+	<!-- -->
+	<!-- JavaDoc of o.e.j.u.s.SslContextFactory.Server can be found at: -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/util/ssl/SslContextFactory.Server.html -->
+	<!-- =========================================================================================================== -->
+	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory$Server">
+		<Set name="KeyStorePath"><SystemProperty name="jetty.keystore.path" default="/etc/myKeystore" /></Set>
+		<Set name="KeyStorePassword"><SystemProperty name="jetty.ssl.password" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
+		<Set name="KeyManagerPassword"><SystemProperty name="jetty.ssl.keypassword" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
+		<Set name="TrustStorePath"><SystemProperty name="jetty.truststore.path" default="/etc/myKeystore" /></Set>
+		<Set name="TrustStorePassword"><SystemProperty name="jetty.ssl.password" default="OBF:1uh81uha1toc1wn31toi1ugg1ugi" /></Set>
+		<Set name="EndpointIdentificationAlgorithm"></Set>
+		<Set name="NeedClientAuth"><SystemProperty name="jetty.ssl.needClientAuth" default="false" /></Set>
+		<Set name="WantClientAuth"><SystemProperty name="jetty.ssl.wantClientAuth" default="false" /></Set>
+	</New>
+
+
+	<!-- =========================================================================================================== -->
+	<!-- Add a HTTPS Connector. -->
+	<!-- Configure an o.e.j.server.ServerConnector with connection -->
+	<!-- factories for TLS (aka SSL) and HTTP to provide HTTPS. -->
+	<!-- All accepted TLS connections are wired to a HTTP connection. -->
+	<!-- -->
+	<!-- Consult the JavaDoc of o.e.j.server.ServerConnector at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/ServerConnector.html, -->
+	<!-- o.e.j.server.SslConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/SslConnectionFactory.html, -->
+	<!-- o.e.j.a.s.ALPNServerConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/alpn/server/ALPNServerConnectionFactory.html, -->
+	<!-- o.e.j.h2.s.HTTP2ServerConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/http2/server/HTTP2ServerConnectionFactory.html and -->
+	<!-- o.e.j.s.HttpConnectionFactory at -->
+	<!-- https://javadoc.jetty.org/jetty-9/org/eclipse/jetty/server/HttpConnectionFactory.html -->
+	<!-- for all configuration that may be set here. -->
+	<!-- =========================================================================================================== -->
+	<Call name="addConnector">
+		<Arg>
+			<New class="org.eclipse.jetty.server.ServerConnector" id="sslConnectorId">
+				<Arg name="server">
+					<Ref refid="Server" />
+				</Arg>
+				<Arg name="factories">
+					<Array type="org.eclipse.jetty.server.ConnectionFactory">
+						<Item>
+							<New class="org.eclipse.jetty.server.SslConnectionFactory">
+								<Arg name="sslContextFactory">
+									<Ref refid="sslContextFactory" />
+								</Arg>
+								<Arg name="next">alpn</Arg>
+							</New>
+						</Item>
+						<Item>
+							<New class="org.eclipse.jetty.alpn.server.ALPNServerConnectionFactory">
+								<Arg>h2,http/1.1</Arg>
+							</New>
+						</Item>
+						<!-- HTTP/2 over TLS -->
+						<Item>
+							<New class="org.eclipse.jetty.http2.server.HTTP2ServerConnectionFactory">
+								<Arg name="config">
+									<Ref refid="httpConfig" />
+								</Arg>
+							</New>
+						</Item>
+						<!-- WebSockets (HTTP/1.1) -->
+						<Item>
+							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
+								<Arg name="config">
+									<Ref refid="httpConfig" />
+								</Arg>
+							</New>
+						</Item>
+					</Array>
+				</Arg>
+				<Set name="name">
+					<SystemProperty name="jetty.host" default="0.0.0.0" />:<SystemProperty name="org.osgi.service.http.port.secure" default="8443" />
+				</Set>
+				<Set name="host">
+					<SystemProperty name="jetty.host" />
+				</Set>
+				<Set name="port">
+					<SystemProperty name="org.osgi.service.http.port.secure" default="8443" />
+				</Set>
+				<Set name="idleTimeout">
+					<SystemProperty name="https.timeout" default="30000" />
+				</Set>
+			</New>
+		</Arg>
+	</Call>
+	<Call name="setAttribute">
+                <Arg>org.eclipse.jetty.server.Request.maxFormContentSize</Arg>
+                <Arg>300000</Arg>
+	</Call>
+	<Call name="addBean">
+		<Arg>
+			<New id="keyStoreScanner" class="org.eclipse.jetty.util.ssl.KeyStoreScanner">
+				<Arg>
+					<Ref refid="sslContextFactory"/>
+				</Arg>
+				<Set name="scanInterval">
+					<Property name="jetty.sslContext.reload.scanInterval" default="15"/>
+				</Set>
+			</New>
+		</Arg>
+	</Call>
+</Configure>
