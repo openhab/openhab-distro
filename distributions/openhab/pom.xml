@@ -61,6 +61,14 @@
       <type>xml</type>
       <scope>runtime</scope>
     </dependency>
+    <!-- Java Sound API SPI Providers -->
+    <!-- FLAC Decoder & Encoder -->
+    <dependency>
+      <groupId>org.openhab.osgiify</groupId>
+      <artifactId>com.io7m.flannel.core</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -118,6 +126,18 @@
                   <destFileName>addons.xml</destFileName>
                 </artifactItem>
               </artifactItems>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-audio-spi-libs</id>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <outputDirectory>${project.build.directory}/assembly/lib/boot</outputDirectory>
+              <includeArtifactIds>com.io7m.flannel.core</includeArtifactIds>
+              <excludeTransitive>true</excludeTransitive>
             </configuration>
           </execution>
           <execution>
