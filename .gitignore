@@ -11,6 +11,7 @@ Californium.properties
 .history/
 .metadata/
 bin/
+!./distributions/openhab/src/main/resources/bin/
 src-gen/
 target/
 xtend-gen/
