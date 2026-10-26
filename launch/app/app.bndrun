@@ -105,10 +105,10 @@ feature.openhab-model-runtime-all: \
 	openhab.userdata=${.}/runtime/userdata,\
 	openhab.logdir=${.}/runtime/userdata/logs
 
-# org.apache.felix.http.servlet-api and tomcat-servlet-api are legacy servlet-api shims that also export
-# jakarta.servlet/javax.servlet alongside the real jakarta.servlet-api 6.1.0 - having multiple distinct bundles
-# all providing the same heavily "uses"-referenced servlet packages was a prime driver of the resolver's
-# exponential blowup with org.eclipse.osgitech.rest (found via index dump of duplicate package providers).
+# The legacy servlet-api shims org.apache.felix.http.servlet-api and tomcat-servlet-api, which also export
+# jakarta.servlet/javax.servlet alongside the real jakarta.servlet-api 6.1.0, are excluded in the openHAB Core
+# runtime BOM - having multiple distinct bundles all providing the same heavily "uses"-referenced servlet
+# packages was a prime driver of the resolver's exponential blowup with org.eclipse.osgitech.rest.
 # NOTE: org.ops4j.pax.web.pax-web-compatibility-servlet is NOT blacklisted despite also exporting these
 # packages - it's the bridge that provides the osgi.contract=JakartaServlet capability at both 5.0.0 (needed
 # by org.eclipse.osgitech.rest, which is pinned to Jakarta Servlet 5.0) and 6.1.0 (needed by pax-web-runtime
@@ -116,8 +116,6 @@ feature.openhab-model-runtime-all: \
 -runblacklist: \
 	bnd.identity;id='org.apache.aries.jpa.container',\
 	bnd.identity;id='org.apache.karaf.kar.core',\
-	bnd.identity;id='org.apache.felix.http.servlet-api',\
-	bnd.identity;id='org.apache.tomcat-servlet-api',\
 	bnd.identity;id='org.openhab.core.addon.marketplace.karaf',\
 	bnd.identity;id='org.openhab.core.io.console.karaf',\
 	bnd.identity;id='org.openhab.core.karaf',\
