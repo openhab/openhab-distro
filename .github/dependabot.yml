@@ -12,6 +12,13 @@ version: 2
 #    type: "maven-repository"
 #    url: "https://openhab.jfrog.io/artifactory/libs-all/"
 
+# the pluginRepository declared in pom.xml must be listed here,
+# otherwise the Dependabot proxy blocks access to it (egress not allowlisted)
+registries:
+  openhab-jfrog-3rdparty:
+    type: "maven-repository"
+    url: "https://openhab.jfrog.io/artifactory/libs-3rdparty-local"
+
 updates:
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
