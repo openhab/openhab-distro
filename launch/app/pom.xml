@@ -16,7 +16,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <oh.java.version>21</oh.java.version>
     <maven.compiler.release>${oh.java.version}</maven.compiler.release>
-    <bnd.version>7.1.0</bnd.version>
+    <bnd.version>7.4.0</bnd.version>
   </properties>
 
   <dependencies>
@@ -230,7 +230,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
+          <version>3.5.1</version>
         </plugin>
 
         <plugin>
@@ -280,34 +280,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.2</version>
-        </plugin>
-
-        <!-- This plugin's configuration is used to store Eclipse m2e settings only. -->
-        <!-- It has no influence on the Maven build itself. -->
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>biz.aQute.bnd</groupId>
-                    <artifactId>bnd-indexer-maven-plugin</artifactId>
-                    <versionRange>[3.1.0,)</versionRange>
-                    <goals>
-                      <goal>index</goal>
-                      <goal>local-index</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
