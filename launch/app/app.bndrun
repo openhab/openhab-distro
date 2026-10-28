@@ -291,7 +291,6 @@ feature.openhab-model-runtime-all: \
 	de.focus_shift.jollyday-core;version='[1.9.3,1.9.4)',\
 	de.focus_shift.jollyday-jackson;version='[1.9.3,1.9.4)',\
 	org.openhab.core.sitemap;version='[5.3.0,5.3.1)',\
-	com.google.gson;version='[2.14.0,2.14.1)',\
 	com.fasterxml.jackson.core.jackson-core;version='[2.22.4,2.22.5)',\
 	com.fasterxml.jackson.core.jackson-databind;version='[2.22.4,2.22.5)',\
 	com.fasterxml.jackson.dataformat.jackson-dataformat-xml;version='[2.22.4,2.22.5)',\
@@ -302,4 +301,5 @@ feature.openhab-model-runtime-all: \
 	io.swagger.core.v3.swagger-integration;version='[2.2.55,2.2.56)',\
 	io.swagger.core.v3.swagger-jaxrs2;version='[2.2.55,2.2.56)',\
 	io.swagger.core.v3.swagger-models;version='[2.2.55,2.2.56)',\
-	tech.units.indriya;version='[2.2.4,2.2.5)'
+	tech.units.indriya;version='[2.2.4,2.2.5)',\
+	com.google.gson;version='[2.15.0,2.15.1)'
