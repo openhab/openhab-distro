@@ -37,6 +37,9 @@
 			<AppenderRef ref="OSGI"/>
 		</Root>
 
+		<!-- JLine emits warnings for history files with broad permissions -->
+		<Logger level="ERROR" name="org.jline"/>
+
 		<!-- Karaf Shell logger -->
 		<Logger level="OFF" name="org.apache.karaf.shell.support">
 			<AppenderRef ref="STDOUT"/>
