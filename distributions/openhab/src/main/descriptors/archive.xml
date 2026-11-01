@@ -51,6 +51,14 @@
                 <include>system/**</include>
                 <include>bin/*.lst</include>
             </includes>
+            <excludes>
+                <!-- unused, openHAB runs on Equinox (see custom.properties) -->
+                <exclude>system/org/apache/felix/org.apache.felix.framework/**</exclude>
+                <!-- unused, openHAB logs via pax-logging-log4j2 -->
+                <exclude>system/org/ops4j/pax/logging/pax-logging-logback/**</exclude>
+                <!-- copied to lib/boot, provided scope makes karaf-maven-plugin also add it to system -->
+                <exclude>system/org/openhab/osgiify/com.io7m.flannel.core/**</exclude>
+            </excludes>
             <!-- specifically fixes https://github.com/openhab/openhab-distro/issues/503 -->
             <fileMode>0644</fileMode>
         </fileSet>
