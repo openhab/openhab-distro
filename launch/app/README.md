@@ -16,7 +16,7 @@ You can start the demo app in two ways:
 
 ## Troubleshooting Dependencies
 
-If dependencies do not resolve, `launch.bndrun` may need an update.
+If dependencies do not resolve, `app.bndrun` may need an update.
 
 - Trigger the resolver with:
   ```
