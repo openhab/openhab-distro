@@ -168,24 +168,6 @@
           </executions>
         </plugin>
 
-        <!-- Define the version of the baseline plugin we use and avoid failing when no baseline jar exists. -->
-        <!-- (for example before the first release) -->
-        <plugin>
-          <groupId>biz.aQute.bnd</groupId>
-          <artifactId>bnd-baseline-maven-plugin</artifactId>
-          <version>${bnd.version}</version>
-          <configuration>
-            <failOnMissing>false</failOnMissing>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>baseline</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
         <!-- Allow running openHAB demo app from a Maven/bnd task -->
         <plugin>
           <groupId>biz.aQute.bnd</groupId>
@@ -201,12 +183,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.4.0</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.13.0</version>
         </plugin>
 
         <plugin>
@@ -229,12 +205,6 @@
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.11.2</version>
           <configuration>
@@ -245,41 +215,8 @@
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-plugin-plugin</artifactId>
-          <version>3.15.1</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>3.1.1</version>
-          <configuration>
-            <preparationGoals>clean install</preparationGoals>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.13.0</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.21.0</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>3.3.1</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.5.2</version>
         </plugin>
 
         <!-- This plugin's configuration is used to store Eclipse m2e settings only. -->
