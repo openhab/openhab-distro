@@ -223,6 +223,13 @@
             <feature>eventadmin</feature>
             <feature>wrap</feature>
           </startupFeatures>
+          <!-- jaxb-runtime is a startup bundle with an optional import of org.jvnet.staxex [2.1,3) and
+            DynamicImport-Package: *. Provide stax-ex at startup, so it is wired statically from the first resolution:
+            otherwise it is wired dynamically to any stax-ex installed later (e.g. 1.7.4 by add-ons using
+            openhab.tp-jaxws), and installing or removing that refreshes JAXB, Karaf itself and Jersey. -->
+          <startupBundles>
+            <bundle>mvn:org.jvnet.staxex/stax-ex/2.1.0</bundle>
+          </startupBundles>
           <bootFeatures>
             <feature>jaas</feature>
             <feature>shell</feature>
