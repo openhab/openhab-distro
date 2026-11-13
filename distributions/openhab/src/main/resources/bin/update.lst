@@ -222,6 +222,7 @@ ALERT;Groovy Scripting: Groovy has been upgraded from 4 to 6. Review and adapt e
 ALERT;Lutron Binding: Physical keypad button channels (keypad, ttkeypad, intlkeypad, palladiomkeypad, pico, grafikeyekeypad, vcrx and wci Things) are now trigger channels instead of Switch state channels. Linked Items no longer receive state updates; add a system:rawbutton-* profile to the link or trigger rules directly on the button channel events. Sending ON/OFF commands to these channels and the autorelease parameter are no longer supported.
 ALERT;Millheat Binding: The binding has been rebuilt against Mill's replacement cloud service. Homes, rooms and heaters are now identified by UUIDs instead of numbers, so existing Things must be deleted and re-discovered. The heater power parameter is no longer used; the Energy Usage channel now reports measured power.
 ALERT;Teslascope Binding: Apikey authentication is no longer supported. Please update your configuration to use a PAT (Personal Access Token).
+ALERT;VolvoOnCall Binding: Due to Volvo security changes, this add-on does not work anymore and has been removed. Use new VolvoCars binding instead.
 
 [[PRE]]
 [2.2.0]
