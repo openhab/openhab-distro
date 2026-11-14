@@ -273,9 +273,10 @@
       </build>
     </profile>
     <profile>
-      <id>j21</id>
+      <!-- resolve against Java 25 bytecode, requires JDK 25; activate explicitly with -Pj25 -->
+      <id>j25</id>
       <properties>
-        <oh.java.version>21</oh.java.version>
+        <oh.java.version>25</oh.java.version>
         <maven.compiler.release>${oh.java.version}</maven.compiler.release>
       </properties>
     </profile>

@@ -85,7 +85,7 @@ feature.openhab-model-runtime-all: \
 
 -runfw: org.eclipse.osgi
 
--runee: JavaSE-21
+-runee: JavaSE-${def;oh.java.version;21}
 
 -runrequires.ee: \
 	bnd.identity;id='jakarta.xml.bind-api',\
