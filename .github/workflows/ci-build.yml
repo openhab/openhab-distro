@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         java: [ '21' ]
-        os: [ 'ubuntu-24.04' ]
+        os: [ 'ubuntu-26.04' ]
     name: Build (Java ${{ matrix.java }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     # typical duration is ~6min, set twice the amount as limit (default is 6h)
