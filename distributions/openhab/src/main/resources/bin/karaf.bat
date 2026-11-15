@@ -311,8 +311,10 @@ for /f tokens^=2-5^ delims^=.-_+^" %%j in ('"%JAVA%" -fullversion 2^>^&1') do (
 )
 
 if %JAVA_VERSION% NEQ 21 (
-    call :warn "JVM must be version 21. JVM version %JAVA_VERSION% is unsupported (JAVA_HOME=%JAVA_HOME%)"
-    goto END
+    if %JAVA_VERSION% NEQ 25 (
+        call :warn "JVM must be version 21 or 25. JVM version %JAVA_VERSION% is unsupported (JAVA_HOME=%JAVA_HOME%)"
+        goto END
+    )
 )
 
 if %JAVA_VERSION% GTR 8 (
