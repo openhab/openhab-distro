@@ -532,6 +532,7 @@ if "%KARAF_PROFILER%" == "" goto :RUN
                 --add-exports=java.rmi/sun.rmi.registry=ALL-UNNAMED ^
                 --add-exports=java.security.sasl/com.sun.security.sasl=ALL-UNNAMED ^
                 --add-exports=java.naming/com.sun.jndi.ldap=ALL-UNNAMED ^
+                --enable-native-access=ALL-UNNAMED ^
                 -classpath "%CLASSPATH%" ^
                 -Dkaraf.instances="%OPENHAB_USERDATA%\tmp\instances" ^
                 -Dkaraf.home="%KARAF_HOME%" ^
