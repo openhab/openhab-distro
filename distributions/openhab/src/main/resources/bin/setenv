@@ -115,6 +115,7 @@ export JAVA_OPTS="${JAVA_OPTS}
 # set JVM options
 #
 EXTRA_JAVA_OPTS_COMMON="
+  -XX:-UseBASE64Intrinsics
   -Djava.awt.headless=true
   -Dfile.encoding=UTF-8"
 export EXTRA_JAVA_OPTS="${EXTRA_JAVA_OPTS_COMMON} ${EXTRA_JAVA_OPTS}"
