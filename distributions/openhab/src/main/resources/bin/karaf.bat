@@ -111,6 +111,10 @@ set STOPPED_TARGET_LEVEL=0
 set RUNHIDDEN=wscript //nologo "%DIRNAME%runhidden.vbs"
 
 echo Starting server...
+
+rem Disable deleyed start for now as jline no longer prints warnings
+goto AFTER_CACHE_READY
+
 set KARAF_HOME=
 %RUNHIDDEN% "%DIRNAME%karaf.bat" "server"
 setlocal EnableDelayedExpansion
@@ -135,7 +139,7 @@ if !SECONDS_WAITED! GEQ 70 (
 )
 timeout /t 1 /nobreak >nul
 set /a SECONDS_WAITED=!SECONDS_WAITED!+1
-goto AWAIT_SERVER_STARTED
+goto :AWAIT_SERVER_STARTED
 
 :SERVER_STARTED
 endlocal

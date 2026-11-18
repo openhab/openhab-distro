@@ -181,7 +181,8 @@ init() {
 
 run() {
     # refresh  OSGI cache if needed
-    awaitOsgiCacheReady
+    # (dectivated as jline does no longer print warning)
+    # awaitOsgiCacheReady
 
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
