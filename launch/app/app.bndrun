@@ -212,7 +212,7 @@ feature.openhab-model-runtime-all: \
 	org.ops4j.pax.web.pax-web-tomcat-common;version='[11.1.4,11.1.5)',\
 	org.osgi.service.jakartars;version='[2.0.0,2.0.1)',\
 	org.osgi.service.servlet;version='[2.0.0,2.0.1)',\
-	com.fasterxml.jackson.core.jackson-annotations;version='[2.22.0,2.22.1)',\
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.23.0,2.23.1)',\
 	de.focus_shift.jollyday-core;version='[1.9.3,1.9.4)',\
 	de.focus_shift.jollyday-jackson;version='[1.9.3,1.9.4)',\
 	org.openhab.core.addon;version='[5.3.0,5.3.1)',\
@@ -227,7 +227,7 @@ feature.openhab-model-runtime-all: \
 	org.osgi.service.component.annotations;version='[1.5.1,1.5.2)',\
 	org.threeten.extra;version='[1.8.0,1.8.1)',\
 	org.yaml.snakeyaml;version='[2.5.0,2.5.1)',\
-	stax2-api;version='[4.3.0,4.3.1)',\
+	stax2-api;version='[4.3.1,4.3.2)',\
 	org.openhab.core.audio;version='[5.3.0,5.3.1)',\
 	org.openhab.core.auth.jaas;version='[5.3.0,5.3.1)',\
 	org.openhab.core.config.dispatch;version='[5.3.0,5.3.1)',\
@@ -327,11 +327,11 @@ feature.openhab-model-runtime-all: \
 	org.eclipse.jetty.compression.common;version='[12.1.14,12.1.15)',\
 	org.eclipse.jetty.compression.gzip;version='[12.1.14,12.1.15)',\
 	org.openhab.core.io.jetty.compression;version='[5.3.0,5.3.1)',\
-	com.fasterxml.jackson.core.jackson-core;version='[2.22.4,2.22.5)',\
-	com.fasterxml.jackson.core.jackson-databind;version='[2.22.4,2.22.5)',\
-	com.fasterxml.jackson.dataformat.jackson-dataformat-xml;version='[2.22.4,2.22.5)',\
-	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.22.4,2.22.5)',\
-	com.fasterxml.jackson.datatype.jackson-datatype-jsr310;version='[2.22.4,2.22.5)',\
+	com.fasterxml.jackson.core.jackson-core;version='[2.23.0,2.23.1)',\
+	com.fasterxml.jackson.core.jackson-databind;version='[2.23.0,2.23.1)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-xml;version='[2.23.0,2.23.1)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.23.0,2.23.1)',\
+	com.fasterxml.jackson.datatype.jackson-datatype-jsr310;version='[2.23.0,2.23.1)',\
 	io.swagger.core.v3.swagger-annotations.jakarta;version='[2.2.55,2.2.56)',\
 	io.swagger.core.v3.swagger-core.jakarta;version='[2.2.55,2.2.56)',\
 	io.swagger.core.v3.swagger-integration.jakarta;version='[2.2.55,2.2.56)',\
