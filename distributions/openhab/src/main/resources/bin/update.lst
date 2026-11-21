@@ -213,6 +213,7 @@ ALERT;Piper TTS Voice: Voice UIDs now contain the model quality. You need to set
 ALERT;Teleinfo Binding : This binding has been rewritten to support the D2L ERL dongle. As a result, channels and channel types have changed, so you may need to recreate your Things and update your configuration.
 
 [5.3.0]
+ALERT;CORE: openHAB now runs on Apache Karaf 4.5, Jetty 12 and Jersey 3 (Jakarta EE 10). Add-ons that are not part of the official distribution and were built for openHAB 5.2 or earlier (javax.servlet, javax.ws.rs, Jetty 9) need a version built for openHAB 5.3.
 ALERT;CORE: DSL sitemap rule conditions with item name and argument, but no operator require a blank or == between item name and argument to avoid ambiguity, an argument starting with - with no blank between item name and argument was accepted before
 ALERT;Bluelink Binding: Refresh tokens are no longer supported for the EU region, as new ones can no longer be obtained. Please update the account Thing to use your account email (username) and password.
 ALERT;ChatGPT Binding: apiUrl and modelUrl parameters of the account Thing have been replaced by baseUrl. Whilst backwards compatibility is kept, it is recommended to set baseUrl for all ChatGPT Things and remove apiUrl and modelUrl.
@@ -240,6 +241,9 @@ DEFAULT;$OPENHAB_USERDATA/etc/org.apache.karaf.log.cfg
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 
 [4.0.2]
+DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
+
+[5.3.0]
 DEFAULT;$OPENHAB_USERDATA/etc/log4j2.xml
 
 [[POST]]

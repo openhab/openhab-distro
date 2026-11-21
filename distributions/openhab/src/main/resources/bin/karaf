@@ -157,10 +157,12 @@ init() {
     # Determine the JVM vendor
     detectJVM
 
-    # Determine the JVM version and check that it is version 21
+    # Determine the JVM version and check that it is version 21 or 25
     checkJvmVersion
     if [ "${VERSION}" -ne "21" ]; then
-        die "JVM must be version 21. JVM version ${VERSION} is unsupported (JAVA_HOME=$JAVA_HOME)"
+        if [ "${VERSION}" -ne "25" ]; then
+            die "JVM must be version 21 or 25. JVM version ${VERSION} is unsupported (JAVA_HOME=$JAVA_HOME)"
+        fi
     fi
 
     # Check if a root instance is already running
@@ -179,7 +181,8 @@ init() {
 
 run() {
     # refresh  OSGI cache if needed
-    awaitOsgiCacheReady
+    # (dectivated as jline does no longer print warning)
+    # awaitOsgiCacheReady
 
     OPTS="-Dkaraf.startLocalConsole=true -Dkaraf.startRemoteShell=true"
     MAIN=org.apache.karaf.main.Main
@@ -306,9 +309,6 @@ run() {
             if [ "${VERSION}" -gt "8" ]; then
                 ${KARAF_EXEC} "${JAVA}" ${JAVA_OPTS} \
                     --add-reads=java.xml=java.logging \
-                    --add-exports=java.base/org.apache.karaf.specs.locator=java.xml,ALL-UNNAMED \
-                    --patch-module java.base="${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.locator-4.4.12.jar" \
-                    --patch-module java.xml="${KARAF_HOME}/lib/endorsed/org.apache.karaf.specs.java.xml-4.4.12.jar" \
                     --add-opens java.base/java.security=ALL-UNNAMED \
                     --add-opens java.base/java.net=ALL-UNNAMED \
                     --add-opens java.base/java.lang=ALL-UNNAMED \
@@ -332,6 +332,7 @@ run() {
                     --add-exports=java.rmi/sun.rmi.registry=ALL-UNNAMED \
                     --add-exports=java.security.sasl/com.sun.security.sasl=ALL-UNNAMED \
                     --add-exports=java.naming/com.sun.jndi.ldap=ALL-UNNAMED \
+                    --enable-native-access=ALL-UNNAMED \
                     -Dkaraf.instances="${KARAF_DATA}/tmp/instances" \
                     -Dkaraf.home="${KARAF_HOME}" \
                     -Dkaraf.base="${KARAF_BASE}" \
