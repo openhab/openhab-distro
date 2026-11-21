@@ -5,6 +5,7 @@ config.properties
 custom.properties
 custom.system.properties
 distribution.info
+JakartarsServletWhiteboardRuntimeComponent.cfg
 jmx.acl.org.apache.karaf.bundle.cfg
 jmx.acl.org.apache.karaf.config.cfg
 jre.properties
@@ -13,6 +14,7 @@ org.apache.felix.fileinstall-deploy.cfg
 org.apache.karaf.command.acl.bundle.cfg
 org.apache.karaf.command.acl.config.cfg
 org.apache.karaf.command.acl.feature.cfg
+org.apache.karaf.command.acl.groovy.cfg
 org.apache.karaf.command.acl.jaas.cfg
 org.apache.karaf.command.acl.kar.cfg
 org.apache.karaf.command.acl.scope_bundle.cfg
