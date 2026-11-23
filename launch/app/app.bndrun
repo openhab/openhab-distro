@@ -153,7 +153,6 @@ feature.openhab-model-runtime-all: \
 	org.apache.felix.configadmin;version='[1.10.0,1.10.1)',\
 	org.apache.felix.scr;version='[2.3.0,2.3.1)',\
 	org.eclipse.equinox.event;version='[1.7.300,1.7.301)',\
-	org.osgi.service.cm;version='[1.6.1,1.6.2)',\
 	org.osgi.service.component;version='[1.5.1,1.5.2)',\
 	org.osgi.service.event;version='[1.4.1,1.4.2)',\
 	org.osgi.util.function;version='[1.2.0,1.2.1)',\
@@ -211,7 +210,6 @@ feature.openhab-model-runtime-all: \
 	org.ops4j.pax.web.pax-web-spi;version='[11.1.4,11.1.5)',\
 	org.ops4j.pax.web.pax-web-tomcat-common;version='[11.1.4,11.1.5)',\
 	org.osgi.service.jakartars;version='[2.0.0,2.0.1)',\
-	org.osgi.service.servlet;version='[2.0.0,2.0.1)',\
 	com.fasterxml.jackson.core.jackson-annotations;version='[2.23.0,2.23.1)',\
 	de.focus_shift.jollyday-core;version='[1.9.3,1.9.4)',\
 	de.focus_shift.jollyday-jackson;version='[1.9.3,1.9.4)',\
