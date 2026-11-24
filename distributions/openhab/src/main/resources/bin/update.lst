@@ -225,6 +225,7 @@ ALERT;Millheat Binding: The binding has been rebuilt against Mill's replacement 
 ALERT;SmartThings Binding: The binding has been replaced with a local OCF implementation (no longer using the cloud API). All existing Things must be deleted and newly created, and Item channel links must be relinked. Not all previously supported devices may still be supported.
 ALERT;Teslascope Binding: Apikey authentication is no longer supported. Please update your configuration to use a PAT (Personal Access Token).
 ALERT;VolvoOnCall Binding: Due to Volvo security changes, this add-on does not work anymore and has been removed. Use new VolvoCars binding instead.
+ALERT;Z-Way Binding: This add-on has been removed, as its Z-Way library is not compatible with Jetty 12. Use the Z-Wave binding or the Z-Wave JS binding instead.
 
 [[PRE]]
 [2.2.0]
