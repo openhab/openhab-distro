@@ -20,6 +20,12 @@ rem
 if not "%ECHO%" == "" echo %ECHO%
 
 setlocal
+rem Karaf's data directory also contains persistent openHAB userdata.
+for %%A in (%*) do (
+    if "%%~A" == "clean" goto :rejectClean
+    if "%%~A" == "cleanall" goto :rejectClean
+)
+
 set DIRNAME=%~dp0%
 set PROGNAME=%~nx0%
 set ARGS=%*
@@ -50,6 +56,10 @@ goto BEGIN
 :warn
     echo %PROGNAME%: %*
 goto :EOF
+
+:rejectClean
+    >&2 echo Karaf's clean and cleanall options are disabled because they delete persistent openHAB userdata.
+    exit /b 1
 
 :BEGIN
 

@@ -16,6 +16,16 @@
 #    limitations under the License.
 #
 
+# Karaf's data directory also contains persistent openHAB userdata.
+for arg in "$@"; do
+    case "$arg" in
+        clean|cleanall)
+            echo "Karaf's clean and cleanall options are disabled because they delete persistent openHAB userdata." >&2
+            exit 1
+            ;;
+    esac
+done
+
 realpath() {
   # Use in priority xpg4 awk or nawk on SunOS as standard awk is outdated
   AWK=awk
