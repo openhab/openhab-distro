@@ -112,7 +112,10 @@ goto :debug_port_done
 :debug_port_done
 
 :: set Java options
+:: --enable-native-access is needed by JLine in bin\client, shell and instance, which start their own JVM;
+:: Karaf only sets it in bin\karaf. Remove it once Karaf also sets it for these scripts.
 set JAVA_OPTS=%JAVA_OPTS% ^
+  --enable-native-access=ALL-UNNAMED ^
   -Dopenhab.home=%OPENHAB_HOME% ^
   -Dopenhab.conf=%OPENHAB_CONF% ^
   -Dopenhab.runtime=%OPENHAB_RUNTIME% ^
