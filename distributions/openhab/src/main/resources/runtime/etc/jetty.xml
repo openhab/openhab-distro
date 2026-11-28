@@ -65,6 +65,8 @@
 				<Set name="includedPaths">
 					<Array type="java.lang.String">
 						<Item>/assets/*</Item>
+						<Item>/basicui/*</Item>
+						<Item>/icon/*</Item>
 						<Item>/images/*</Item>
 						<Item>/rest/*</Item>
 						<Item>/static/*</Item>
@@ -74,6 +76,7 @@
 					<Array type="java.lang.String">
 						<Item>application/javascript</Item>
 						<Item>application/json</Item>
+						<Item>application/xml</Item>
 						<Item>image/svg+xml</Item>
 						<Item>text/css</Item>
 						<Item>text/html</Item>
