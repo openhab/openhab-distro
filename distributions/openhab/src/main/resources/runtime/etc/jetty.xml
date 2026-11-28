@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd">
 
 
 <!-- =============================================================== -->
 <!-- Configure the Jetty Server -->
 <!-- -->
 <!-- Documentation of this file format can be found at: -->
-<!-- http://wiki.eclipse.org/Jetty/Reference/jetty.xml_syntax -->
+<!-- https://jetty.org/docs/jetty/12.1/operations-guide/xml/index.html -->
 <!-- =============================================================== -->
 
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
 
 	<!-- =========================================================================================================== -->
-	<!-- Set handler Collection Structure -->
+	<!-- Additional handlers -->
 	<!-- =========================================================================================================== -->
 
 	<Get name="handler">
@@ -94,7 +94,7 @@
 		<Set name="outputBufferSize">32768</Set>
 		<Set name="requestHeaderSize">8192</Set>
 		<Set name="responseHeaderSize">8192</Set>
-		<Set name="sendServerVersion">true</Set>
+		<Set name="sendServerVersion">false</Set>
 		<Set name="sendDateHeader">false</Set>
 		<Set name="headerCacheSize">512</Set>
 
@@ -207,10 +207,6 @@
 				</Set>
 			</New>
 		</Arg>
-	</Call>
-	<Call name="setAttribute">
-                <Arg>org.eclipse.jetty.server.Request.maxFormContentSize</Arg>
-                <Arg>300000</Arg>
 	</Call>
 	<Call name="addBean">
 		<Arg>
